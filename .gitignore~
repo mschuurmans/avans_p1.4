@@ -33,3 +33,6 @@ local.properties
 
 # PDT-specific
 .buildpath
+compile
+runfestival
+runfestival.bat
