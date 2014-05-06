@@ -1,9 +1,13 @@
 package nl.avans.essperience.views;
 
+import javax.swing.JPanel;
+
 import nl.avans.essperience.models.GameModel;
 
-public abstract class GameScreen 
+public abstract class GameScreen extends JPanel
 {
+	private static final long serialVersionUID = 517082358948978120L;
+	
 	private GameModel _gameModel;
 	
 	public GameScreen(GameModel model)
