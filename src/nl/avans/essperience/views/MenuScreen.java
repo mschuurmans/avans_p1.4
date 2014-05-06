@@ -1,5 +1,7 @@
 package nl.avans.essperience.views;
 
+import java.awt.Graphics;
+
 import nl.avans.essperience.models.GameModel;
 
 public class MenuScreen extends GameScreen
@@ -11,15 +13,16 @@ public class MenuScreen extends GameScreen
 	}
 
 	@Override
-	public void render() {
+	public void update() 
+	{
 		// TODO Auto-generated method stub
-		
+		// update stuff here
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public void paintComponent(Graphics g)
+	{
+		//drawing code.
 	}
+	
 
 }

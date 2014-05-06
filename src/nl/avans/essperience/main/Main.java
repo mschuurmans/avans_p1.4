@@ -18,6 +18,7 @@ class MyFrame extends JFrame
 	{
 		super("The Essperience");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	
 		
 		//setContentPane(new MenuScreen(new GameModel()));
 		

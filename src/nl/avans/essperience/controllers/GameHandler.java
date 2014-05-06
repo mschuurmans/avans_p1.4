@@ -1,5 +1,7 @@
 package nl.avans.essperience.controllers;
 
+import javax.swing.JFrame;
+
 import nl.avans.essperience.views.GameScreen;
 
 public class GameHandler 
@@ -26,4 +28,7 @@ public class GameHandler
 	{
 		
 	}
+	
 }
+
+
