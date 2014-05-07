@@ -6,22 +6,27 @@ import nl.avans.essperience.models.GameModel;
 
 public class MenuScreen extends GameScreen
 {
-
-	public MenuScreen(GameModel model) 
+	private boolean _debug = false;
+	
+	public MenuScreen() 
 	{
-		super(model);
+		super(new GameModel());
 	}
 
 	@Override
 	public void update() 
 	{
-		// TODO Auto-generated method stub
-		// update stuff here
+		if(_debug)
+			System.out.println("Update called.");
 	}
 
 	public void paintComponent(Graphics g)
 	{
 		//drawing code.
+		if(_debug)
+			System.out.println("Drawing menu screen");
+		
+		g.drawString("Menu Screen", 10, 15);
 	}
 	
 

@@ -1,5 +1,13 @@
 package nl.avans.essperience.controllers;
 
-public class InputController {
+import nl.avans.essperience.events.InputTriggerdEventListener;
 
+public class InputController 
+{
+	private InputTriggerdEventListener _listener = null;
+	
+	public void addInputTriggeredEventListener(InputTriggerdEventListener listener)
+	{
+		this._listener = listener;
+	}
 }

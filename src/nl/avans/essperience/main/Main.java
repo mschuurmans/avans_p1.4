@@ -2,6 +2,8 @@ package nl.avans.essperience.main;
 
 import javax.swing.JFrame;
 
+import nl.avans.essperience.views.MenuScreen;
+
 public class Main 
 {
 	public static void main(String[] args)
@@ -20,10 +22,10 @@ class MyFrame extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 		
-		//setContentPane(new MenuScreen(new GameModel()));
+		setContentPane(new MenuScreen());
 		
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		setUndecorated(true);  
+		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//setUndecorated(true);  
 		setSize(800, 800);
 		setVisible(true);
 	}

@@ -4,7 +4,12 @@ public abstract class GameController
 {
 	private InputController _input;
 	
-	public GameController(InputController input)
+	public GameController()
+	{
+		
+	}
+	
+	public void setInputController(InputController input)
 	{
 		this._input = input;
 	}
