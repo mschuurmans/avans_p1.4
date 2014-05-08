@@ -36,4 +36,9 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	
 	public abstract void update();
 	public abstract void paintComponent(Graphics g);
+	
+	public void drawLives(Graphics g)
+	{
+		
+	}
 }

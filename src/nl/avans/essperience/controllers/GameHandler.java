@@ -39,7 +39,10 @@ public class GameHandler extends JFrame
 		setSize(800, 800);
 		setVisible(true);
 	}
-	
+	public int getLivesLeft()
+	{
+		return _lives;
+	}
 	public void init()
 	{
 		this._gameScreen = new MenuScreen();

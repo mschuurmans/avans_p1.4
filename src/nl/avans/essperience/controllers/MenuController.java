@@ -41,10 +41,10 @@ public class MenuController extends GameController
 	
 	public void selectCurrentOption()
 	{
-		System.out.println("current option");
+		if(_debug)
+			System.out.println("MenuController : current option");
 		
-		if(this._finishedListener != null)
-			this._finishedListener.microGameFinishedEvent(true);
+		this.callFinishedListener(true);
 	}
 
 }
