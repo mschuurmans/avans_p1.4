@@ -1,7 +1,14 @@
 package nl.avans.essperience.events;
 
-public interface ButtonPressedEventListener 
+import nl.avans.essperience.utils.Enums.GameKeys;
+
+/**
+ * This is a class used for parsing button pressed events.
+ * @author michiel
+ *
+ */
+public class ButtonPressedEventListener 
 {
-	public void keyboardButtonPressed(int code);
-	public void wiimoteButtonPressed(int code);
+	public void keyboardButtonPressed(int code){}
+	public void wiimoteButtonPressed(GameKeys key){}
 }

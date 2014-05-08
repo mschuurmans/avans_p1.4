@@ -9,21 +9,25 @@ public class MenuController extends GameController
 {
 	private MenuScreen _view;
 	private MenuModel _model;
+	
+	private boolean _debug = false;
+	
 	public MenuController(MenuScreen menuScreen, MenuModel model) 
 	{
 		this._view = menuScreen;
 		this._model = model;
-		InputController input = new InputController();
-		input.addInputTriggeredEventListener(new InputTriggerdEventListener() 
+		
+		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener() 
 		{
 				@Override
 				public void keyPressed(GameKeys key) 
 				{
-					//handle the button pressed event.
+					if(_debug)
+						System.out.println("button was pressed and event was called.");
 				}
 		});
 		
-		this.setInputController(input);
+		this._view.addKeyListener(InputController.Instance().getKeyboardListener());
 	}
 
 }

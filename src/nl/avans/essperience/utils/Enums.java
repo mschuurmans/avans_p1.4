@@ -9,8 +9,7 @@ public class Enums
 		KeyB,
 		WiiA,
 		WiiUp,
-		WiiB;
-		
-		
+		WiiB,
+		None		
 	}
 }

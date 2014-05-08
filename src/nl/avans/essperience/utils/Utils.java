@@ -11,6 +11,6 @@ public class Utils
 		else if(code == 66)
 			return GameKeys.KeyB;
 		else
-			return GameKeys.KeyA;
+			return GameKeys.None;
 	}
 }

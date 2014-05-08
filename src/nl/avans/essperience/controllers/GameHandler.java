@@ -41,6 +41,9 @@ public class GameHandler extends JFrame
 		this._gameController = new MenuController((MenuScreen)this._gameScreen, (MenuModel)_gameModel);
 		this._gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener()
 		{
+			/**
+			 * this is the finshed listener for the menu screen. All screens except the menuscreen will do other stuff in this event. (will be added in start method).
+			 */
 			@Override
 			public void microGameFinishedEvent(boolean succeed) 
 			{
@@ -56,7 +59,7 @@ public class GameHandler extends JFrame
 	
 	public void stop()
 	{
-		
+		reset();
 	}
 	
 	/**
