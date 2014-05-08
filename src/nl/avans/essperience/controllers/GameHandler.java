@@ -13,7 +13,9 @@ public class GameHandler extends JFrame
 	private static final long serialVersionUID = -4608768969398477748L;
 	
 	private int _difficulty = 1;
+	
 	private int _lives = GameHandler.MAX_LIVES;
+	
 	public static final int MAX_LIVES = 3;
 	private GameScreen _gameScreen;
 	private GameController _gameController;

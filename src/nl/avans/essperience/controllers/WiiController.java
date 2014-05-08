@@ -28,7 +28,7 @@ public class WiiController implements WiimoteListener
 	private Wiimote[] _wiimotes;
 	private ButtonPressedEventListener _listener = null;
 	public static final int MAX_TRIES = 3;
-	
+
 	private boolean _debug = true;
 	public WiiController(int numbers)
 	{
@@ -47,11 +47,22 @@ public class WiiController implements WiimoteListener
 			
 			times++;
 		}
-		
+		int count = 1;
 		for(Wiimote wim : wiimotes)
 		{
-			wim.setLeds(true, true, true, false);
+			boolean l1 = true;
+			boolean l2 = false;
+			boolean l3 = false;
+			boolean l4 = false;
+			
+			if(count >1) l2 = true;
+			if(count >2) l3 = true;
+			if(count > 3) l4 = true;
+			
+			wim.setLeds(l1, l2, l3, l4);
 			wim.addWiiMoteEventListeners(this);
+			
+			count++;
 		}
 		
 		_wiimotes = wiimotes;			
