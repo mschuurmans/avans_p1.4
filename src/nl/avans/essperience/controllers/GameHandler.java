@@ -1,10 +1,14 @@
 package nl.avans.essperience.controllers;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import nl.avans.essperience.events.MicroGameFinishedEventListener;
+import nl.avans.essperience.main.Main;
+import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.MenuModel;
+import nl.avans.essperience.views.FlappyBirdScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.MenuScreen;
 
@@ -56,7 +60,7 @@ public class GameHandler extends JFrame
 	
 	public void start()
 	{
-		
+		nextGame(true); // for now.
 	}
 	
 	public void stop()
@@ -77,6 +81,7 @@ public class GameHandler extends JFrame
 	
 	public void nextGame(boolean succeed)
 	{
+		System.out.println("GOING TO CHANGE THE SCREEN");
 		if(!succeed)
 		{
 			if(_lives == 1)
@@ -87,8 +92,24 @@ public class GameHandler extends JFrame
 			else
 				_lives--;
 		}
-		
+		setContentPane(new JPanel(null));
 		// do logic for next game screen hier.
+		this._gameModel = new FlappyBirdModel();
+		this._gameScreen = new FlappyBirdScreen(this._gameModel);
+		this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
+		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
+			
+			@Override
+			public void microGameFinishedEvent(boolean succeed) 
+			{
+				nextGame(succeed);
+			}
+		});
+		
+		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
+		Main.GAME.validate();
+		Main.GAME.repaint();
+		System.out.println("CHANGING SCREEN");
 	}
 	
 }

@@ -6,6 +6,7 @@ import nl.avans.essperience.models.GameModel;
 
 public class FlappyBirdScreen extends GameScreen
 {
+	private static final long serialVersionUID = -2013215913618586135L;
 
 	public FlappyBirdScreen(GameModel model) 
 	{
@@ -23,7 +24,8 @@ public class FlappyBirdScreen extends GameScreen
 	@Override
 	public void paintComponent(Graphics g) 
 	{
-		
+		System.out.println("FLAPPY DRAW CALLED");
+		g.drawString("FlappyBird Screen", 10, 15);
 	}
 
 }
