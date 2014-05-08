@@ -11,4 +11,6 @@ public class ButtonPressedEventListener
 {
 	public void keyboardButtonPressed(int code){}
 	public void wiimoteButtonPressed(GameKeys key){}
+	public void wiimoteMotionGForceAcceleration(){}
+	
 }
