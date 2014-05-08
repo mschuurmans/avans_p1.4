@@ -41,7 +41,6 @@ public class AssetManager
 			}
 			else
 			{
-				System.out.println("succes.");
 				try 
 				{
 					Image img = ImageIO.read(url);
