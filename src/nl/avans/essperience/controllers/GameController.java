@@ -4,7 +4,7 @@ import nl.avans.essperience.events.MicroGameFinishedEventListener;
 
 public abstract class GameController 
 {
-	private MicroGameFinishedEventListener _finishedListener = null;
+	protected MicroGameFinishedEventListener _finishedListener = null;
 	
 	public GameController()
 	{

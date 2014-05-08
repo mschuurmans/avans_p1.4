@@ -65,6 +65,8 @@ public class WiiController implements WiimoteListener
 	@Override
 	public void onButtonsEvent(WiimoteButtonsEvent e) 
 	{
+		if(_debug)
+			System.out.println("WiiController : Button event called");
 		if(e.isButtonAJustPressed())
 		{
 			if(_listener != null)

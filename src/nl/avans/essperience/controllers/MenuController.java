@@ -24,10 +24,25 @@ public class MenuController extends GameController
 				{
 					if(_debug)
 						System.out.println("button was pressed and event was called.");
+					
+					switch(key)
+					{
+						case KeyEnter:
+							selectCurrentOption();
+							break;
+						default:
+							break;
+					}
 				}
 		});
 		
 		this._view.addKeyListener(InputController.Instance().getKeyboardListener());
+	}
+	
+	public void selectCurrentOption()
+	{
+		if(this._finishedListener != null)
+			this._finishedListener.microGameFinishedEvent(true);
 	}
 
 }

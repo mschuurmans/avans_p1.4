@@ -7,6 +7,7 @@ public class Enums
 	{
 		KeyA,
 		KeyB,
+		KeyEnter,
 		WiiA,
 		WiiUp,
 		WiiB,
