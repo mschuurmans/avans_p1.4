@@ -15,34 +15,36 @@ import nl.avans.essperience.views.MenuScreen;
 public class GameHandler extends JFrame
 {
 	private static final long serialVersionUID = -4608768969398477748L;
-	
+
 	private int _difficulty = 1;
-	
+
 	private int _lives = GameHandler.MAX_LIVES;
-	
+
 	public static final int MAX_LIVES = 3;
 	private GameScreen _gameScreen;
 	private GameController _gameController;
 	private GameModel _gameModel;
-	
+
 	public GameHandler()
 	{
 		super("Essperience");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	
+
 		init();
-		
+
 		setContentPane(_gameScreen);
-		
+
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		//setUndecorated(true);  
 		setSize(800, 800);
 		setVisible(true);
 	}
+	
 	public int getLivesLeft()
 	{
 		return _lives;
 	}
+	
 	public void init()
 	{
 		this._gameScreen = new MenuScreen();
@@ -60,17 +62,17 @@ public class GameHandler extends JFrame
 			}
 		});
 	}
-	
+
 	public void start()
 	{
 		nextGame(true); // for now.
 	}
-	
+
 	public void stop()
 	{
 		reset();
 	}
-	
+
 	/**
 	 * resets the game back to the menuscreen
 	 */
@@ -79,9 +81,9 @@ public class GameHandler extends JFrame
 		_lives = MAX_LIVES;
 		init();
 	}
-	
-	
-	
+
+
+
 	public void nextGame(boolean succeed)
 	{
 		System.out.println("GOING TO CHANGE THE SCREEN");
@@ -101,20 +103,18 @@ public class GameHandler extends JFrame
 		this._gameScreen = new FlappyBirdScreen(this._gameModel);
 		this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
 		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
-			
+
 			@Override
 			public void microGameFinishedEvent(boolean succeed) 
 			{
 				nextGame(succeed);
 			}
 		});
-		
+
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
 		System.out.println("CHANGING SCREEN");
 	}
-	
+
 }
-
-
