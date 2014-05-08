@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import nl.avans.essperience.models.GameModel;
+import nl.avans.essperience.utils.AssetManager;
 
 public abstract class GameScreen extends JPanel implements ActionListener
 {
@@ -39,6 +40,6 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	
 	public void drawLives(Graphics g)
 	{
-		
+		g.drawImage(AssetManager.Instance().getImage("heart.png"), 10,10,25,25, null);
 	}
 }

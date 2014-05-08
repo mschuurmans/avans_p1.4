@@ -15,4 +15,9 @@ public class Utils
 		else
 			return GameKeys.None;
 	}
+	
+	public static int percentOf(int percent, int maxValue)
+	{
+		return (maxValue / 100) * percent;
+	}
 }

@@ -24,8 +24,9 @@ public class FlappyBirdScreen extends GameScreen
 	@Override
 	public void paintComponent(Graphics g) 
 	{
-		System.out.println("FLAPPY DRAW CALLED");
 		g.drawString("FlappyBird Screen", 10, 15);
+		
+		super.drawLives(g);
 	}
 
 }

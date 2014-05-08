@@ -1,14 +1,15 @@
 package nl.avans.essperience.utils;
-import java.util.*;
-import java.io.*;
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.imageio.*;
+import javax.imageio.ImageIO;
 
 public class AssetManager
 {
-	private String[] customAssets = new String[] { "res/flappy.png" };
+	private String[] customAssets = new String[] { "flappy.png" , "heart.png"};
 
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 
@@ -31,50 +32,31 @@ public class AssetManager
 	{
 		_assets = new HashMap<String, Image>();
 
-/*		for (Stage stage : FestivalHandler.Instance().getStages())
-		{
-			if (!stage.getImage().trim().equals(""))
-			{
-				File file = new File(stage.getImage());
-
-				if (file.exists())
-				{
-					try
-					{
-						Image img = ImageIO.read(file);
-						_assets.put(stage.getImage().trim(), img);
-					}
-					catch (Exception e)
-					{
-					}
-				}
-			}
-		}
-*/
 		for (String asset : customAssets)
 		{
-			File file = new File(asset);
-			if (file.exists())
+			URL url = this.getClass().getClassLoader().getResource(asset);
+			if(url == null)
 			{
-				Image img;
-				try
+				return;
+			}
+			else
+			{
+				System.out.println("succes.");
+				try 
 				{
-					img = ImageIO.read(file);
+					Image img = ImageIO.read(url);
 					_assets.put(asset, img);
-				}
+				} 
 				catch (IOException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 		}
 	}
 
 	public Image getImage(String key)
 	{
-		// System.out.println(_assets);
 		return _assets.get(key.trim());
 	}
 }
