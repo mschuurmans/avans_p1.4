@@ -34,7 +34,12 @@ public class FlappyBirdScreen extends GameScreen
 		_background = AssetManager.Instance().getImage("Flappy/background.png");
 		init();
 	}
-
+	
+	public void flap()
+	{
+		System.out.println("Im flapping!!");
+	}
+	
 	public void init()
 	{		
 		/**
@@ -79,7 +84,9 @@ public class FlappyBirdScreen extends GameScreen
 		
 		_pipeTop.draw(g);
 		_pipeBottom.draw(g);
+		
 		_player.draw(g);
+		
 		super.drawLives(g);
 	}
 

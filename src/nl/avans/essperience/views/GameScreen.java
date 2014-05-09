@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import nl.avans.essperience.events.ViewToControllerFinishedEventListener;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.utils.AssetManager;
 
@@ -16,6 +17,8 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	private static final long serialVersionUID = 517082358948978120L;
 	
 	private GameModel _gameModel;
+	protected ViewToControllerFinishedEventListener _listener = null;
+	
 	
 	public GameScreen(GameModel model)
 	{
@@ -23,6 +26,12 @@ public abstract class GameScreen extends JPanel implements ActionListener
 		this.setFocusable(true);
 		new Timer(30, this).start();
 	}
+	
+	public void addViewToControllerEventListener(ViewToControllerFinishedEventListener event)
+	{
+		_listener = event;
+	}
+	
 	public void setKeyboardListener(KeyListener listener)
 	{
 		this.addKeyListener(listener);
