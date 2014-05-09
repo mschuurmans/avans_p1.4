@@ -18,6 +18,9 @@ public class IndianaJantjeScreen extends GameScreen
 	private double _offset;
 	private int _drawX;
 	private int _drawY;
+	private int _spriteX;
+	private int _spriteY;
+	private int index;
 	
 	private static final long serialVersionUID = -2013215913618586135L;
 
@@ -27,6 +30,7 @@ public class IndianaJantjeScreen extends GameScreen
 		// TODO Auto-generated constructor stub
 		_background = AssetManager.Instance().getImage("IndianaJantje/background.jpg");
 		_stone = AssetManager.Instance().getImage("Flappy/flappy.png");
+		_spritesheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonespritesheet.png");
 		init();
 	}
 
@@ -52,6 +56,11 @@ public class IndianaJantjeScreen extends GameScreen
 			default: System.out.println("OMFG SIDE WENT WRONG");
 				break;
 		}
+		
+		_spriteX = (index % 6) * 800;
+		_spriteY = (index / 3) * 800;
+		index++;
+		index %= 18;
 	}
 
 	@Override
@@ -66,6 +75,9 @@ public class IndianaJantjeScreen extends GameScreen
 		int backgroundWidth = _background.getWidth(null);
 		g.drawImage(_background, 0, 0, screenWidth, screenHeight, null);
 		g.drawImage(_stone, _drawX, _drawY, screenWidth/2, screenHeight/2, null);
+		
+		BufferedImage subImg = _spritesheet.getSubimage(_spriteX, _spriteY, 800, 800);
+		g.drawImage(subImg, 0, 0, 800, 800, null);
 		init();
 	}
 	
