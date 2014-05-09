@@ -27,6 +27,7 @@ public class FlappyBirdController extends GameController
 			
 			public void WiimotionGForceMovement()
 			{
+
 				_view.flap();
 			}
 		});
