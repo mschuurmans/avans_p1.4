@@ -2,7 +2,9 @@ package nl.avans.essperience.entities.flappy;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
@@ -66,5 +68,11 @@ public class FlappyPipe
 	public void draw(Graphics g)
 	{
 		g.drawImage(_image, _x,_y,_width,_height, null);
+	}
+	
+	public boolean collision(Shape shape)
+	{
+		Rectangle2D pipec = new Rectangle2D.Double(_x, _y, _width, _height);
+		return pipec.intersects((Rectangle2D) shape);
 	}
 }
