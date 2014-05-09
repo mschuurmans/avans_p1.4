@@ -37,7 +37,8 @@ public class FlappyBirdScreen extends GameScreen
 	
 	public void flap()
 	{
-		System.out.println("Im flapping!!");
+		if(_player.getY() > 10)
+			_player.moveY(-10);
 	}
 	
 	public void init()
@@ -72,6 +73,10 @@ public class FlappyBirdScreen extends GameScreen
 			if (_listener != null)
 			_listener.sendGamefinishedEvent(false);
 		}
+		
+		if(_player.getY() < Main.GAME.getHeight() - 20)
+			_player.moveY(10);
+		
 	}
 
 	@Override
