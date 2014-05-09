@@ -10,6 +10,7 @@ public class FlappyBirdController extends GameController
 	private FlappyBirdModel _model;
 	private FlappyBirdScreen _view;
 	private boolean _debug = true;
+	
 	public FlappyBirdController(FlappyBirdModel model, FlappyBirdScreen view)
 	{
 		_model = model;

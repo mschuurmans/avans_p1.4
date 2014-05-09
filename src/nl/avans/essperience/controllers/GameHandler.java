@@ -34,15 +34,20 @@ public class GameHandler extends JFrame
 
 		setContentPane(_gameScreen);
 
-		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//setUndecorated(true);  
-		setSize(800, 800);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		setUndecorated(true);  
+		//setSize(800, 800);
 		setVisible(true);
+		setLocationRelativeTo(null);
 	}
 	
 	public int getLivesLeft()
 	{
 		return _lives;
+	}
+	public int getDifficulty()
+	{
+		return _difficulty;
 	}
 	
 	public void init()
