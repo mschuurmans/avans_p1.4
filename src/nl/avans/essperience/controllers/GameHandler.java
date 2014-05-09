@@ -38,15 +38,12 @@ public class GameHandler extends JFrame
 		setContentPane(_gameScreen);
 
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
-<<<<<<< HEAD
 		setUndecorated(false);  
 		setSize(800, 800);
-=======
 		//setUndecorated(true);  
 		setSize(800, 800);
 		setUndecorated(true);  
 		setSize(1280, 800);
->>>>>>> a46eb585a7450593c34865109c3b25501d94db3f
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
@@ -151,15 +148,12 @@ public class GameHandler extends JFrame
 			}
 		});
 
-<<<<<<< HEAD
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
 		_gameScreen.requestFocus();
 		System.out.println("CHANGING SCREEN");
-=======
 		changeScreen();
->>>>>>> d4b013f86a1fb5054a954bb64ebb1406e44d279c
 	}
 
 }
