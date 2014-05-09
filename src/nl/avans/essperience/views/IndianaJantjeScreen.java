@@ -13,11 +13,10 @@ public class IndianaJantjeScreen extends GameScreen
 	// Images
 	private BufferedImage _spritesheet;
 	private Image _background;
-	private Image _stone;
 	private int _side;
-	private double _offset;
 	private int _drawX;
 	private int _drawY;
+	private int _index;
 	
 	private static final long serialVersionUID = -2013215913618586135L;
 
@@ -26,32 +25,23 @@ public class IndianaJantjeScreen extends GameScreen
 		super(model);
 		// TODO Auto-generated constructor stub
 		_background = AssetManager.Instance().getImage("IndianaJantje/background.jpg");
-		_stone = AssetManager.Instance().getImage("Flappy/flappy.png");
+		_spritesheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonesspritesheet.png");
 		init();
 	}
 
 	public void init()
 	{		
-		_side = chooseSide();
+		if(_index==0)
+			_side = chooseSide();
 	}
 	
 	@Override
 	public void update() 
 	{
-		switch (_side)
-		{
-			case 0:
-				_offset = 0;
-				break;
-			case 1:
-				_offset = 1;
-				break;
-			case 2:
-				_offset = -1;
-				break;
-			default: System.out.println("OMFG SIDE WENT WRONG");
-				break;
-		}
+		_drawX = (_index % 6) * 800;
+		_drawY = (_index / 6) * 800;
+		_index++;
+		_index %= 18;
 	}
 
 	@Override
@@ -60,12 +50,12 @@ public class IndianaJantjeScreen extends GameScreen
 		super.paintComponent(g);
 		int screenWidth = Main.GAME.getWidth();
 		int screenHeight = Main.GAME.getHeight();
-		_drawY = screenHeight/2;
-		_drawX = (int) ((screenWidth/2) + ((screenWidth/4)*_offset));
 		
 		int backgroundWidth = _background.getWidth(null);
 		g.drawImage(_background, 0, 0, screenWidth, screenHeight, null);
-		g.drawImage(_stone, _drawX, _drawY, screenWidth/2, screenHeight/2, null);
+		
+		BufferedImage subImg = _spritesheet.getSubimage(_drawX, _drawY, 800, 800);
+		g.drawImage(subImg, screenWidth/3*_side, screenHeight-(screenWidth/3), screenWidth/3, screenWidth/3, null);
 		init();
 	}
 	

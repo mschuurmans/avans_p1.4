@@ -47,6 +47,7 @@ public class InputController
 			@Override
 			public void wiimoteMotionGForceAcceleration()
 			{
+				System.out.println(_listener);
 				if(_listener != null)
 					_listener.WiimotionGForceMovement();
 			}
@@ -70,6 +71,7 @@ public class InputController
 	
 	public void addInputTriggeredEventListener(InputTriggerdEventListener listener)
 	{
+		this._listener = null;
 		this._listener = listener;
 	}
 	

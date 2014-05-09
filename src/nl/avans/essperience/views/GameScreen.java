@@ -18,13 +18,14 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	
 	private GameModel _gameModel;
 	protected ViewToControllerFinishedEventListener _listener = null;
-	
+	protected Timer _timer;
 	
 	public GameScreen(GameModel model)
 	{
 		this._gameModel = model;
 		this.setFocusable(true);
-		new Timer(30, this).start();
+		_timer = new Timer(60, this);
+		_timer.start();
 	}
 	
 	public void addViewToControllerEventListener(ViewToControllerFinishedEventListener event)

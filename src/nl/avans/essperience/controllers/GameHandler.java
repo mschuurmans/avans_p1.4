@@ -38,8 +38,15 @@ public class GameHandler extends JFrame
 		setContentPane(_gameScreen);
 
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
+<<<<<<< HEAD
 		setUndecorated(false);  
 		setSize(800, 800);
+=======
+		//setUndecorated(true);  
+		setSize(800, 800);
+		setUndecorated(true);  
+		setSize(1280, 800);
+>>>>>>> a46eb585a7450593c34865109c3b25501d94db3f
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
@@ -107,7 +114,7 @@ public class GameHandler extends JFrame
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen hier.
-		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
+		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 2;
 		switch (rand) {
 		case 1: 
 			_gameModel = new IndianaJantjeModel();

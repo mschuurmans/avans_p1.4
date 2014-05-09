@@ -63,9 +63,10 @@ public class WiiController implements WiimoteListener
 			wim.setLeds(l1, l2, l3, l4);
 			wim.addWiiMoteEventListeners(this);
 			wim.activateSmoothing();
+			wim.activateMotionSensing();
 			count++;
 		}
-		
+		System.out.println(wiimotes.length);
 		_wiimotes = wiimotes;			
 	}
 	
@@ -94,7 +95,7 @@ public class WiiController implements WiimoteListener
 	public void onButtonsEvent(WiimoteButtonsEvent e) 
 	{
 		//if(_debug)
-			//System.out.println("WiiController : Button event called");
+		//	System.out.println("WiiController : Button event called");
 		if(e.isButtonAJustPressed())
 		{
 			if(_listener != null)
@@ -154,10 +155,11 @@ public class WiiController implements WiimoteListener
 	@Override
 	public void onMotionSensingEvent(MotionSensingEvent e) 
 	{		
+		//System.out.println(e.getGforce().getY());
 		if(e.getGforce().getY() > 2.5f)
 		{
-			if(_debug)
-				System.out.println("moving detected.");
+			//if(_debug)
+			//	System.out.println("moving detected.");
 			
 			if(_listener != null)
 				_listener.wiimoteMotionGForceAcceleration();
