@@ -15,10 +15,4 @@ public abstract class GameController
 	{
 		this._finishedListener = listener;
 	}	
-	
-	public void callFinishedListener(boolean succeed)
-	{
-		if(_finishedListener != null)
-			_finishedListener.microGameFinishedEvent(succeed);
-	}
 }

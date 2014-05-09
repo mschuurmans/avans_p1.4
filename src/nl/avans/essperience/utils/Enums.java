@@ -13,12 +13,4 @@ public class Enums
 		WiiB,
 		None		
 	}
-	
-	public static enum DockLocations
-	{
-		Top,
-		Bottom,
-		Left,
-		Right
-	}
 }
