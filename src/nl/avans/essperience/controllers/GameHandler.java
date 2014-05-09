@@ -79,6 +79,7 @@ public class GameHandler extends JFrame
 
 	public void changeScreen()
 	{
+		_gameScreen.addKeyListener(InputController.Instance().getKeyboardListener());
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
