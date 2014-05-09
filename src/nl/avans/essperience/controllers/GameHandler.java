@@ -7,9 +7,11 @@ import nl.avans.essperience.events.MicroGameFinishedEventListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.models.GameModel;
+import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.views.FlappyBirdScreen;
 import nl.avans.essperience.views.GameScreen;
+import nl.avans.essperience.views.IndianaJantjeScreen;
 import nl.avans.essperience.views.MenuScreen;
 
 public class GameHandler extends JFrame
@@ -17,6 +19,7 @@ public class GameHandler extends JFrame
 	private static final long serialVersionUID = -4608768969398477748L;
 
 	private int _difficulty = 1;
+	private final int _NUMBEROFGAMES = 1;
 
 	private int _lives = GameHandler.MAX_LIVES;
 
@@ -104,9 +107,22 @@ public class GameHandler extends JFrame
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen hier.
-		this._gameModel = new FlappyBirdModel();
-		this._gameScreen = new FlappyBirdScreen(this._gameModel);
-		this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
+		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
+		switch (rand) {
+		case 1: 
+			_gameModel = new IndianaJantjeModel();
+			_gameScreen = new IndianaJantjeScreen((IndianaJantjeModel) _gameModel);
+			_gameController = new IndianaJantjeController((IndianaJantjeScreen)_gameScreen, (IndianaJantjeModel)_gameModel);
+			break;
+		case 2:
+			this._gameModel = new FlappyBirdModel();
+			this._gameScreen = new FlappyBirdScreen(this._gameModel);
+			this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
+			break;
+		default:
+			reset();
+			break;
+		}
 		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
 
 			@Override

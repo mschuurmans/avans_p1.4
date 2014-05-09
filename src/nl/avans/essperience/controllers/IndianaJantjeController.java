@@ -21,7 +21,7 @@ public class IndianaJantjeController extends GameController
 			public void keyPressed(GameKeys key)
 			{
 				if(_debug)
-					System.out.println("FlappyBirdController : key has been pressed");
+					System.out.println("IndianaJantjeController : key has been pressed");
 			}
 		});
 		
