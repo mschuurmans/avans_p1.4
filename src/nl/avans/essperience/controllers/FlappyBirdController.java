@@ -1,5 +1,6 @@
 package nl.avans.essperience.controllers;
 
+import nl.avans.essperience.entities.flappy.FlappyPlayer;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.utils.Enums.GameKeys;

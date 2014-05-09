@@ -22,19 +22,26 @@ public class FlappyBirdScreen extends GameScreen
 	private FlappyPipe _pipeBottom;
 	
 	//player 
+
 	private FlappyPlayer _player;
-	
 	private static final long serialVersionUID = -2013215913618586135L;
 
 	public FlappyBirdScreen(GameModel model) 
 	{
 		super(model);
-		// TODO Auto-generated constructor stub
+		//TODO Auto-generated constructor stub
 		_spritesheet = (BufferedImage) AssetManager.Instance().getImage("Flappy/flappy.png");
 		_background = AssetManager.Instance().getImage("Flappy/background.png");
 		init();
 	}
 
+	public void setPlayer(FlappyPlayer play)
+	{
+		_player = play;
+	}
+	
+	
+	
 	public void init()
 	{		
 		/**
@@ -79,7 +86,7 @@ public class FlappyBirdScreen extends GameScreen
 		
 		_pipeTop.draw(g);
 		_pipeBottom.draw(g);
-		
+		_player.draw(g);
 		super.drawLives(g);
 	}
 
