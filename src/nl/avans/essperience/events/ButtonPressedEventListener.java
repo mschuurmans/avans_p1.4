@@ -10,6 +10,7 @@ import nl.avans.essperience.utils.Enums.GameKeys;
 public class ButtonPressedEventListener 
 {
 	public void keyboardButtonPressed(int code){}
+	public void keyboardButtonReleased(int code){}
 	public void wiimoteButtonPressed(GameKeys key){}
 	public void wiimoteMotionGForceAcceleration(){}
 	

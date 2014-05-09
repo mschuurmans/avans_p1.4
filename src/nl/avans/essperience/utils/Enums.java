@@ -11,6 +11,9 @@ public class Enums
 		WiiA,
 		WiiUp,
 		WiiB,
+		KeyW,
+		KeyD,
+		KeyS,
 		None		
 	}
 	

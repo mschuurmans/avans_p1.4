@@ -71,7 +71,11 @@ public class IndianaJantjeScreen extends GameScreen
 	
 	private int chooseSide() {
 		int rand = (int)(Math.random() * 3);
+		System.out.println("rand is: " + rand);
 		return rand;
 	}
 
+	public int getSide() {
+		return this._side;
+	}
 }

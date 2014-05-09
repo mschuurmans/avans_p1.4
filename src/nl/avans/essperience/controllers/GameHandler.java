@@ -37,9 +37,9 @@ public class GameHandler extends JFrame
 
 		setContentPane(_gameScreen);
 
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		setUndecorated(true);  
-		//setSize(800, 800);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		setUndecorated(false);  
+		setSize(800, 800);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
@@ -135,6 +135,7 @@ public class GameHandler extends JFrame
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
+		_gameScreen.requestFocus();
 		System.out.println("CHANGING SCREEN");
 	}
 
