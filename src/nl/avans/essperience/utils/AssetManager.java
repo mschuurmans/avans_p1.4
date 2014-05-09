@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class AssetManager
 {
-	private String[] customAssets = new String[] { "Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", "Flappy/background.png", "Flappy/bird.png", "IndianaJantje/background.jpg"};
+	private String[] customAssets = new String[] { "Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", "Flappy/background.png", "Flappy/bird.png", "IndianaJantje/background.jpg", "IndianaJantje/stonesspritesheet.png"};
 
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 

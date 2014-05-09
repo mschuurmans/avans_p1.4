@@ -37,9 +37,9 @@ public class GameHandler extends JFrame
 
 		setContentPane(_gameScreen);
 
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setUndecorated(true);  
-		//setSize(800, 800);
+		setSize(1280, 800);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}
