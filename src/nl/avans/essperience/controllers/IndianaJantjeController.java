@@ -30,21 +30,21 @@ public class IndianaJantjeController extends GameController
 				switch (((IndianaJantjeScreen)_view).getSide()) {
 				case 0:
 					if (key == GameKeys.KeyA){
-						callFinishedListener(true);
+						((IndianaJantjeScreen)_view).nextGame();
 					} else {
 						callFinishedListener(false);
 					}
 					break;
 				case 1:
 					if (key == GameKeys.KeyA || key == GameKeys.KeyD){
-						callFinishedListener(true);
+						((IndianaJantjeScreen)_view).nextGame();
 					} else {
 						callFinishedListener(false);
 					}
 					break;
 				case 2:
 					if (key == GameKeys.KeyD){
-						callFinishedListener(true);
+						((IndianaJantjeScreen)_view).nextGame();
 					} else {
 						callFinishedListener(false);
 					}

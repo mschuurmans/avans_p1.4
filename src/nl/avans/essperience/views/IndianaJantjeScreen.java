@@ -40,7 +40,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_games = 0;
 		_sizeX = 0;
 		_sizeY = 0;
-		_gameAmount = 3;
+		_gameAmount = 10;
 		init();
 		_screenWidth = Main.GAME.getWidth();
 		_screenHeight = Main.GAME.getHeight();
@@ -55,20 +55,16 @@ public class IndianaJantjeScreen extends GameScreen
 	@Override
 	public void update() 
 	{
-
 		_drawX = (_index%4) * 500;
 		_drawY = (_index/4) * 500;
 		_index++;
+		_index%=16;
 
 		_sizeY += (_factor * _difficulty);
 		_sizeX += (_factor * _difficulty);
 
 		if (_sizeY >= _screenHeight/2) {
 			_listener.sendGamefinishedEvent(false);
-		}
-		if (_games < _gameAmount) {
-			_games++;
-			init();
 		}
 	}
 
@@ -91,5 +87,14 @@ public class IndianaJantjeScreen extends GameScreen
 
 	public int getSide() {
 		return this._side;
+	}
+	
+	public void nextGame() {
+		if (_games <= _gameAmount) {
+			_games++;
+			init();
+		} else {
+			_listener.sendGamefinishedEvent(true);
+		}
 	}
 }
