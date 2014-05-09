@@ -71,6 +71,7 @@ public class FlappyBirdScreen extends GameScreen
 		
 		if (_pipeTop.collision(_player.getShape()) || _pipeBottom.collision(_player.getShape())) 
 		{
+			_timer.stop();
 			if (_listener != null)
 			_listener.sendGamefinishedEvent(false);
 		}
@@ -79,7 +80,10 @@ public class FlappyBirdScreen extends GameScreen
 		if(_player.getY() < Main.GAME.getHeight() - 20)
 			_player.moveY(10);
 		else
+		{
+			_timer.stop();
 			_listener.sendGamefinishedEvent(false);
+		}
 		
 	}
 
