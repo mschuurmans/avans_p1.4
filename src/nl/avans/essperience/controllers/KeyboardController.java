@@ -29,7 +29,11 @@ public class KeyboardController implements KeyListener
 	@Override
 	public void keyReleased(KeyEvent arg0) 
 	{
+		if(_listener != null)
+			_listener.keyboardButtonReleased(arg0.getKeyCode());
 		
+		if(_debug)
+			System.out.println("button Released : " + arg0.getKeyCode() + " : " + arg0.getKeyChar());
 	}
 
 	@Override

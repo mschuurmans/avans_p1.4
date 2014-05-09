@@ -21,7 +21,34 @@ public class IndianaJantjeController extends GameController
 			public void keyPressed(GameKeys key)
 			{
 				if(_debug)
-					System.out.println("IndianaJantjeController : key has been pressed");
+					System.out.println("IndianaJantjeController : key has been pressed" + key);
+			}
+			public void keyReleased(GameKeys key) {
+				if(_debug)
+					System.out.println("IndianaJantjeController : key has been released" + key);
+				switch (((IndianaJantjeScreen)_view).getSide()) {
+				case 0:
+					if (key == GameKeys.KeyA){
+						callFinishedListener(true);
+					} else {
+						callFinishedListener(false);
+					}
+					break;
+				case 1:
+					if (key == GameKeys.KeyA || key == GameKeys.KeyD){
+						callFinishedListener(true);
+					} else {
+						callFinishedListener(false);
+					}
+					break;
+				case 2:
+					if (key == GameKeys.KeyD){
+						callFinishedListener(true);
+					} else {
+						callFinishedListener(false);
+					}
+					break;
+				}
 			}
 		});
 		
