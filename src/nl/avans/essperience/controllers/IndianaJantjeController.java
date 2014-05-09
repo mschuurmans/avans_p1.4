@@ -23,6 +23,7 @@ public class IndianaJantjeController extends GameController
 				if(_debug)
 					System.out.println("IndianaJantjeController : key has been pressed" + key);
 			}
+			
 			public void keyReleased(GameKeys key) {
 				if(_debug)
 					System.out.println("IndianaJantjeController : key has been released" + key);
