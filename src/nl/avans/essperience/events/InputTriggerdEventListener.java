@@ -2,7 +2,9 @@ package nl.avans.essperience.events;
 
 import nl.avans.essperience.utils.Enums.GameKeys;
 
-public interface InputTriggerdEventListener 
+public class InputTriggerdEventListener 
 {
-	public void keyPressed(GameKeys key);
+	public void keyPressed(GameKeys key){}
+	
+	public void WiimotionGForceMovement(){}
 }

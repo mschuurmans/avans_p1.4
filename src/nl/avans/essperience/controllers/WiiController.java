@@ -17,6 +17,7 @@ import wiiusej.wiiusejevents.wiiuseapievents.GuitarHeroRemovedEvent;
 import wiiusej.wiiusejevents.wiiuseapievents.NunchukInsertedEvent;
 import wiiusej.wiiusejevents.wiiuseapievents.NunchukRemovedEvent;
 import wiiusej.wiiusejevents.wiiuseapievents.StatusEvent;
+import wiiusej.wiiusejevents.wiiuseapievents.WiiUseApiEvent;
 
 /**
  * Class that handles the Wiimote logic.
@@ -61,11 +62,27 @@ public class WiiController implements WiimoteListener
 			
 			wim.setLeds(l1, l2, l3, l4);
 			wim.addWiiMoteEventListeners(this);
-			
+			wim.activateSmoothing();
 			count++;
 		}
 		
 		_wiimotes = wiimotes;			
+	}
+	
+	public void activateMotionSensor()
+	{
+		for(Wiimote wim : _wiimotes)
+		{
+			wim.activateMotionSensing();
+		}
+	}
+	
+	public void deactivateMotionSensor()
+	{
+		for(Wiimote wim : _wiimotes)
+		{
+			wim.deactivateMotionSensing();
+		}
 	}
 	
 	public void addButtonPressedListener(ButtonPressedEventListener listener)
@@ -76,8 +93,8 @@ public class WiiController implements WiimoteListener
 	@Override
 	public void onButtonsEvent(WiimoteButtonsEvent e) 
 	{
-		if(_debug)
-			System.out.println("WiiController : Button event called");
+		//if(_debug)
+			//System.out.println("WiiController : Button event called");
 		if(e.isButtonAJustPressed())
 		{
 			if(_listener != null)
@@ -111,8 +128,8 @@ public class WiiController implements WiimoteListener
 	}
 
 	@Override
-	public void onExpansionEvent(ExpansionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void onExpansionEvent(ExpansionEvent e) 
+	{
 		
 	}
 
@@ -135,9 +152,16 @@ public class WiiController implements WiimoteListener
 	}
 
 	@Override
-	public void onMotionSensingEvent(MotionSensingEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void onMotionSensingEvent(MotionSensingEvent e) 
+	{		
+		if(e.getGforce().getY() > 2.5f)
+		{
+			if(_debug)
+				System.out.println("moving detected.");
+			
+			if(_listener != null)
+				_listener.wiimoteMotionGForceAcceleration();
+		}
 	}
 
 	@Override
@@ -153,8 +177,8 @@ public class WiiController implements WiimoteListener
 	}
 
 	@Override
-	public void onStatusEvent(StatusEvent arg0) {
-		// TODO Auto-generated method stub
+	public void onStatusEvent(StatusEvent e)
+	{
 		
 	}
 

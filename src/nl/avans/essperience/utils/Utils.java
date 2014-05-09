@@ -10,7 +10,14 @@ public class Utils
 			return GameKeys.KeyA;
 		else if(code == 66)
 			return GameKeys.KeyB;
+		else if(code == 10)
+			return GameKeys.KeyEnter;
 		else
 			return GameKeys.None;
+	}
+	
+	public static int percentOf(int percent, int maxValue)
+	{
+		return (maxValue / 100) * percent;
 	}
 }

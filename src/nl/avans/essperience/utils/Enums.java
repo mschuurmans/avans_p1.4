@@ -17,7 +17,7 @@ public class Enums
 	public static enum DockLocations
 	{
 		Top,
-		Bottom, 
+		Bottom,
 		Left,
 		Right
 	}

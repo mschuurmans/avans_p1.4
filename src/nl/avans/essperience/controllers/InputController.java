@@ -35,10 +35,16 @@ public class InputController
 					_listener.keyPressed(Utils.getFromKeyboardCode(code));
 			}
 		});
-		
 		_wiiController = new WiiController(2); // TODO replace magic cookies..
 		_wiiController.addButtonPressedListener(new ButtonPressedEventListener()
 		{
+			@Override
+			public void wiimoteMotionGForceAcceleration()
+			{
+				if(_listener != null)
+					_listener.WiimotionGForceMovement();
+			}
+			
 			@Override
 			public void wiimoteButtonPressed(GameKeys key) 
 			{
@@ -46,6 +52,14 @@ public class InputController
 					_listener.keyPressed(key);
 			}
 		});
+	}
+	
+	public void setMotionDetecting(boolean state)
+	{
+		if(state)
+			_wiiController.activateMotionSensor();
+		else
+			_wiiController.deactivateMotionSensor();
 	}
 	
 	public void addInputTriggeredEventListener(InputTriggerdEventListener listener)
