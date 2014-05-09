@@ -33,7 +33,7 @@ public class GameHandler extends JFrame
 		super("Essperience");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		init();
+		init(true);
 
 		setContentPane(_gameScreen);
 
@@ -60,7 +60,7 @@ public class GameHandler extends JFrame
 		return _difficulty;
 	}
 	
-	public void init()
+	public void init(boolean firstRun)
 	{
 		this._gameScreen = new MenuScreen();
 		this._gameModel = new MenuModel();
@@ -76,8 +76,20 @@ public class GameHandler extends JFrame
 				start(); // calls the start method to start the series of minigames. 
 			}
 		});
+		
+		if(!firstRun)
+			changeScreen();
+		
 	}
 
+	public void changeScreen()
+	{
+		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
+		Main.GAME.validate();
+		Main.GAME.repaint();
+		System.out.println("CHANGING SCREEN");
+	}
+	
 	public void start()
 	{
 		nextGame(true); // for now.
@@ -94,7 +106,7 @@ public class GameHandler extends JFrame
 	public void reset()
 	{
 		_lives = MAX_LIVES;
-		init();
+		init(false);
 	}
 
 
@@ -139,11 +151,15 @@ public class GameHandler extends JFrame
 			}
 		});
 
+<<<<<<< HEAD
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
 		_gameScreen.requestFocus();
 		System.out.println("CHANGING SCREEN");
+=======
+		changeScreen();
+>>>>>>> d4b013f86a1fb5054a954bb64ebb1406e44d279c
 	}
 
 }
