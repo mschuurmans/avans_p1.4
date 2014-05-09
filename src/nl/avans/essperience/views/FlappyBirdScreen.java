@@ -57,9 +57,9 @@ public class FlappyBirdScreen extends GameScreen
 		
 		_pipeBottom = new FlappyPipe(DockLocations.Bottom,Main.GAME.getDifficulty() * 2);
 		_pipeBottom.setX(600);
-		_pipeBottom.setY(Main.GAME.getHeight() - 300);
+		_pipeBottom.setY(Main.GAME.getHeight() - 200);
 		_pipeBottom.setWidth(100);
-		_pipeBottom.setHeight(300);
+		_pipeBottom.setHeight(200);
 	}
 	
 	@Override
