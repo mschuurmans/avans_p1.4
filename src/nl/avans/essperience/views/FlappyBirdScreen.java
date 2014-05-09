@@ -39,7 +39,7 @@ public class FlappyBirdScreen extends GameScreen
 	{
 		//if position more than 10 it can move up. (0 is the top of the screen)
 		if(_player.getY() > 10)
-			_player.moveY(-10);
+			_player.moveY(-6);
 	}
 	
 	public void init()
