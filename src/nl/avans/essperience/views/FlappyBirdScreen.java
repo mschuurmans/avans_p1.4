@@ -66,6 +66,12 @@ public class FlappyBirdScreen extends GameScreen
 		// TODO Auto-generated method stub
 		_pipeTop.moveLeft();
 		_pipeBottom.moveLeft();
+		
+		if (_pipeTop.collision(_player.getShape()) || _pipeBottom.collision(_player.getShape())) 
+		{
+			if (_listener != null)
+			_listener.sendGamefinishedEvent(false);
+		}
 	}
 
 	@Override
