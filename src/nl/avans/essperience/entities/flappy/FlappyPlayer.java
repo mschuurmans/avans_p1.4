@@ -44,4 +44,14 @@ public class FlappyPlayer
 		Rectangle2D birdc = new Rectangle2D.Double(_x, _y, width, height);
 		return birdc;
 	}
+	
+	public int getY()
+	{
+		return _y;
+	}
+	
+	public void moveY(int deltaY)
+	{
+		_y += deltaY;
+	}
 }

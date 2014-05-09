@@ -37,7 +37,9 @@ public class FlappyBirdScreen extends GameScreen
 	
 	public void flap()
 	{
-		System.out.println("Im flapping!!");
+		//if position more than 10 it can move up. (0 is the top of the screen)
+		if(_player.getY() > 10)
+			_player.moveY(-10);
 	}
 	
 	public void init()
@@ -72,6 +74,13 @@ public class FlappyBirdScreen extends GameScreen
 			if (_listener != null)
 			_listener.sendGamefinishedEvent(false);
 		}
+		
+		// if the bird is above the GAME.getHeight -20(height of birdimage) it can be moved up. else the game should be ended cause the bird hit the ground
+		if(_player.getY() < Main.GAME.getHeight() - 20)
+			_player.moveY(10);
+		else
+			_listener.sendGamefinishedEvent(false);
+		
 	}
 
 	@Override
