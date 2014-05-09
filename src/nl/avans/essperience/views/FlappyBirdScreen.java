@@ -79,7 +79,7 @@ public class FlappyBirdScreen extends GameScreen
 		
 		_pipeTop.draw(g);
 		_pipeBottom.draw(g);
-		
+		_player.draw(g);
 		super.drawLives(g);
 	}
 
