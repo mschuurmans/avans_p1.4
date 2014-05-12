@@ -137,6 +137,7 @@ public class GameHandler extends JFrame
 			reset();
 			break;
 		}
+		
 		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
 
 			@Override
