@@ -38,6 +38,8 @@ public class GameHandler extends JFrame
 		setContentPane(_gameScreen);
 
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		setUndecorated(false);  
+		setSize(800, 800);
 		//setUndecorated(true);  
 		setSize(800, 800);
 		setUndecorated(true);  
@@ -79,6 +81,7 @@ public class GameHandler extends JFrame
 
 	public void changeScreen()
 	{
+		_gameScreen.addKeyListener(InputController.Instance().getKeyboardListener());
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
@@ -121,7 +124,7 @@ public class GameHandler extends JFrame
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen hier.
-		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 2;
+		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
 		switch (rand) {
 		case 1: 
 			_gameModel = new IndianaJantjeModel();
@@ -147,6 +150,11 @@ public class GameHandler extends JFrame
 			}
 		});
 
+		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
+		Main.GAME.validate();
+		Main.GAME.repaint();
+		_gameScreen.requestFocus();
+		System.out.println("CHANGING SCREEN");
 		changeScreen();
 	}
 

@@ -34,6 +34,12 @@ public class InputController
 				if(_listener != null)
 					_listener.keyPressed(Utils.getFromKeyboardCode(code));
 			}
+			@Override
+			public void keyboardButtonReleased(int code) 
+			{
+				if(_listener != null)
+					_listener.keyReleased(Utils.getFromKeyboardCode(code));
+			}
 		});
 		_wiiController = new WiiController(2); // TODO replace magic cookies..
 		_wiiController.addButtonPressedListener(new ButtonPressedEventListener()

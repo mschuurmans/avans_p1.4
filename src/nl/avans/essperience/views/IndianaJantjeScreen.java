@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
+import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.utils.AssetManager;
 
 public class IndianaJantjeScreen extends GameScreen
@@ -16,52 +17,84 @@ public class IndianaJantjeScreen extends GameScreen
 	private int _side;
 	private int _drawX;
 	private int _drawY;
+	private int _sizeX;
+	private int _sizeY;
 	private int _index;
+	private int _difficulty;
+	private double _factor;
+	private int _screenWidth;
+	private int _screenHeight;
+	
+	private int _games;
+	private int _gameAmount;
 	
 	private static final long serialVersionUID = -2013215913618586135L;
 
 	public IndianaJantjeScreen(GameModel model) 
 	{
 		super(model);
-		// TODO Auto-generated constructor stub
 		_background = AssetManager.Instance().getImage("IndianaJantje/background.jpg");
 		_spritesheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonesspritesheet.png");
+		_difficulty = ((IndianaJantjeModel) model).getDifficulty();
+		_factor = 10;
+		_games = 0;
+		_sizeX = 0;
+		_sizeY = 0;
+		_gameAmount = 10;
 		init();
+		_screenWidth = Main.GAME.getWidth();
+		_screenHeight = Main.GAME.getHeight();
 	}
 
 	public void init()
 	{		
-		if(_index==0)
-			_side = chooseSide();
+		_index = 0;
+		_side = chooseSide();
 	}
 	
 	@Override
 	public void update() 
 	{
-		_drawX = (_index % 6) * 800;
-		_drawY = (_index / 6) * 800;
+		_drawX = (_index%4) * 500;
+		_drawY = (_index/4) * 500;
 		_index++;
-		_index %= 18;
+		_index%=16;
+
+		_sizeY += (_factor * _difficulty);
+		_sizeX += (_factor * _difficulty);
+
+		if (_sizeY >= _screenHeight/2) {
+			_listener.sendGamefinishedEvent(false);
+		}
 	}
 
 	@Override
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
-		int screenWidth = Main.GAME.getWidth();
-		int screenHeight = Main.GAME.getHeight();
 		
-		int backgroundWidth = _background.getWidth(null);
-		g.drawImage(_background, 0, 0, screenWidth, screenHeight, null);
+		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 		
-		BufferedImage subImg = _spritesheet.getSubimage(_drawX, _drawY, 800, 800);
-		g.drawImage(subImg, screenWidth/3*_side, screenHeight-(screenWidth/3), screenWidth/3, screenWidth/3, null);
-		init();
-	}
+		BufferedImage subImg = _spritesheet.getSubimage(_drawX, _drawY, 500, 500);
+		g.drawImage(subImg, (_screenWidth/3*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
+	} 
 	
 	private int chooseSide() {
 		int rand = (int)(Math.random() * 3);
+		System.out.println("rand is: " + rand);
 		return rand;
 	}
 
+	public int getSide() {
+		return this._side;
+	}
+	
+	public void nextGame() {
+		if (_games <= _gameAmount) {
+			_games++;
+			init();
+		} else {
+			_listener.sendGamefinishedEvent(true);
+		}
+	}
 }

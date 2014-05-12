@@ -10,6 +10,10 @@ public class Utils
 			return GameKeys.KeyA;
 		else if(code == 66)
 			return GameKeys.KeyB;
+		else if(code == 87)
+			return GameKeys.KeyW;
+		else if(code == 68)
+			return GameKeys.KeyD;
 		else if(code == 10)
 			return GameKeys.KeyEnter;
 		else

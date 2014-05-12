@@ -21,6 +21,13 @@ public class FlappyBirdController extends GameController
 		{
 			public void keyPressed(GameKeys key)
 			{
+				switch(key)
+				{
+					case KeyA:
+						_view.flap();
+						break;
+				}
+				
 				if(_debug)
 					System.out.println("FlappyBirdController : key has been pressed");
 			}

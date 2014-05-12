@@ -14,4 +14,8 @@ public class IndianaJantjeModel extends GameModel
 		this._speed = _difficulty;
 		_amountOfBalls = 3;
 	}
+	
+	public int getDifficulty() {
+		return _difficulty;
+	}
 }
