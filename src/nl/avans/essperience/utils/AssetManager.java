@@ -37,9 +37,11 @@ public class AssetManager
 
 		for (String asset : customAssets)
 		{
+			System.out.println("Asset: " + asset);
 			URL url = this.getClass().getClassLoader().getResource(asset);
 			if(url == null)
 			{
+				System.out.println("Asset is null: " + asset);
 				return;
 			}
 			else
