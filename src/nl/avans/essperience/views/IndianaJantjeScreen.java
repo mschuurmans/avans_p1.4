@@ -71,7 +71,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_drawStoneX = (_index%4) * 500;
 		_drawStoneY = (_index/4) * 500;
 		_drawPlayerX = (_position%3) * 500;
-		_drawPlayerY = 0;
+		_drawPlayerY = 350;
 		_index++;
 		_index%=16;
 
@@ -92,9 +92,9 @@ public class IndianaJantjeScreen extends GameScreen
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 
 		BufferedImage subImg = _spriteSheet.getSubimage(_drawStoneX, _drawStoneY, 500, 500);
-		BufferedImage subImg2 = _playerSheet.getSubimage(_drawPlayerX, _drawPlayerY, 500, 900);
+		BufferedImage subImg2 = _playerSheet.getSubimage(_drawPlayerX, 0, 500, 900);
 		g.drawImage(subImg, (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
-		g.drawImage(subImg2, (_screenWidth/3) * _position, _screenHeight-250, 250, 450, null);
+		g.drawImage(subImg2, (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);
 	} 
 
 	private int chooseSide() {

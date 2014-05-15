@@ -10,7 +10,7 @@ public class IndianaJantjeModel extends GameModel
 	private int _position;
 	
 	public IndianaJantjeModel() {
-		_position = 0;
+		_position = 1;
 		_difficulty = Main.GAME.getDifficulty();
 		this._maxTime = _STARTTIME - (_difficulty);
 		this._speed = _difficulty/3;

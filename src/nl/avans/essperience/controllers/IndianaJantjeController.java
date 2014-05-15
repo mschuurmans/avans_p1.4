@@ -26,7 +26,7 @@ public class IndianaJantjeController extends GameController
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
 				if (_currentKey == key) {
 					_currentKey = null;
-					_model.setCurrentPosition(0);
+					_model.setCurrentPosition(1);
 					System.out.println("Changing position to: CENTER" );
 				}
 			}
@@ -39,7 +39,7 @@ public class IndianaJantjeController extends GameController
 					_model.setCurrentPosition(2);
 					System.out.println("Changing position to: RIGHT" );
 				} else if (_currentKey == GameKeys.KeyD) {
-					_model.setCurrentPosition(1);
+					_model.setCurrentPosition(0);
 					System.out.println("Changing position to: LEFT" );
 				}
 			}
