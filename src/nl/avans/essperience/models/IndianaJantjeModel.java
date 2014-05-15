@@ -18,4 +18,8 @@ public class IndianaJantjeModel extends GameModel
 	public int getDifficulty() {
 		return _difficulty;
 	}
+	
+	public int getAmountOfBalls() {
+		return _amountOfBalls;
+	}
 }
