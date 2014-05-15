@@ -16,7 +16,7 @@ public abstract class GameScreen extends JPanel implements ActionListener
 {
 	private static final long serialVersionUID = 517082358948978120L;
 	
-	private GameModel _gameModel;
+	protected GameModel _gameModel;
 	protected ViewToControllerFinishedEventListener _listener = null;
 	protected Timer _timer;
 	

@@ -24,7 +24,7 @@ public class FlappyBirdController extends GameController
 				switch(key)
 				{
 					case KeyA:
-						_view.flap();
+						_model.flap();
 						break;
 				}
 				
@@ -35,7 +35,7 @@ public class FlappyBirdController extends GameController
 			public void WiimotionGForceMovement()
 			{
 
-				_view.flap();
+				_model.flap();
 			}
 		});
 		

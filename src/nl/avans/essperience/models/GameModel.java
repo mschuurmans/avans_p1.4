@@ -4,4 +4,6 @@ public class GameModel
 {
 	protected int _maxTime;
 	protected int _speed;
+	
+	public void update(){}
 }

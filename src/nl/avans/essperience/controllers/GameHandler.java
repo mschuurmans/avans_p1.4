@@ -124,7 +124,7 @@ public class GameHandler extends JFrame
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen hier.
-		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
+		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 2;
 		switch (rand) {
 		case 1: 
 			_gameModel = new IndianaJantjeModel();
@@ -133,7 +133,7 @@ public class GameHandler extends JFrame
 			break;
 		case 2:
 			this._gameModel = new FlappyBirdModel();
-			this._gameScreen = new FlappyBirdScreen(this._gameModel);
+			this._gameScreen = new FlappyBirdScreen((FlappyBirdModel)this._gameModel);
 			this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
 			break;
 		default:
