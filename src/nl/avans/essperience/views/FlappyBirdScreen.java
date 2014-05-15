@@ -3,6 +3,7 @@ package nl.avans.essperience.views;
 import java.awt.Graphics;
 
 import nl.avans.essperience.events.CollisionDetectedEventListener;
+import nl.avans.essperience.events.FlappyBirdFinishedListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
 
@@ -26,7 +27,18 @@ public class FlappyBirdScreen extends GameScreen
 			{
 				_timer.stop();
 				if (_listener != null)
-				_listener.sendGamefinishedEvent(false);		
+					_listener.sendGamefinishedEvent(false);		
+			}
+		});
+		
+		((FlappyBirdModel)_gameModel).addFlappyFinishedListener(new FlappyBirdFinishedListener()
+		{	
+			@Override
+			public void flappyFinishedListener() 
+			{
+				_timer.stop();
+				if(_listener != null)
+					_listener.sendGamefinishedEvent(true);		
 			}
 		});
 	}

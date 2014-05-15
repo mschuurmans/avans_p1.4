@@ -50,6 +50,10 @@ public class FlappyPlayer
 		return _y;
 	}
 	
+	public int getX()
+	{
+		return _x;
+	}
 	public void moveY(int deltaY)
 	{
 		_y += deltaY;

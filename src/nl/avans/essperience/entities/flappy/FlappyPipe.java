@@ -75,4 +75,12 @@ public class FlappyPipe
 		Rectangle2D pipec = new Rectangle2D.Double(_x, _y, _width, _height);
 		return pipec.intersects((Rectangle2D) shape);
 	}
+	
+	public boolean isPast(FlappyPlayer player)
+	{
+		if(player.getX() > (_x + _width))
+			return true;
+		else
+			return false;
+	}
 }

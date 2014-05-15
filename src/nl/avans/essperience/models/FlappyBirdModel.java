@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import nl.avans.essperience.entities.flappy.FlappyPipe;
 import nl.avans.essperience.entities.flappy.FlappyPlayer;
 import nl.avans.essperience.events.CollisionDetectedEventListener;
+import nl.avans.essperience.events.FlappyBirdFinishedListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.DockLocations;
@@ -21,7 +22,7 @@ public class FlappyBirdModel extends GameModel
 	//player 
 	private FlappyPlayer _player;
 	private CollisionDetectedEventListener _collision = null;
-	
+	private FlappyBirdFinishedListener _flappyFinished = null;
 	public FlappyBirdModel()
 	{
 		
@@ -73,14 +74,27 @@ public class FlappyBirdModel extends GameModel
 				_collision.collisionDetected();
 		}
 		
+		if(_pipeTop.isPast(_player))
+		{
+			if(_flappyFinished != null)
+				_flappyFinished.flappyFinishedListener();
+		}
+		
 	}
 	public void addCollisionListener(CollisionDetectedEventListener e)
 	{
 		_collision = e;
 	}
-	
+	public void addFlappyFinishedListener(FlappyBirdFinishedListener e)
+	{
+		_flappyFinished = e;
+	}
 	public void init()
 	{		
+		int gap = 200;
+		
+		int pipeTopHeight = (int)(Math.random() * Main.GAME.getHeight() / 1.3f) + 1;
+		
 		/**
 		 * TODO make dynamic..
 		 */
@@ -90,13 +104,13 @@ public class FlappyBirdModel extends GameModel
 		_pipeTop.setX(600);
 		_pipeTop.setY(0);
 		_pipeTop.setWidth(100);
-		_pipeTop.setHeight(400);
+		_pipeTop.setHeight(pipeTopHeight);
 		
 		_pipeBottom = new FlappyPipe(DockLocations.Bottom,Main.GAME.getDifficulty() * 2);
 		_pipeBottom.setX(600);
-		_pipeBottom.setY(Main.GAME.getHeight() - 200);
+		_pipeBottom.setY(pipeTopHeight + gap);
 		_pipeBottom.setWidth(100);
-		_pipeBottom.setHeight(200);
+		_pipeBottom.setHeight(Main.GAME.getHeight() - (pipeTopHeight + gap));
 	}
 	
 	public void flap()
