@@ -72,8 +72,6 @@ public class FlappyBirdScreen extends GameScreen
 		model.getPipeBottom().draw(g);
 		
 		model.getPlayer().draw(g);
-		
-		super.drawLives(g);
 	}
 
 }

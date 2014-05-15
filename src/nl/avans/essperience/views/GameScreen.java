@@ -47,8 +47,4 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	
 	public abstract void update();
 	
-	public void drawLives(Graphics g)
-	{
-		g.drawImage(AssetManager.Instance().getImage("heart.png"), 10,10,25,25, null);
-	}
 }

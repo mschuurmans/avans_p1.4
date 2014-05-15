@@ -22,7 +22,7 @@ public class GameHandler extends JFrame
 	private static final long serialVersionUID = -4608768969398477748L;
 
 	private int _difficulty = 1;
-	private final int _NUMBEROFGAMES = 1;
+	private final int _NUMBEROFGAMES = 2;
 
 	private int _lives = GameHandler.MAX_LIVES;
 
