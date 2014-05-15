@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import nl.avans.essperience.events.ViewToControllerFinishedEventListener;
+import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.utils.AssetManager;
 
@@ -17,7 +17,7 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	private static final long serialVersionUID = 517082358948978120L;
 	
 	protected GameModel _gameModel;
-	protected ViewToControllerFinishedEventListener _listener = null;
+	protected ViewToControllerEventListener _listener = null;
 	protected Timer _timer;
 	
 	public GameScreen(GameModel model)
@@ -28,7 +28,7 @@ public abstract class GameScreen extends JPanel implements ActionListener
 		_timer.start();
 	}
 	
-	public void addViewToControllerEventListener(ViewToControllerFinishedEventListener event)
+	public void addViewToControllerEventListener(ViewToControllerEventListener event)
 	{
 		_listener = event;
 	}
