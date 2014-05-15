@@ -24,12 +24,24 @@ public class IndianaJantjeController extends GameController
 			{
 				if(_debug)
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
+				if (_currentKey == key) {
+					_currentKey = null;
+					_model.setCurrentPosition(0);
+					System.out.println("Changing position to: CENTER" );
+				}
 			}
 
 			public void keyReleased(GameKeys key) {
 				if(_debug)
 					System.out.println("IndianaJantjeController : key has been released " + key);
 				_currentKey = key;
+				if (_currentKey == GameKeys.KeyA) {
+					_model.setCurrentPosition(2);
+					System.out.println("Changing position to: RIGHT" );
+				} else if (_currentKey == GameKeys.KeyD) {
+					_model.setCurrentPosition(1);
+					System.out.println("Changing position to: LEFT" );
+				}
 			}
 		});
 
@@ -63,15 +75,5 @@ public class IndianaJantjeController extends GameController
 				}
 			}
 		});
-	}
-
-	private void run() {
-		while(_view.getEnd()) {
-			if (_view.getEnd()) {
-				
-			} else {
-				
-			}
-		}
 	}
 }

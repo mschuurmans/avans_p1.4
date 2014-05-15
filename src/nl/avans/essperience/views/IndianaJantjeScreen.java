@@ -12,21 +12,27 @@ import nl.avans.essperience.utils.AssetManager;
 public class IndianaJantjeScreen extends GameScreen
 {
 	// Images
-	private BufferedImage _spritesheet;
+	private BufferedImage _spriteSheet;
+	private BufferedImage _playerSheet;
 	private Image _background;
 	private int _side;
-	private int _drawX;
-	private int _drawY;
+	private int _drawStoneX;
+	private int _drawStoneY;
+	private int _drawPlayerX;
+	private int _drawPlayerY;
+	private int _position;
 	private int _sizeX;
 	private int _sizeY;
 	private int _index;
 	private int _difficulty;
-	private double _factor;
+	private final double FACTOR = 1;
+	private int _startSpeed;
 	private int _screenWidth;
 	private int _screenHeight;
 
 	private int _games;
 	private int _gameAmount;
+	private GameModel _model;
 	
 	private boolean _end;
 
@@ -35,12 +41,14 @@ public class IndianaJantjeScreen extends GameScreen
 	public IndianaJantjeScreen(GameModel model) 
 	{
 		super(model);
+		_model = model;
 		_background = AssetManager.Instance().getImage("IndianaJantje/background.jpg");
-		_spritesheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonesspritesheet.png");
+		_playerSheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/indianajantje_player_spritesheet.png");
+		_spriteSheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonesspritesheet.png");
 		_difficulty = ((IndianaJantjeModel) model).getDifficulty();
-		_factor = 10;
+		_startSpeed = 15;
 		_games = 0;
-		_gameAmount = 10;
+		_gameAmount = ((IndianaJantjeModel)_model).getAmountOfBalls();;
 		_end = false;
 		init();
 		_screenWidth = Main.GAME.getWidth();
@@ -59,13 +67,16 @@ public class IndianaJantjeScreen extends GameScreen
 	@Override
 	public void update() 
 	{
-		_drawX = (_index%4) * 500;
-		_drawY = (_index/4) * 500;
+		_position = ((IndianaJantjeModel)_model).getCurrentPosition();
+		_drawStoneX = (_index%4) * 500;
+		_drawStoneY = (_index/4) * 500;
+		_drawPlayerX = (_position%3) * 500;
+		_drawPlayerY = 0;
 		_index++;
 		_index%=16;
 
-		_sizeY += (_factor * _difficulty);
-		_sizeX += (_factor * _difficulty);
+		_sizeY += _startSpeed + (FACTOR * _difficulty-1);
+		_sizeX += _startSpeed + (FACTOR * _difficulty-1);
 		
 		if (_sizeY >= _screenHeight/2) {
 			_timer.stop();
@@ -80,8 +91,10 @@ public class IndianaJantjeScreen extends GameScreen
 
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 
-		BufferedImage subImg = _spritesheet.getSubimage(_drawX, _drawY, 500, 500);
+		BufferedImage subImg = _spriteSheet.getSubimage(_drawStoneX, _drawStoneY, 500, 500);
+		BufferedImage subImg2 = _playerSheet.getSubimage(_drawPlayerX, _drawPlayerY, 500, 900);
 		g.drawImage(subImg, (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
+		g.drawImage(subImg2, (_screenWidth/3) * _position, _screenHeight-250, 250, 450, null);
 		super.drawLives(g);
 	} 
 
@@ -97,7 +110,7 @@ public class IndianaJantjeScreen extends GameScreen
 
 	public void next() {
 		System.out.println("next game called in view");
-		if (_games <= _gameAmount) {
+		if (_games < _gameAmount) {
 			_games++;
 			init();
 		} else {

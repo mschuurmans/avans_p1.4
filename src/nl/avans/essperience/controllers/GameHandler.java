@@ -10,6 +10,7 @@ import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.models.ScoreModel;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.views.FlappyBirdScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
@@ -64,6 +65,7 @@ public class GameHandler extends JFrame
 	}
 	public void init(boolean firstRun)
 	{
+		AssetManager.Instance();
 		this._gameScreen = new MenuScreen();
 		this._gameModel = new MenuModel();
 		this._gameController = new MenuController((MenuScreen)this._gameScreen, (MenuModel)_gameModel);

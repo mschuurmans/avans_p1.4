@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class AssetManager
 {
 	private String[] customAssets = new String[] { "Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", "Flappy/background.png", "Flappy/bird.png", 
-			"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", "IndianaJantje/stonesspritesheet.png"};
+			"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", "IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png"};
 
 
 	
