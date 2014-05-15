@@ -82,7 +82,6 @@ public class IndianaJantjeScreen extends GameScreen
 
 		BufferedImage subImg = _spritesheet.getSubimage(_drawX, _drawY, 500, 500);
 		g.drawImage(subImg, (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
-		super.drawLives(g);
 	} 
 
 	private int chooseSide() {
