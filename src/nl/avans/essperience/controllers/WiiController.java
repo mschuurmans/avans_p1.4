@@ -6,7 +6,10 @@ import wiiusej.WiiUseApiManager;
 import wiiusej.Wiimote;
 import wiiusej.wiiusejevents.physicalevents.ExpansionEvent;
 import wiiusej.wiiusejevents.physicalevents.IREvent;
+import wiiusej.wiiusejevents.physicalevents.JoystickEvent;
 import wiiusej.wiiusejevents.physicalevents.MotionSensingEvent;
+import wiiusej.wiiusejevents.physicalevents.NunchukButtonsEvent;
+import wiiusej.wiiusejevents.physicalevents.NunchukEvent;
 import wiiusej.wiiusejevents.physicalevents.WiimoteButtonsEvent;
 import wiiusej.wiiusejevents.utils.WiimoteListener;
 import wiiusej.wiiusejevents.wiiuseapievents.ClassicControllerInsertedEvent;
@@ -131,7 +134,28 @@ public class WiiController implements WiimoteListener
 	@Override
 	public void onExpansionEvent(ExpansionEvent e) 
 	{
-		
+		if(e instanceof NunchukEvent)
+		{
+			NunchukEvent nunchuck = (NunchukEvent)e;
+			
+			NunchukButtonsEvent buttons = nunchuck.getButtonsEvent();
+			JoystickEvent joy = nunchuck.getNunchukJoystickEvent();
+			MotionSensingEvent mot = nunchuck.getNunchukMotionSensingEvent();
+			
+			if(joy.getAngle() < 85 || joy.getAngle() > 95)
+				System.out.println(joy.getAngle());
+			
+			MotionSensingEvent evt = nunchuck.getNunchukMotionSensingEvent();
+			System.out.println(evt.getGforce());
+			if(evt.getGforce().getY() > 0.4f)
+			{
+				//if(_debug)
+					System.out.println("nunchuck moved");
+				
+				if(_listener != null)
+					_listener.wiimoteMotionGForceAcceleration();
+			}
+		}
 	}
 
 	@Override

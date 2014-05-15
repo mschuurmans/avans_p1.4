@@ -1,7 +1,7 @@
 package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
-import nl.avans.essperience.events.ViewToControllerFinishedEventListener;
+import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.FlappyBirdScreen;
@@ -39,7 +39,7 @@ public class FlappyBirdController extends GameController
 			}
 		});
 		
-		_view.addViewToControllerEventListener(new ViewToControllerFinishedEventListener()
+		_view.addViewToControllerEventListener(new ViewToControllerEventListener()
 		{
 			@Override
 			public void sendGamefinishedEvent(boolean succes)

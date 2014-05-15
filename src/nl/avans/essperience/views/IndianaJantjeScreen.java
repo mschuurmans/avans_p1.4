@@ -53,6 +53,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeY = 0;
 		_index = 0;
 		_side = chooseSide();
+		_timer.start();
 	}
 
 	@Override
@@ -67,6 +68,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeX += (_factor * _difficulty);
 		
 		if (_sizeY >= _screenHeight/2) {
+			_timer.stop();
 			_listener.sendGamefinishedEvent(true);
 		}
 	}
@@ -99,6 +101,7 @@ public class IndianaJantjeScreen extends GameScreen
 			_games++;
 			init();
 		} else {
+			_timer.stop();
 			_listener.sendGamefinishedEvent(false);
 		}
 	}

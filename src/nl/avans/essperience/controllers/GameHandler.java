@@ -9,10 +9,12 @@ import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.models.MenuModel;
+import nl.avans.essperience.models.ScoreModel;
 import nl.avans.essperience.views.FlappyBirdScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 import nl.avans.essperience.views.MenuScreen;
+import nl.avans.essperience.views.ScoreScreen;
 
 public class GameHandler extends JFrame
 {
@@ -56,7 +58,10 @@ public class GameHandler extends JFrame
 	{
 		return _difficulty;
 	}
-	
+	public int getLevel()
+	{
+		return _difficulty;
+	}
 	public void init(boolean firstRun)
 	{
 		this._gameScreen = new MenuScreen();
@@ -111,7 +116,7 @@ public class GameHandler extends JFrame
 
 	public void nextGame(boolean succeed)
 	{
-		System.out.println("GOING TO CHANGE THE SCREEN");
+		//System.out.println("GOING TO CHANGE THE SCREEN");
 		if(!succeed)
 		{
 			if(_lives == 1)
@@ -124,21 +129,32 @@ public class GameHandler extends JFrame
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen hier.
-		int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
-		switch (rand) {
-		case 1: 
-			_gameModel = new IndianaJantjeModel();
-			_gameScreen = new IndianaJantjeScreen((IndianaJantjeModel) _gameModel);
-			_gameController = new IndianaJantjeController((IndianaJantjeScreen)_gameScreen, (IndianaJantjeModel)_gameModel);
-			break;
-		case 2:
-			this._gameModel = new FlappyBirdModel();
-			this._gameScreen = new FlappyBirdScreen((FlappyBirdModel)this._gameModel);
-			this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
-			break;
-		default:
-			reset();
-			break;
+		if(!(_gameController instanceof ScoreScreenController) && !(_gameController instanceof MenuController))
+		{
+			_gameModel = new ScoreModel();
+			_gameScreen = new ScoreScreen((ScoreModel)_gameModel);
+			_gameController = new ScoreScreenController((ScoreModel)_gameModel, (ScoreScreen)_gameScreen);
+		}
+		else
+		{
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
+			switch (rand) 
+			{
+				case 1: 
+					_gameModel = new IndianaJantjeModel();
+					_gameScreen = new IndianaJantjeScreen((IndianaJantjeModel) _gameModel);
+					_gameController = new IndianaJantjeController((IndianaJantjeScreen)_gameScreen, (IndianaJantjeModel)_gameModel);
+					break;
+				case 2:
+					this._gameModel = new FlappyBirdModel();
+					this._gameScreen = new FlappyBirdScreen((FlappyBirdModel)this._gameModel);
+					this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
+					break;
+				default:
+					reset();
+					break;
+			}
+			_difficulty++;
 		}
 		
 		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
@@ -154,8 +170,11 @@ public class GameHandler extends JFrame
 		Main.GAME.validate();
 		Main.GAME.repaint();
 		_gameScreen.requestFocus();
-		System.out.println("CHANGING SCREEN");
+		//System.out.println("CHANGING SCREEN");
 		changeScreen();
+		
+		if(_gameController instanceof ScoreScreenController)
+			((ScoreScreenController)_gameController).start();
 	}
 
 }
