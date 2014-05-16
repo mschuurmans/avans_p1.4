@@ -87,7 +87,6 @@ public class IndianaJantjeScreen extends GameScreen
 	@Override
 	public void update() 
 	{
-		System.out.println("updating");
 		_position = ((IndianaJantjeModel)_model).getCurrentPosition();
 		_drawStoneX = (_index%4);
 		_drawStoneY = (_index/4);
@@ -146,7 +145,7 @@ public class IndianaJantjeScreen extends GameScreen
 	}
 
 	public void next() {
-		System.out.println("next game called in view");
+		//System.out.println("next game called in view");
 		if (_games < _gameAmount) {
 			_games++;
 			init();

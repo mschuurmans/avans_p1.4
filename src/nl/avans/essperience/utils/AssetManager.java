@@ -17,7 +17,7 @@ public class AssetManager
 													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png", "IndianaJantje/bloodsplash.jpg"};
 
-	private String[] soundsList = new String[] { "IndianaJantje/IndianaJantjeBGM.mp3" };
+	private String[] soundsList = new String[] { "Essperience/background1.wav", "Essperience/background2.wav" };
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
@@ -35,6 +35,7 @@ public class AssetManager
 	private AssetManager()
 	{
 		loadAssets();
+		playSound("Essperience/background1.wav");
 	}
 
 	public void loadAssets()
