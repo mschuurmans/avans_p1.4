@@ -3,7 +3,6 @@ package nl.avans.essperience.controllers;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.IndianaJantjeModel;
-import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 
@@ -12,7 +11,6 @@ public class IndianaJantjeController extends GameController
 	private IndianaJantjeModel _model;
 	private IndianaJantjeScreen _view;
 	private boolean _debug = false;
-	private GameKeys _currentKey = GameKeys.None;
 	private boolean keyA = true;
 	private boolean keyD = true;
 
@@ -42,7 +40,7 @@ public class IndianaJantjeController extends GameController
 
 			public void keyReleased(GameKeys key) {
 				if(_debug)
-					System.out.println("IndianaJantjeController : key has been released " + key);
+					//System.out.println("IndianaJantjeController : key has been released " + key);
 				if (key == GameKeys.KeyA) {
 					keyA = false;
 				}
