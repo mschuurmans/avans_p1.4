@@ -41,10 +41,7 @@ public class GameHandler extends JFrame
 		setContentPane(_gameScreen);
 
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		setUndecorated(false);  
-		setSize(800, 800);
-		//setUndecorated(true);  
-		setSize(800, 800);
+		
 		setUndecorated(true);  
 		setSize(1280, 800);
 		setVisible(true);
@@ -92,6 +89,7 @@ public class GameHandler extends JFrame
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
+		_gameScreen.requestFocus();
 		System.out.println("CHANGING SCREEN");
 	}
 	
@@ -130,8 +128,8 @@ public class GameHandler extends JFrame
 				_lives--;
 		}
 		setContentPane(new JPanel(null));
-		// do logic for next game screen hier.
-		if(!(_gameController instanceof ScoreScreenController) && !(_gameController instanceof MenuController))
+		// do logic for next game screen here.
+		if(!(_gameController instanceof ScoreScreenController))
 		{
 			_gameModel = new ScoreModel();
 			_gameScreen = new ScoreScreen((ScoreModel)_gameModel);
@@ -139,7 +137,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 2;
 			switch (rand) 
 			{
 				case 1: 
@@ -168,11 +166,6 @@ public class GameHandler extends JFrame
 			}
 		});
 
-		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
-		Main.GAME.validate();
-		Main.GAME.repaint();
-		_gameScreen.requestFocus();
-		//System.out.println("CHANGING SCREEN");
 		changeScreen();
 		
 		if(_gameController instanceof ScoreScreenController)

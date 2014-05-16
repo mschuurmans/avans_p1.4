@@ -31,7 +31,7 @@ public class WiiController implements WiimoteListener
 {
 	private Wiimote[] _wiimotes;
 	private ButtonPressedEventListener _listener = null;
-	public static final int MAX_TRIES = 3;
+	public static final int MAX_TRIES = 1;
 
 	private boolean _debug = true;
 	public WiiController(int numbers)
@@ -40,7 +40,7 @@ public class WiiController implements WiimoteListener
 			System.out.println("Searching for WiiRemotes.");
 		Wiimote[] wiimotes = new Wiimote[0];
 		boolean keepSearching = true;
-		int times = 0;
+		int times = 1;
 		while(keepSearching)
 		{
 			wiimotes = WiiUseApiManager.getWiimotes(numbers, true);
@@ -149,7 +149,7 @@ public class WiiController implements WiimoteListener
 			System.out.println(evt.getGforce());
 			if(evt.getGforce().getY() > 0.4f)
 			{
-				//if(_debug)
+				if(_debug)
 					System.out.println("nunchuck moved");
 				
 				if(_listener != null)

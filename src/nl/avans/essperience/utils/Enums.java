@@ -14,6 +14,8 @@ public class Enums
 		KeyW,
 		KeyD,
 		KeyS,
+		KeyUp,
+		KeyDown,
 		None		
 	}
 	

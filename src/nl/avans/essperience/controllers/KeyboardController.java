@@ -9,7 +9,7 @@ public class KeyboardController implements KeyListener
 {
 	private ButtonPressedEventListener _listener = null;
 	
-	private boolean _debug = true;
+	private boolean _debug = false;
 	
 	public void addButtonPressedEventListener(ButtonPressedEventListener listener)
 	{

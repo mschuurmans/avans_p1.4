@@ -1,6 +1,8 @@
 package nl.avans.essperience.views;
 
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 
 import nl.avans.essperience.main.Main;
@@ -12,6 +14,7 @@ public class ScoreScreen extends GameScreen
 	private static final long serialVersionUID = -2401781820632799509L;
 	private int _livesLeft = 3;
 	private int _level = 1;
+	
 	public ScoreScreen(ScoreModel model) 
 	{
 		super(model);
@@ -36,15 +39,11 @@ public class ScoreScreen extends GameScreen
 	{
 		super.paintComponent(g);
 		
-		g.drawString("The Essperience Score screen!", 200, 100);
-		g.drawString("Lives left: " + _livesLeft, 200, 125);
-		g.drawString("Current Level: " + _level, 200, 150);
-		
 		int size = 200;
 		int space = 50;
 		int center = Main.GAME.getWidth() / 2;
 		int y = (Main.GAME.getHeight() / 2) - size / 2;
-		//200 50 100
+		
 		Image img = AssetManager.Instance().getImage("heart.png");
 		if(_livesLeft > 0)
 			g.drawImage(img, center - (size + space + size/2), y ,size, size, null);
@@ -54,6 +53,11 @@ public class ScoreScreen extends GameScreen
 		
 		if(_livesLeft > 2)
 			g.drawImage(img, center + (space + size/2), y ,size, size, null);
+		
+		Graphics2D g2 = (Graphics2D)g;
+		
+		g2.setFont(new Font("Arial", Font.PLAIN, 80));
+		g2.drawString(""+_level, center - (size/2), 150);
 	}
 
 }

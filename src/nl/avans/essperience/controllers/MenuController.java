@@ -10,7 +10,8 @@ public class MenuController extends GameController
 	private MenuScreen _view;
 	private MenuModel _model;
 	
-	private boolean _debug = false;
+	private boolean _debug = true;
+	private int _currentlySelected = 0;
 	
 	public MenuController(MenuScreen menuScreen, MenuModel model) 
 	{
@@ -23,12 +24,22 @@ public class MenuController extends GameController
 				public void keyPressed(GameKeys key) 
 				{
 					if(_debug)
-						System.out.println("button was pressed and event was called.");
+						System.out.println("button was pressed and event was called." + key.toString());
 					
 					switch(key)
 					{
 						case KeyEnter:
 							selectCurrentOption();
+							break;
+						case KeyUp:
+							if(_currentlySelected > 0)
+								_currentlySelected = 0;
+							_view.setSelected(0);
+							break;
+						case KeyDown:
+							if(_currentlySelected < 1)
+								_currentlySelected++;
+							_view.setSelected(_currentlySelected);
 							break;
 						default:
 							break;
@@ -44,7 +55,10 @@ public class MenuController extends GameController
 		if(_debug)
 			System.out.println("MenuController : current option");
 		
-		this.callFinishedListener(true);
+		if(_currentlySelected == 0)
+			this.callFinishedListener(true);
+		else if(_currentlySelected == 1)
+			System.exit(0);
 	}
 
 }

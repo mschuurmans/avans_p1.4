@@ -16,6 +16,10 @@ public class Utils
 			return GameKeys.KeyD;
 		else if(code == 10)
 			return GameKeys.KeyEnter;
+		else if(code == 38)
+			return GameKeys.KeyUp;
+		else if(code == 40)
+			return GameKeys.KeyDown;
 		else
 			return GameKeys.None;
 	}
