@@ -140,7 +140,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 3;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 4;
 			switch (rand) 
 			{
 				case 1: 
