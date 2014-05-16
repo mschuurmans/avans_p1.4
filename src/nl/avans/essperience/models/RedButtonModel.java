@@ -1,5 +1,6 @@
 package nl.avans.essperience.models;
 
+<<<<<<< HEAD
 import java.awt.Image;
 
 import nl.avans.essperience.utils.AssetManager;
@@ -24,4 +25,8 @@ public class RedButtonModel extends GameModel
 	{
 		
 	}
+=======
+public class RedButtonModel extends GameModel {
+
+>>>>>>> 0d13b5b522b242f58b2db64cabbf123a3a54a40f
 }

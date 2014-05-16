@@ -1,5 +1,6 @@
 package nl.avans.essperience.views;
 
+<<<<<<< HEAD
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -12,6 +13,11 @@ import nl.avans.essperience.utils.Utils;
 
 public class RedButtonScreen extends GameScreen
 {
+=======
+import nl.avans.essperience.models.GameModel;
+
+public class RedButtonScreen extends GameScreen {
+>>>>>>> 0d13b5b522b242f58b2db64cabbf123a3a54a40f
 
 	public RedButtonScreen(GameModel model) {
 		super(model);
@@ -21,6 +27,7 @@ public class RedButtonScreen extends GameScreen
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		_gameModel.update();
 	}
 	
@@ -43,6 +50,8 @@ public class RedButtonScreen extends GameScreen
 		String _press = "PRESS THE RED BUTTON";
 		stringWidth = Utils.getWidth(_press, g.getFont());
 		g.drawString(_press, xCenter - (stringWidth / 2), yCenter + 50);
+=======
+>>>>>>> 0d13b5b522b242f58b2db64cabbf123a3a54a40f
 		
 	}
 
