@@ -15,9 +15,9 @@ public class AssetManager
 	private String[] customAssets = new String[] { 	"Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", 
 													"Flappy/background.png", "Flappy/bird.png", 
 													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
-													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png", "IndianaJantje/bloodsplash.jpg"};
+													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png", "IndianaJantje/bloodsplash.png"};
 
-	private String[] soundsList = new String[] { "IndianaJantje/IndianaJantjeBGM.mp3" };
+	private String[] soundsList = new String[] { "IndianaJantje/indianaJantjeBGM.mp3" };
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
@@ -69,14 +69,15 @@ public class AssetManager
 	        System.out.println("Sound loading: " + sound);
 			try
 			{
-				URL url = this.getClass().getClassLoader().getResource(sound);
 				Clip clip = AudioSystem.getClip();
-		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
+		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getClassLoader().getResourceAsStream(sound));
 		        clip.open(inputStream);
 		        _sounds.put(sound, clip);
 		        System.out.println("Sound loaded: " + sound);
 			}
-			catch(Exception e){}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 
