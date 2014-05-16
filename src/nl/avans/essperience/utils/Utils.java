@@ -24,6 +24,8 @@ public class Utils
 			return GameKeys.KeyUp;
 		else if(code == 40)
 			return GameKeys.KeyDown;
+		else if(code == 32)
+			return GameKeys.KeySpacebar;
 		else
 			return GameKeys.None;
 	}
