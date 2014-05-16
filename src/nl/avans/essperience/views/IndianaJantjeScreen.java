@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import javax.sound.sampled.Clip;
+
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
@@ -29,6 +31,12 @@ public class IndianaJantjeScreen extends GameScreen
 	private int _startSpeed;
 	private int _screenWidth;
 	private int _screenHeight;
+	
+	private BufferedImage subImg;
+	private BufferedImage subImg2;
+	
+	private BufferedImage[] rock;
+	private BufferedImage[] player;
 
 	private int _games;
 	private int _gameAmount;
@@ -53,6 +61,20 @@ public class IndianaJantjeScreen extends GameScreen
 		init();
 		_screenWidth = Main.GAME.getWidth();
 		_screenHeight = Main.GAME.getHeight();
+		createImageArrays();
+	}
+	
+	private void createImageArrays() {
+		rock = new BufferedImage[16];
+		player = new BufferedImage[3];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				rock[j+(4*i)] = _spriteSheet.getSubimage(j*500, i*500, 500, 500);
+			}
+		}
+		for (int i = 0; i < 3; i++) {
+			player[i] = _playerSheet.getSubimage(i*500, 0, 500, 900);
+		}
 	}
 
 	public void init()
@@ -68,9 +90,9 @@ public class IndianaJantjeScreen extends GameScreen
 	public void update() 
 	{
 		_position = ((IndianaJantjeModel)_model).getCurrentPosition();
-		_drawStoneX = (_index%4) * 500;
-		_drawStoneY = (_index/4) * 500;
-		_drawPlayerX = (_position%3) * 500;
+		_drawStoneX = (_index%4);
+		_drawStoneY = (_index/4);
+		_drawPlayerX = (_position%3);
 		_drawPlayerY = 350;
 		_index++;
 		_index%=16;
@@ -91,10 +113,8 @@ public class IndianaJantjeScreen extends GameScreen
 
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 
-		BufferedImage subImg = _spriteSheet.getSubimage(_drawStoneX, _drawStoneY, 500, 500);
-		BufferedImage subImg2 = _playerSheet.getSubimage(_drawPlayerX, 0, 500, 900);
-		g.drawImage(subImg, (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
-		g.drawImage(subImg2, (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);
+		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
+		g.drawImage(player[_drawPlayerX], (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);
 	} 
 
 	private int chooseSide() {
