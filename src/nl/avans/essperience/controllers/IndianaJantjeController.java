@@ -12,7 +12,9 @@ public class IndianaJantjeController extends GameController
 	private IndianaJantjeModel _model;
 	private IndianaJantjeScreen _view;
 	private boolean _debug = true;
-	private GameKeys _currentKey;
+	private GameKeys _currentKey = GameKeys.None;
+	private boolean keyA = true;
+	private boolean keyD = true;
 
 	public IndianaJantjeController(IndianaJantjeScreen view, IndianaJantjeModel model)
 	{
@@ -26,24 +28,29 @@ public class IndianaJantjeController extends GameController
 			{
 				if(_debug)
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
-				if (_currentKey == key) {
-					_currentKey = null;
-					_model.setCurrentPosition(1);
-					System.out.println("Changing position to: CENTER" );
+				if (key == GameKeys.KeyA) {
+					keyA = true;
 				}
+				if (key == GameKeys.KeyD) {
+					keyD = true;
+				}
+				if (key == GameKeys.None) {
+					keyD = false;
+					keyA = false;
+				}
+				setPos();
 			}
 
 			public void keyReleased(GameKeys key) {
 				if(_debug)
 					System.out.println("IndianaJantjeController : key has been released " + key);
-				_currentKey = key;
-				if (_currentKey == GameKeys.KeyA) {
-					_model.setCurrentPosition(2);
-					System.out.println("Changing position to: RIGHT" );
-				} else if (_currentKey == GameKeys.KeyD) {
-					_model.setCurrentPosition(0);
-					System.out.println("Changing position to: LEFT" );
+				if (key == GameKeys.KeyA) {
+					keyA = false;
 				}
+				if (key == GameKeys.KeyD) {
+					keyD = false;
+				}
+				setPos();
 			}
 		});
 
@@ -58,7 +65,7 @@ public class IndianaJantjeController extends GameController
 				if (moreGames) {
 					switch (((IndianaJantjeScreen)_view).getSide()) {
 					case 0:
-						if (_currentKey == GameKeys.KeyA){
+						if (!keyA && keyD){
 							((IndianaJantjeScreen)_view).next();
 						} else {
 							if (((IndianaJantjeScreen)_view).getDead()) {
@@ -69,7 +76,7 @@ public class IndianaJantjeController extends GameController
 						}
 						break;
 					case 1:
-						if (_currentKey == GameKeys.KeyD){
+						if (keyA && !keyD){
 							((IndianaJantjeScreen)_view).next();
 						} else {
 							if (((IndianaJantjeScreen)_view).getDead()) {
@@ -85,5 +92,19 @@ public class IndianaJantjeController extends GameController
 				}
 			}
 		});
+		
+		
+	}
+	
+	private void setPos() {
+		if (keyA && keyD) {
+			_model.setCurrentPosition(1);
+		} else if (keyA) {
+			_model.setCurrentPosition(0);
+		} else if (keyD) {
+			_model.setCurrentPosition(2);
+		} else {
+			_model.setCurrentPosition(1);	
+		}
 	}
 }
