@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 
 public class AssetManager
 {
@@ -71,13 +73,19 @@ public class AssetManager
 			try
 			{
 				URL url = this.getClass().getClassLoader().getResource(sound);
-				Clip clip = AudioSystem.getClip();
+				System.out.println("Path of sound: " + url.getPath());
+				
+				
+				
 		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
+		        AudioFormat format = inputStream.getFormat();
+		        DataLine.Info info = new DataLine.Info(Clip.class, format);
+		        Clip clip = (Clip)AudioSystem.getLine(info);
 		        clip.open(inputStream);
 		        _sounds.put(sound, clip);
 		        System.out.println("Sound loaded: " + sound);
 			}
-			catch(Exception e){}
+			catch(Exception e){e.printStackTrace();}
 		}
 	}
 
