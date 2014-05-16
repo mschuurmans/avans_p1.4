@@ -8,18 +8,22 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.DockLocations;
 
 public class FlappyPipe 
 {
 	private String _imageKey = "Flappy/pipe1.png";
-	private Image _image;
+	private String _pipeImageKey = "Flappy/pipeCap.png";
+	private Image _pipeImage;
+	private Image _pipeCapImage;
 	private int _x;
 	private int _y;
 	private int _width;
 	private int _height;
 	private int _speed;
+	private int _cappOffset;
 	
 	private DockLocations _docked = DockLocations.Top;
 	
@@ -28,17 +32,19 @@ public class FlappyPipe
 		this._docked = loc;
 		this._speed = speed;
 		
-		this._image = AssetManager.Instance().getImage(_imageKey);
+		this._pipeImage = AssetManager.Instance().getImage(_imageKey);
+		this._pipeCapImage = AssetManager.Instance().getImage(_pipeImageKey);
 		
 		if(_docked == DockLocations.Bottom)
 		{
 			//rotating the image 180 degree.
-			int width = (int)_image.getWidth(null);
-			int height = (int)_image.getHeight(null);
+			int width = (int)_pipeImage.getWidth(null);
+			int height = (int)_pipeImage.getHeight(null);
 			AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
 			tx.translate(-width, -height);
 			AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-			_image = op.filter((BufferedImage)_image, null);
+			_pipeImage = op.filter((BufferedImage)_pipeImage, null);
+			_pipeCapImage = op.filter((BufferedImage)_pipeCapImage, null);
 		}
 	}
 	public void moveLeft()
@@ -63,11 +69,21 @@ public class FlappyPipe
 	public void setHeight(int value)
 	{
 		_height = value;
+		
+		if(_docked == DockLocations.Bottom)
+		{
+			_cappOffset = (Main.GAME.getHeight() - _height *2) - 5;
+		}
+		else
+		{
+			_cappOffset = -36; //36 is the capp image height.
+		}
 	}
 	
 	public void draw(Graphics g)
 	{
-		g.drawImage(_image, _x,_y,_width,_height, null);
+		g.drawImage(_pipeImage, _x,_y,_width,_height, null);
+		g.drawImage(_pipeCapImage, _x,_height + _cappOffset, _width, 36, null);
 	}
 	
 	public boolean collision(Shape shape)

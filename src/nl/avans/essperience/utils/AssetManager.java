@@ -15,7 +15,7 @@ import javax.sound.sampled.LineUnavailableException;
 
 public class AssetManager
 {
-	private String[] customAssets = new String[] { 	"Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", 
+	private String[] customAssets = new String[] { 	"Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", "Flappy/pipeCap.png", 
 													"Flappy/background.png", "Flappy/bird.png", 
 													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png",

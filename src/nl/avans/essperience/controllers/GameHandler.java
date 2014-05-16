@@ -170,7 +170,7 @@ public class GameHandler extends JFrame
 				case 5:
 					this._gameModel = new SimonGameModel();
 					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
-//					this._gameController = new SimonGameController((SimonGameScreen) _gameModel, (SimonGameScreen)_GameScreen);
+					this._gameController = new SimonGameController((SimonGameModel) _gameModel, (SimonGameScreen)_gameScreen);
 				default:
 					reset();
 					break;
