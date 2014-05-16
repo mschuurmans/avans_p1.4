@@ -99,6 +99,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeX += _startSpeed + (FACTOR * _difficulty-1);
 		
 		if (_dead) {
+			AssetManager.Instance().playSound("IndianaJantje/bloodsplash.wav");
 			//System.out.println("HAHA JE BENT DOOD!");
 			try {
 				Thread.sleep(1000);
