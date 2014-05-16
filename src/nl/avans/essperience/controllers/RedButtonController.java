@@ -26,12 +26,12 @@ public class RedButtonController extends GameController
 				{
 					case KeySpacebar:
 						callFinishedListener(false);
+						if (_debug)
+							System.out.println("Red Button Pressed");
 						break;
 					default:
 						break;
-				}
-				if (_debug)
-					System.out.println("Red Button Pressed");
+				}			
 			}
 		});
 		
