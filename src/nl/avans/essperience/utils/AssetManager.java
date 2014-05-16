@@ -17,7 +17,7 @@ public class AssetManager
 													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png"};
 
-	private String[] soundsList = new String[] { };
+	private String[] soundsList = new String[] { "IndianaJantje/IndianaJantjeBGM.mp3" };
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
@@ -66,6 +66,7 @@ public class AssetManager
 		
 		for(String sound : soundsList)
 		{
+	        System.out.println("Sound loading: " + sound);
 			try
 			{
 				URL url = this.getClass().getClassLoader().getResource(sound);

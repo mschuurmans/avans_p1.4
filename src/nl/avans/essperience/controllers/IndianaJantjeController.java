@@ -3,6 +3,7 @@ package nl.avans.essperience.controllers;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.IndianaJantjeModel;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 
@@ -15,6 +16,7 @@ public class IndianaJantjeController extends GameController
 
 	public IndianaJantjeController(IndianaJantjeScreen view, IndianaJantjeModel model)
 	{
+		AssetManager.Instance().playSound("IndianaJantje/IndianaJantjeBMG.mp3");
 		_model = model;
 		_view = view;
 
