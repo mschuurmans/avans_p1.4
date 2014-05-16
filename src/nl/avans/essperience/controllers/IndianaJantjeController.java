@@ -23,8 +23,9 @@ public class IndianaJantjeController extends GameController
 		{
 			public void keyPressed(GameKeys key)
 			{
-				if(_debug)
+				if(_debug) {
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
+				}
 				if (key == GameKeys.KeyA) {
 					keyA = true;
 				}
@@ -39,8 +40,9 @@ public class IndianaJantjeController extends GameController
 			}
 
 			public void keyReleased(GameKeys key) {
-				if(_debug)
+				if(_debug){
 					//System.out.println("IndianaJantjeController : key has been released " + key);
+				}
 				if (key == GameKeys.KeyA) {
 					keyA = false;
 				}
