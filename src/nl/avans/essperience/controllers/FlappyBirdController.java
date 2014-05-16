@@ -26,6 +26,8 @@ public class FlappyBirdController extends GameController
 					case KeyA:
 						_model.flap();
 						break;
+					default:
+						break;
 				}
 				
 				if(_debug)

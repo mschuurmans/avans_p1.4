@@ -45,6 +45,7 @@ public class ScoreScreenController extends GameController
 					e.printStackTrace();
 				}
 				
+				_view.stopTimer();
 				if(_finishedListener != null)
 					_finishedListener.microGameFinishedEvent(true);
 			}

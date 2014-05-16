@@ -12,8 +12,10 @@ import javax.sound.sampled.Clip;
 
 public class AssetManager
 {
-	private String[] customAssets = new String[] { "Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", "Flappy/background.png", "Flappy/bird.png", 
-			"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", "IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png"};
+	private String[] customAssets = new String[] { 	"Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", 
+													"Flappy/background.png", "Flappy/bird.png", 
+													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
+													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png"};
 
 	private String[] soundsList = new String[] { };
 	
@@ -70,7 +72,6 @@ public class AssetManager
 				Clip clip = AudioSystem.getClip();
 		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
 		        clip.open(inputStream);
-		        
 		        _sounds.put(sound, clip);
 		        System.out.println("Sound loaded: " + sound);
 			}
@@ -86,7 +87,7 @@ public class AssetManager
 			{
 				try 
 				{
-					_sounds.get(key).start(); 
+					_sounds.get(key).start();
 				}
 			    catch (Exception e) 
 			    {
