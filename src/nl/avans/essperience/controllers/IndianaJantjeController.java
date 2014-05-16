@@ -59,14 +59,22 @@ public class IndianaJantjeController extends GameController
 						if (_currentKey == GameKeys.KeyA){
 							((IndianaJantjeScreen)_view).next();
 						} else {
-							callFinishedListener(false);
+							if (((IndianaJantjeScreen)_view).getDead()) {
+								callFinishedListener(false);
+							} else {
+								((IndianaJantjeScreen)_view).fail();
+							}
 						}
 						break;
 					case 1:
 						if (_currentKey == GameKeys.KeyD){
 							((IndianaJantjeScreen)_view).next();
 						} else {
-							callFinishedListener(false);
+							if (((IndianaJantjeScreen)_view).getDead()) {
+								callFinishedListener(false);
+							} else {
+								((IndianaJantjeScreen)_view).fail();
+							}
 						}
 						break;
 					}

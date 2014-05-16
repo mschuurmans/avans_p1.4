@@ -14,6 +14,7 @@ public class IndianaJantjeScreen extends GameScreen
 	// Images
 	private BufferedImage _spriteSheet;
 	private BufferedImage _playerSheet;
+	private Image _bloodImage;
 	private Image _background;
 	private int _side;
 	private int _drawStoneX;
@@ -29,12 +30,12 @@ public class IndianaJantjeScreen extends GameScreen
 	private int _startSpeed;
 	private int _screenWidth;
 	private int _screenHeight;
+	private boolean _dead;
 
 	private int _games;
 	private int _gameAmount;
 	private GameModel _model;
-	
-	private boolean _end;
+
 
 	private static final long serialVersionUID = -2013215913618586135L;
 
@@ -45,14 +46,14 @@ public class IndianaJantjeScreen extends GameScreen
 		_background = AssetManager.Instance().getImage("IndianaJantje/background.jpg");
 		_playerSheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/indianajantje_player_spritesheet.png");
 		_spriteSheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonesspritesheet.png");
+		_bloodImage = AssetManager.Instance().getImage("IndianaJantje/bloodsplash.jpg");
 		_difficulty = ((IndianaJantjeModel) model).getDifficulty();
 		_startSpeed = 15;
 		_games = 0;
-		_gameAmount = ((IndianaJantjeModel)_model).getAmountOfBalls();;
-		_end = false;
-		init();
+		_gameAmount = ((IndianaJantjeModel)_model).getAmountOfBalls();
 		_screenWidth = Main.GAME.getWidth();
 		_screenHeight = Main.GAME.getHeight();
+		init();
 	}
 
 	public void init()
@@ -61,12 +62,14 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeY = 0;
 		_index = 0;
 		_side = chooseSide();
+		_dead = false;
 		_timer.start();
 	}
 
 	@Override
 	public void update() 
 	{
+		System.out.println("updating");
 		_position = ((IndianaJantjeModel)_model).getCurrentPosition();
 		_drawStoneX = (_index%4) * 500;
 		_drawStoneY = (_index/4) * 500;
@@ -78,7 +81,19 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeY += _startSpeed + (FACTOR * _difficulty-1);
 		_sizeX += _startSpeed + (FACTOR * _difficulty-1);
 		
-		if (_sizeY >= _screenHeight/2) {
+		if (_dead) {
+			System.out.println("HAHA JE BENT DOOD!");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			_timer.stop();
+			_listener.sendGamefinishedEvent(true);	
+		}
+		
+		if (_sizeY >= _screenHeight/2 && !_dead) {
 			_timer.stop();
 			_listener.sendGamefinishedEvent(true);
 		}
@@ -88,13 +103,20 @@ public class IndianaJantjeScreen extends GameScreen
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
-
+		System.out.println("drawing");
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 
 		BufferedImage subImg = _spriteSheet.getSubimage(_drawStoneX, _drawStoneY, 500, 500);
 		BufferedImage subImg2 = _playerSheet.getSubimage(_drawPlayerX, 0, 500, 900);
 		g.drawImage(subImg, (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
 		g.drawImage(subImg2, (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);
+		
+		if (_dead)
+		{
+			g.drawImage(_bloodImage, 0, 0, _screenWidth, _screenHeight, null);
+			System.out.println("dood!");
+			_timer.start();
+		}
 	} 
 
 	private int chooseSide() {
@@ -117,8 +139,15 @@ public class IndianaJantjeScreen extends GameScreen
 			_listener.sendGamefinishedEvent(false);
 		}
 	}
-
-	public boolean getEnd() {
-		return _end;
+	
+	public void fail()
+	{
+		_dead = true;
+		System.out.println("fail");
+	}
+	
+	public boolean getDead() {
+		System.out.println("checking dead");
+		return _dead;
 	}
 }

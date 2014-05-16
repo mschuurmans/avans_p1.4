@@ -1,7 +1,6 @@
 package nl.avans.essperience.models;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 import nl.avans.essperience.entities.flappy.FlappyPipe;
 import nl.avans.essperience.entities.flappy.FlappyPlayer;
