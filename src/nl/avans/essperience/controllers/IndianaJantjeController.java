@@ -11,14 +11,13 @@ public class IndianaJantjeController extends GameController
 {
 	private IndianaJantjeModel _model;
 	private IndianaJantjeScreen _view;
-	private boolean _debug = true;
+	private boolean _debug = false;
 	private GameKeys _currentKey = GameKeys.None;
 	private boolean keyA = true;
 	private boolean keyD = true;
 
 	public IndianaJantjeController(IndianaJantjeScreen view, IndianaJantjeModel model)
 	{
-		AssetManager.Instance().playSound("IndianaJantje/IndianaJantjeBMG.mp3");
 		_model = model;
 		_view = view;
 
@@ -61,7 +60,7 @@ public class IndianaJantjeController extends GameController
 			@Override
 			public void sendGamefinishedEvent(boolean moreGames)
 			{
-				System.out.println("received event in controller. currentKey = " + _currentKey);
+				//System.out.println("received event in controller. currentKey = " + _currentKey);
 				if (moreGames) {
 					switch (((IndianaJantjeScreen)_view).getSide()) {
 					case 0:

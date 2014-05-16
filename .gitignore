@@ -35,3 +35,7 @@ local.properties
 .buildpath
 rungame
 compile
+
+# Sound files
+.wav
+.mp3
