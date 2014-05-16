@@ -10,12 +10,14 @@ import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.models.ScoreModel;
+import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.views.FlappyBirdScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 import nl.avans.essperience.views.MenuScreen;
 import nl.avans.essperience.views.ScoreScreen;
+import nl.avans.essperience.views.WafScreen;
 
 public class GameHandler extends JFrame
 {
@@ -150,6 +152,11 @@ public class GameHandler extends JFrame
 					this._gameModel = new FlappyBirdModel();
 					this._gameScreen = new FlappyBirdScreen((FlappyBirdModel)this._gameModel);
 					this._gameController = new FlappyBirdController((FlappyBirdModel)_gameModel, (FlappyBirdScreen)_gameScreen);
+					break;
+				case 3:
+					this._gameModel = new WafModel();
+					this._gameScreen = new WafScreen((WafModel)_gameModel);
+					this._gameController = new WafController((WafModel)_gameModel, (WafScreen)_gameScreen);
 					break;
 				default:
 					reset();
