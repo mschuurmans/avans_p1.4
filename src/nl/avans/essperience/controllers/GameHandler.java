@@ -11,6 +11,7 @@ import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.models.ScoreModel;
+import nl.avans.essperience.models.SimonGameModel;
 import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.views.FlappyBirdScreen;
@@ -19,6 +20,7 @@ import nl.avans.essperience.views.IndianaJantjeScreen;
 import nl.avans.essperience.views.MenuScreen;
 import nl.avans.essperience.views.RedButtonScreen;
 import nl.avans.essperience.views.ScoreScreen;
+import nl.avans.essperience.views.SimonGameScreen;
 import nl.avans.essperience.views.WafScreen;
 
 public class GameHandler extends JFrame
@@ -142,7 +144,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 1;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 2;
 			switch (rand) 
 			{
 				case 1: 
@@ -165,6 +167,10 @@ public class GameHandler extends JFrame
 					this._gameScreen = new RedButtonScreen((RedButtonModel) _gameModel);
 					this._gameController = new RedButtonController((RedButtonModel)_gameModel, (RedButtonScreen)_gameScreen);
 					break;
+				case 5:
+					this._gameModel = new SimonGameModel();
+					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
+//					this._gameController = new SimonGameController((SimonGameScreen) _gameModel, (SimonGameScreen)_GameScreen);
 				default:
 					reset();
 					break;
