@@ -94,9 +94,6 @@ public class FlappyBirdModel extends GameModel
 		
 		int pipeTopHeight = (int)(Math.random() * Main.GAME.getHeight() / 1.3f) + 1;
 		
-		/**
-		 * TODO make dynamic..
-		 */
 		_player = new FlappyPlayer();
 		
 		_pipeTop = new FlappyPipe(DockLocations.Top, Main.GAME.getDifficulty() * 2);

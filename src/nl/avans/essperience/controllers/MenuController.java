@@ -8,6 +8,7 @@ import nl.avans.essperience.views.MenuScreen;
 public class MenuController extends GameController
 {
 	private MenuScreen _view;
+	@SuppressWarnings("unused")
 	private MenuModel _model;
 	
 	private boolean _debug = true;

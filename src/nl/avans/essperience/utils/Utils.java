@@ -1,5 +1,9 @@
 package nl.avans.essperience.utils;
 
+import java.awt.Font;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+
 import nl.avans.essperience.utils.Enums.GameKeys;
 
 public class Utils 
@@ -20,6 +24,8 @@ public class Utils
 			return GameKeys.KeyUp;
 		else if(code == 40)
 			return GameKeys.KeyDown;
+		else if(code == 32)
+			return GameKeys.KeySpacebar;
 		else
 			return GameKeys.None;
 	}
@@ -27,5 +33,25 @@ public class Utils
 	public static int percentOf(int percent, int maxValue)
 	{
 		return (maxValue / 100) * percent;
+	}
+	
+	/**
+	 * measures the width of a string
+	 * @param s string to be measured
+	 * @return width of the string in pixels
+	 * @author jack
+	 */
+	public static int getWidth(String s, Font font)
+	{
+		int width;
+
+//		width = s.length() * 3;
+
+		AffineTransform affinetransform = new AffineTransform();     
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);     
+//		Font font = new Font("Tahoma", Font.PLAIN, 12);
+		width = (int)(font.getStringBounds(s, frc).getWidth());
+
+		return width;
 	}
 }

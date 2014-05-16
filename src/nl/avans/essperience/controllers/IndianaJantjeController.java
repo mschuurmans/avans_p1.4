@@ -3,7 +3,6 @@ package nl.avans.essperience.controllers;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.IndianaJantjeModel;
-import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 
@@ -11,14 +10,12 @@ public class IndianaJantjeController extends GameController
 {
 	private IndianaJantjeModel _model;
 	private IndianaJantjeScreen _view;
-	private boolean _debug = true;
-	private GameKeys _currentKey = GameKeys.None;
+	private boolean _debug = false;
 	private boolean keyA = true;
 	private boolean keyD = true;
 
 	public IndianaJantjeController(IndianaJantjeScreen view, IndianaJantjeModel model)
 	{
-		AssetManager.Instance().playSound("IndianaJantje/IndianaJantjeBMG.mp3");
 		_model = model;
 		_view = view;
 
@@ -26,8 +23,9 @@ public class IndianaJantjeController extends GameController
 		{
 			public void keyPressed(GameKeys key)
 			{
-				if(_debug)
+				if(_debug) {
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
+				}
 				if (key == GameKeys.KeyA) {
 					keyA = true;
 				}
@@ -42,8 +40,9 @@ public class IndianaJantjeController extends GameController
 			}
 
 			public void keyReleased(GameKeys key) {
-				if(_debug)
-					System.out.println("IndianaJantjeController : key has been released " + key);
+				if(_debug){
+					//System.out.println("IndianaJantjeController : key has been released " + key);
+				}
 				if (key == GameKeys.KeyA) {
 					keyA = false;
 				}
@@ -61,7 +60,7 @@ public class IndianaJantjeController extends GameController
 			@Override
 			public void sendGamefinishedEvent(boolean moreGames)
 			{
-				System.out.println("received event in controller. currentKey = " + _currentKey);
+				//System.out.println("received event in controller. currentKey = " + _currentKey);
 				if (moreGames) {
 					switch (((IndianaJantjeScreen)_view).getSide()) {
 					case 0:

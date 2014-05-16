@@ -57,6 +57,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_screenWidth = Main.GAME.getWidth();
 		_screenHeight = Main.GAME.getHeight();
 		init();
+
 		createImageArrays();
 	}
 	
@@ -86,7 +87,6 @@ public class IndianaJantjeScreen extends GameScreen
 	@Override
 	public void update() 
 	{
-		System.out.println("updating");
 		_position = ((IndianaJantjeModel)_model).getCurrentPosition();
 		_drawStoneX = (_index%4);
 		_drawStoneY = (_index/4);
@@ -99,9 +99,12 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeX += _startSpeed + (FACTOR * _difficulty-1);
 		
 		if (_dead) {
+			AssetManager.Instance().playSound("IndianaJantje/bloodsplash.wav");
+			//System.out.println("HAHA JE BENT DOOD!");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			_timer.stop();
@@ -118,6 +121,7 @@ public class IndianaJantjeScreen extends GameScreen
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
+		//System.out.println("drawing");
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 		
 		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
@@ -126,6 +130,7 @@ public class IndianaJantjeScreen extends GameScreen
 		if (_dead)
 		{
 			g.drawImage(_bloodImage, 0, 0, _screenWidth, _screenHeight, null);
+			//System.out.println("dood!");
 			_timer.start();
 		}
 	} 
@@ -141,7 +146,7 @@ public class IndianaJantjeScreen extends GameScreen
 	}
 
 	public void next() {
-		System.out.println("next game called in view");
+		//System.out.println("next game called in view");
 		if (_games < _gameAmount) {
 			_games++;
 			init();
@@ -154,11 +159,11 @@ public class IndianaJantjeScreen extends GameScreen
 	public void fail()
 	{
 		_dead = true;
-		System.out.println("fail");
+		//System.out.println("fail");
 	}
 	
 	public boolean getDead() {
-		System.out.println("checking dead");
+		//System.out.println("checking dead");
 		return _dead;
 	}
 }

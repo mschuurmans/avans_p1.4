@@ -2,7 +2,6 @@ package nl.avans.essperience.entities.flappy;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
