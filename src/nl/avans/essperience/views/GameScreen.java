@@ -46,5 +46,8 @@ public abstract class GameScreen extends JPanel implements ActionListener
 	}
 	
 	public abstract void update();
-	
+	public void stopTimer()
+	{
+		_timer.stop();
+	}
 }

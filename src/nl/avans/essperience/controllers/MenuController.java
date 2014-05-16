@@ -56,7 +56,10 @@ public class MenuController extends GameController
 			System.out.println("MenuController : current option");
 		
 		if(_currentlySelected == 0)
+		{
+			_view.stopTimer();
 			this.callFinishedListener(true);
+		}
 		else if(_currentlySelected == 1)
 			System.exit(0);
 	}

@@ -6,16 +6,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class AssetManager
 {
-	private String[] customAssets = new String[] { "Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", "Flappy/background.png", "Flappy/bird.png", 
-			"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", "IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png", "IndianaJantje/bloodsplash.jpg"};
+	private String[] customAssets = new String[] { 	"Flappy/flappy.png" , "heart.png", "Flappy/pipe1.png", 
+													"Flappy/background.png", "Flappy/bird.png", 
+													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
+													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png"};
 
-
+	private String[] soundsList = new String[] { "IndianaJantje/IndianaJantjeBGM.mp3" };
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
-
+	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
+	
 	private static AssetManager _instance = null;
 
 	public static AssetManager Instance()
@@ -57,8 +63,41 @@ public class AssetManager
 				}
 			}
 		}
+		
+		for(String sound : soundsList)
+		{
+	        System.out.println("Sound loading: " + sound);
+			try
+			{
+				URL url = this.getClass().getClassLoader().getResource(sound);
+				Clip clip = AudioSystem.getClip();
+		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
+		        clip.open(inputStream);
+		        _sounds.put(sound, clip);
+		        System.out.println("Sound loaded: " + sound);
+			}
+			catch(Exception e){}
+		}
 	}
 
+	public void playSound(final String key)
+	{
+		new Thread(new Runnable()
+		{
+			public void run()
+			{
+				try 
+				{
+					_sounds.get(key).start();
+				}
+			    catch (Exception e) 
+			    {
+			    	System.err.println(e.getMessage());
+			    }
+			}
+		}).start();
+	}
+	
 	public Image getImage(String key)
 	{
 		return _assets.get(key.trim());
