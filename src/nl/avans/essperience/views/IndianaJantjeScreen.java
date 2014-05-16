@@ -49,7 +49,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_background = AssetManager.Instance().getImage("IndianaJantje/background.jpg");
 		_playerSheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/indianajantje_player_spritesheet.png");
 		_spriteSheet = (BufferedImage) AssetManager.Instance().getImage("IndianaJantje/stonesspritesheet.png");
-		_bloodImage = AssetManager.Instance().getImage("IndianaJantje/bloodsplash.png");
+		_bloodImage = AssetManager.Instance().getImage("IndianaJantje/bloodsplash.jpg");
 		_difficulty = ((IndianaJantjeModel) model).getDifficulty();
 		_startSpeed = 15;
 		_games = 0;
@@ -57,6 +57,7 @@ public class IndianaJantjeScreen extends GameScreen
 		_screenWidth = Main.GAME.getWidth();
 		_screenHeight = Main.GAME.getHeight();
 		init();
+
 		createImageArrays();
 	}
 	
@@ -99,9 +100,11 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeX += _startSpeed + (FACTOR * _difficulty-1);
 		
 		if (_dead) {
+			System.out.println("HAHA JE BENT DOOD!");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			_timer.stop();
@@ -118,6 +121,7 @@ public class IndianaJantjeScreen extends GameScreen
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
+		System.out.println("drawing");
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 		
 		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
@@ -126,6 +130,7 @@ public class IndianaJantjeScreen extends GameScreen
 		if (_dead)
 		{
 			g.drawImage(_bloodImage, 0, 0, _screenWidth, _screenHeight, null);
+			System.out.println("dood!");
 			_timer.start();
 		}
 	} 
