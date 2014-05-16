@@ -8,6 +8,7 @@ import nl.avans.essperience.views.ScoreScreen;
 
 public class ScoreScreenController extends GameController
 {
+	@SuppressWarnings("unused")
 	private ScoreModel _model;
 	private ScoreScreen _view;
 	
@@ -17,7 +18,7 @@ public class ScoreScreenController extends GameController
 		_view = view;
 		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
-		{
+		{ 
 			public void keyPressed(GameKeys key)
 			{
 				

@@ -1,6 +1,5 @@
 package nl.avans.essperience.views;
 
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -10,7 +9,6 @@ import javax.swing.Timer;
 
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.GameModel;
-import nl.avans.essperience.utils.AssetManager;
 
 public abstract class GameScreen extends JPanel implements ActionListener
 {
@@ -25,7 +23,7 @@ public abstract class GameScreen extends JPanel implements ActionListener
 		this._gameModel = model;
 		this.setFocusable(true);
 		_timer = new Timer(60, this);
-		_timer.start();
+		_timer.start(); 
 	}
 	
 	public void addViewToControllerEventListener(ViewToControllerEventListener event)
