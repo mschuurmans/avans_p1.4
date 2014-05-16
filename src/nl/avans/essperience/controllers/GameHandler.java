@@ -131,9 +131,9 @@ public class GameHandler extends JFrame
 		// do logic for next game screen here.
 		if(!(_gameController instanceof ScoreScreenController))
 		{
-			_gameModel = new ScoreModel();
-			_gameScreen = new ScoreScreen((ScoreModel)_gameModel);
-			_gameController = new ScoreScreenController((ScoreModel)_gameModel, (ScoreScreen)_gameScreen);
+			this._gameModel = new ScoreModel();
+			this._gameScreen = new ScoreScreen((ScoreModel)_gameModel);
+			this._gameController = new ScoreScreenController((ScoreModel)_gameModel, (ScoreScreen)_gameScreen);
 		}
 		else
 		{
@@ -141,9 +141,9 @@ public class GameHandler extends JFrame
 			switch (rand) 
 			{
 				case 1: 
-					_gameModel = new IndianaJantjeModel();
-					_gameScreen = new IndianaJantjeScreen((IndianaJantjeModel) _gameModel);
-					_gameController = new IndianaJantjeController((IndianaJantjeScreen)_gameScreen, (IndianaJantjeModel)_gameModel);
+					this._gameModel = new IndianaJantjeModel();
+					this._gameScreen = new IndianaJantjeScreen((IndianaJantjeModel) _gameModel);
+					this._gameController = new IndianaJantjeController((IndianaJantjeScreen)_gameScreen, (IndianaJantjeModel)_gameModel);
 					break;
 				case 2:
 					this._gameModel = new FlappyBirdModel();
