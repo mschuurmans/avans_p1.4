@@ -11,6 +11,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
 
 public class AssetManager
 {
@@ -19,7 +20,7 @@ public class AssetManager
 													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png", "IndianaJantje/bloodsplash.png"};
 
-	private String[] soundsList = new String[] { "Essperience/background1.wav", "Essperience/background2.wav", "IndianaJantje/bloodsplash.wav" };
+	private String[] soundsList = new String[] { "Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav", "IndianaJantje/bloodsplash.wav" };
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
@@ -37,7 +38,7 @@ public class AssetManager
 	private AssetManager()
 	{
 		loadAssets();
-		playSound("Essperience/background1.wav");
+		loopSound("Essperience/background3.wav");
 	}
 
 	public void loadAssets()
@@ -91,7 +92,11 @@ public class AssetManager
 
 	public void playSound(final String key)
 	{
-		new Thread(new Runnable()
+		_sounds.get(key).stop();
+		_sounds.get(key).setFramePosition(0);
+		_sounds.get(key).start();
+		/*
+		Thread thread = new Thread(new Runnable()
 		{
 			public void run()
 			{
@@ -104,7 +109,13 @@ public class AssetManager
 			    	System.err.println(e.getMessage());
 			    }
 			}
-		}).start();
+		});
+		thread.start();
+		*/
+	}
+	
+	public void loopSound(final String key) {
+		_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY	);
 	}
 	
 	public Image getImage(String key)
