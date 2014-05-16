@@ -31,8 +31,7 @@ public class RedButtonController extends GameController
 						break;
 					default:
 						break;
-				}
-
+				}			
 			}
 		});
 		

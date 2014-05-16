@@ -1,4 +1,5 @@
 package nl.avans.essperience.views;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -31,16 +32,16 @@ public class RedButtonScreen extends GameScreen {
 		int xCenter = Main.GAME.getWidth() / 2;
 		int yCenter = Main.GAME.getHeight() / 2;
 		
-		RedButtonModel model = (RedButtonModel)_gameModel;
+		setBackground(Color.CYAN);
 		
-		g.setFont(new Font("Arial", Font.PLAIN, 50));
+		g.setFont(new Font("Arial", Font.PLAIN, 35));
 		String _dont = "DON'T";
 		int stringWidth = Utils.getWidth(_dont, g.getFont());
-		g.drawString(_dont, xCenter - (stringWidth / 2), yCenter);
-		g.setFont(new Font("Arial", Font.PLAIN, 80));
+		g.drawString(_dont, xCenter - (stringWidth / 2), yCenter - 70);
+		g.setFont(new Font("Arial", Font.PLAIN, 90));
 		String _press = "PRESS THE RED BUTTON";
 		stringWidth = Utils.getWidth(_press, g.getFont());
-		g.drawString(_press, xCenter - (stringWidth / 2), yCenter + 50);
+		g.drawString(_press, xCenter - (stringWidth / 2), yCenter);
 		
 	}
 
