@@ -23,7 +23,7 @@ public class FlappyPipe
 	private int _width;
 	private int _height;
 	private int _speed;
-	private int _cappOffset;
+	private int _cappY;
 	
 	private DockLocations _docked = DockLocations.Top;
 	
@@ -72,18 +72,18 @@ public class FlappyPipe
 		
 		if(_docked == DockLocations.Bottom)
 		{
-			_cappOffset = (Main.GAME.getHeight() - _height *2) - 5;
+			_cappY = Main.GAME.getHeight() - _height - 5;
 		}
 		else
 		{
-			_cappOffset = -36; //36 is the capp image height.
+			_cappY = _height -36; //36 is the capp image height.
 		}
 	}
 	
 	public void draw(Graphics g)
 	{
 		g.drawImage(_pipeImage, _x,_y,_width,_height, null);
-		g.drawImage(_pipeCapImage, _x,_height + _cappOffset, _width, 36, null);
+		g.drawImage(_pipeCapImage, _x, _cappY, _width, 36, null);
 	}
 	
 	public boolean collision(Shape shape)
