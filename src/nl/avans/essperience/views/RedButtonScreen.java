@@ -44,6 +44,8 @@ public class RedButtonScreen extends GameScreen {
 		String _press = "PRESS THE RED BUTTON";
 		stringWidth = Utils.getWidth(_press, g.getFont());
 		g.drawString(_press, xCenter - (stringWidth / 2), yCenter);
+		long timeBarSize = Main.GAME.getWidth() * ((RedButtonModel) _gameModel).getTimeRemaining();
+		g.drawRect(0, 0, (int) timeBarSize, 20);
 	}
 
 }

@@ -25,7 +25,7 @@ public class RedButtonModel extends GameModel
 		_timePassed = _currentTime - _beginTime;
 		if (_timePassed < 3000)
 		{
-			_timeBar = (_maxTime - _timePassed) / _maxTime * 1000;
+			_timeBar = (_maxTime - _timePassed) / _maxTime;
 		}
 		return _timeBar;
 	}
