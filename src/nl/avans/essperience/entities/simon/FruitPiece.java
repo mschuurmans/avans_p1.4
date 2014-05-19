@@ -102,7 +102,9 @@ public class FruitPiece
 	
 	public Body getBody()
 	{
-		return new Body(_name, _shape, _m);
+		Body body = new Body(_name, _shape, _m);
+		body.setUserData(new String(getName()));
+		return body;
 	}
 
 }

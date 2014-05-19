@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.BodyList;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Line;
@@ -42,7 +43,7 @@ public class SimonGameModel extends GameModel
 	private void init()
 	{
 		int _difficulty = Main.GAME.getDifficulty();
-		_patternLenght = (_difficulty /2) +1;
+		_patternLenght = (_difficulty /4) +3;
 		
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
 		
@@ -66,7 +67,8 @@ public class SimonGameModel extends GameModel
 		
 		for(Body body : _fruitPieces)
 		{
-			body.setPosition(Main.GAME.getWidth()/2, 0);		//position these bodies at the top center
+			body.setPosition(Main.GAME.getWidth()/2f, 0f);		//position these bodies at the top center
+			body.setRestitution(0.7f);
 			_myWorld.add(body);									// add fruitpieces to the world
 		}
 		
@@ -77,20 +79,26 @@ public class SimonGameModel extends GameModel
 	@Override
 	public void update()
 	{
+
+		System.out.println("position: " + _fruitPieces.get(0).getPosition().toString());
 		super.update();
 		_myWorld.step();
+		
 	}
 	
 	public void draw(Graphics g)
 	{
 		for(Body body : _fruitPieces)
-		{
-			g.drawImage(getFruitImage(body.toString()), (int)body.getPosition().getX(), (int)body.getPosition().getY(), null);
+		{			
+			g.drawImage(getFruitImage(body), (int)body.getPosition().getX(), (int)body.getPosition().getY(), null);
 		}
 	}
 	
-	private Image getFruitImage(String name)
+	private Image getFruitImage(Body body)
 	{
+		String name = (String)body.getUserData();
+//		System.out.println(name);
+		
 		switch(name)
 		{
 		default: // case "banana"
