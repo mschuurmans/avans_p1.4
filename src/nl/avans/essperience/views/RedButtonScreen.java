@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
@@ -11,7 +12,7 @@ import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.utils.Utils;
 
 public class RedButtonScreen extends GameScreen {
-
+	
 	public RedButtonScreen(GameModel model) {
 		super(model);
 		// TODO Auto-generated constructor stub
@@ -27,6 +28,7 @@ public class RedButtonScreen extends GameScreen {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		//addTimer(g, (RedButtonModel) _gameModel.getTimeRemaining());
 		int screenWidth = Main.GAME.getWidth();
 		int screenHeight = Main.GAME.getHeight();
 		int xCenter = Main.GAME.getWidth() / 2;
@@ -42,7 +44,8 @@ public class RedButtonScreen extends GameScreen {
 		String _press = "PRESS THE RED BUTTON";
 		stringWidth = Utils.getWidth(_press, g.getFont());
 		g.drawString(_press, xCenter - (stringWidth / 2), yCenter);
-		
+		long timeBarSize = Main.GAME.getWidth() * ((RedButtonModel) _gameModel).getTimeRemaining();
+		g.drawRect(0, 0, (int) timeBarSize, 20);
 	}
 
 }
