@@ -3,6 +3,7 @@ package nl.avans.essperience.models;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
@@ -24,8 +25,8 @@ public class SimonGameModel extends GameModel
 	private int _patternLenght;
 	private World _myWorld;
 	private Body _floor;
-	private ArrayList<Body> _fruitPieces = new ArrayList<Body>();
-	
+	private List<Body> _fruitPieces = new ArrayList<Body>();
+	private boolean _debug = true;
 	private Image[] _fruitImages = new Image[4];
 	
 	public SimonGameModel()
@@ -68,10 +69,15 @@ public class SimonGameModel extends GameModel
 			body.setPosition(Main.GAME.getWidth()/2, 0);		//position these bodies at the top center
 			_myWorld.add(body);									// add fruitpieces to the world
 		}
+		
+		if(_debug)
+			System.out.println("INIT SIMON GAME COMPLETE");
 	}
 	
+	@Override
 	public void update()
 	{
+		super.update();
 		_myWorld.step();
 	}
 	
