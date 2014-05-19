@@ -21,6 +21,8 @@ public class MenuController extends GameController
 		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener() 
 		{
+			private boolean aPressed = false;
+			private boolean dPressed = false;
 				@Override
 				public void keyPressed(GameKeys key) 
 				{
@@ -29,20 +31,28 @@ public class MenuController extends GameController
 					
 					switch(key)
 					{
-						case KeyEnter:
-							selectCurrentOption();
+						case KeyA:
+							aPressed = true;
 							break;
-						case KeyUp:
-							if(_currentlySelected > 0)
-								_currentlySelected = 0;
-							_view.setSelected(0);
+						case KeyD:
+							dPressed = true;
 							break;
-						case KeyDown:
-							if(_currentlySelected < 1)
-								_currentlySelected++;
-							_view.setSelected(_currentlySelected);
+					}
+					
+					if(aPressed && dPressed)
+						startGame();
+				}
+				
+				@Override
+				public void keyReleased(GameKeys key)
+				{
+					switch(key)
+					{
+						case KeyA:
+							aPressed = false;
 							break;
-						default:
+						case KeyD:
+							dPressed = false;
 							break;
 					}
 				}
@@ -51,18 +61,14 @@ public class MenuController extends GameController
 		this._view.addKeyListener(InputController.Instance().getKeyboardListener());
 	}
 	
-	public void selectCurrentOption()
+	public void startGame()
 	{
 		if(_debug)
 			System.out.println("MenuController : current option");
 		
-		if(_currentlySelected == 0)
-		{
-			_view.stopTimer();
-			this.callFinishedListener(true);
-		}
-		else if(_currentlySelected == 1)
-			System.exit(0);
+		
+		_view.stopTimer();
+		this.callFinishedListener(true);
 	}
 
 }

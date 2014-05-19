@@ -47,21 +47,13 @@ public class MenuScreen extends GameScreen
 			Font font = new Font("Arial", Font.PLAIN, 60) ;
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 			FontMetrics fm = img.getGraphics().getFontMetrics(font);
-			String startGame = "Start Game";
-			String exitGame = "Exit Game";
+			String startGame = "Press A and D to start";
 			
-			if(_selected == 0)
-				startGame = ">> Start Game <<";
-			
-			if(_selected == 1)
-				exitGame = ">> Exit Game <<";
 			
 			int stringWidth = fm.stringWidth(startGame);
-			int optionStringWidth = fm.stringWidth(exitGame);
 			
 			g.setFont(font);
 			g.drawString(startGame, xCenter - (stringWidth / 2), yCenter);
-			g.drawString(exitGame, xCenter - (optionStringWidth / 2), yCenter + 55);
 		}
 	}
 	
