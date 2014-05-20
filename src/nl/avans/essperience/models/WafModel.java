@@ -15,7 +15,7 @@ public class WafModel extends GameModel
 
 	public WafModel()
 	{
-		_background = AssetManager.Instance().getImage("Waf/fardoes background.jpg");
+		_background = AssetManager.Instance().getImage("Waf/fardoes background.png");
 		_fardoes = new Fardoes(1, 100,100); //TODO change to image w/h
 		_timeBeforeMove = 200 + (2500/(int)Math.sqrt(Main.GAME.getDifficulty()));
 		_maxTime = 1000 + (2000/(int)Math.sqrt(Main.GAME.getDifficulty()));
