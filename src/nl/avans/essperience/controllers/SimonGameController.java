@@ -12,10 +12,6 @@ public class SimonGameController extends GameController
 	private SimonGameModel _model;
 	private SimonGameScreen _view;
 	private boolean _debug = false;
-	private boolean keyU = true;
-	private boolean keyI = true;
-	private boolean keyO = true;
-	private boolean keyP = true;
 	
 	
 	public SimonGameController(SimonGameModel model, SimonGameScreen view)

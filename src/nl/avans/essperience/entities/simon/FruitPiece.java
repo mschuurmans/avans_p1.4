@@ -89,7 +89,7 @@ public class FruitPiece
 		body.setPosition(randX, -100f);		//position these bodies at the top center
 		body.setFriction(100f);
 		body.setRotatable(true);
-		body.setRestitution(0.1f);
+		body.setRestitution(1f);
 		
 		return body;
 	}
