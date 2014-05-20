@@ -59,8 +59,8 @@ public class SimonGameModel extends GameModel
 	private void init()
 	{
 		int _difficulty = Main.GAME.getDifficulty();
-		_difficulty *= 2;;
-		_patternLength = (_difficulty /4) +3;
+		_difficulty *= 2;
+		_patternLength = (_difficulty /4) +3; //max 426
 		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
 		_stepsPerUpdate = (_difficulty /2) +4;

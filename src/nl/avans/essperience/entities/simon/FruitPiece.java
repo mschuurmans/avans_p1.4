@@ -107,7 +107,7 @@ public class FruitPiece
 		
 		for(Body body : fpList)
 		{
-			if( body.getPosition().getX() == _position.x) 
+			if( (int)body.getPosition().getX() == (int)_position.x) 
 				result = true;
 		}
 		
