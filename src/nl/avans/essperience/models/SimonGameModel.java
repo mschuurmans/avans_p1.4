@@ -56,10 +56,9 @@ public class SimonGameModel extends GameModel
 	{
 		int _difficulty = Main.GAME.getDifficulty();
 		_patternLength = (_difficulty /4) +3;
-		_patternLength = 40;
-		int stepsPerPiece = 20;
+		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
-		_stepsPerUpdate = 5;
+		_stepsPerUpdate = (_difficulty /4) +4;
 		
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
 		

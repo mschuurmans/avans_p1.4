@@ -1,6 +1,7 @@
 package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
+import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.utils.Enums.GameKeys;
@@ -21,7 +22,7 @@ public class RedButtonController extends GameController
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
 		{
 			public void keyPressed(GameKeys key)
-			{
+			{			
 				switch(key)
 				{
 					case KeySpacebar:
@@ -32,6 +33,15 @@ public class RedButtonController extends GameController
 					default:
 						break;
 				}			
+				}
+		});
+		_model.addModelToControllerEventListener(new ModelToControllerEventListener()
+		{
+			@Override
+			public void timesUpEvent()
+			{
+				_view.stopTimer();
+				callFinishedListener(true);
 			}
 		});
 		

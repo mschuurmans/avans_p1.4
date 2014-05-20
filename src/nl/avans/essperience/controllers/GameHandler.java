@@ -174,11 +174,9 @@ public class GameHandler extends JFrame
 					this._gameController = new RedButtonController((RedButtonModel)_gameModel, (RedButtonScreen)_gameScreen);
 					break;
 				case 5:
-					System.out.println("Simon going to becreated.");
 					this._gameModel = new SimonGameModel();
 					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
 					this._gameController = new SimonGameController((SimonGameModel) _gameModel, (SimonGameScreen)_gameScreen);
-					System.out.println("Simon has been created.");
 					break;
 				case 6:
 					this._gameModel = new TestModel();

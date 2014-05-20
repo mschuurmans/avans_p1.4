@@ -31,7 +31,7 @@ public class WiiController implements WiimoteListener
 {
 	private Wiimote[] _wiimotes;
 	private ButtonPressedEventListener _listener = null;
-	public static final int MAX_TRIES = 1;
+	public static final int MAX_TRIES = 3;
 
 	private boolean _debug = true;
 	public WiiController(int numbers)
