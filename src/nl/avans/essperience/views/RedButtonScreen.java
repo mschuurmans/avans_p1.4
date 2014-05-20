@@ -1,16 +1,12 @@
 package nl.avans.essperience.views;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.Rectangle2D;
 
-import net.phys2d.raw.Body;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
-import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 
@@ -23,11 +19,12 @@ public class RedButtonScreen extends GameScreen {
 		// TODO Auto-generated constructor stub
 		_arrow = AssetManager.Instance().getImage("RedButton/arrow.png");
 	}
-
+	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		_gameModel.update();
+		setBackground(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()).brighter().brighter());
 	}
 	
 	@Override
@@ -39,8 +36,10 @@ public class RedButtonScreen extends GameScreen {
 		int screenHeight = Main.GAME.getHeight();
 		int xCenter = Main.GAME.getWidth() / 2;
 		int yCenter = Main.GAME.getHeight() / 2;
-		
-		setBackground(Color.CYAN);
+		int arrowWidth = screenWidth/10;
+		int arrowHeight = screenWidth/5;
+		int numberOfArrowsInCircle = 24;
+		int numberOfArrows = 7;
 		
 		g.setFont(new Font("Arial", Font.PLAIN, 14));
 		String _dont = "DON'T";
@@ -51,26 +50,25 @@ public class RedButtonScreen extends GameScreen {
 		stringWidth = Utils.getWidth(_press, g.getFont());
 		g.drawString(_press, xCenter - (stringWidth / 2), yCenter - (yCenter / 2));
 		
-		for(int i = 0; i < 24; i++)
+		for(int i = 0; i < numberOfArrowsInCircle; i++)
 		{			
-			double rotation = Math.toRadians(15 * i);
+			double rotation = Math.toRadians((360/numberOfArrowsInCircle) * i);
 			int x = screenWidth/2;
-			int y = (int) (screenHeight) + 385;
+			int y;
+			if (screenWidth/screenHeight == 1.6)
+				y = (int) (screenHeight * 1.48125);
+			else
+				y = (int) (screenHeight * 1.45);
 			
 			g2.translate(x, y);
 			g2.rotate(rotation);
 			
-			g2.drawImage(_arrow, 0 - screenWidth/20, 0 - 800, screenWidth/10, screenWidth/5, null);
+			if (i < (numberOfArrows/2+1) || i > (numberOfArrowsInCircle - (numberOfArrows/2+1)))
+				g2.drawImage(_arrow, 0 - arrowWidth/2, 0 - screenHeight, arrowWidth, arrowHeight, null);
 			
 			g2.rotate(-rotation);
 			g2.translate(-x, -y);
 		}
-		
-//		g.drawImage(_arrow, screenWidth/6-70, screenHeight-screenWidth/5, screenWidth/10, screenWidth/5, null);
-//		g.drawImage(_arrow, screenWidth/6*2-70, screenHeight-screenWidth/5, screenWidth/10, screenWidth/5, null);
-//		g.drawImage(_arrow, screenWidth/6*3-70, screenHeight-screenWidth/5, screenWidth/10, screenWidth/5, null);
-//		g.drawImage(_arrow, screenWidth/6*4-70, screenHeight-screenWidth/5, screenWidth/10, screenWidth/5, null);
-//		g.drawImage(_arrow, screenWidth/6*5-70, screenHeight-screenWidth/5, screenWidth/10, screenWidth/5, null);
 		
 		addTimeBar(g);
 	}
