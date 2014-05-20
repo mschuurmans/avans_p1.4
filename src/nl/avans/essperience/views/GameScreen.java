@@ -11,7 +11,6 @@ import javax.swing.Timer;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
-import nl.avans.essperience.models.RedButtonModel;
 
 public abstract class GameScreen extends JPanel implements ActionListener
 {

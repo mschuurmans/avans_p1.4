@@ -1,10 +1,10 @@
 package nl.avans.essperience.models;
 
-import nl.avans.essperience.entities.waf.Fardoes;
-import nl.avans.essperience.main.*;
-import nl.avans.essperience.utils.AssetManager;
+import java.awt.Image;
 
-import java.awt.*;
+import nl.avans.essperience.entities.waf.Fardoes;
+import nl.avans.essperience.main.Main;
+import nl.avans.essperience.utils.AssetManager;
 
 public class WafModel extends GameModel
 {

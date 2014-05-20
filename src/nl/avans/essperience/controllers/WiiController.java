@@ -20,7 +20,6 @@ import wiiusej.wiiusejevents.wiiuseapievents.GuitarHeroRemovedEvent;
 import wiiusej.wiiusejevents.wiiuseapievents.NunchukInsertedEvent;
 import wiiusej.wiiusejevents.wiiuseapievents.NunchukRemovedEvent;
 import wiiusej.wiiusejevents.wiiuseapievents.StatusEvent;
-import wiiusej.wiiusejevents.wiiuseapievents.WiiUseApiEvent;
 
 /**
  * Class that handles the Wiimote logic.

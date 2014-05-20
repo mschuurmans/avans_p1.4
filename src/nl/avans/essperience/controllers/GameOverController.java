@@ -1,12 +1,9 @@
 package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
-import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameOverModel;
-import nl.avans.essperience.models.ScoreModel;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.GameOverScreen;
-import nl.avans.essperience.views.ScoreScreen;
 
 public class GameOverController extends GameController 
 {

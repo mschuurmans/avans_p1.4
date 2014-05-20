@@ -14,12 +14,14 @@ public class SimonGameController extends GameController
 	private boolean _debug = false;
 	
 	
+	
 	public SimonGameController(SimonGameModel model, SimonGameScreen view)
 	{
 		this._model = model;
 		this._view = view;
 		
 		_model.addModelToControllerEventListener(new ModelToControllerEventListener()
+		
 		{
 			@Override
 			public void gameFinished(boolean succes)

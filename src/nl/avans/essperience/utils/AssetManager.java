@@ -20,7 +20,7 @@ public class AssetManager
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png",
 													"IndianaJantje/bloodsplash.png", "Simon/banana.png", "Simon/orange.png", "Simon/apple.png",
 													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png", "RedButton/arrow.png",
-													"Waf/fardoes background.png"};
+													"Waf/fardoes background.png", "Simon/simon_background_tree.png", "Simon/simon_background.png"};
 
 	private String[] soundsList = new String[] { "Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav", "IndianaJantje/bloodsplash.wav" };
 	

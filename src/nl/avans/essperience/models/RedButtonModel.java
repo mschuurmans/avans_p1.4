@@ -1,10 +1,6 @@
 package nl.avans.essperience.models;
 
-import java.awt.Image;
-import java.util.Timer;
-
 import nl.avans.essperience.main.Main;
-import nl.avans.essperience.utils.AssetManager;
 
 
 public class RedButtonModel extends GameModel
