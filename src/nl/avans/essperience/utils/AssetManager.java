@@ -27,7 +27,7 @@ public class AssetManager
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
 	
-	private Clip _currentBGM;
+	private String _currentBGMKey = "";
 	
 	private static AssetManager _instance = null;
 
@@ -117,9 +117,14 @@ public class AssetManager
 	}
 	
 	public void playBackgroundMusic(final String key) {
-		//_sounds.get(key).setFramePosition(0);
-		_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY);
-		_currentBGM = _sounds.get(key);
+		if (!_currentBGMKey.equals(key)) {
+			if (!_currentBGMKey.equals("")) {
+			_sounds.get(_currentBGMKey).stop();
+		}
+			_sounds.get(key).setFramePosition(0);
+			_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY);
+			_currentBGMKey = key;
+		}
 	}
 	
 	public void stopSound(final String key) {
@@ -127,7 +132,12 @@ public class AssetManager
 	}
 	
 	public void stopCurrentBackgroundMusic() {
-		_currentBGM.stop();
+		System.out.println("stopping music");
+		_sounds.get(_currentBGMKey).stop();
+	}
+	
+	public String getCurrentBackgroundMusic() {
+		return _currentBGMKey;
 	}
 	
 	public Image getImage(String key)

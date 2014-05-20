@@ -142,16 +142,17 @@ public class GameHandler extends JFrame
 
 		((GameOverController)_gameController).start();
 		AssetManager.Instance().stopCurrentBackgroundMusic();
+		System.out.println("1");
 	}
 
 	public void nextGame(boolean succeed)
 	{
 		if (_difficulty < 11) {
-			AssetManager.Instance().stopCurrentBackgroundMusic();
 			AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
+			System.out.println("2");
 		} else {
-			AssetManager.Instance().stopCurrentBackgroundMusic();
 			AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
+			System.out.println("3");
 		}
 		if(_gameController instanceof GameOverController)
 		{
