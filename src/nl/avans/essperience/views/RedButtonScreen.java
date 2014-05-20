@@ -7,6 +7,7 @@ import java.awt.Image;
 
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
+import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 
@@ -24,7 +25,9 @@ public class RedButtonScreen extends GameScreen {
 	public void update() {
 		// TODO Auto-generated method stub
 		_gameModel.update();
-		setBackground(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()).brighter().brighter());
+		if (((RedButtonModel) (_gameModel)).getColorChange()){
+			setBackground(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()).brighter().brighter());
+		}
 	}
 	
 	@Override
@@ -55,7 +58,7 @@ public class RedButtonScreen extends GameScreen {
 			double rotation = Math.toRadians((360/numberOfArrowsInCircle) * i);
 			int x = screenWidth/2;
 			int y;
-			if (screenWidth/screenHeight == 1.6)
+			if ((double) screenWidth/ (double) screenHeight == 1.6)
 				y = (int) (screenHeight * 1.48125);
 			else
 				y = (int) (screenHeight * 1.45);

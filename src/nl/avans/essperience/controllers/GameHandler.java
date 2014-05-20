@@ -7,22 +7,22 @@ import nl.avans.essperience.events.MicroGameFinishedEventListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.models.GameModel;
+import nl.avans.essperience.models.GameOverModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.models.ScoreModel;
 import nl.avans.essperience.models.SimonGameModel;
-import nl.avans.essperience.models.TestModel;
 import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.views.FlappyBirdScreen;
+import nl.avans.essperience.views.GameOverScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 import nl.avans.essperience.views.MenuScreen;
 import nl.avans.essperience.views.RedButtonScreen;
 import nl.avans.essperience.views.ScoreScreen;
 import nl.avans.essperience.views.SimonGameScreen;
-import nl.avans.essperience.views.TestScreen;
 import nl.avans.essperience.views.WafScreen;
 
 public class GameHandler extends JFrame
@@ -124,17 +124,38 @@ public class GameHandler extends JFrame
 		init(false);
 	}
 
+	public void gameOver()
+	{
+		this._gameModel = new GameOverModel();
+		this._gameScreen = new GameOverScreen((GameOverModel) _gameModel);
+		this._gameController = new GameOverController((GameOverModel) _gameModel, (GameOverScreen) _gameScreen);
+		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
 
+			@Override
+			public void microGameFinishedEvent(boolean succeed) 
+			{
+				nextGame(succeed);
+			}
+		});
+		changeScreen();
+
+		((GameOverController)_gameController).start();
+	}
 
 	public void nextGame(boolean succeed)
 	{
+		if(_gameController instanceof GameOverController)
+		{
+			reset();
+			return;
+		}
 		//System.out.println("GOING TO CHANGE THE SCREEN");
 		System.out.println(succeed);
 		if(!succeed)
 		{
 			if(_lives == 1)
 			{
-				reset();
+				gameOver();
 				return;
 			}	
 			else
@@ -150,7 +171,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 3;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 5;
 			switch (rand) 
 			{
 				case 1: 
