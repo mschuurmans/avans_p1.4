@@ -1,6 +1,7 @@
 package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
+import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.SimonGameModel;
 import nl.avans.essperience.utils.Enums.GameKeys;
@@ -22,10 +23,21 @@ public class SimonGameController extends GameController
 		this._model = model;
 		this._view = view;
 		
+		_model.addModelToControllerEventListener(new ModelToControllerEventListener()
+		{
+			@Override
+			public void gameFinished(boolean succes)
+			{
+				_view.stopTimer();
+				callFinishedListener(succes);
+			}
+		});
+		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
 		{
 				public void keyPressed(GameKeys key)
 				{
+					
 					if(_debug) {
 						System.out.println("IndianaJantjeController : key has been pressed " + key);
 					}

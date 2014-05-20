@@ -3,7 +3,6 @@ package nl.avans.essperience.models;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +23,8 @@ public class SimonGameModel extends GameModel
 	public static final int ORANGE = 1;
 	public static final int APPLE = 2;
 	public static final int PEAR = 3;
+
+	private boolean _debug = false;
 	
 	private int _patternLength;
 	private World _myWorld;
@@ -31,7 +32,6 @@ public class SimonGameModel extends GameModel
 	private List<Body> _fruitPieces = new ArrayList<Body>();
 	private Iterator<Body> _fruitPiecesIterator;
 	private List<Body> _bodyList = new ArrayList<Body>();
-	private boolean _debug = true;
 	private Image[] _fruitImages = new Image[4];
 	
 	private int _stepsPerUpdate;
@@ -181,8 +181,41 @@ public class SimonGameModel extends GameModel
 		}
 	}
 	
-	public void setCurrentFruit(int pos) {
+	private int matchNametoNumber(String name)
+	{
+		switch(name)
+		{
+		default: // case "banana"
+			return BANANA;
+		case "orange":
+			return ORANGE;
+		case "apple":
+			return APPLE;
+		case "pear":
+			return PEAR;
+		}
+	}
+	
+	public void setCurrentFruit(int pos)
+	{
 		_FruitPressed = pos;
+		System.out.println(pos);
+		
+		System.out.println("keyNumber pressed: " + pos);
+		
+		for(int i = 0; i < _bodyList.size(); i++)
+		{
+			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
+			{
+				if(_modelToControllerListener != null && i == _bodyList.size())
+					_modelToControllerListener.gameFinished(true);
+			}
+			else
+			{
+				if(_modelToControllerListener != null)
+					_modelToControllerListener.gameFinished(false);
+			}
+		}
 	}
 	
 }
