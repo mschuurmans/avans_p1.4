@@ -91,7 +91,7 @@ public class SimonGameController extends GameController
 		} else if (keyP) {
 			_model.setCurrentFruit(3);
 		} else {
-	
+			_model.setCurrentFruit(-1);
 		}
 	}
 	
