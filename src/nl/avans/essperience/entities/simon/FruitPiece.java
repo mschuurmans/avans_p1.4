@@ -2,12 +2,14 @@ package nl.avans.essperience.entities.simon;
 
 import net.phys2d.raw.Body;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Circle;
+import net.phys2d.raw.shapes.DynamicShape;
 import nl.avans.essperience.main.Main;
 
 public class FruitPiece
 {
 	String _name;
-	Box _shape;
+	DynamicShape _shape;
 	float _m;
 	
 	int _massModifier = 10000;
@@ -47,7 +49,7 @@ public class FruitPiece
 			_m = 126*_massModifier;
 			break;
 		case "orange":
-			_shape = new Box(60f, 60f);
+			_shape = new Circle(30f);
 			_m = 54*_massModifier;
 			break;
 		case "apple":
@@ -67,7 +69,7 @@ public class FruitPiece
 		return _name;
 	}
 	
-	public Box getBox()
+	public DynamicShape getBox()
 	{
 		return _shape;
 	}
@@ -84,8 +86,9 @@ public class FruitPiece
 		
 		int randX = (int)(Math.random() * Main.GAME.getWidth()/3 ) + (Main.GAME.getWidth()/3) +1;
 		
-		body.setPosition(randX, 0f);		//position these bodies at the top center
-		body.setFriction(1f);
+		body.setPosition(randX, -100f);		//position these bodies at the top center
+		body.setFriction(100f);
+		body.setRotatable(true);
 		body.setRestitution(0.1f);
 		
 		return body;
