@@ -19,7 +19,8 @@ public class AssetManager
 													"Flappy/bird2.png", "Flappy/bird3.png", "IndianaJantje/background.jpg", 
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png",
 													"IndianaJantje/bloodsplash.png", "Simon/banana.png", "Simon/orange.png", "Simon/apple.png",
-													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png, "RedButton/arrow.png"};
+													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png", "RedButton/arrow.png",
+													"Waf/fardoes background.png"};
 
 	private String[] soundsList = new String[] { "Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav", "IndianaJantje/bloodsplash.wav" };
 	
@@ -114,7 +115,7 @@ public class AssetManager
 	}
 	
 	public void loopSound(final String key) {
-		_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY	);
+		_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	public Image getImage(String key)

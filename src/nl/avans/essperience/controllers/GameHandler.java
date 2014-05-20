@@ -150,7 +150,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (zint) (Math.random() * _NUMBEROFGAMES) +1 ;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 3;
 			switch (rand) 
 			{
 				case 1: 
@@ -177,11 +177,6 @@ public class GameHandler extends JFrame
 					this._gameModel = new SimonGameModel();
 					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
 					this._gameController = new SimonGameController((SimonGameModel) _gameModel, (SimonGameScreen)_gameScreen);
-					break;
-				case 6:
-					this._gameModel = new TestModel();
-					this._gameScreen = new TestScreen((TestModel)_gameModel);
-					this._gameController = new TestController((TestModel)_gameModel, (TestScreen)_gameScreen);
 					break;
 				default:
 					reset();
