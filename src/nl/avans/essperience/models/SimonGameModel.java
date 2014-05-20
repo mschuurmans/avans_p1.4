@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.Timer;
+
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.StaticBody;
@@ -25,6 +27,8 @@ public class SimonGameModel extends GameModel
 	public static final int PEAR = 3;
 
 	private boolean _debug = false;
+	private boolean _easyMode = true;
+	private char[] _charArray = {'u' , 'i', 'o', 'p'};
 	
 	private int _patternLength;
 	private World _myWorld;
@@ -38,6 +42,10 @@ public class SimonGameModel extends GameModel
 	private int _updateCounter;
 	private int _totalUpdatesNeeded;
 	private int _FruitPressed;
+	private int _FruitLastPressed;
+	private int _updateCountOnLastPressed;
+	
+	private int _buttonsPressedCorrect;
 	
 	private double _updateProgress;
 	private double _actualProgress;
@@ -126,7 +134,9 @@ public class SimonGameModel extends GameModel
 			g.translate(x, y);
 			g.rotate(rotation);
 			
-			g.drawImage(getFruitImage(body), 0 -32, 0 -32, 64, 64, null);
+			g.drawImage(getFruitImage(body), 0 -32, 0 -32, 64, 64, null);	
+			if(_easyMode)
+				g.drawString("K: " + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
 			
 			g.rotate(-rotation);
 			g.translate(-x, -y);
@@ -151,7 +161,7 @@ public class SimonGameModel extends GameModel
 			int h = (int)_floor.getShape().getBounds().getHeight();
 			g.drawRect(x, y, w, h);
 			
-			//debug display bodyBoundingBoxes
+			//debug display bodyBoundingBoxes and corresponding keys
 			for(Body body : _fruitPieces)
 			{
 				int bw = (int) body.getShape().getBounds().getWidth();
@@ -159,6 +169,7 @@ public class SimonGameModel extends GameModel
 				int bx = (int) body.getPosition().getX() - bw/2;
 				int by = (int) body.getPosition().getY() - bh/2;
 				g.drawRect(bx, by, bw, bh);
+
 			}
 		}
 	}
@@ -198,24 +209,37 @@ public class SimonGameModel extends GameModel
 	
 	public void setCurrentFruit(int pos)
 	{
+		// fixxed the issue of 2 keyevents on one keyrelease
+		if(_updateCountOnLastPressed + 5 > _updateCounter)
+			return;
+
 		_FruitPressed = pos;
-		System.out.println(pos);
 		
 		System.out.println("keyNumber pressed: " + pos);
 		
-		for(int i = 0; i < _bodyList.size(); i++)
+		if(_buttonsPressedCorrect < _bodyList.size() )
 		{
+			int i = _buttonsPressedCorrect;
+			System.out.println("KeyPressed: " + pos + " KeyExpected: " + matchNametoNumber( (String)_bodyList.get(i).getUserData() ));
 			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
 			{
-				if(_modelToControllerListener != null && i == _bodyList.size())
+				_buttonsPressedCorrect++;
+				if(_modelToControllerListener != null && i == _bodyList.size()-1)
+				{
+					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
 					_modelToControllerListener.gameFinished(true);
+				}
 			}
 			else
 			{
 				if(_modelToControllerListener != null)
+				{
+					//System.out.println("GameFinishedFalse Called!!!!!!!!!!!");
 					_modelToControllerListener.gameFinished(false);
+				}
 			}
 		}
+		_updateCountOnLastPressed = _updateCounter;
 	}
 	
 }

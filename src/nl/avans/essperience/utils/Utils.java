@@ -19,6 +19,14 @@ public class Utils
 			return GameKeys.KeyW;
 		else if(code == 68)
 			return GameKeys.KeyD;
+		else if(code == 85)
+			return GameKeys.KeyU;
+		else if(code == 73)
+			return GameKeys.KeyI;
+		else if(code == 79)
+			return GameKeys.KeyO;
+		else if(code == 80)
+			return GameKeys.KeyP;
 		else if(code == 10)
 			return GameKeys.KeyEnter;
 		else if(code == 38)

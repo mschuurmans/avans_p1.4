@@ -26,6 +26,7 @@ public class RedButtonController extends GameController
 				switch(key)
 				{
 					case KeySpacebar:
+						_view.stopTimer();
 						callFinishedListener(false);
 						if (_debug)
 							System.out.println("Red Button Pressed");

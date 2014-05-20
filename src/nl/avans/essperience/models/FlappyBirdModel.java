@@ -97,13 +97,13 @@ public class FlappyBirdModel extends GameModel
 		_player = new FlappyPlayer();
 		
 		_pipeTop = new FlappyPipe(DockLocations.Top, Main.GAME.getDifficulty() * 2);
-		_pipeTop.setX(600);
+		_pipeTop.setX(900);
 		_pipeTop.setY(0);
 		_pipeTop.setWidth(100);
 		_pipeTop.setHeight(pipeTopHeight);
 		
 		_pipeBottom = new FlappyPipe(DockLocations.Bottom,Main.GAME.getDifficulty() * 2);
-		_pipeBottom.setX(600);
+		_pipeBottom.setX(900);
 		_pipeBottom.setY(pipeTopHeight + gap);
 		_pipeBottom.setWidth(100);
 		_pipeBottom.setHeight(Main.GAME.getHeight() - (pipeTopHeight + gap));
