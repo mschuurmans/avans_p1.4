@@ -27,6 +27,8 @@ public class AssetManager
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
 	
+	private Clip _currentBGM;
+	
 	private static AssetManager _instance = null;
 
 	public static AssetManager Instance()
@@ -40,7 +42,7 @@ public class AssetManager
 	private AssetManager()
 	{
 		loadAssets();
-		loopSound("Essperience/background1.wav");
+		//playBackgroundMusic("Essperience/background1.wav");
 	}
 
 	public void loadAssets()
@@ -114,8 +116,18 @@ public class AssetManager
 		*/
 	}
 	
-	public void loopSound(final String key) {
+	public void playBackgroundMusic(final String key) {
+		//_sounds.get(key).setFramePosition(0);
 		_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY);
+		_currentBGM = _sounds.get(key);
+	}
+	
+	public void stopSound(final String key) {
+		_sounds.get(key).stop();
+	}
+	
+	public void stopCurrentBackgroundMusic() {
+		_currentBGM.stop();
 	}
 	
 	public Image getImage(String key)
