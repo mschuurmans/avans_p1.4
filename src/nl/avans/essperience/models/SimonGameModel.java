@@ -37,6 +37,7 @@ public class SimonGameModel extends GameModel
 	private int _stepsPerUpdate;
 	private int _updateCounter;
 	private int _totalUpdatesNeeded;
+	private int _FruitPressed;
 	
 	private double _updateProgress;
 	private double _actualProgress;
@@ -179,6 +180,10 @@ public class SimonGameModel extends GameModel
 		case "pear":
 			return _fruitImages[PEAR];
 		}
+	}
+	
+	public void setCurrentFruit(int pos) {
+		_FruitPressed = pos;
 	}
 	
 }
