@@ -199,9 +199,7 @@ public class SimonGameModel extends GameModel
 	public void setCurrentFruit(int pos)
 	{
 		_FruitPressed = pos;
-<<<<<<< HEAD
 		System.out.println(pos);
-=======
 		
 		System.out.println("keyNumber pressed: " + pos);
 		
@@ -218,7 +216,6 @@ public class SimonGameModel extends GameModel
 					_modelToControllerListener.gameFinished(false);
 			}
 		}
->>>>>>> 11f1081eb5a718011b181921525e5ef1316060cc
 	}
 	
 }
