@@ -3,7 +3,10 @@ package nl.avans.essperience.models;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.rmi.CORBA.Util;
 
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
@@ -14,6 +17,7 @@ import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nl.avans.essperience.entities.simon.FruitPiece;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class SimonGameModel extends GameModel
 {
@@ -22,14 +26,21 @@ public class SimonGameModel extends GameModel
 	public static final int APPLE = 2;
 	public static final int PEAR = 3;
 	
-	private int _patternLenght;
+	private int _patternLength;
 	private World _myWorld;
 	private Body _floor;
 	private List<Body> _fruitPieces = new ArrayList<Body>();
+	private Iterator<Body> _fruitPiecesIterator;
+	private List<Body> _bodyList = new ArrayList<Body>();
 	private boolean _debug = true;
 	private Image[] _fruitImages = new Image[4];
 	
 	private int _stepsPerUpdate;
+	private int _updateCounter;
+	private int _totalUpdatesNeeded;
+	
+	private double _updateProgress;
+	private double _actualProgress;
 	
 	public SimonGameModel()
 	{		
@@ -44,8 +55,10 @@ public class SimonGameModel extends GameModel
 	private void init()
 	{
 		int _difficulty = Main.GAME.getDifficulty();
-		_patternLenght = (_difficulty /4) +3;
-		_patternLenght = 40;
+		_patternLength = (_difficulty /4) +3;
+		_patternLength = 40;
+		int stepsPerPiece = 10;
+		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
 		_stepsPerUpdate = 5;
 		
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
@@ -57,16 +70,13 @@ public class SimonGameModel extends GameModel
 		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 200);
 		_myWorld.add(_floor);
 		
-		for(int i = 0; i < _patternLenght; i++)					//add pieces of fruit
+		for(int i = 0; i < _patternLength; i++)					//add pieces of fruit
 		{
 			FruitPiece fp = new FruitPiece();					//create new pieces of fruit
 			_fruitPieces.add(fp.getBody());						//get the Bodies and store them
 		}
 		
-		for(Body body : _fruitPieces)
-		{
-			_myWorld.add(body);									// add fruitpieces to the world
-		}
+		_fruitPiecesIterator = _fruitPieces.iterator();
 		
 		if(_debug)
 			System.out.println("INIT SIMON GAME COMPLETE");
@@ -75,6 +85,7 @@ public class SimonGameModel extends GameModel
 	@Override
 	public void update()
 	{
+		_updateCounter++;
 
 		System.out.println("position: " + _fruitPieces.get(0).getPosition().toString());
 		super.update();
@@ -82,11 +93,29 @@ public class SimonGameModel extends GameModel
 		for(int i = 0; i < _stepsPerUpdate; i ++)
 			_myWorld.step();
 		
+		
+		_updateProgress = (double)_updateCounter/(double)_totalUpdatesNeeded;
+		_actualProgress = (double)_bodyList.size() / (double)_fruitPieces.size();
+		
+		if(_updateProgress >= _actualProgress)
+		{
+			Body body = null;
+			
+			if(_fruitPiecesIterator.hasNext())
+				body = _fruitPiecesIterator.next();
+			
+			if(body != null)
+			{
+				_bodyList.add(body);
+				_myWorld.add(body);
+			}
+		}
+		
 	}
 	
 	public void draw(Graphics g)
 	{
-		for(Body body : _fruitPieces)
+		for(Body body : _bodyList)
 		{			
 			g.drawImage(getFruitImage(body), (int)body.getPosition().getX() -32, (int)body.getPosition().getY(), 64, 64, null);
 		}
@@ -94,6 +123,15 @@ public class SimonGameModel extends GameModel
 
 		if(_debug)
 		{
+			//display updateCounter
+			int drawStringX = Main.GAME.getWidth() - 150;
+			g.drawString("Update no.: " + _updateCounter, drawStringX, 20);
+			
+			//display _bodyList size
+			g.drawString("_updateProgress: " + _updateProgress, drawStringX, 40);
+			g.drawString("_actualProgress: " + _actualProgress, drawStringX, 60);
+			g.drawString("_bodyList.Size: " + _bodyList.size(), drawStringX, 80);
+			
 			//debug display Floor
 			int x = (int) _floor.getPosition().getX() - Main.GAME.getWidth()/2;
 			int y = (int) _floor.getPosition().getY();
