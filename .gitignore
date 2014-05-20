@@ -11,6 +11,7 @@
 .metadata
 .metadata
 bin/**
+EclipseProject/**
 tmp/**
 tmp/**/*
 *.tmp
