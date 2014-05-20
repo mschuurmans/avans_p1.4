@@ -39,7 +39,7 @@ public class AssetManager
 	private AssetManager()
 	{
 		loadAssets();
-		loopSound("Essperience/background2.wav");
+		loopSound("Essperience/background1.wav");
 	}
 
 	public void loadAssets()
