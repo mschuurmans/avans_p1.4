@@ -45,6 +45,7 @@ public class WafScreen extends GameScreen
 		super.paintComponent(g);
 		WafModel model = (WafModel)_gameModel;
 		
+		g.drawImage(model.getBackground(), 0, 0, _screenWidth, _screenHeight, null);
 		for (int y = 0; y < 3; y++) 
 		{
 			for (int x = 0; x < 3; x++) 
@@ -59,6 +60,7 @@ public class WafScreen extends GameScreen
 			}
 		}
 		g.drawString("Whack A Fardoes Screen", 10, 10);
+		addTimeBar(g);
 	}
 
 }

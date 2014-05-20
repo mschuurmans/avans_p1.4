@@ -24,7 +24,7 @@ public class SimonGameModel extends GameModel
 	public static final int APPLE = 2;
 	public static final int PEAR = 3;
 
-	private boolean _debug = false;
+	private boolean _debug = true;
 	private boolean _easyMode = true;
 	private char[] _charArray = {'u' , 'i', 'o', 'p'};
 	
@@ -39,7 +39,7 @@ public class SimonGameModel extends GameModel
 	private int _stepsPerUpdate;
 	private int _updateCounter;
 	private int _totalUpdatesNeeded;
-	private int _FruitPressed;
+	private int _updateCountOnLastPressed;
 	
 	private int _buttonsPressedCorrect;
 	
@@ -59,6 +59,7 @@ public class SimonGameModel extends GameModel
 	private void init()
 	{
 		int _difficulty = Main.GAME.getDifficulty();
+		_difficulty *= 2;
 		_patternLength = (_difficulty /4) +3;
 		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
@@ -130,7 +131,9 @@ public class SimonGameModel extends GameModel
 			g.translate(x, y);
 			g.rotate(rotation);
 			
-			g.drawImage(getFruitImage(body), 0 -32, 0 -32, 64, 64, null);	
+			int size = 90;
+			
+			g.drawImage(getFruitImage(body), 0 -size/2, 0 -size/2, size, size, null);	
 			if(_easyMode)
 				g.drawString("K: " + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
 			
@@ -205,8 +208,9 @@ public class SimonGameModel extends GameModel
 	
 	public void setCurrentFruit(int pos)
 	{
-		_FruitPressed = pos;
-		System.out.println(pos);
+		// fixxed the issue of 2 keyevents on one keyrelease
+		if(_updateCountOnLastPressed + 5 > _updateCounter)
+			return;
 		
 		System.out.println("keyNumber pressed: " + pos);
 		
@@ -219,7 +223,7 @@ public class SimonGameModel extends GameModel
 				_buttonsPressedCorrect++;
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
-					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
+					System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
 					_modelToControllerListener.gameFinished(true);
 				}
 			}
@@ -232,6 +236,7 @@ public class SimonGameModel extends GameModel
 				}
 			}
 		}
+		_updateCountOnLastPressed = _updateCounter;
 	}
 	
 }

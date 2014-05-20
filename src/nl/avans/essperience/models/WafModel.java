@@ -2,6 +2,8 @@ package nl.avans.essperience.models;
 
 import nl.avans.essperience.entities.waf.Fardoes;
 import nl.avans.essperience.main.*;
+import nl.avans.essperience.utils.AssetManager;
+
 import java.awt.*;
 
 public class WafModel extends GameModel
@@ -13,8 +15,10 @@ public class WafModel extends GameModel
 
 	public WafModel()
 	{
+		_background = AssetManager.Instance().getImage("Waf/fardoes background.png");
 		_fardoes = new Fardoes(1, 100,100); //TODO change to image w/h
-		_timeBeforeMove = 2100 - (Main.GAME.getDifficulty() * 100);
+		_timeBeforeMove = 200 + (2500/(int)Math.sqrt(Main.GAME.getDifficulty()));
+		_maxTime = 1000 + (2000/(int)Math.sqrt(Main.GAME.getDifficulty()));
 	}
 	
 	/**
@@ -49,6 +53,14 @@ public class WafModel extends GameModel
 			int newLocation =(int) (Math.random() * 9) + 1;		
 			_fardoes.setLocation(newLocation);
 			_lastTimeChanged = System.currentTimeMillis();
+		}
+		
+		if(getTimeRemaining() <= 0)
+		{
+			if(_modelToControllerListener != null)
+			{
+				_modelToControllerListener.gameFinished(false);
+			}
 		}
 	}
 }

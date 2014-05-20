@@ -12,10 +12,6 @@ public class SimonGameController extends GameController
 	private SimonGameModel _model;
 	private SimonGameScreen _view;
 	private boolean _debug = false;
-	private boolean keyU = true;
-	private boolean keyI = true;
-	private boolean keyO = true;
-	private boolean keyP = true;
 	
 	
 	public SimonGameController(SimonGameModel model, SimonGameScreen view)
@@ -53,7 +49,6 @@ public class SimonGameController extends GameController
 					if (key == GameKeys.KeyP) {
 						_model.setCurrentFruit(3);
 					}
-					
 				}
 		});
 		_view.addViewToControllerEventListener(new ViewToControllerEventListener()
