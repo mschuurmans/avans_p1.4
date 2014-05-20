@@ -59,7 +59,7 @@ public class SimonGameModel extends GameModel
 	private void init()
 	{
 		int _difficulty = Main.GAME.getDifficulty();
-		_difficulty *= 2;
+		_difficulty *= 2;;
 		_patternLength = (_difficulty /4) +3;
 		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
@@ -79,6 +79,11 @@ public class SimonGameModel extends GameModel
 		for(int i = 0; i < _patternLength; i++)					//add pieces of fruit
 		{
 			FruitPiece fp = new FruitPiece();					//create new pieces of fruit
+			while( fp.intersects(_fruitPieces))					//while the new fruitpiece intersects with one of the old ones
+			{
+				System.out.println("Intersecting fruitpiece discarded!");
+				fp = new FruitPiece();							// if true. replace it with a new one until it gets false
+			}
 			_fruitPieces.add(fp.getBody());						//get the Bodies and store them
 		}
 		
@@ -148,12 +153,12 @@ public class SimonGameModel extends GameModel
 		{
 			//display updateCounter
 			int drawStringX = Main.GAME.getWidth() - 150;
-			g.drawString("Update no.: " + _updateCounter, drawStringX, 20);
+			g.drawString("Update no.: " + _updateCounter, drawStringX, 100);
 			
 			//display _bodyList size
-			g.drawString("_updateProgress: " + _updateProgress, drawStringX, 40);
-			g.drawString("_actualProgress: " + _actualProgress, drawStringX, 60);
-			g.drawString("_bodyList.Size: " + _bodyList.size(), drawStringX, 80);
+			g.drawString("_updateProgress: " + _updateProgress, drawStringX, 120);
+			g.drawString("_actualProgress: " + _actualProgress, drawStringX, 140);
+			g.drawString("_bodyList.Size: " + _bodyList.size(), drawStringX, 160);
 			
 			//debug display Floor
 			int x = (int) _floor.getPosition().getX() - Main.GAME.getWidth()/2;
