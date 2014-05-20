@@ -40,3 +40,4 @@ compile
 # Sound files
 *.mp3
 *.wav
+/bin
