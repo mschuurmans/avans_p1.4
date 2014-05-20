@@ -19,6 +19,14 @@ public class Utils
 			return GameKeys.KeyW;
 		else if(code == 68)
 			return GameKeys.KeyD;
+		else if(code == 85)
+			return GameKeys.KeyU;
+		else if(code == 73)
+			return GameKeys.KeyI;
+		else if(code == 79)
+			return GameKeys.KeyO;
+		else if(code == 80)
+			return GameKeys.KeyP;
 		else if(code == 10)
 			return GameKeys.KeyEnter;
 		else if(code == 38)
@@ -27,6 +35,24 @@ public class Utils
 			return GameKeys.KeyDown;
 		else if(code == 32)
 			return GameKeys.KeySpacebar;
+		else if(code == 49)
+			return GameKeys.Key1;
+		else if(code == 50)
+			return GameKeys.Key2;
+		else if(code == 51)
+			return GameKeys.Key3;
+		else if(code == 52)
+			return GameKeys.Key4;
+		else if(code == 53)
+			return GameKeys.Key5;
+		else if(code == 54)
+			return GameKeys.Key6;
+		else if(code == 55)
+			return GameKeys.Key7;
+		else if(code == 56)
+			return GameKeys.Key8;
+		else if(code == 57)
+			return GameKeys.Key9;
 		else
 			return GameKeys.None;
 		

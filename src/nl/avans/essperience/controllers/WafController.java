@@ -23,6 +23,33 @@ public class WafController extends GameController
 			{
 				switch(key)
 				{
+					case Key1:
+						whack(1);
+						break;
+					case Key2:
+						whack(2);
+						break;
+					case Key3:
+						whack(3);
+						break;
+					case Key4:
+						whack(4);
+						break;
+					case Key5:
+						whack(5);
+						break;
+					case Key6:
+						whack(6);
+						break;
+					case Key7:
+						whack(7);
+						break;
+					case Key8:
+						whack(8);
+						break;
+					case Key9:
+						whack(9);
+						break;
 					default:
 						break;
 				}

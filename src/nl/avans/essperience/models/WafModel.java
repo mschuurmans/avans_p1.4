@@ -13,7 +13,7 @@ public class WafModel extends GameModel
 
 	public WafModel()
 	{
-		_fardoes = new Fardoes(1, 75,100); //TODO change to image w/h
+		_fardoes = new Fardoes(1, 100,100); //TODO change to image w/h
 		_timeBeforeMove = 2100 - (Main.GAME.getDifficulty() * 100);
 	}
 	

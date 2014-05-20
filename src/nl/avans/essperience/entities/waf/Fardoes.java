@@ -7,10 +7,8 @@ import nl.avans.essperience.utils.AssetManager;
 
 public class Fardoes 
 {
-	private String _imageKey = "fardoes.png";
+	private String _imageKey = "Waf/fardoes.png";
 	private Image _fardoesImage;
-	private int _x;
-	private int _y;
 	private int _width;
 	private int _height;
 	private int _location;
@@ -34,6 +32,6 @@ public class Fardoes
 	
 	public void draw(Graphics g, int x , int y)
 	{
-		g.drawImage(_fardoesImage, _x, _y, _width, _height, null);
+		g.drawImage(_fardoesImage, x, y, _width, _height, null);
 	}
 }
