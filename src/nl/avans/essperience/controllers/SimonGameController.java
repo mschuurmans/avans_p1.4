@@ -26,6 +26,7 @@ public class SimonGameController extends GameController
 		{
 				public void keyPressed(GameKeys key)
 				{
+					
 					if(_debug) {
 						System.out.println("IndianaJantjeController : key has been pressed " + key);
 					}

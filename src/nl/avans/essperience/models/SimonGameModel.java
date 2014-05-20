@@ -183,6 +183,7 @@ public class SimonGameModel extends GameModel
 	
 	public void setCurrentFruit(int pos) {
 		_FruitPressed = pos;
+		System.out.println(pos);
 	}
 	
 }

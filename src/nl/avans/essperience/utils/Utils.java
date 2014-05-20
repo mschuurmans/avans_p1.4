@@ -10,6 +10,7 @@ public class Utils
 {
 	public static GameKeys getFromKeyboardCode(int code)
 	{
+		System.out.println(code);
 		if(code == 65)
 			return GameKeys.KeyA;
 		else if(code == 66)
@@ -28,6 +29,7 @@ public class Utils
 			return GameKeys.KeySpacebar;
 		else
 			return GameKeys.None;
+		
 	}
 	
 	public static int percentOf(int percent, int maxValue)
