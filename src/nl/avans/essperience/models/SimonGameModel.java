@@ -3,7 +3,6 @@ package nl.avans.essperience.models;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +23,8 @@ public class SimonGameModel extends GameModel
 	public static final int ORANGE = 1;
 	public static final int APPLE = 2;
 	public static final int PEAR = 3;
+
+	private boolean _debug = false;
 	
 	private int _patternLength;
 	private World _myWorld;
@@ -31,12 +32,12 @@ public class SimonGameModel extends GameModel
 	private List<Body> _fruitPieces = new ArrayList<Body>();
 	private Iterator<Body> _fruitPiecesIterator;
 	private List<Body> _bodyList = new ArrayList<Body>();
-	private boolean _debug = true;
 	private Image[] _fruitImages = new Image[4];
 	
 	private int _stepsPerUpdate;
 	private int _updateCounter;
 	private int _totalUpdatesNeeded;
+	private int _FruitPressed;
 	
 	private double _updateProgress;
 	private double _actualProgress;
@@ -55,10 +56,9 @@ public class SimonGameModel extends GameModel
 	{
 		int _difficulty = Main.GAME.getDifficulty();
 		_patternLength = (_difficulty /4) +3;
-		_patternLength = 40;
-		int stepsPerPiece = 20;
+		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
-		_stepsPerUpdate = 5;
+		_stepsPerUpdate = (_difficulty /4) +4;
 		
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
 		
@@ -178,6 +178,43 @@ public class SimonGameModel extends GameModel
 			return _fruitImages[APPLE];
 		case "pear":
 			return _fruitImages[PEAR];
+		}
+	}
+	
+	private int matchNametoNumber(String name)
+	{
+		switch(name)
+		{
+		default: // case "banana"
+			return BANANA;
+		case "orange":
+			return ORANGE;
+		case "apple":
+			return APPLE;
+		case "pear":
+			return PEAR;
+		}
+	}
+	
+	public void setCurrentFruit(int pos)
+	{
+		_FruitPressed = pos;
+		System.out.println(pos);
+		
+		System.out.println("keyNumber pressed: " + pos);
+		
+		for(int i = 0; i < _bodyList.size(); i++)
+		{
+			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
+			{
+				if(_modelToControllerListener != null && i == _bodyList.size())
+					_modelToControllerListener.gameFinished(true);
+			}
+			else
+			{
+				if(_modelToControllerListener != null)
+					_modelToControllerListener.gameFinished(false);
+			}
 		}
 	}
 	

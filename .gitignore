@@ -11,6 +11,7 @@
 .metadata
 .metadata
 bin/**
+EclipseProject/**
 tmp/**
 tmp/**/*
 *.tmp
@@ -39,3 +40,4 @@ compile
 # Sound files
 *.mp3
 *.wav
+/bin

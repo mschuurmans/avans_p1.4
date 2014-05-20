@@ -17,6 +17,10 @@ public class Enums
 		KeyUp,
 		KeyDown,
 		KeySpacebar,
+		KeyU,
+		KeyI,
+		KeyO,
+		KeyP,
 		None		
 	}
 	

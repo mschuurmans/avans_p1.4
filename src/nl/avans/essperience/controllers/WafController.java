@@ -10,6 +10,7 @@ public class WafController extends GameController
 {
 	private WafModel _model;
 	private WafScreen _view;
+	private int _triesLeft = 1;
 	
 	public WafController(WafModel model, WafScreen view)
 	{
@@ -46,6 +47,11 @@ public class WafController extends GameController
 		if(_model.whack(location))
 			callFinishedListener(true);
 		else
-			callFinishedListener(false);
+		{
+			if(_triesLeft == 0)
+				callFinishedListener(false);
+			else
+				_triesLeft--;
+		}
 	}
 }
