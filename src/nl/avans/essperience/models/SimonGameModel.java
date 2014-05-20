@@ -63,7 +63,7 @@ public class SimonGameModel extends GameModel
 		_patternLength = (_difficulty /4) +3;
 		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
-		_stepsPerUpdate = (_difficulty /4) +4;
+		_stepsPerUpdate = (_difficulty /2) +4;
 		
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
 		
@@ -71,8 +71,10 @@ public class SimonGameModel extends GameModel
 		_myWorld.setGravity(0, 30);
 		
 		_floor = new StaticBody("Floor", new Box(Main.GAME.getWidth(), 1f));
-		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 200);
+		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 100);
+		_floor.setRestitution(0.4f);
 		_myWorld.add(_floor);
+		
 		
 		for(int i = 0; i < _patternLength; i++)					//add pieces of fruit
 		{
@@ -209,7 +211,7 @@ public class SimonGameModel extends GameModel
 	public void setCurrentFruit(int pos)
 	{
 		// fixxed the issue of 2 keyevents on one keyrelease
-		if(_updateCountOnLastPressed + 5 > _updateCounter)
+		if(_updateCountOnLastPressed + 2 > _updateCounter)
 			return;
 		
 		System.out.println("keyNumber pressed: " + pos);
