@@ -1,6 +1,7 @@
 package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
+import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.Enums.GameKeys;
@@ -16,6 +17,15 @@ public class WafController extends GameController
 	{
 		_model = model;
 		_view = view;
+		_model.addModelToControllerEventListener(new ModelToControllerEventListener()
+		{
+			@Override
+			public void gameFinished(boolean succes)
+			{
+				_view.stopTimer();
+				callFinishedListener(succes);
+			}
+		});
 		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
 		{
@@ -72,11 +82,17 @@ public class WafController extends GameController
 	public void whack(int location)
 	{
 		if(_model.whack(location))
+		{
+			_view.stopTimer();
 			callFinishedListener(true);
+		}
 		else
 		{
 			if(_triesLeft == 0)
+			{
+				_view.stopTimer();
 				callFinishedListener(false);
+			}
 			else
 				_triesLeft--;
 		}

@@ -129,6 +129,14 @@ public class GameHandler extends JFrame
 		this._gameModel = new GameOverModel();
 		this._gameScreen = new GameOverScreen((GameOverModel) _gameModel);
 		this._gameController = new GameOverController((GameOverModel) _gameModel, (GameOverScreen) _gameScreen);
+		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
+
+			@Override
+			public void microGameFinishedEvent(boolean succeed) 
+			{
+				nextGame(succeed);
+			}
+		});
 		changeScreen();
 
 		((GameOverController)_gameController).start();
@@ -163,7 +171,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) +3 ;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) + 3;
 			switch (rand) 
 			{
 				case 1: 
@@ -190,11 +198,6 @@ public class GameHandler extends JFrame
 					this._gameModel = new SimonGameModel();
 					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
 					this._gameController = new SimonGameController((SimonGameModel) _gameModel, (SimonGameScreen)_gameScreen);
-					break;
-				case 6:
-					this._gameModel = new GameOverModel();
-					this._gameScreen = new GameOverScreen((GameOverModel)_gameModel);
-					this._gameController = new GameOverController((GameOverModel)_gameModel, (GameOverScreen)_gameScreen);
 					break;
 				default:
 					reset();
