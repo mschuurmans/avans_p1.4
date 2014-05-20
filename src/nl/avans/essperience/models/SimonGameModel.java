@@ -1,12 +1,12 @@
 package nl.avans.essperience.models;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.rmi.CORBA.Util;
 
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
@@ -17,7 +17,6 @@ import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nl.avans.essperience.entities.simon.FruitPiece;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.AssetManager;
-import nl.avans.essperience.utils.Utils;
 
 public class SimonGameModel extends GameModel
 {
@@ -57,7 +56,7 @@ public class SimonGameModel extends GameModel
 		int _difficulty = Main.GAME.getDifficulty();
 		_patternLength = (_difficulty /4) +3;
 		_patternLength = 40;
-		int stepsPerPiece = 10;
+		int stepsPerPiece = 20;
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
 		_stepsPerUpdate = 5;
 		
@@ -87,25 +86,26 @@ public class SimonGameModel extends GameModel
 	{
 		_updateCounter++;
 
-		System.out.println("position: " + _fruitPieces.get(0).getPosition().toString());
-		super.update();
+		if(_debug)
+			System.out.println("position: " + _fruitPieces.get(0).getPosition().toString());
 		
+		//update and step the world
+		super.update();
 		for(int i = 0; i < _stepsPerUpdate; i ++)
 			_myWorld.step();
 		
-		
+		// track progress
 		_updateProgress = (double)_updateCounter/(double)_totalUpdatesNeeded;
 		_actualProgress = (double)_bodyList.size() / (double)_fruitPieces.size();
 		
+		//add bodies when the actualProgress is behind on the updateProgress
 		if(_updateProgress >= _actualProgress)
 		{
 			Body body = null;
 			
 			if(_fruitPiecesIterator.hasNext())
-				body = _fruitPiecesIterator.next();
-			
-			if(body != null)
 			{
+				body = _fruitPiecesIterator.next();
 				_bodyList.add(body);
 				_myWorld.add(body);
 			}
@@ -113,11 +113,23 @@ public class SimonGameModel extends GameModel
 		
 	}
 	
-	public void draw(Graphics g)
+	public void draw(Graphics g1)
 	{
+		Graphics2D g = (Graphics2D) g1;;
+		
 		for(Body body : _bodyList)
 		{			
-			g.drawImage(getFruitImage(body), (int)body.getPosition().getX() -32, (int)body.getPosition().getY(), 64, 64, null);
+			float rotation = body.getRotation();
+			int x = (int)body.getPosition().getX();
+			int y = (int)body.getPosition().getY();
+			
+			g.translate(x, y);
+			g.rotate(rotation);
+			
+			g.drawImage(getFruitImage(body), 0 -32, 0 -32, 64, 64, null);
+			
+			g.rotate(-rotation);
+			g.translate(-x, -y);
 		}
 		
 
@@ -145,7 +157,7 @@ public class SimonGameModel extends GameModel
 				int bw = (int) body.getShape().getBounds().getWidth();
 				int bh = (int) body.getShape().getBounds().getHeight();
 				int bx = (int) body.getPosition().getX() - bw/2;
-				int by = (int) body.getPosition().getY();
+				int by = (int) body.getPosition().getY() - bh/2;
 				g.drawRect(bx, by, bw, bh);
 			}
 		}
