@@ -23,7 +23,7 @@ public class RedButtonModel extends GameModel
 	public double getTimeRemaining() {
 		_currentTime = System.currentTimeMillis();
 		_timePassed = _currentTime - _beginTime;
-		if (_timePassed < 3000)
+		if (_timePassed < _maxTime)
 		{
 			_timeBar = (_maxTime - _timePassed) / _maxTime;
 		}
@@ -37,6 +37,10 @@ public class RedButtonModel extends GameModel
 	@Override
 	public void update()
 	{
-		
+		if (getTimeRemaining() == 0)
+		{
+			if(_modelToControllerListener != null)
+				_modelToControllerListener.timesUpEvent();
+		}
 	}
 }

@@ -28,7 +28,6 @@ public class RedButtonScreen extends GameScreen {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		//addTimer(g, (RedButtonModel) _gameModel.getTimeRemaining());
 		int screenWidth = Main.GAME.getWidth();
 		int screenHeight = Main.GAME.getHeight();
 		int xCenter = Main.GAME.getWidth() / 2;
