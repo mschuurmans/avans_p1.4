@@ -25,7 +25,7 @@ public class WafScreen extends GameScreen
 		super.paintComponent(g);
 		WafModel model = (WafModel)_gameModel;
 		
-		model.getFardoes().draw(g);
+		model.getFardoes().draw(g, 10,10);
 		g.drawString("Whack A Fardoes Screen", 10, 10);
 	}
 
