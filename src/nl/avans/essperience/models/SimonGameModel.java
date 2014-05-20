@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.Timer;
+
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.StaticBody;
@@ -40,6 +42,8 @@ public class SimonGameModel extends GameModel
 	private int _updateCounter;
 	private int _totalUpdatesNeeded;
 	private int _FruitPressed;
+	private int _FruitLastPressed;
+	private int _updateCountOnLastPressed;
 	
 	private int _buttonsPressedCorrect;
 	
@@ -205,8 +209,11 @@ public class SimonGameModel extends GameModel
 	
 	public void setCurrentFruit(int pos)
 	{
+		// fixxed the issue of 2 keyevents on one keyrelease
+		if(_updateCountOnLastPressed + 5 > _updateCounter)
+			return;
+
 		_FruitPressed = pos;
-		System.out.println(pos);
 		
 		System.out.println("keyNumber pressed: " + pos);
 		
@@ -232,6 +239,7 @@ public class SimonGameModel extends GameModel
 				}
 			}
 		}
+		_updateCountOnLastPressed = _updateCounter;
 	}
 	
 }

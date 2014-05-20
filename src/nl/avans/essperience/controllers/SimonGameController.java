@@ -53,7 +53,6 @@ public class SimonGameController extends GameController
 					if (key == GameKeys.KeyP) {
 						_model.setCurrentFruit(3);
 					}
-					
 				}
 		});
 		_view.addViewToControllerEventListener(new ViewToControllerEventListener()
