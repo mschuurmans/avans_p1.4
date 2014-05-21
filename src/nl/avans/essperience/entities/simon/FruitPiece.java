@@ -1,13 +1,11 @@
 package nl.avans.essperience.entities.simon;
 
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
-import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.shapes.DynamicShape;
 import net.phys2d.raw.shapes.Polygon;
@@ -20,9 +18,10 @@ public class FruitPiece
 	float _m;
 	Vector2f _position;
 	
-	private ROVector2f[] _bananaPolygon = new ROVector2f[17];
-	private ROVector2f[] _pearPolygon = new ROVector2f[20];
-	private ROVector2f[] _applePolygon = new ROVector2f[111];
+	private ROVector2f[] _bananaPath = new ROVector2f[32];
+	private ROVector2f[] _orangePath = new ROVector2f[24];
+	private ROVector2f[] _applePath = new ROVector2f[37];
+	private ROVector2f[] _pearPath = new ROVector2f[29];
 	
 	int _massModifier = 10000;
 	
@@ -62,19 +61,19 @@ public class FruitPiece
 		switch(name)
 		{
 		case "banana":
-			_shape = new Polygon(_bananaPolygon);
+			_shape = new Polygon(_bananaPath);
 			_m = 126*_massModifier;
 			break;
 		case "orange":
-			_shape = new Circle(30f);
+			_shape = new Polygon(_orangePath);
 			_m = 54*_massModifier;
 			break;
 		case "apple":
-			_shape = new Polygon(_applePolygon);
+			_shape = new Polygon(_applePath);
 			_m = 70*_massModifier;
 			break;
 		case "pear":
-			_shape = new Polygon(_pearPolygon);
+			_shape = new Polygon(_pearPath);
 			_m = 165*_massModifier;
 			break;
 		}
@@ -138,194 +137,179 @@ public class FruitPiece
 	
 	private void init()
 	{
-		float magnifier = 1.6f;
+		float magnifier = 1.8f;
 		
 		//banana polygon
-		ROVector2f[] bp = new ROVector2f[17];
-		bp[0] = (new Vector2f(39f, 0f));
-		bp[1] = (new Vector2f(42f, 10f));
-		bp[2] = (new Vector2f(45f, 10f));
-		bp[3] = (new Vector2f(49f, 20f));
-		bp[4] = (new Vector2f(46f, 30f));
-		bp[5] = (new Vector2f(39f, 40f));
-		bp[6] = (new Vector2f(30f, 47f));
-		bp[7] = (new Vector2f(15f, 50f));
-		bp[8] = (new Vector2f(8f, 50f));
-		bp[9] = (new Vector2f(1f, 46f));
-		bp[10] = (new Vector2f(1f, 42f));
-		bp[11] = (new Vector2f(20f, 33f));
-		bp[12] = (new Vector2f(28f, 30f));
-		bp[13] = (new Vector2f(36f, 20f));
-		bp[14] = (new Vector2f(37f, 10f));
-		bp[15] = (new Vector2f(34f, 4f));
-		bp[16] = (new Vector2f(38f, 0f));
+		ROVector2f[] bp = new ROVector2f[32];
+		bp[0] = (new Vector2f(38f,0f));
+		bp[1] = (new Vector2f(38f,2f));
+		bp[2] = (new Vector2f(42f,9f));
+		bp[3] = (new Vector2f(44f,9f));
+		bp[4] = (new Vector2f(47f,12f));
+		bp[5] = (new Vector2f(48f,17f));
+		bp[6] = (new Vector2f(48f,24f));
+		bp[7] = (new Vector2f(46f,30f));
+		bp[8] = (new Vector2f(42f,36f));
+		bp[9] = (new Vector2f(37f,42f));
+		bp[10] = (new Vector2f(30f,46f));
+		bp[11] = (new Vector2f(22f,48f));
+		bp[12] = (new Vector2f(12f,50f));
+		bp[13] = (new Vector2f(8f,50f));
+		bp[14] = (new Vector2f(1f,46f));
+		bp[15] = (new Vector2f(0f,44f));
+		bp[16] = (new Vector2f(1f,42f));
+		bp[17] = (new Vector2f(9f,37f));
+		bp[18] = (new Vector2f(19f,33f));
+		bp[19] = (new Vector2f(25f,30f));
+		bp[20] = (new Vector2f(29f,28f));
+		bp[21] = (new Vector2f(32f,25f));
+		bp[22] = (new Vector2f(34f,23f));
+		bp[23] = (new Vector2f(35f,20f));
+		bp[24] = (new Vector2f(37f,16f));
+		bp[25] = (new Vector2f(37f,11f));
+		bp[26] = (new Vector2f(37f,8f));
+		bp[27] = (new Vector2f(36f,6f));
+		bp[28] = (new Vector2f(35f,5f));
+		bp[29] = (new Vector2f(34f,4f));
+		bp[30] = (new Vector2f(34f,2f));
+		bp[31] = (new Vector2f(36f,1f));
 		//scale and reposition the polygon
 		for(int i = 0; i < bp.length; i++)
 		{
-			float bananaMagnifier = magnifier;
-			((Vector2f)bp[i]).scale(bananaMagnifier);
-			((Vector2f)bp[i]).x += -40;
-			((Vector2f)bp[i]).y += -40;
+			((Vector2f)bp[i]).scale(magnifier);
+			((Vector2f)bp[i]).x += -45;
+			((Vector2f)bp[i]).y += -45;
 		}
 		
-		_bananaPolygon = bp;
+		_bananaPath = bp;
 		
 		//Pear Polygon
-		ROVector2f[] pp = new ROVector2f[20];
-		pp[0] = (new Vector2f(25f, 5f));
-		pp[1] = (new Vector2f(27f, 5f));
-		pp[2] = (new Vector2f(27f, 8f));
-		pp[3] = (new Vector2f(31f, 10f));
-		pp[4] = (new Vector2f(32f, 15f));
-		pp[5] = (new Vector2f(33f, 20f));
-		pp[6] = (new Vector2f(36f, 25f));
-		pp[7] = (new Vector2f(38f, 32f));
-		pp[8] = (new Vector2f(38f, 38f));
-		pp[9] = (new Vector2f(34f, 43f));
-		pp[10] = (new Vector2f(26f, 46f));
-		pp[11] = (new Vector2f(18f, 43f));
-		pp[12] = (new Vector2f(14f, 38f));
-		pp[13] = (new Vector2f(14f, 32f));
-		pp[14] = (new Vector2f(16f, 25f));
-		pp[15] = (new Vector2f(17f, 20f));
-		pp[16] = (new Vector2f(18f, 15f));
-		pp[17] = (new Vector2f(19f, 10f));
-		pp[18] = (new Vector2f(24f, 8f));
-		pp[19] = (new Vector2f(25f, 5f));
+		ROVector2f[] pp = new ROVector2f[29];
+		pp[0] = (new Vector2f(24f,8f));
+		pp[1] = (new Vector2f(25f,5f));
+		pp[2] = (new Vector2f(27f,4f));
+		pp[3] = (new Vector2f(28f,5f));
+		pp[4] = (new Vector2f(28f,6f));
+		pp[5] = (new Vector2f(26f,7f));
+		pp[6] = (new Vector2f(29f,9f));
+		pp[7] = (new Vector2f(31f,11f));
+		pp[8] = (new Vector2f(32f,14f));
+		pp[9] = (new Vector2f(32f,17f));
+		pp[10] = (new Vector2f(33f,20f));
+		pp[11] = (new Vector2f(35f,24f));
+		pp[12] = (new Vector2f(37f,29f));
+		pp[13] = (new Vector2f(38f,35f));
+		pp[14] = (new Vector2f(37f,40f));
+		pp[15] = (new Vector2f(34f,42f));
+		pp[16] = (new Vector2f(29f,45f));
+		pp[17] = (new Vector2f(25f,46f));
+		pp[18] = (new Vector2f(21f,45f));
+		pp[19] = (new Vector2f(16f,42f));
+		pp[20] = (new Vector2f(14f,38f));
+		pp[21] = (new Vector2f(13f,33f));
+		pp[22] = (new Vector2f(14f,27f));
+		pp[23] = (new Vector2f(16f,23f));
+		pp[24] = (new Vector2f(17f,21f));
+		pp[25] = (new Vector2f(17f,17f));
+		pp[26] = (new Vector2f(18f,13f));
+		pp[27] = (new Vector2f(19f,10f));
+		pp[28] = (new Vector2f(21f,9f));
 		//scale and reposition the polygon
 		for(int i = 0; i < pp.length; i++)
 		{
-			float pearMagnifier = magnifier + 0.2f;
-			((Vector2f)pp[i]).scale(pearMagnifier);
+			((Vector2f)pp[i]).scale(magnifier);
 			((Vector2f)pp[i]).x += -45;
 			((Vector2f)pp[i]).y += -45;
 		}
 		
-		_pearPolygon = pp;
+		_pearPath = pp;
 		
 		//apple polygon
-		ROVector2f[] ap = new ROVector2f[111];
-		ap[0] = (new Vector2f(254f,78f));
-		ap[1] = (new Vector2f(271f,97f));
-		ap[2] = (new Vector2f(270f,97f));
-		ap[3] = (new Vector2f(269f,97f));
-		ap[4] = (new Vector2f(269f,124f));
-		ap[5] = (new Vector2f(268f,142f));
-		ap[6] = (new Vector2f(292f,140f));
-		ap[7] = (new Vector2f(323f,145f));
-		ap[8] = (new Vector2f(348f,158f));
-		ap[9] = (new Vector2f(369f,175f));
-		ap[10] = (new Vector2f(387f,194f));
-		ap[11] = (new Vector2f(400f,225f));
-		ap[12] = (new Vector2f(406f,258f));
-		ap[13] = (new Vector2f(403f,291f));
-		ap[14] = (new Vector2f(391f,325f));
-		ap[15] = (new Vector2f(377f,362f));
-		ap[16] = (new Vector2f(348f,398f));
-		ap[17] = (new Vector2f(318f,415f));
-		ap[18] = (new Vector2f(285f,419f));
-		ap[19] = (new Vector2f(254f,418f));
-		ap[20] = (new Vector2f(212f,421f));
-		ap[21] = (new Vector2f(178f,404f));
-		ap[22] = (new Vector2f(145f,370f));
-		ap[23] = (new Vector2f(120f,331f));
-		ap[24] = (new Vector2f(109f,290f));
-		ap[25] = (new Vector2f(112f,238f));
-		ap[26] = (new Vector2f(124f,202f));
-		ap[27] = (new Vector2f(142f,178f));
-		ap[28] = (new Vector2f(168f,156f));
-		ap[29] = (new Vector2f(196f,144f));
-		ap[30] = (new Vector2f(167f,125f));
-		ap[31] = (new Vector2f(145f,114f));
-		ap[32] = (new Vector2f(131f,109f));
-		ap[33] = (new Vector2f(151f,94f));
-		ap[34] = (new Vector2f(175f,86f));
-		ap[35] = (new Vector2f(201f,89f));
-		ap[36] = (new Vector2f(222f,102f));
-		ap[37] = (new Vector2f(246f,118f));
-		ap[38] = (new Vector2f(246f,99f));
-		ap[39] = (new Vector2f(271f,126f));
-		ap[40] = (new Vector2f(268f,142f));
-		ap[41] = (new Vector2f(292f,140f));
-		ap[42] = (new Vector2f(323f,145f));
-		ap[43] = (new Vector2f(348f,158f));
-		ap[44] = (new Vector2f(369f,175f));
-		ap[45] = (new Vector2f(387f,194f));
-		ap[46] = (new Vector2f(400f,225f));
-		ap[47] = (new Vector2f(406f,258f));
-		ap[48] = (new Vector2f(403f,291f));
-		ap[49] = (new Vector2f(391f,325f));
-		ap[50] = (new Vector2f(377f,362f));
-		ap[51] = (new Vector2f(348f,398f));
-		ap[52] = (new Vector2f(318f,415f));
-		ap[53] = (new Vector2f(285f,419f));
-		ap[54] = (new Vector2f(254f,418f));
-		ap[55] = (new Vector2f(212f,421f));
-		ap[56] = (new Vector2f(178f,404f));
-		ap[57] = (new Vector2f(145f,370f));
-		ap[58] = (new Vector2f(120f,331f));
-		ap[59] = (new Vector2f(111f,290f));
-		ap[60] = (new Vector2f(112f,238f));
-		ap[61] = (new Vector2f(124f,202f));
-		ap[62] = (new Vector2f(142f,178f));
-		ap[63] = (new Vector2f(168f,156f));
-		ap[64] = (new Vector2f(196f,144f));
-		ap[65] = (new Vector2f(167f,127f));
-		ap[66] = (new Vector2f(147f,114f));
-		ap[67] = (new Vector2f(131f,109f));
-		ap[68] = (new Vector2f(151f,92f));
-		ap[69] = (new Vector2f(175f,86f));
-		ap[70] = (new Vector2f(199f,89f));
-		ap[71] = (new Vector2f(222f,102f));
-		ap[72] = (new Vector2f(246f,118f));
-		ap[73] = (new Vector2f(246f,99f));
-		ap[74] = (new Vector2f(240f,91f));
-		ap[75] = (new Vector2f(270f,125f));
-		ap[76] = (new Vector2f(268f,142f));
-		ap[77] = (new Vector2f(292f,140f));
-		ap[78] = (new Vector2f(323f,145f));
-		ap[79] = (new Vector2f(348f,158f));
-		ap[80] = (new Vector2f(369f,175f));
-		ap[81] = (new Vector2f(387f,194f));
-		ap[82] = (new Vector2f(400f,225f));
-		ap[83] = (new Vector2f(406f,258f));
-		ap[84] = (new Vector2f(403f,291f));
-		ap[85] = (new Vector2f(391f,325f));
-		ap[86] = (new Vector2f(377f,362f));
-		ap[87] = (new Vector2f(348f,398f));
-		ap[88] = (new Vector2f(318f,415f));
-		ap[89] = (new Vector2f(285f,419f));
-		ap[90] = (new Vector2f(254f,418f));
-		ap[91] = (new Vector2f(212f,421f));
-		ap[92] = (new Vector2f(178f,404f));
-		ap[93] = (new Vector2f(145f,370f));
-		ap[94] = (new Vector2f(120f,331f));
-		ap[95] = (new Vector2f(110f,290f));
-		ap[96] = (new Vector2f(112f,238f));
-		ap[97] = (new Vector2f(124f,202f));
-		ap[98] = (new Vector2f(142f,178f));
-		ap[99] = (new Vector2f(168f,156f));
-		ap[100] = (new Vector2f(196f,144f));
-		ap[101] = (new Vector2f(167f,126f));
-		ap[102] = (new Vector2f(146f,114f));
-		ap[103] = (new Vector2f(131f,109f));
-		ap[104] = (new Vector2f(151f,93f));
-		ap[105] = (new Vector2f(175f,86f));
-		ap[106] = (new Vector2f(200f,89f));
-		ap[107] = (new Vector2f(222f,102f));
-		ap[108] = (new Vector2f(246f,118f));
-		ap[109] = (new Vector2f(246f,99f));
-		ap[110] = (new Vector2f(240f,91f));
+		ROVector2f[] ap = new ROVector2f[37];
+		ap[0] = (new Vector2f(25f,7f));
+		ap[1] = (new Vector2f(26f,9f));
+		ap[2] = (new Vector2f(26f,12f));
+		ap[3] = (new Vector2f(26f,14f));
+		ap[4] = (new Vector2f(29f,14f));
+		ap[5] = (new Vector2f(32f,14f));
+		ap[6] = (new Vector2f(34f,15f));
+		ap[7] = (new Vector2f(36f,17f));
+		ap[8] = (new Vector2f(38f,19f));
+		ap[9] = (new Vector2f(40f,22f));
+		ap[10] = (new Vector2f(40f,25f));
+		ap[11] = (new Vector2f(40f,29f));
+		ap[12] = (new Vector2f(39f,32f));
+		ap[13] = (new Vector2f(37f,36f));
+		ap[14] = (new Vector2f(34f,39f));
+		ap[15] = (new Vector2f(31f,41f));
+		ap[16] = (new Vector2f(28f,41f));
+		ap[17] = (new Vector2f(25f,41f));
+		ap[18] = (new Vector2f(21f,42f));
+		ap[19] = (new Vector2f(17f,40f));
+		ap[20] = (new Vector2f(14f,37f));
+		ap[21] = (new Vector2f(12f,33f));
+		ap[22] = (new Vector2f(10f,29f));
+		ap[23] = (new Vector2f(11f,23f));
+		ap[24] = (new Vector2f(12f,20f));
+		ap[25] = (new Vector2f(14f,17f));
+		ap[26] = (new Vector2f(16f,15f));
+		ap[27] = (new Vector2f(19f,14f));
+		ap[28] = (new Vector2f(16f,12f));
+		ap[29] = (new Vector2f(14f,11f));
+		ap[30] = (new Vector2f(13f,10f));
+		ap[31] = (new Vector2f(15f,9f));
+		ap[32] = (new Vector2f(17f,8f));
+		ap[33] = (new Vector2f(20f,8f));
+		ap[34] = (new Vector2f(22f,10f));
+		ap[35] = (new Vector2f(24f,11f));
+		ap[36] = (new Vector2f(24f,9f));
+
 		//scale and reposition the polygon
 		for(int i = 0; i < ap.length; i++)
 		{
-			float appleMagnifier = (magnifier +0.1f) /10;
-			((Vector2f)ap[i]).scale(appleMagnifier);
+			((Vector2f)ap[i]).scale(magnifier);
 			((Vector2f)ap[i]).x += -45;
 			((Vector2f)ap[i]).y += -45;
 		}
 		
-		_applePolygon = ap;
+		_applePath = ap;
+		
+		//orangePolygon
+		ROVector2f[] op = new ROVector2f[24];
+		op[0] = (new Vector2f(28f,10f));
+		op[1] = (new Vector2f(34f,12f));
+		op[2] = (new Vector2f(37f,15f));
+		op[3] = (new Vector2f(39f,18f));
+		op[4] = (new Vector2f(41f,23f));
+		op[5] = (new Vector2f(41f,28f));
+		op[6] = (new Vector2f(40f,33f));
+		op[7] = (new Vector2f(37f,36f));
+		op[8] = (new Vector2f(33f,40f));
+		op[9] = (new Vector2f(29f,41f));
+		op[10] = (new Vector2f(25f,41f));
+		op[11] = (new Vector2f(20f,40f));
+		op[12] = (new Vector2f(15f,38f));
+		op[13] = (new Vector2f(13f,36f));
+		op[14] = (new Vector2f(11f,32f));
+		op[15] = (new Vector2f(10f,29f));
+		op[16] = (new Vector2f(10f,25f));
+		op[17] = (new Vector2f(11f,22f));
+		op[18] = (new Vector2f(12f,19f));
+		op[19] = (new Vector2f(13f,17f));
+		op[20] = (new Vector2f(16f,14f));
+		op[21] = (new Vector2f(18f,12f));
+		op[22] = (new Vector2f(21f,11f));
+		op[23] = (new Vector2f(24f,10f));
+
+		//scale and reposition the polygon
+		for(int i = 0; i < op.length; i++)
+		{
+			((Vector2f)op[i]).scale(magnifier);
+			((Vector2f)op[i]).x += -45;
+			((Vector2f)op[i]).y += -45;
+		}
+		
+		_orangePath = op;
 	}
 
 }
