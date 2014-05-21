@@ -1,13 +1,16 @@
 package nl.avans.essperience.entities.simon;
 
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
+import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.shapes.DynamicShape;
+import net.phys2d.raw.shapes.Polygon;
 import nl.avans.essperience.main.Main;
 
 public class FruitPiece
@@ -17,6 +20,7 @@ public class FruitPiece
 	float _m;
 	Vector2f _position;
 	
+	private ROVector2f[] _bananaPolygon = new ROVector2f[17];
 	
 	int _massModifier = 10000;
 	
@@ -27,6 +31,9 @@ public class FruitPiece
 	public FruitPiece()
 	{
 		_position = new Vector2f((float)(Math.random() * Main.GAME.getWidth()/3 ) + (Main.GAME.getWidth()/3) +1, -100f);
+		
+		//init
+		fillBananaPolygon();
 		
 		int n = (int) ((Math.random() * 4 ));
 		
@@ -53,7 +60,7 @@ public class FruitPiece
 		switch(name)
 		{
 		case "banana":
-			_shape = new Box(80f, 40f);
+			_shape = new Polygon(_bananaPolygon);
 			_m = 126*_massModifier;
 			break;
 		case "orange":
@@ -125,6 +132,38 @@ public class FruitPiece
 		body.setRestitution(0.7f);
 		
 		return body;
+	}
+	
+	private void fillBananaPolygon()
+	{
+		ROVector2f[] bp = new ROVector2f[17];
+		bp[0] = (new Vector2f(38f, 0f));
+		bp[1] = (new Vector2f(42f, 10f));
+		bp[2] = (new Vector2f(45f, 10f));
+		bp[3] = (new Vector2f(49f, 20f));
+		bp[4] = (new Vector2f(46f, 30f));
+		bp[5] = (new Vector2f(39f, 40f));
+		bp[6] = (new Vector2f(30f, 47f));
+		bp[7] = (new Vector2f(15f, 50f));
+		bp[8] = (new Vector2f(8f, 50f));
+		bp[9] = (new Vector2f(1f, 46f));
+		bp[10] = (new Vector2f(1f, 42f));
+		bp[11] = (new Vector2f(20f, 33f));
+		bp[12] = (new Vector2f(28f, 30f));
+		bp[13] = (new Vector2f(36f, 20f));
+		bp[14] = (new Vector2f(37f, 10f));
+		bp[15] = (new Vector2f(34f, 4f));
+		bp[16] = (new Vector2f(38f, 0f));
+		
+		for(int i = 0; i < bp.length; i++)
+		{
+			float magnifier = 1.6f;
+			((Vector2f)bp[i]).scale(magnifier);
+			((Vector2f)bp[i]).x += -40;
+			((Vector2f)bp[i]).y += -40;
+		}
+		
+		_bananaPolygon = bp;
 	}
 
 }

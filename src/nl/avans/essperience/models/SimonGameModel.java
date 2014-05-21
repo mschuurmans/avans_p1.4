@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Polygon;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nl.avans.essperience.entities.simon.FruitPiece;
 import nl.avans.essperience.main.Main;
@@ -140,6 +142,22 @@ public class SimonGameModel extends GameModel
 			
 			g.translate(x, y);
 			g.rotate(rotation);
+			
+			//debugging purposes
+			if (body.getShape() instanceof Polygon)
+			{
+				ROVector2f[] vectors = ((Polygon)body.getShape()).getVertices();
+				
+				for (int i = 0; i + 1 < vectors.length; i ++)
+				{
+					int x1 = (int) vectors[i].getX();
+					int y1 = (int) vectors[i].getY();
+					int x2 = (int) vectors[i+1].getX();
+					int y2 = (int) vectors[i+1].getY();
+					
+					g.drawLine(x1, y1, x2, y2);
+				}
+			}
 			
 			int size = 90;
 			
