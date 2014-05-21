@@ -42,6 +42,7 @@ public class SimonGameModel extends GameModel
 	private int _updateCountOnLastPressed;
 	
 	private int _buttonsPressedCorrect;
+	private boolean _guessedRight;
 	
 	private double _updateProgress;
 	private double _actualProgress;
@@ -64,6 +65,8 @@ public class SimonGameModel extends GameModel
 		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
 		_stepsPerUpdate = (_difficulty /2) +4;
+		
+		_guessedRight = false;
 		
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
 		
@@ -180,6 +183,16 @@ public class SimonGameModel extends GameModel
 		}
 	}
 	
+	public boolean getGuessedRight()
+	{
+		return _guessedRight;
+	}
+	
+	public void resetGuessedRight()
+	{
+		_guessedRight = false;
+	}
+	
 	private Image getFruitImage(Body body)
 	{
 		String name = (String)body.getUserData();
@@ -227,6 +240,7 @@ public class SimonGameModel extends GameModel
 			System.out.println("KeyPressed: " + pos + " KeyExpected: " + matchNametoNumber( (String)_bodyList.get(i).getUserData() ));
 			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
 			{
+				_guessedRight = true;
 				_buttonsPressedCorrect++;
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
@@ -245,7 +259,6 @@ public class SimonGameModel extends GameModel
 		}
 		_updateCountOnLastPressed = _updateCounter;
 	}
-	
 }
 
 

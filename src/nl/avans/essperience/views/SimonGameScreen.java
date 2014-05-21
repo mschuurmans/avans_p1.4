@@ -1,5 +1,6 @@
 package nl.avans.essperience.views;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -15,6 +16,8 @@ public class SimonGameScreen extends GameScreen
 	private Image _backgroundTree;
 	private int _screenWidth;
 	private int _screenHeight;
+	
+	private int _flashIntensity;
 	
 
 	public SimonGameScreen(SimonGameModel model) 
@@ -38,19 +41,29 @@ public class SimonGameScreen extends GameScreen
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
-		
-		System.out.println("drawing simon");
-		int screenWidth = Main.GAME.getWidth();
-		int screenHeight = Main.GAME.getHeight();
-		
-		
 		SimonGameModel model = (SimonGameModel) _gameModel;
 		
+		//background
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
-
+		//model content
 		model.draw(g);	
-		
+		//foreground tree
 		g.drawImage(_backgroundTree, 0, 0, _screenWidth, _screenHeight, null);
+
+		
+		// if model says that the user has guessed right. set the alpha level at 0xff/2
+		if( ((SimonGameModel)_gameModel).getGuessedRight() )
+			_flashIntensity = 0xff/2;
+		// when the alphalevel is above 10 display a white screen with the given alpha level.
+		if(_flashIntensity > 10)
+		{
+			((SimonGameModel)_gameModel).resetGuessedRight();
+			
+			g.setColor(new Color(0xff, 0xff, 0xff, _flashIntensity));
+			g.fillRect(0, 0, _screenWidth, _screenHeight);
+			_flashIntensity /= 2;
+			g.setColor(Color.black);
+		}
 	}
 
 }
