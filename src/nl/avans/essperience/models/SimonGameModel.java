@@ -143,8 +143,14 @@ public class SimonGameModel extends GameModel
 			g.translate(x, y);
 			g.rotate(rotation);
 			
+			int size = 90;
+			
+			g.drawImage(getFruitImage(body), 0 -size/2, 0 -size/2, size, size, null);	
+			if(_easyMode)
+				g.drawString("K: " + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
+			
 			//debugging purposes
-			if (body.getShape() instanceof Polygon)
+			if (body.getShape() instanceof Polygon && _debug)
 			{
 				ROVector2f[] vectors = ((Polygon)body.getShape()).getVertices();
 				
@@ -158,12 +164,6 @@ public class SimonGameModel extends GameModel
 					g.drawLine(x1, y1, x2, y2);
 				}
 			}
-			
-			int size = 90;
-			
-			g.drawImage(getFruitImage(body), 0 -size/2, 0 -size/2, size, size, null);	
-			if(_easyMode)
-				g.drawString("K: " + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
 			
 			g.rotate(-rotation);
 			g.translate(-x, -y);
