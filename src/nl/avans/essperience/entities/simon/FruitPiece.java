@@ -6,11 +6,16 @@ import java.util.List;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
-import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.shapes.DynamicShape;
 import net.phys2d.raw.shapes.Polygon;
 import nl.avans.essperience.main.Main;
 
+/**
+ * FruitPiece Class
+ * a class of an entity that is being used in the SimonLovesFruit Game
+ * @author jack
+ *
+ */
 public class FruitPiece
 {
 	String _name;
@@ -31,14 +36,26 @@ public class FruitPiece
 	 */
 	public FruitPiece()
 	{
-		_position = new Vector2f((float)(Math.random() * Main.GAME.getWidth()/3 ) + (Main.GAME.getWidth()/3) +1, -100f);
-		
 		//init
 		init();
 		
-		int n = (int) ((Math.random() * 4 ));
+		String name = getRandomFruitName();
 		
+		buildPieceOfFruit(name);
+	}
+	
+	public FruitPiece(String name)
+	{
+		init();
+		
+		buildPieceOfFruit(name);		
+	}
+
+	private String getRandomFruitName()
+	{
 		String name;
+	
+		int n = (int) ((Math.random() * 4 ));
 		
 		switch(n)
 		{
@@ -55,6 +72,13 @@ public class FruitPiece
 			name = "pear";
 			break;
 		}
+		
+		return name;
+	}
+	
+	private void buildPieceOfFruit(String name)
+	{
+		_position = new Vector2f((float)(Math.random() * Main.GAME.getWidth()/3 ) + (Main.GAME.getWidth()/3) +1, -100f); //position at top center. between 1/3 and 2/3 of the screenwidth
 		
 		_name = name;
 		
@@ -77,9 +101,8 @@ public class FruitPiece
 			_m = 165*_massModifier;
 			break;
 		}
-		
 	}
-	
+
 	public String getName()
 	{
 		return _name;
@@ -122,19 +145,30 @@ public class FruitPiece
 		return result;
 	}
 	
+	/**
+	 * returns an object of type Body that is being build with the data of the FruitPiece object itself.
+	 * @return Body object of fruitPiece
+	 * Body objects are being used for the Phys2D engine.
+	 */
 	public Body getBody()
 	{
 		Body body = new Body(_name, _shape, _m);
 		body.setUserData(new String(getName()));
 		
 		body.setPosition(_position.x, _position.y);		//position these bodies at the top center
-		body.setFriction(100f);
 		body.setRotatable(true);
+		body.setRotation((float) (Math.random()* (Math.PI*2)) );
+		body.setCanRest(true);
+		body.setFriction(100f);
 		body.setRestitution(0.7f);
 		
 		return body;
 	}
 	
+	/*
+	 * initialises the arrays that contain the vector data that is being used for the creation of the fruitPolygons
+	 * @author Jack
+	 */
 	private void init()
 	{
 		float magnifier = 1.8f;
