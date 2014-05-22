@@ -307,11 +307,12 @@ public class SimonGameModel extends GameModel
 			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
 			{
 				_guessedRight = true;
+				AssetManager.Instance().playSound("Flappy/bading.wav");
+				
 				_buttonsPressedCorrect++;
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
 					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
-					AssetManager.Instance().playSound("Flappy/bading.wav");
 					_modelToControllerListener.gameFinished(true);
 				}
 			}
