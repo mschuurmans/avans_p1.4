@@ -170,9 +170,10 @@ public class WiiController implements WiimoteListener
 	}
 
 	@Override
-	public void onIrEvent(IREvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void onIrEvent(IREvent e) 
+	{
+		if(_listener != null)
+			_listener.wiimoteIREvent(e);
 	}
 
 	@Override

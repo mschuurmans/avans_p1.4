@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import nl.avans.essperience.events.MicroGameFinishedEventListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
+import nl.avans.essperience.models.FopsModel;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.GameOverModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
@@ -20,6 +21,7 @@ import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 import nl.avans.essperience.views.FlappyBirdScreen;
+import nl.avans.essperience.views.FopsScreen;
 import nl.avans.essperience.views.GameOverScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
@@ -241,6 +243,11 @@ public class GameHandler extends JFrame
 					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
 					this._gameController = new SimonGameController((SimonGameModel) _gameModel, (SimonGameScreen)_gameScreen);
 					break;
+				case 6:
+					this._gameModel = new FopsModel();
+					this._gameScreen = new FopsScreen((FopsModel)_gameModel);
+					this._gameController = new FopsController((FopsModel)_gameModel, (FopsScreen)_gameScreen);
+					break;
 				default:
 					reset();
 					break;
@@ -267,7 +274,7 @@ public class GameHandler extends JFrame
 			try
 			{
 				Process proc = Runtime.getRuntime().exec("xset r off");
-				System.out.println("Rpeat is off");
+				System.out.println("Repeat is off");
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}
