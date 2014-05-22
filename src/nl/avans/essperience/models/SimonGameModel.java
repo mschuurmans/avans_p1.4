@@ -311,6 +311,7 @@ public class SimonGameModel extends GameModel
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
 					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
+					AssetManager.Instance().playSound("Flappy/bading.wav");
 					_modelToControllerListener.gameFinished(true);
 				}
 			}
