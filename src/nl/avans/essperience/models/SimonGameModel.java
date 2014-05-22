@@ -26,7 +26,7 @@ public class SimonGameModel extends GameModel
 	public static final int APPLE = 2;
 	public static final int PEAR = 3;
 
-	private boolean _debug = true;
+	private boolean _debug = false;
 	private boolean _easyMode = true;
 	private char[] _charArray = {'u' , 'i', 'o', 'p'};
 	
