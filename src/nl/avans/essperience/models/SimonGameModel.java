@@ -18,6 +18,7 @@ import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nl.avans.essperience.entities.simon.FruitPiece;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class SimonGameModel extends GameModel
 {
@@ -26,8 +27,8 @@ public class SimonGameModel extends GameModel
 	public static final int APPLE = 2;
 	public static final int PEAR = 3;
 
-	private boolean _debug = true;
-	private boolean _easyMode = true;
+	private boolean _debug = false;
+	private boolean _easyMode = false;
 	private char[] _charArray = {'u' , 'i', 'o', 'p'};
 	
 	private int _patternLength;
@@ -132,7 +133,7 @@ public class SimonGameModel extends GameModel
 	
 	public void draw(Graphics g1)
 	{
-		Graphics2D g = (Graphics2D) g1;;
+		Graphics2D g = (Graphics2D) g1;
 		
 		for(Body body : _bodyList)
 		{			
@@ -147,7 +148,7 @@ public class SimonGameModel extends GameModel
 			
 			g.drawImage(getFruitImage(body), 0 -size/2, 0 -size/2, size, size, null);	
 			if(_easyMode)
-				g.drawString("K: " + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
+				g.drawString("" + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
 			
 			//debugging purposes
 			if (body.getShape() instanceof Polygon && _debug)
@@ -201,6 +202,53 @@ public class SimonGameModel extends GameModel
 		}
 	}
 	
+	/**
+	 * the drawOverlay displays an overlay in the top right of the gamescreen that displays boxxes equal to the ammount of fruitpieces that will drop in that game
+	 * When the right key has been hit. and thus the fruitpiece has correctly been identified the fruitpiece that has been hit will be displayed in its order. in the grid.
+	 * this to give the user visual feedback of his progress ingame.
+	 * 
+	 * when _easyMode has been set to true the user gets visual cues of what piece of fruit has just been spawned.
+	 * @param g1
+	 */
+	public void drawOverlay(Graphics g1)
+	{
+		Graphics2D g = (Graphics2D) g1;
+		
+		int imageSize = 90;
+		int boxSize = imageSize +10;
+		
+		//for every body in the fruitpieces list draw a box
+		for (Body fp : _fruitPieces)
+		{
+			int i = _fruitPieces.indexOf(fp);
+			int x = 10 + ( i * boxSize) + ( i * 10);
+			int y = 10;
+			
+			g.drawRect(x, y, boxSize, boxSize);
+		}
+		
+		// for every body in the bodylist draw its shape but only IF: it has been hit correctly
+		for (Body body : _bodyList)
+		{
+			int i = _bodyList.indexOf(body);
+			int x = 10 + ( i * boxSize) + ( i * 10) + 5;
+			int y = 10 + 5;
+			
+			// if hit right or _easyMode == true. than display the fruitpieces.
+			if(_buttonsPressedCorrect > i || _easyMode)
+			{				
+				g.drawImage(getFruitImage(body), x, y, imageSize, imageSize, null); 
+			}
+			// if _easyMode is true than not only is the image drawn in the upper left when it spawns, the correspondig key that should be pressed will be printed as well
+			if (_easyMode)
+			{
+				String string = "Key: " + _charArray[matchNametoNumber((String)body.getUserData())];
+				int stringLength = Utils.getWidth(string);
+				g.drawString(string, x + imageSize - stringLength, y + imageSize);
+			}
+		}
+	}
+	
 	public boolean getGuessedRight()
 	{
 		return _guessedRight;
@@ -250,19 +298,19 @@ public class SimonGameModel extends GameModel
 		if(_updateCountOnLastPressed + 2 > _updateCounter)
 			return;
 		
-		System.out.println("keyNumber pressed: " + pos);
+		//System.out.println("keyNumber pressed: " + pos);
 		
 		if(_buttonsPressedCorrect < _bodyList.size() )
 		{
 			int i = _buttonsPressedCorrect;
-			System.out.println("KeyPressed: " + pos + " KeyExpected: " + matchNametoNumber( (String)_bodyList.get(i).getUserData() ));
+			//System.out.println("KeyPressed: " + pos + " KeyExpected: " + matchNametoNumber( (String)_bodyList.get(i).getUserData() ));
 			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
 			{
 				_guessedRight = true;
 				_buttonsPressedCorrect++;
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
-					System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
+					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
 					_modelToControllerListener.gameFinished(true);
 				}
 			}
