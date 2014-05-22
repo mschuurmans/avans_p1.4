@@ -6,6 +6,7 @@ import nl.avans.essperience.events.CollisionDetectedEventListener;
 import nl.avans.essperience.events.FlappyBirdFinishedListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
+import nl.avans.essperience.utils.AssetManager;
 
 public class FlappyBirdScreen extends GameScreen
 {
@@ -25,6 +26,7 @@ public class FlappyBirdScreen extends GameScreen
 			@Override
 			public void collisionDetected() 
 			{
+				AssetManager.Instance().playSound("Flappy/smack.wav");
 				_timer.stop();
 				if (_listener != null)
 					_listener.sendGamefinishedEvent(false);		
@@ -36,6 +38,7 @@ public class FlappyBirdScreen extends GameScreen
 			@Override
 			public void flappyFinishedListener() 
 			{
+				AssetManager.Instance().playSound("Flappy/bading.wav");
 				_timer.stop();
 				if(_listener != null)
 					_listener.sendGamefinishedEvent(true);		

@@ -50,7 +50,8 @@ public class WafModel extends GameModel
 		// update method
 		if(System.currentTimeMillis() > (_lastTimeChanged + _timeBeforeMove))
 		{
-			int newLocation =(int) (Math.random() * 9) + 1;		
+			int newLocation =(int) (Math.random() * 9) + 1;
+			AssetManager.Instance().playSound("Waf/hello.wav");
 			_fardoes.setLocation(newLocation);
 			_lastTimeChanged = System.currentTimeMillis();
 		}
