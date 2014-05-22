@@ -113,6 +113,7 @@ public class IndianaJantjeScreen extends GameScreen
 		
 		if (_sizeY >= _screenHeight/2 && !_dead) {
 			_timer.stop();
+			AssetManager.Instance().playSound("IndianaJantje/stonebreak.wav");
 			_listener.sendGamefinishedEvent(true);
 		}
 	}

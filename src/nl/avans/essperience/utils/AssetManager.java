@@ -22,7 +22,11 @@ public class AssetManager
 													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png", "RedButton/arrow.png",
 													"Waf/fardoes background.png", "Simon/simon_background_tree.png", "Simon/simon_background.png"};
 
-	private String[] soundsList = new String[] { "Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav", "IndianaJantje/bloodsplash.wav" };
+	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
+													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav",
+													"IndianaJantje/bloodsplash.wav", "IndianaJantje/stonebreak.wav", "IndianaJantje/stomp.wav",
+													"Waf/hello.wav", "Waf/ouch.wav", "Waf/whack.wav", 
+													"Flappy/flap.wav", "Flappy/smack.wav", "Flappy/bading.wav"};
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private Map<String, Clip> _sounds = new HashMap<String, Clip>();

@@ -4,6 +4,7 @@ import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.WafModel;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.WafScreen;
 
@@ -12,11 +13,12 @@ public class WafController extends GameController
 	private WafModel _model;
 	private WafScreen _view;
 	private int _triesLeft = 1;
-	
+	private boolean _whacked;
 	public WafController(WafModel model, WafScreen view)
 	{
 		_model = model;
 		_view = view;
+		_whacked = false;
 		_model.addModelToControllerEventListener(new ModelToControllerEventListener()
 		{
 			@Override
@@ -81,8 +83,20 @@ public class WafController extends GameController
 	
 	public void whack(int location)
 	{
+		if(!_whacked)
+		{
+			AssetManager.Instance().playSound("Waf/whack.wav");
+		}
+		_whacked = ! _whacked;
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(_model.whack(location))
 		{
+			AssetManager.Instance().playSound("Waf/ouch.wav");
 			_view.stopTimer();
 			callFinishedListener(true);
 		}

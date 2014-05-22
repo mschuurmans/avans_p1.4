@@ -29,6 +29,7 @@ public class GameHandler extends JFrame
 {
 	private static final long serialVersionUID = -4608768969398477748L;
 
+	private boolean _failed = false;
 	private int _difficulty = 1;
 	private final int _NUMBEROFGAMES = 5;
 
@@ -142,17 +143,15 @@ public class GameHandler extends JFrame
 
 		((GameOverController)_gameController).start();
 		AssetManager.Instance().stopCurrentBackgroundMusic();
-		System.out.println("1");
+		AssetManager.Instance().playSound("Essperience/gameover.wav");
 	}
 
 	public void nextGame(boolean succeed)
 	{
 		if (_difficulty < 11) {
 			AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
-			System.out.println("2");
 		} else {
 			AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
-			System.out.println("3");
 		}
 		if(_gameController instanceof GameOverController)
 		{
@@ -169,7 +168,19 @@ public class GameHandler extends JFrame
 				return;
 			}	
 			else
+			{
+				AssetManager.Instance().playSound("Essperience/lifeloss.wav");
+				_failed = true;
 				_lives--;
+			}
+		} 
+		else
+		{
+			if (!_failed && _difficulty > 1)
+			{
+				AssetManager.Instance().playSound("Essperience/levelup.wav");
+			}
+			_failed = !_failed;
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen here.
