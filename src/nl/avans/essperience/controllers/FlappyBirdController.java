@@ -30,13 +30,14 @@ public class FlappyBirdController extends GameController
 						break;
 				}
 				
-				if(_debug)
-					System.out.println("FlappyBirdController : key has been pressed");
+				//if(_debug)
+					//System.out.println("FlappyBirdController : key has been pressed");
 			}
 			
 			public void WiimotionGForceMovement()
 			{
-
+				if(_debug)
+					System.out.println("wiimote gforce");
 				_model.flap();
 			}
 		});

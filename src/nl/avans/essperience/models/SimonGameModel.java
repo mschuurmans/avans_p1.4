@@ -28,7 +28,7 @@ public class SimonGameModel extends GameModel
 	public static final int PEAR = 3;
 
 	private boolean _debug = false;
-	private boolean _easyMode = false;
+	private boolean _easyMode = true;
 	private char[] _charArray = {'u' , 'i', 'o', 'p'};
 	
 	private int _patternLength;
@@ -311,6 +311,7 @@ public class SimonGameModel extends GameModel
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
 					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
+					AssetManager.Instance().playSound("Flappy/bading.wav");
 					_modelToControllerListener.gameFinished(true);
 				}
 			}

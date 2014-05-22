@@ -29,7 +29,7 @@ public class AssetManager
 													"Flappy/flap.wav", "Flappy/smack.wav", "Flappy/bading.wav"};
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
-	private Map<String, Clip> _sounds = new HashMap<String, Clip>();
+	private static Map<String, Clip> _sounds = new HashMap<String, Clip>();
 	
 	private String _currentBGMKey = "";
 	
@@ -98,26 +98,26 @@ public class AssetManager
 
 	public void playSound(final String key)
 	{
-		_sounds.get(key).stop();
-		_sounds.get(key).setFramePosition(0);
-		_sounds.get(key).start();
-		/*
-		Thread thread = new Thread(new Runnable()
-		{
-			public void run()
-			{
-				try 
-				{
+		
+		
+		//Thread thread = new Thread(new Runnable()
+		//{
+		//	public void run()
+		//	{
+		//		try 
+		//		{
+					_sounds.get(key).stop();
+					_sounds.get(key).setFramePosition(0);
 					_sounds.get(key).start();
-				}
-			    catch (Exception e) 
-			    {
-			    	System.err.println(e.getMessage());
-			    }
-			}
-		});
-		thread.start();
-		*/
+		//		}
+		//	    catch (Exception e) 
+		//	    {
+		//	    	System.err.println(e.getMessage());
+		//	    }
+		//	}
+		//});
+		//thread.start();
+		
 	}
 	
 	public void playBackgroundMusic(final String key) {

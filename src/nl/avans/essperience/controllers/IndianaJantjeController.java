@@ -3,7 +3,6 @@ package nl.avans.essperience.controllers;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.IndianaJantjeModel;
-import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 
@@ -19,7 +18,6 @@ public class IndianaJantjeController extends GameController
 	{
 		_model = model;
 		_view = view;
-
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
 		{
 			public void keyPressed(GameKeys key)
@@ -27,13 +25,16 @@ public class IndianaJantjeController extends GameController
 				if(_debug) {
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
 				}
-				if (key == GameKeys.KeyA) {
+				if (key == GameKeys.KeyA) 
+				{
 					keyA = true;
 				}
-				if (key == GameKeys.KeyD) {
+				if (key == GameKeys.KeyD) 
+				{
 					keyD = true;
 				}
-				if (key == GameKeys.None) {
+				if (key == GameKeys.None) 
+				{
 					keyD = false;
 					keyA = false;
 				}
@@ -97,7 +98,7 @@ public class IndianaJantjeController extends GameController
 	}
 	
 	private void setPos() {
-		AssetManager.Instance().playSound("IndianaJantje/stomp.wav");
+		//AssetManager.Instance().playSound("IndianaJantje/stomp.wav");
 		if (keyA && keyD) {
 			_model.setCurrentPosition(1);
 		} else if (keyA) {
