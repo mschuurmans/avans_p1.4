@@ -68,9 +68,9 @@ public class SimonGameModel extends GameModel
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
 		_stepsPerUpdate = (_difficulty /2) +4;
 		
-		_guessedRight = false;
+		_guessedRight = false; //used for the controller to check if the button that was pressed whas the right one. // gets set by the method setCurrentFruit()
 		
-		_myWorld = new World(new Vector2f(0.0f, 10.0f), 10, new QuadSpaceStrategy(20,5));
+		_myWorld = new World(new Vector2f(0.0f, 10.0f), 3, new QuadSpaceStrategy(20,5));
 		
 		_myWorld.clear();
 		_myWorld.setGravity(0, 30);
