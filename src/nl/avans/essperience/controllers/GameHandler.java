@@ -1,5 +1,8 @@
 package nl.avans.essperience.controllers;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,6 +18,7 @@ import nl.avans.essperience.models.ScoreModel;
 import nl.avans.essperience.models.SimonGameModel;
 import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 import nl.avans.essperience.views.FlappyBirdScreen;
 import nl.avans.essperience.views.GameOverScreen;
 import nl.avans.essperience.views.GameScreen;
@@ -148,6 +152,23 @@ public class GameHandler extends JFrame
 
 	public void nextGame(boolean succeed)
 	{
+		String OS = System.getProperty("os.name").toLowerCase();
+		if(Utils.isUnix(OS))
+		{
+			try
+			{
+				Process proc = Runtime.getRuntime().exec("xset r on");
+
+				System.out.println("Rpeat is on");
+				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+				proc.waitFor();
+			}
+			catch(Exception e) 
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+		
 		if (_difficulty < 11) {
 			AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
 		} else {
@@ -240,6 +261,21 @@ public class GameHandler extends JFrame
 		
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
+		
+		if(_gameController instanceof IndianaJantjeController && Utils.isUnix(OS))
+		{
+			try
+			{
+				Process proc = Runtime.getRuntime().exec("xset r off");
+				System.out.println("Rpeat is off");
+				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+				proc.waitFor();
+			}
+			catch(Exception e) 
+			{
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 }

@@ -84,4 +84,22 @@ public class Utils
 
 		return width;
 	}
+	
+	/**
+	 * measures the width of a string
+	 * @param s string to be measured
+	 * @return width of the string in pixels
+	 * @author jack
+	 */
+	public static int getWidth(String s)
+	{  
+		Font font = new Font("Tahoma", Font.PLAIN, 12);
+		return getWidth(s, font);
+	}
+	
+	public static boolean isUnix(String OS) {
+		 
+		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
+ 
+	}
 }

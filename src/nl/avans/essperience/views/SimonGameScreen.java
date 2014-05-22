@@ -49,6 +49,8 @@ public class SimonGameScreen extends GameScreen
 		model.draw(g);	
 		//foreground tree
 		g.drawImage(_backgroundTree, 0, 0, _screenWidth, _screenHeight, null);
+		//drawOverlay GUI. should be displayed in front of the game elemnts
+		model.drawOverlay(g);
 
 		
 		// if model says that the user has guessed right. set the alpha level at 0xff/2
