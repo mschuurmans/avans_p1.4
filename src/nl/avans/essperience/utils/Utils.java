@@ -8,9 +8,11 @@ import nl.avans.essperience.utils.Enums.GameKeys;
 
 public class Utils 
 {
+	private static boolean _debug = false;
 	public static GameKeys getFromKeyboardCode(int code)
 	{
-		System.out.println(code);
+		if (_debug)
+			System.out.println(code);
 		if(code == 65)
 			return GameKeys.KeyA;
 		else if(code == 66)
@@ -81,5 +83,23 @@ public class Utils
 		width = (int)(font.getStringBounds(s, frc).getWidth());
 
 		return width;
+	}
+	
+	/**
+	 * measures the width of a string
+	 * @param s string to be measured
+	 * @return width of the string in pixels
+	 * @author jack
+	 */
+	public static int getWidth(String s)
+	{  
+		Font font = new Font("Tahoma", Font.PLAIN, 12);
+		return getWidth(s, font);
+	}
+	
+	public static boolean isUnix(String OS) {
+		 
+		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
+ 
 	}
 }
