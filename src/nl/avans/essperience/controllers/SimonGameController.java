@@ -29,6 +29,13 @@ public class SimonGameController extends GameController
 				_view.stopTimer();
 				callFinishedListener(succes);
 			}
+			
+			@Override
+			public void timesUpEvent()
+			{
+				_view.stopTimer();
+				callFinishedListener(false);
+			}
 		});
 		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
