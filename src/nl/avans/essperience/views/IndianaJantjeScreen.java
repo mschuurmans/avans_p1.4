@@ -133,7 +133,7 @@ public class IndianaJantjeScreen extends GameScreen
 		//System.out.println("drawing");
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 		
-		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2), _screenHeight/2, _sizeX, _sizeY, null);
+		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2) + _screenWidth/11, _screenHeight/2, _sizeX, _sizeY, null);
 		g.drawImage(player[_drawPlayerX], (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);
 	
 		if (_dead)
