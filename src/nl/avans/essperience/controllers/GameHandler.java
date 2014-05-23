@@ -46,6 +46,7 @@ public class GameHandler extends JFrame
 	private GameScreen _gameScreen;
 	private GameController _gameController;
 	private GameModel _gameModel;
+	private ScoreModel _scoreModel;
 
 	public GameHandler()
 	{
@@ -54,6 +55,7 @@ public class GameHandler extends JFrame
 
 		init(true);
 
+		_scoreModel = new ScoreModel();
 		setContentPane(_gameScreen);
 
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -202,7 +204,9 @@ public class GameHandler extends JFrame
 		{
 			if (!_failed && _difficulty > 1)
 			{
+				_scoreModel.update();
 				AssetManager.Instance().playSound("Essperience/levelup.wav");
+				
 			}
 			_failed = !_failed;
 		}
@@ -210,9 +214,8 @@ public class GameHandler extends JFrame
 		// do logic for next game screen here.
 		if(!(_gameController instanceof ScoreScreenController))
 		{
-			this._gameModel = new ScoreModel();
-			this._gameScreen = new ScoreScreen((ScoreModel)_gameModel);
-			this._gameController = new ScoreScreenController((ScoreModel)_gameModel, (ScoreScreen)_gameScreen);
+			this._gameScreen = new ScoreScreen(_scoreModel);
+			this._gameController = new ScoreScreenController(_scoreModel, (ScoreScreen)_gameScreen);
 		}
 		else
 		{

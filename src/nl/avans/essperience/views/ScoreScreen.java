@@ -8,6 +8,7 @@ import java.awt.Image;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.ScoreModel;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class ScoreScreen extends GameScreen
 {
@@ -57,7 +58,8 @@ public class ScoreScreen extends GameScreen
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.setFont(new Font("Arial", Font.PLAIN, 80));
-		g2.drawString(""+_level, center - (size/2), 150);
+		g2.drawString(""+_level, center - Utils.getWidth(""+_level, getFont()), 150);
+		g2.drawString("Your score: " + ((ScoreModel) _gameModel).getScore(), center - (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore(), g2.getFont())/2), 250);
 	}
 
 }
