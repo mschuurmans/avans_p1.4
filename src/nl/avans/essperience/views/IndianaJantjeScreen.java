@@ -61,15 +61,19 @@ public class IndianaJantjeScreen extends GameScreen
 		createImageArrays();
 	}
 	
-	private void createImageArrays() {
+	private void createImageArrays()
+	{
 		rock = new BufferedImage[16];
 		player = new BufferedImage[3];
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < 4; i++) 
+		{
+			for (int j = 0; j < 4; j++) 
+			{
 				rock[j+(4*i)] = _spriteSheet.getSubimage(j*500, i*500, 500, 500);
 			}
 		}
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; i++) 
+		{
 			player[i] = _playerSheet.getSubimage(i*500, 0, 500, 900);
 		}
 	}
@@ -98,20 +102,24 @@ public class IndianaJantjeScreen extends GameScreen
 		_sizeY += _startSpeed + (FACTOR * _difficulty-1);
 		_sizeX += _startSpeed + (FACTOR * _difficulty-1);
 		
-		if (_dead) {
+		if (_dead) 
+		{
 			AssetManager.Instance().playSound("IndianaJantje/bloodsplash.wav");
 			//System.out.println("HAHA JE BENT DOOD!");
-			try {
+			try 
+			{
 				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+			} 
+			catch (InterruptedException e) 
+			{
 				e.printStackTrace();
 			}
 			_timer.stop();
 			_listener.sendGamefinishedEvent(true);	
 		}
 		
-		if (_sizeY >= _screenHeight/2 && !_dead) {
+		if (_sizeY >= _screenHeight/2 && !_dead) 
+		{
 			_timer.stop();
 			AssetManager.Instance().playSound("IndianaJantje/stonebreak.wav");
 			_listener.sendGamefinishedEvent(true);
@@ -136,22 +144,28 @@ public class IndianaJantjeScreen extends GameScreen
 		}
 	} 
 
-	private int chooseSide() {
+	private int chooseSide() 
+	{
 		int rand = (int)(Math.random() * 2);
 		System.out.println("rand is: " + rand);
 		return rand;
 	}
 
-	public int getSide() {
+	public int getSide() 
+	{
 		return this._side;
 	}
 
-	public void next() {
+	public void next() 
+	{
 		//System.out.println("next game called in view");
-		if (_games < _gameAmount) {
+		if (_games < _gameAmount) 
+		{
 			_games++;
 			init();
-		} else {
+		} 
+		else 
+		{
 			_timer.stop();
 			_listener.sendGamefinishedEvent(false);
 		}
@@ -163,7 +177,8 @@ public class IndianaJantjeScreen extends GameScreen
 		//System.out.println("fail");
 	}
 	
-	public boolean getDead() {
+	public boolean getDead() 
+	{
 		//System.out.println("checking dead");
 		return _dead;
 	}

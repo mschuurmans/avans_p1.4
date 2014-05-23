@@ -22,7 +22,8 @@ public class IndianaJantjeController extends GameController
 		{
 			public void keyPressed(GameKeys key)
 			{
-				if(_debug) {
+				if(_debug)
+				{
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
 				}
 				if (key == GameKeys.KeyA) 
@@ -41,14 +42,18 @@ public class IndianaJantjeController extends GameController
 				setPos();
 			}
 
-			public void keyReleased(GameKeys key) {
-				if(_debug){
+			public void keyReleased(GameKeys key)
+			{
+				if(_debug)
+				{
 					//System.out.println("IndianaJantjeController : key has been released " + key);
 				}
-				if (key == GameKeys.KeyA) {
+				if (key == GameKeys.KeyA)
+				{
 					keyA = false;
 				}
-				if (key == GameKeys.KeyD) {
+				if (key == GameKeys.KeyD)
+				{
 					keyD = false;
 				}
 				setPos();
@@ -63,32 +68,52 @@ public class IndianaJantjeController extends GameController
 			public void sendGamefinishedEvent(boolean moreGames)
 			{
 				//System.out.println("received event in controller. currentKey = " + _currentKey);
-				if (moreGames) {
-					switch (((IndianaJantjeScreen)_view).getSide()) {
+				if (moreGames)
+				{
+					if (((IndianaJantjeScreen)_view).getDead()) 
+					{
+						callFinishedListener(false);
+					}
+					switch (((IndianaJantjeScreen)_view).getSide())
+					{
 					case 0:
-						if (!keyA && keyD){
+						if (!keyA && keyD)
+						{
 							((IndianaJantjeScreen)_view).next();
-						} else {
-							if (((IndianaJantjeScreen)_view).getDead()) {
+						}
+						else
+						{
+							if (((IndianaJantjeScreen)_view).getDead())
+							{
 								callFinishedListener(false);
-							} else {
+							}
+							else 
+							{
 								((IndianaJantjeScreen)_view).fail();
 							}
 						}
 						break;
 					case 1:
-						if (keyA && !keyD){
+						if (keyA && !keyD)
+						{
 							((IndianaJantjeScreen)_view).next();
-						} else {
-							if (((IndianaJantjeScreen)_view).getDead()) {
+						} 
+						else 
+						{
+							if (((IndianaJantjeScreen)_view).getDead()) 
+							{
 								callFinishedListener(false);
-							} else {
+							} 
+							else 
+							{
 								((IndianaJantjeScreen)_view).fail();
 							}
 						}
 						break;
 					}
-				} else {
+				} 
+				else 
+				{
 					callFinishedListener(true);
 				}
 			}
@@ -97,15 +122,23 @@ public class IndianaJantjeController extends GameController
 		
 	}
 	
-	private void setPos() {
+	private void setPos() 
+	{
 		//AssetManager.Instance().playSound("IndianaJantje/stomp.wav");
-		if (keyA && keyD) {
+		if (keyA && keyD) 
+		{
 			_model.setCurrentPosition(1);
-		} else if (keyA) {
+		}
+		else if (keyA) 
+		{
 			_model.setCurrentPosition(0);
-		} else if (keyD) {
+		} 
+		else if (keyD) 
+		{
 			_model.setCurrentPosition(2);
-		} else {
+		} 
+		else 
+		{
 			_model.setCurrentPosition(1);	
 		}
 	}
