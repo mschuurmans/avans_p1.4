@@ -115,7 +115,7 @@ public class IndianaJantjeScreen extends GameScreen
 				e.printStackTrace();
 			}
 			_timer.stop();
-			_listener.sendGamefinishedEvent(true);	
+			_listener.sendGamefinishedEvent(false);	
 		}
 		
 		if (_sizeY >= _screenHeight/2 && !_dead) 

@@ -70,10 +70,6 @@ public class IndianaJantjeController extends GameController
 				//System.out.println("received event in controller. currentKey = " + _currentKey);
 				if (moreGames)
 				{
-					if (((IndianaJantjeScreen)_view).getDead()) 
-					{
-						callFinishedListener(false);
-					}
 					switch (((IndianaJantjeScreen)_view).getSide())
 					{
 					case 0:
@@ -114,7 +110,14 @@ public class IndianaJantjeController extends GameController
 				} 
 				else 
 				{
-					callFinishedListener(true);
+					if (((IndianaJantjeScreen)_view).getDead()) 
+					{
+						callFinishedListener(false);
+					}
+					else
+					{
+						callFinishedListener(true);
+					}
 				}
 			}
 		});
