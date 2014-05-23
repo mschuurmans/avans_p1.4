@@ -117,7 +117,7 @@ public class IndianaJantjeController extends GameController
 					else
 					{
 						callFinishedListener(true);
-					}
+					}	
 				}
 			}
 		});
