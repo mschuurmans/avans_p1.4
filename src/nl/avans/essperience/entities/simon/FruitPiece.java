@@ -165,6 +165,36 @@ public class FruitPiece
 		return body;
 	}
 	
+	public Body getBodyFops()
+	{
+		boolean sideIsLeft = Math.random() < 0.5;
+		
+		Body body = new Body(_name, _shape, _m);
+		body.setUserData(new String(getName()));
+		
+		int bodyWidth = (int) body.getShape().getBounds().getWidth();
+		int bodyHeight = (int) body.getShape().getBounds().getHeight();
+		
+		if(sideIsLeft)
+		{
+			body.setPosition(0 - bodyWidth, Main.GAME.getHeight() - bodyHeight);
+			body.adjustVelocity(new Vector2f(100, -100));
+		}
+		else
+		{
+			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight());
+			body.adjustVelocity(new Vector2f(-100, -100));
+		}
+		
+		body.setRotatable(true);
+		body.setRotation((float) (Math.random()* (Math.PI*2)) );
+		body.setCanRest(true);
+		body.setFriction(100f);
+		body.setRestitution(0.7f);
+		
+		return body;
+	}
+	
 	/*
 	 * initialises the arrays that contain the vector data that is being used for the creation of the fruitPolygons
 	 * @author Jack
