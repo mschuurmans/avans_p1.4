@@ -177,13 +177,13 @@ public class FruitPiece
 		
 		if(sideIsLeft)
 		{
-			body.setPosition(0 - bodyWidth, Main.GAME.getHeight() - bodyHeight);
-			body.adjustVelocity(new Vector2f(100, -100));
+			body.setPosition(0 - bodyWidth, Main.GAME.getHeight()/3 - bodyHeight);
+			body.adjustVelocity(new Vector2f(200, -200));
 		}
 		else
 		{
-			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight());
-			body.adjustVelocity(new Vector2f(-100, -100));
+			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight()/3);
+			body.adjustVelocity(new Vector2f(-200, -200));
 		}
 		
 		body.setRotatable(true);

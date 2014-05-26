@@ -87,7 +87,22 @@ public class WiiController implements WiimoteListener
 			wim.deactivateMotionSensing();
 		}
 	}
+
+	public void activateIRTracking()
+	{
+		for(Wiimote wim : _wiimotes)
+		{
+			wim.activateIRTRacking();
+		}
+	}
 	
+	public void deactivateIRTracking()
+	{
+		for(Wiimote wim : _wiimotes)
+		{
+			wim.deactivateIRTRacking();
+		}
+	}
 	public void addButtonPressedListener(ButtonPressedEventListener listener)
 	{
 		_listener = listener;

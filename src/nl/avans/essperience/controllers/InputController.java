@@ -76,6 +76,14 @@ public class InputController
 			_wiiController.deactivateMotionSensor();
 	}
 	
+	public void setIRTracking(boolean state)
+	{
+		if(state)
+			_wiiController.activateIRTracking();
+		else
+			_wiiController.deactivateIRTracking();
+	}
+	
 	public void addInputTriggeredEventListener(InputTriggerdEventListener listener)
 	{
 		this._listener = null;
