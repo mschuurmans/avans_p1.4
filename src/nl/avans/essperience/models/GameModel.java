@@ -9,6 +9,7 @@ public class GameModel
 	protected ModelToControllerEventListener _modelToControllerListener = null;
 	protected double _timeBar;
 	protected double _beginTime = System.currentTimeMillis();
+	protected boolean _debug = false;
 	
 	public void addModelToControllerEventListener( ModelToControllerEventListener  listener)
 	{
@@ -16,16 +17,14 @@ public class GameModel
 	}
 	
 	public double getTimeRemaining() {
-		double _currentTime = System.currentTimeMillis();
-		double _timePassed = _currentTime - _beginTime;
-		if (_timePassed < _maxTime)
-		{
-			_timeBar = (_maxTime - _timePassed) / _maxTime;
-		}
+		double currentTime = System.currentTimeMillis();
+		double timePassed = currentTime - _beginTime;
+		if (timePassed < _maxTime)
+			_timeBar = (_maxTime - timePassed) / _maxTime;
 		else
-		{
 			_timeBar = 0;
-		}
+		if (_debug)
+			System.out.println("maxtime: "+ _maxTime + " timePassed: " + timePassed + "_timeBar: " + _timeBar);
 		return _timeBar;
 	}
 	

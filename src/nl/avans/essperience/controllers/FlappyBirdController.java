@@ -38,6 +38,7 @@ public class FlappyBirdController extends GameController
 			{
 				if(_debug)
 					System.out.println("wiimote gforce");
+				
 				_model.flap();
 			}
 		});

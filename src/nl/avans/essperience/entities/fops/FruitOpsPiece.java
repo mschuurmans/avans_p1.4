@@ -1,4 +1,4 @@
-package nl.avans.essperience.entities.simon;
+package nl.avans.essperience.entities.fops;
 
 import java.awt.geom.Rectangle2D;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.shapes.DynamicShape;
 import net.phys2d.raw.shapes.Polygon;
 import nl.avans.essperience.main.Main;
@@ -16,7 +17,7 @@ import nl.avans.essperience.main.Main;
  * @author jack
  *
  */
-public class FruitPiece
+public class FruitOpsPiece
 {
 	String _name;
 	DynamicShape _shape;
@@ -34,7 +35,7 @@ public class FruitPiece
 	 * creates a random FruitPiece for the Simon Loves Fruit game
 	 * @author jack
 	 */
-	public FruitPiece()
+	public FruitOpsPiece()
 	{
 		//init
 		init();
@@ -44,7 +45,7 @@ public class FruitPiece
 		buildPieceOfFruit(name);
 	}
 	
-	public FruitPiece(String name)
+	public FruitOpsPiece(String name)
 	{
 		init();
 		
@@ -152,10 +153,27 @@ public class FruitPiece
 	 */
 	public Body getBody()
 	{
+		boolean sideIsLeft = Math.random() < 0.5;
+		
 		Body body = new Body(_name, _shape, _m);
 		body.setUserData(new String(getName()));
 		
-		body.setPosition(_position.x, _position.y);		//position these bodies at the top center
+		int bodyWidth = (int) body.getShape().getBounds().getWidth();
+		int bodyHeight = (int) body.getShape().getBounds().getHeight();
+		
+		int force = 300;
+		
+		if(sideIsLeft)
+		{
+			body.setPosition(0 - bodyWidth, Main.GAME.getHeight() - bodyHeight);
+			body.adjustVelocity(new Vector2f( (force - 150), -(force + 100) ));
+		}
+		else
+		{
+			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight());
+			body.adjustVelocity(new Vector2f(-(force - 150), -(force + 100) ));
+		}
+		
 		body.setRotatable(true);
 		body.setRotation((float) (Math.random()* (Math.PI*2)) );
 		body.setCanRest(true);
@@ -165,35 +183,6 @@ public class FruitPiece
 		return body;
 	}
 	
-	public Body getBodyFops()
-	{
-		boolean sideIsLeft = Math.random() < 0.5;
-		
-		Body body = new Body(_name, _shape, _m);
-		body.setUserData(new String(getName()));
-		
-		int bodyWidth = (int) body.getShape().getBounds().getWidth();
-		int bodyHeight = (int) body.getShape().getBounds().getHeight();
-		
-		if(sideIsLeft)
-		{
-			body.setPosition(0 - bodyWidth, Main.GAME.getHeight()/3 - bodyHeight);
-			body.adjustVelocity(new Vector2f(200, -200));
-		}
-		else
-		{
-			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight()/3);
-			body.adjustVelocity(new Vector2f(-200, -200));
-		}
-		
-		body.setRotatable(true);
-		body.setRotation((float) (Math.random()* (Math.PI*2)) );
-		body.setCanRest(true);
-		body.setFriction(100f);
-		body.setRestitution(0.7f);
-		
-		return body;
-	}
 	
 	/*
 	 * initialises the arrays that contain the vector data that is being used for the creation of the fruitPolygons
