@@ -31,6 +31,7 @@ public class WiiController implements WiimoteListener
 	private Wiimote[] _wiimotes;
 	private ButtonPressedEventListener _listener = null;
 	public static final int MAX_TRIES = 3;
+	private static int _currentWiiMoteID = 0;
 
 	private boolean _debug = true;
 	public WiiController(int numbers)
@@ -113,6 +114,7 @@ public class WiiController implements WiimoteListener
 	{
 		//if(_debug)
 		//	System.out.println("WiiController : Button event called");
+		_currentWiiMoteID = e.getWiimoteId();
 		if(e.isButtonAJustPressed())
 		{
 			if(_listener != null)
@@ -221,6 +223,11 @@ public class WiiController implements WiimoteListener
 	public void onStatusEvent(StatusEvent e)
 	{
 		
+	}
+	
+	public static int getID()
+	{
+		return _currentWiiMoteID;
 	}
 
 }

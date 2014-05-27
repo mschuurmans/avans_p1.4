@@ -100,8 +100,14 @@ public class FopsModel extends GameModel
 		}
 		if (_bodies.size() <= 0)
 		{
-			if(_modelToControllerListener != null)
+			if (_updates > 40)
+			{
+				_updates = 0;
+			}
+			if(_modelToControllerListener != null && _updates > 30)
 				_modelToControllerListener.gameFinished(true);
+			else
+				_updates++;
 		}
 	}
 
@@ -237,7 +243,7 @@ public class FopsModel extends GameModel
 		int bodyWidth = (int) (body.getShape().getBounds().getWidth());
 		int fractionWidth = (int) (bodyWidth * 0.35);
 		int fractionMass = (int) (body.getMass() * 0.35);
-		int _multiplier = 300;
+		int _multiplier = (int)(Math.random() * 200) + 200;
 
 		for (int i = 0; i < 5; i++)
 		{

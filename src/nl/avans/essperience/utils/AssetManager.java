@@ -117,7 +117,8 @@ public class AssetManager
 		//	{
 		//		try 
 		//		{
-					_sounds.get(key).stop();
+					if (!key.equals("Fops/gun shot.wav"))
+						_sounds.get(key).stop();
 					_sounds.get(key).setFramePosition(0);
 					_sounds.get(key).start();
 		//		}

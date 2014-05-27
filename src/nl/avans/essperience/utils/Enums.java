@@ -1,5 +1,7 @@
 package nl.avans.essperience.utils;
 
+import nl.avans.essperience.controllers.WiiController;
+
 public class Enums
 {
 
@@ -30,7 +32,9 @@ public class Enums
 		Key7,
 		Key8,
 		Key9,
-		None		
+		None;	
+		
+		public int getID(){return WiiController.getID();}
 	}
 	
 	public static enum DockLocations

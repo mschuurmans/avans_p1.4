@@ -32,30 +32,36 @@ public class FopsController extends GameController
 			@Override
 			public void keyPressed(GameKeys key)
 			{
-				if (key == GameKeys.WiiB)
+				if (key.getID() == 1)
 				{
-					if (_model.getBullets() > 0)
+					if (key == GameKeys.WiiB)
 					{
-						AssetManager.Instance().playSound("Fops/gun shot.wav");
-						_model.checkHits();
+						if (_model.getBullets() > 0)
+						{
+							AssetManager.Instance().playSound("Fops/gun shot.wav");
+							_model.bulletFired();
+							_model.checkHits();
+						}
+						else
+						{
+							AssetManager.Instance().playSound("Fops/gun empty.wav");	
+						}
 					}
-					else
-					{
-						AssetManager.Instance().playSound("Fops/gun empty.wav");	
-					}
-					_model.bulletFired();
 				}
 			}
 			
 			@Override
 			public void wiimoteIREvent(IREvent e)
 			{
-				_cursorX = e.getX()*IRXCORRECTION;
-				_cursorY = e.getY()*IRYCORRECTION;
-				_model.updateCursorPosition(_cursorX, _cursorY);
-				if (_debug)
-					System.out.println("xpos and ypos changed. x: " + _cursorX + " y: " + _cursorY);
-				//ir event of the wiimote
+				if (e.getWiimoteId() == 1)
+				{
+					_cursorX = e.getX()*IRXCORRECTION;
+					_cursorY = e.getY()*IRYCORRECTION;
+					_model.updateCursorPosition(_cursorX, _cursorY);
+					if (_debug)
+						System.out.println("xpos and ypos changed. x: " + _cursorX + " y: " + _cursorY);
+					//ir event of the wiimote
+				}
 			}
 		});
 		
