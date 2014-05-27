@@ -2,6 +2,8 @@ package nl.avans.essperience.views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.AlphaComposite;
+import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import nl.avans.essperience.entities.fops.BulletHole;
 import nl.avans.essperience.entities.fops.Splash;
@@ -32,6 +35,7 @@ public class FopsScreen extends GameScreen
 	private static int _screenWidth = Main.GAME.getWidth();
 	private static int _screenHeight = Main.GAME.getHeight();
 	private int _amountOfBullets;
+	private double _splashAlpha = 1;
 	
 	public FopsScreen(FopsModel model) 
 	{
@@ -66,6 +70,16 @@ public class FopsScreen extends GameScreen
 		
 		//draw background
 		g.drawImage(AssetManager.Instance().getImage("Fops/fruitops_background.png") , 0, 0, Main.GAME.getWidth(), Main.GAME.getHeight(), null);
+		
+		//draw SplashScreen
+		Composite composite = g.getComposite();
+		_splashAlpha -= 0.03;
+		if(_splashAlpha > 0)
+		{
+			g.setComposite(AlphaComposite.SrcOver.derive((float) _splashAlpha));
+			g.drawImage(AssetManager.Instance().getImage("Fops/fruitops_splashscreen.png"), (Main.GAME.getWidth() / 2) -400/2, (int) (Main.GAME.getHeight() * 0.1), 800/2, 340/2, null);
+			g.setComposite(composite);
+		}
 		
 		//draw bulletholes
 		for(BulletHole bh : AssetManager.Instance().getBulletHoles())
