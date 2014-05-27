@@ -36,6 +36,7 @@ public class SimonGameModel extends GameModel
 	private World _myWorld;
 	private Body _floor, _tree;
 	private List<Body> _fruitPieces = new ArrayList<Body>();
+	private List<Body> _droppedBodies = new ArrayList<Body>();
 	private Iterator<Body> _fruitPiecesIterator;
 	private List<Body> _bodyList = new ArrayList<Body>();
 	private List<Body> _oldBodyList = new ArrayList<Body>();
@@ -141,12 +142,27 @@ public class SimonGameModel extends GameModel
 				body = _fruitPiecesIterator.next();
 				_bodyList.add(body);
 				_myWorld.add(body);
+				body.adjustVelocity(new Vector2f(0,10));
+				AssetManager.Instance().playSound("Simon/fall.wav");
 			}
 		}
 		if (getTimeRemaining() == 0)
 		{
 			if(_modelToControllerListener != null)
 				_modelToControllerListener.timesUpEvent();
+		}
+		
+		for (Body b : _bodyList)
+		{
+			if (b.getVelocity().getY() < 10f && !_droppedBodies.contains(b))
+			{
+				_droppedBodies.add(b);
+				AssetManager.Instance().playSound("Simon/splat.wav");
+			}
+			else if (b.getVelocity().getY() > 10f)
+			{
+				_droppedBodies.remove(b);
+			}
 		}
 		
 	}

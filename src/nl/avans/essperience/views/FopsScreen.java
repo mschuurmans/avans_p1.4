@@ -1,5 +1,7 @@
 package nl.avans.essperience.views;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import nl.avans.essperience.entities.fops.BulletHole;
 import nl.avans.essperience.entities.fops.Splash;
@@ -100,18 +101,20 @@ public class FopsScreen extends GameScreen
 		g.drawImage(_crosshair, (int)model.getCursorPosition().x, (int)model.getCursorPosition().y, crosshairSize, crosshairSize, null);
 		
 		//bullet information
-		int bulletSize = 40;
-		g.drawString("Bullets: ", _screenWidth - 130, _screenHeight-30);
-		if (_amountOfBullets <= 6)
+		int bulletSize = 60;
+		g.drawString("Bullets: ", _screenWidth - 230, _screenHeight-30);
+		if (_amountOfBullets <= 30)
 		{
 			for (int i = _amountOfBullets; i > 0; i--)
 			{
-				g.drawImage(_bullet, _screenWidth-30-(10*i), _screenHeight-40, bulletSize/2, bulletSize, null);
+				g.drawImage(_bullet, _screenWidth-60-(bulletSize/2*i), _screenHeight-60, bulletSize/2, bulletSize, null);
 			}
 		}
 		else
 		{
-			g.drawString("" + _amountOfBullets, _screenWidth-30, _screenHeight-30);
+			g.setFont(new Font("SANS-SERIF", Font.BOLD, 20));
+			g.setColor(Color.WHITE);
+			g.drawString("Bullets: " + _amountOfBullets, _screenWidth-180, _screenHeight-30);
 		}
 		
 		addTimeBar(g);

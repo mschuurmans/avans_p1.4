@@ -160,18 +160,19 @@ public class FruitOpsPiece
 		
 		int bodyWidth = (int) body.getShape().getBounds().getWidth();
 		int bodyHeight = (int) body.getShape().getBounds().getHeight();
-		
-		int force = 300;
+
+		int force = (int)(Math.random()*100) + 300;
+		int extraForce = (int)(Math.random()*100);
 		
 		if(sideIsLeft)
 		{
 			body.setPosition(0 - bodyWidth, Main.GAME.getHeight() - bodyHeight);
-			body.adjustVelocity(new Vector2f( (force - 150), -(force + 100) ));
+			body.adjustVelocity(new Vector2f( (force - (150-extraForce)), -(force + 100) ));
 		}
 		else
 		{
-			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight());
-			body.adjustVelocity(new Vector2f(-(force - 150), -(force + 100) ));
+			body.setPosition( Main.GAME.getWidth() + bodyWidth, Main.GAME.getHeight() + bodyHeight);
+			body.adjustVelocity(new Vector2f(-(force - (150-extraForce)), -(force + 100) ));
 		}
 		
 		body.setRotatable(true);

@@ -79,9 +79,9 @@ public class Splash
 	public void draw(Graphics2D g)
 	{
 		g.translate(posX, posY);
-		g.rotate(_rotation);
+		g.rotate(Math.toRadians(_rotation));
 		g.drawImage(_splashImage, 0-_size/2, 0-_size/2, _size, _size, null);
-		g.rotate(-_rotation);
+		g.rotate(-Math.toRadians(_rotation));
 		g.translate(-posX, -posY);
 	}
 }

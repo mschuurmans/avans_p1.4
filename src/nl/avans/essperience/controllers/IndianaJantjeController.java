@@ -3,6 +3,7 @@ package nl.avans.essperience.controllers;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ViewToControllerEventListener;
 import nl.avans.essperience.models.IndianaJantjeModel;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.IndianaJantjeScreen;
 
@@ -127,7 +128,7 @@ public class IndianaJantjeController extends GameController
 	
 	private void setPos() 
 	{
-		//AssetManager.Instance().playSound("IndianaJantje/stomp.wav");
+		AssetManager.Instance().playSound("IndianaJantje/stomp.wav");
 		if (keyA && keyD) 
 		{
 			_model.setCurrentPosition(1);

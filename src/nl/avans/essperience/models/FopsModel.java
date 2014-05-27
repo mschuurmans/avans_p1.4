@@ -47,10 +47,10 @@ public class FopsModel extends GameModel
 	public void init()
 	{
 		_difficulty = Main.GAME.getDifficulty();
-		_maxTime = 6000 + (2000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
+		_maxTime = 3000 + (6000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
 		_timeRemaining = _maxTime;
 		_amountOfFruit = (_difficulty / 4) + 2;
-		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000);
+		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 10;
 		_gravity = 170 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
 
 		//debug data
@@ -70,7 +70,6 @@ public class FopsModel extends GameModel
 		_myWorld.clear();
 		for (FruitOpsPiece f : _fruits)
 		{
-			System.out.println("adding body to world");
 			Body body = f.getBody();
 			_bodies.add(body);
 		}
@@ -88,6 +87,7 @@ public class FopsModel extends GameModel
 
 		if (_updates > 30 && _currentBody < _bodies.size())
 		{
+			AssetManager.Instance().playSound("Fops/throw.wav");
 			_updates = 0;
 			_myWorld.add(_bodies.get(_currentBody));
 			_currentBody++;
@@ -243,8 +243,29 @@ public class FopsModel extends GameModel
 		int bodyWidth = (int) (body.getShape().getBounds().getWidth());
 		int fractionWidth = (int) (bodyWidth * 0.35);
 		int fractionMass = (int) (body.getMass() * 0.35);
-		int _multiplier = (int)(Math.random() * 200) + 200;
-
+		int multiplier = (int)(Math.random() * 200) + 200;
+		int imageOffset = 1;
+		float rotation = body.getRotation();
+		if (rotation < 0.4*Math.PI)
+		{
+			imageOffset = 1;
+		}
+		else if(rotation < 0.8*Math.PI)
+		{
+			imageOffset = 2;
+		}
+		else if(rotation < 1.2*Math.PI)
+		{
+			imageOffset = 3;
+		}
+		else if(rotation < 1.6*Math.PI)
+		{
+			imageOffset = 4;
+		}
+		else
+		{
+			imageOffset = 5;
+		}
 		for (int i = 0; i < 5; i++)
 		{
 			newBody[i] = new Body(new Circle( fractionWidth ), fractionMass);
@@ -252,8 +273,12 @@ public class FopsModel extends GameModel
 			int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
 			int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
 			newBody[i].setPosition(newX, newY);
-			newBody[i].setUserData((String)uData + (i+1));
-			newBody[i].adjustVelocity(new Vector2f((float) (Math.cos(angleOffset*i)*_multiplier),(float) (Math.sin(angleOffset*i))*_multiplier));
+			if (i+imageOffset > 5)
+			{
+				imageOffset -= 5;
+			}
+			newBody[i].setUserData((String)uData + (i+imageOffset));
+			newBody[i].adjustVelocity(new Vector2f((float) (Math.cos(angleOffset*i)*multiplier),(float) (Math.sin(angleOffset*i))*multiplier));
 		}
 
 		return newBody;

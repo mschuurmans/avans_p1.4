@@ -34,7 +34,9 @@ public class AssetManager
 													"IndianaJantje/bloodsplash.wav", "IndianaJantje/stonebreak.wav", "IndianaJantje/stomp.wav",
 													"Waf/hello.wav", "Waf/ouch.wav", "Waf/whack.wav", 
 													"Flappy/flap.wav", "Flappy/smack.wav", "Flappy/bading.wav", 
-													"Fops/gun shot.wav", "Fops/gun empty.wav", "Fops/splash.wav", "Essperience/unrealsuperhero.wav"};
+													"Simon/fall.wav", "Simon/splat.wav", 
+													"Fops/gun shot.wav", "Fops/gun empty.wav", "Fops/splash.wav", "Fops/throw.wav", 
+													"Essperience/unrealsuperhero.wav"};
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private static Map<String, Clip> _sounds = new HashMap<String, Clip>();
