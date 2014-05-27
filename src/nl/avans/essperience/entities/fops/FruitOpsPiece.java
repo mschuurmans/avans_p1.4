@@ -161,15 +161,17 @@ public class FruitOpsPiece
 		int bodyWidth = (int) body.getShape().getBounds().getWidth();
 		int bodyHeight = (int) body.getShape().getBounds().getHeight();
 		
+		int force = 300;
+		
 		if(sideIsLeft)
 		{
 			body.setPosition(0 - bodyWidth, Main.GAME.getHeight() - bodyHeight);
-			body.adjustVelocity(new Vector2f(100, -100));
+			body.adjustVelocity(new Vector2f( (force - 150), -(force + 100) ));
 		}
 		else
 		{
 			body.setPosition( Main.GAME.getWidth(), Main.GAME.getHeight());
-			body.adjustVelocity(new Vector2f(-100, -100));
+			body.adjustVelocity(new Vector2f(-(force - 150), -(force + 100) ));
 		}
 		
 		body.setRotatable(true);
@@ -181,30 +183,6 @@ public class FruitOpsPiece
 		return body;
 	}
 	
-	public Body[] splitBody(Body body)
-	{
-		Body[] newBody = new Body[5];
-		
-		int x = (int) body.getPosition().getX();
-		int y = (int) body.getPosition().getY();
-		
-		double angleOffset = Math.toRadians(72);
-		
-		int bodyWidth = (int) (body.getShape().getBounds().getWidth());
-		int fractionWidth = (int) (bodyWidth * 0.35);
-		int fractionMass = (int) (body.getMass() * 0.35);
-		
-		for (int i = 0; i < 5; i++)
-		{
-			newBody[i] = new Body(new Circle( fractionWidth ), fractionMass);
-			
-			int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
-			int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
-			newBody[i].setPosition(newX, newY);
-		}
-		
-		return newBody;
-	}
 	
 	/*
 	 * initialises the arrays that contain the vector data that is being used for the creation of the fruitPolygons

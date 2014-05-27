@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
+import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nl.avans.essperience.entities.fops.FruitOpsPiece;
 import nl.avans.essperience.entities.simon.FruitPiece;
@@ -115,5 +116,36 @@ public class FopsModel extends GameModel
 	{
 		_cursorX = x;
 		_cursorY = y;
+	}
+	
+	/**
+	 * Method receives a body and returns 5 fractions, to be called when a piece of fruit gets shot.
+	 * @param Body object from a fruitpiece
+	 * @return an array that contains 5 bodies. These bodies resemble the fractions of the fruitpiece that has been passed in as a parameter
+	 * @author jack
+	 */
+	public Body[] splitBody(Body body)
+	{
+		Body[] newBody = new Body[5];
+		
+		int x = (int) body.getPosition().getX();
+		int y = (int) body.getPosition().getY();
+		
+		double angleOffset = Math.toRadians(72);
+		
+		int bodyWidth = (int) (body.getShape().getBounds().getWidth());
+		int fractionWidth = (int) (bodyWidth * 0.35);
+		int fractionMass = (int) (body.getMass() * 0.35);
+		
+		for (int i = 0; i < 5; i++)
+		{
+			newBody[i] = new Body(new Circle( fractionWidth ), fractionMass);
+			
+			int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
+			int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
+			newBody[i].setPosition(newX, newY);
+		}
+		
+		return newBody;
 	}
 }
