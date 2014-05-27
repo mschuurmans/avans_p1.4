@@ -10,6 +10,7 @@ import java.util.List;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.BodyList;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
@@ -33,10 +34,11 @@ public class SimonGameModel extends GameModel
 	
 	private int _patternLength;
 	private World _myWorld;
-	private Body _floor;
+	private Body _floor, _tree;
 	private List<Body> _fruitPieces = new ArrayList<Body>();
 	private Iterator<Body> _fruitPiecesIterator;
 	private List<Body> _bodyList = new ArrayList<Body>();
+	private List<Body> _oldBodyList = new ArrayList<Body>();
 	private Image[] _fruitImages = new Image[4];
 	
 	private int _stepsPerUpdate;
@@ -82,7 +84,19 @@ public class SimonGameModel extends GameModel
 		_floor.setRestitution(0.4f);
 		_myWorld.add(_floor);
 		
+		_tree = new StaticBody("tree", new Box(200f, 200f));
+		_tree.setPosition(100f, _floor.getPosition().getY() - 100f);
+		_tree.setRestitution(0.4f);
+		_myWorld.add(_tree);
 		
+		//add old pieces of Fruit
+		for(FruitPiece fp : AssetManager.Instance().getFruitPieces())
+		{
+			_oldBodyList.add(fp.getBody());
+			_myWorld.add(fp.getBody());
+		}
+		
+		//add Pieces of Fruit
 		for(int i = 0; i < _patternLength; i++)					//add pieces of fruit
 		{
 			FruitPiece fp = new FruitPiece();					//create new pieces of fruit
@@ -141,6 +155,25 @@ public class SimonGameModel extends GameModel
 	{
 		Graphics2D g = (Graphics2D) g1;
 		
+		//drawing the old bodies
+		for(Body body : _oldBodyList)
+		{
+			float rotation = body.getRotation();
+			int x = (int)body.getPosition().getX();
+			int y = (int)body.getPosition().getY();
+			
+			g.translate(x, y);
+			g.rotate(rotation);
+			
+			int size = 90;
+			
+			g.drawImage(getFruitImage(body), 0 -size/2, 0 -size/2, size, size, null);	
+
+			g.rotate(-rotation);
+			g.translate(-x, -y);
+		}
+		
+		//drawing the bodies
 		for(Body body : _bodyList)
 		{			
 			float rotation = body.getRotation();
@@ -154,7 +187,10 @@ public class SimonGameModel extends GameModel
 			
 			g.drawImage(getFruitImage(body), 0 -size/2, 0 -size/2, size, size, null);	
 			if(_easyMode)
+			{
 				g.drawString("" + _charArray[matchNametoNumber((String)body.getUserData())], 0, +30);
+				g.drawString("" + (String)body.getUserData(), 0, 50);
+			}
 			
 			//debugging purposes
 			if (body.getShape() instanceof Polygon && _debug)
@@ -193,6 +229,13 @@ public class SimonGameModel extends GameModel
 			int y = (int) _floor.getPosition().getY();
 			int w = (int)_floor.getShape().getBounds().getWidth();
 			int h = (int)_floor.getShape().getBounds().getHeight();
+			g.drawRect(x, y, w, h);
+			
+			//display tree body
+			w = (int) _tree.getShape().getBounds().getWidth();
+			h = (int) _tree.getShape().getBounds().getHeight();
+			x = (int) _tree.getPosition().getX() - w/2;
+			y = (int) _tree.getPosition().getY() - h/2;
 			g.drawRect(x, y, w, h);
 			
 			//debug display bodyBoundingBoxes and corresponding keys
@@ -319,7 +362,7 @@ public class SimonGameModel extends GameModel
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
 					//System.out.println("GameFinishedTrue Called!!!!!!!!!!!");
-					_modelToControllerListener.gameFinished(true);
+					endGame(true);
 				}
 			}
 			else
@@ -327,11 +370,32 @@ public class SimonGameModel extends GameModel
 				if(_modelToControllerListener != null)
 				{
 					//System.out.println("GameFinishedFalse Called!!!!!!!!!!!");
-					_modelToControllerListener.gameFinished(false);
+					endGame(false);
 				}
 			}
 		}
 		_updateCountOnLastPressed = _updateCounter;
+	}
+	
+	private void endGame(boolean succes)
+	{
+		// make 100 steps to prevent the state of game saving with pieces in mid air
+		for(int i = 0; i < 1000; i++)
+		{
+			_myWorld.step();
+		}
+		//TODO save existing bodies to assetmanager to load on new game
+		for (Body body : _bodyList)
+		{
+			String name = (String) body.getUserData();
+			FruitPiece fp = new FruitPiece(name);
+			fp.setPosition((Vector2f) body.getPosition());
+			fp.setRotation(body.getRotation());
+			
+			AssetManager.Instance().addFruitPiece(fp);
+		}
+		
+		_modelToControllerListener.gameFinished(succes);
 	}
 }
 
