@@ -2,6 +2,7 @@ package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.models.MenuModel;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.MenuScreen;
 
@@ -67,6 +68,7 @@ public class MenuController extends GameController
 			System.out.println("MenuController : current option");
 		
 		
+		AssetManager.Instance().flushPersistentData();
 		_view.stopTimer();
 		this.callFinishedListener(true);
 	}

@@ -8,6 +8,7 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
+import nl.avans.essperience.entities.fops.BulletHole;
 import nl.avans.essperience.entities.fops.FruitOpsPiece;
 import nl.avans.essperience.entities.fops.Splash;
 import nl.avans.essperience.main.Main;
@@ -74,6 +75,7 @@ public class FopsModel extends GameModel
 			_bodies.add(body);
 		}
 		_myWorld.setGravity(0, _gravity);
+		
 	}	
 
 	public void update()
@@ -162,6 +164,7 @@ public class FopsModel extends GameModel
 	public void bulletFired() 
 	{
 		_amountOfBullets--;
+		AssetManager.Instance().addBulletHole(new BulletHole(new Vector2f((float)_cursorX, (float)_cursorY)));
 	}
 
 	public void fruitHit(int index)

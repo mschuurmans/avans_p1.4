@@ -7,7 +7,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import nl.avans.essperience.entities.fops.BulletHole;
 import nl.avans.essperience.entities.fops.Splash;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FopsModel;
@@ -60,6 +62,15 @@ public class FopsScreen extends GameScreen
 		_amountOfBullets = model.getBullets();
 		ArrayList<Body> fruitBodies = model.getBodies();
 		ArrayList<Splash> splashes = model.getSplashes();
+		
+		//draw background
+		g.drawImage(AssetManager.Instance().getImage("Fops/fruitops_background.png") , 0, 0, Main.GAME.getWidth(), Main.GAME.getHeight(), null);
+		
+		//draw bulletholes
+		for(BulletHole bh : AssetManager.Instance().getBulletHoles())
+		{
+			bh.draw(g);
+		}
 		
 		//drawing splashes
 		for (Splash s : splashes)

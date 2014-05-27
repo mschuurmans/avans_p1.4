@@ -2,7 +2,9 @@ package nl.avans.essperience.utils;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -11,6 +13,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+
+import nl.avans.essperience.entities.fops.BulletHole;
 
 public class AssetManager
 {
@@ -22,7 +26,7 @@ public class AssetManager
 													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png", "RedButton/arrow.png",
 													"Waf/fardoes background.png", "Simon/simon_background_tree.png", "Simon/simon_background.png",
 													"Fops/crosshair.png", "Fops/bullet.png", "Fops/splashbanana.png", "Fops/splashapple.png", "Fops/splashorange.png", "Fops/splashpear.png",
-													"Fops/apple_pieces.png", "Fops/pear_pieces.png", "Fops/banana_pieces.png", "Fops/orange_pieces.png"};
+													"Fops/apple_pieces.png", "Fops/pear_pieces.png", "Fops/banana_pieces.png", "Fops/orange_pieces.png", "Fops/fruitops_background.png", "Fops/bullethole.png"};
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
 													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav", "Essperience/unrealsuperhero.wav",
@@ -36,6 +40,8 @@ public class AssetManager
 	
 	private String _currentBGMKey = "";
 	
+	private List<BulletHole> _bulletHoles = new ArrayList<BulletHole>();
+
 	private static AssetManager _instance = null;
 
 	public static AssetManager Instance()
@@ -150,5 +156,25 @@ public class AssetManager
 	public Image getImage(String key)
 	{
 		return _assets.get(key.trim());
+	}
+	
+	public List<BulletHole> getBulletHoles()
+	{
+		return _bulletHoles;
+	}
+
+	public void setBulletHoles(List<BulletHole> _bulletHoles)
+	{
+		this._bulletHoles = _bulletHoles;
+	}
+	
+	public void addBulletHole(BulletHole bulletHole)
+	{
+		this._bulletHoles.add(bulletHole);
+	}
+	
+	public void flushPersistentData()
+	{
+		this._bulletHoles.clear();
 	}
 }
