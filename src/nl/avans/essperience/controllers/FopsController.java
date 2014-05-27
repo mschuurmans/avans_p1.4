@@ -14,13 +14,11 @@ import wiiusej.wiiusejevents.physicalevents.IREvent;
 
 public class FopsController extends GameController
 {
-	private boolean _debug = true;
+	private boolean _debug = false;
 	private FopsModel _model;
 	private FopsScreen _view;
 	private double _cursorX;
 	private double _cursorY;
-	private int _XOFFSETALLOWED = 10;
-	private int _YOFFSETALLOWED = 10;
 	private final int IRXCORRECTION = Main.GAME.getWidth()/360;
 	private final int IRYCORRECTION = Main.GAME.getWidth()/410;
 	
@@ -39,7 +37,7 @@ public class FopsController extends GameController
 					if (_model.getBullets() > 0)
 					{
 						AssetManager.Instance().playSound("Fops/gun shot.wav");
-						checkHits();
+						_model.checkHits();
 					}
 					else
 					{
@@ -69,28 +67,17 @@ public class FopsController extends GameController
 				_view.stopTimer();
 				callFinishedListener(false);
 			}
+			
+			public void gameFinished(boolean succeed)
+			{
+				_view.stopTimer();
+				callFinishedListener(succeed);
+			}
 		});
 		
 		InputController.Instance().setMotionDetecting(false);
 		InputController.Instance().setIRTracking(true);
 		_view.addKeyListener(InputController.Instance().getKeyboardListener());
 	}
-	
-	private void checkHits() {
-		ArrayList<FruitOpsPiece> fruits = _model.getFruits();
-		for (int i = 0; i < fruits.size(); i++)
-		{
-			float fruitX = fruits.get(i).getPosition().getX();
-			float fruitY = fruits.get(i).getPosition().getY();
-			if (_debug)
-				System.out.println("fruit posX: " + fruits.get(i).getPosition().getX() + " fruit posY: " + fruits.get(i).getPosition().getY());
-			if (	_cursorX > fruitX - _XOFFSETALLOWED &&
-					_cursorX < fruitX + _YOFFSETALLOWED &&
-					_cursorY > fruitY - _XOFFSETALLOWED &&
-					_cursorY < fruitY + _YOFFSETALLOWED)
-			{
-				_model.fruitHit(i);
-			}
-		}
-	}
+
 }

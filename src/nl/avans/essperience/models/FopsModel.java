@@ -9,7 +9,9 @@ import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Circle;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nl.avans.essperience.entities.fops.FruitOpsPiece;
+import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.main.Main;
+import nl.avans.essperience.utils.AssetManager;
 
 public class FopsModel extends GameModel
 {
@@ -24,6 +26,13 @@ public class FopsModel extends GameModel
 	private double _cursorY;
 	private ArrayList<FruitOpsPiece> _fruits = new ArrayList<FruitOpsPiece>();
 	private ArrayList<Body> _bodies = new ArrayList<Body>();
+	private ArrayList<Body> _splitBodies = new ArrayList<Body>();
+	private ArrayList<Vector2f> _shotPositions = new ArrayList<Vector2f>();
+	private int _updates = 0;
+	private int _currentBody = 0;
+	
+	private final int _XOFFSETALLOWED = 75;
+	private final int _YOFFSETALLOWED = 75;
 	
 	//debug data
 	private boolean _debug = true;
@@ -37,11 +46,11 @@ public class FopsModel extends GameModel
 	public void init()
 	{
 		_difficulty = Main.GAME.getDifficulty();
-		_maxTime = 10000 + (2000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
+		_maxTime = 6000 + (2000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
 		_timeRemaining = _maxTime;
 		_amountOfFruit = (_difficulty / 4) + 2;
-		_amountOfBullets = (int) (_amountOfFruit * 1.5f);
-		_gravity = 100 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
+		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000);
+		_gravity = 170 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
 
 		//debug data
 		_debugData.add("Diff is: " + _difficulty);
@@ -62,7 +71,6 @@ public class FopsModel extends GameModel
 		{
 			System.out.println("adding body to world");
 			Body body = f.getBody();
-			_myWorld.add(body);
 			_bodies.add(body);
 		}
 		_myWorld.setGravity(0, _gravity);
@@ -70,14 +78,17 @@ public class FopsModel extends GameModel
 	
 	public void update()
 	{
-		for (int i = 0; i < _bodies.size(); i ++)
+		for (int i = 0; i < 5; i ++)
 		{
+			_updates++;
 			_myWorld.step();
 		}
-		for (Body f : _bodies)
+		
+		if (_updates > 30 && _currentBody < _bodies.size())
 		{
-			//_myWorld.add(f);
-			//System.out.println("adding to world");
+			_updates = 0;
+			_myWorld.add(_bodies.get(_currentBody));
+			_currentBody++;
 		}
 
 		if (getTimeRemaining() == 0)
@@ -85,6 +96,36 @@ public class FopsModel extends GameModel
 			if(_modelToControllerListener != null)
 				_modelToControllerListener.timesUpEvent();
 		}
+		if (_bodies.size() <= 0)
+		{
+			if(_modelToControllerListener != null)
+				_modelToControllerListener.gameFinished(true);
+		}
+	}
+	
+	public void checkHits()
+	{
+		ArrayList<Integer> indexes = new ArrayList<Integer>();
+		for (int i = 0; i < _bodies.size(); i++)
+		{
+			float fruitX = _bodies.get(i).getPosition().getX();
+			float fruitY = _bodies.get(i).getPosition().getY();
+			if (_debug) 
+			{
+				System.out.println("fruit posX: " + fruitX + " fruit posY: " + fruitY);
+				System.out.println("shot at posX: " + _cursorX + " posY: " + _cursorY);
+			}
+			if (	_cursorX > fruitX - _XOFFSETALLOWED &&
+					_cursorX < fruitX + _YOFFSETALLOWED &&
+					_cursorY > fruitY - _XOFFSETALLOWED &&
+					_cursorY < fruitY + _YOFFSETALLOWED)
+			{
+				_shotPositions.add(new Vector2f((float)_cursorX, (float)_cursorY));
+				fruitHit(i);
+				indexes.add(i);
+			}
+		}
+		removeBodies(indexes);
 	}
 	
 	public ArrayList<FruitOpsPiece> getFruits()
@@ -94,7 +135,22 @@ public class FopsModel extends GameModel
 	
 	public ArrayList<Body> getBodies()
 	{
-		return _bodies;
+		ArrayList<Body> bodies = new ArrayList<Body>();
+		bodies.addAll(_bodies);
+		bodies.addAll(_splitBodies);
+		return bodies;
+	}
+	
+	private void removeBodies(ArrayList<Integer> indexes)
+	{
+		for (int i = indexes.size()-1; i >= 0; i--)
+		{
+			System.out.println("bodies.size(): " + _bodies.size());
+			System.out.println("removing body with index: " + indexes.get(i) + " which is i: " + i);
+			_bodies.remove(_bodies.get(indexes.get(i)));
+			AssetManager.Instance().playSound("Fops/splash.wav");
+			//_bodies.remove(indexes.get(i));
+		}
 	}
 	
 	public int getBullets() 
@@ -110,7 +166,18 @@ public class FopsModel extends GameModel
 	public void fruitHit(int index)
 	{
 		// TODO do something when hit
-		_fruits.remove(index);
+		Body[] bodies = splitBody(_bodies.get(index));
+		for (Body b : bodies)
+		{
+			_splitBodies.add(b);
+			_myWorld.add(b);
+		}
+		//_fruits.remove(index);
+	}
+	
+	public ArrayList<Vector2f> getShotPositions()
+	{
+		return _shotPositions;
 	}
 	
 	public Vector2f getCursorPosition()
@@ -143,6 +210,7 @@ public class FopsModel extends GameModel
 	public Body[] splitBody(Body body)
 	{
 		Body[] newBody = new Body[5];
+		String uData = (String)body.getUserData();
 		
 		int x = (int) body.getPosition().getX();
 		int y = (int) body.getPosition().getY();
@@ -152,6 +220,7 @@ public class FopsModel extends GameModel
 		int bodyWidth = (int) (body.getShape().getBounds().getWidth());
 		int fractionWidth = (int) (bodyWidth * 0.35);
 		int fractionMass = (int) (body.getMass() * 0.35);
+		int _multiplier = 300;
 		
 		for (int i = 0; i < 5; i++)
 		{
@@ -160,6 +229,8 @@ public class FopsModel extends GameModel
 			int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
 			int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
 			newBody[i].setPosition(newX, newY);
+			newBody[i].setUserData(uData);
+			newBody[i].adjustVelocity(new Vector2f((float) (Math.cos(angleOffset*i)*_multiplier),(float) (Math.sin(angleOffset*i))*_multiplier));
 		}
 		
 		return newBody;
