@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 
 import nl.avans.essperience.entities.fops.BulletHole;
+import nl.avans.essperience.entities.simon.FruitPiece;
 
 public class AssetManager
 {
@@ -41,6 +42,7 @@ public class AssetManager
 	private String _currentBGMKey = "";
 	
 	private List<BulletHole> _bulletHoles = new ArrayList<BulletHole>();
+	private List<FruitPiece> _fruitPieces = new ArrayList<FruitPiece>();
 
 	private static AssetManager _instance = null;
 
@@ -173,8 +175,20 @@ public class AssetManager
 		this._bulletHoles.add(bulletHole);
 	}
 	
+	public void addFruitPiece(FruitPiece fp)
+	{
+		this._fruitPieces.add(fp);
+	}
+	
+	public List<FruitPiece> getFruitPieces()
+	{
+		return _fruitPieces;
+	}
+	
 	public void flushPersistentData()
 	{
 		this._bulletHoles.clear();
+		this._fruitPieces.clear();
 	}
+	
 }

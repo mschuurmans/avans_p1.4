@@ -1,6 +1,7 @@
 package nl.avans.essperience.entities.simon;
 
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 import java.util.List;
 
 import net.phys2d.math.ROVector2f;
@@ -16,11 +17,12 @@ import nl.avans.essperience.main.Main;
  * @author jack
  *
  */
-public class FruitPiece
+public class FruitPiece implements Serializable
 {
 	String _name;
 	DynamicShape _shape;
 	float _m;
+	float _rotation;
 	Vector2f _position;
 	
 	private ROVector2f[] _bananaPath = new ROVector2f[32];
@@ -40,7 +42,7 @@ public class FruitPiece
 		init();
 		
 		String name = getRandomFruitName();
-		
+				
 		buildPieceOfFruit(name);
 	}
 	
@@ -79,6 +81,7 @@ public class FruitPiece
 	private void buildPieceOfFruit(String name)
 	{
 		_position = new Vector2f((float)(Math.random() * Main.GAME.getWidth()/3 ) + (Main.GAME.getWidth()/3) +1, -100f); //position at top center. between 1/3 and 2/3 of the screenwidth
+		_rotation = (float) (Math.random()* (Math.PI*2));
 		
 		_name = name;
 		
@@ -123,6 +126,16 @@ public class FruitPiece
 		return _position;
 	}
 	
+	public void setPosition(Vector2f vector)
+	{
+		this._position = vector;
+	}
+	
+	public void setRotation(float r)
+	{
+		this._rotation = r;
+	}
+	
 	public Rectangle2D getBoundingBox()
 	{
 		double x = _position.getX();
@@ -157,7 +170,7 @@ public class FruitPiece
 		
 		body.setPosition(_position.x, _position.y);		//position these bodies at the top center
 		body.setRotatable(true);
-		body.setRotation((float) (Math.random()* (Math.PI*2)) );
+		body.setRotation(_rotation);
 		body.setCanRest(true);
 		body.setFriction(100f);
 		body.setRestitution(0.7f);
