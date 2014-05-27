@@ -21,7 +21,8 @@ public class AssetManager
 													"IndianaJantje/bloodsplash.png", "Simon/banana.png", "Simon/orange.png", "Simon/apple.png",
 													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png", "RedButton/arrow.png",
 													"Waf/fardoes background.png", "Simon/simon_background_tree.png", "Simon/simon_background.png",
-													"Fops/crosshair.png", "Fops/bullet.png", "Fops/splash.png"};
+													"Fops/crosshair.png", "Fops/bullet.png", "Fops/splashbanana.png", "Fops/splashapple.png", "Fops/splashorange.png", "Fops/splashpear.png",
+													"Fops/apple_piece.png", "Fops/pear_piece.png", "Fops/banana_piece.png", "Fops/orange_piece.png"};
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
 													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav", "Essperience/unrealsuperhero.wav",

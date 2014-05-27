@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import nl.avans.essperience.entities.fops.Splash;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FopsModel;
@@ -17,14 +18,18 @@ import nl.avans.essperience.utils.Utils;
 public class FopsScreen extends GameScreen 
 {
 	private static final long serialVersionUID = -6529289814578856921L;
-	private Image[] _fruitImages = new Image[4];
+	private Image[] _fruitImages = new Image[8];
 	private Image _crosshair = AssetManager.Instance().getImage("Fops/crosshair.png");
 	private Image _bullet = AssetManager.Instance().getImage("Fops/bullet.png");
-	private Image _splashImage = AssetManager.Instance().getImage("Fops/splash.png");
 	private static final int BANANA = 0;
 	private static final int ORANGE = 1;
 	private static final int APPLE = 2;
 	private static final int PEAR = 3;
+	private static final int BANANAPIECE = 4;
+	private static final int ORANGEPIECE = 5;
+	private static final int APPLEPIECE = 6;
+	private static final int PEARPIECE = 7;
+	
 	private static int _screenWidth = Main.GAME.getWidth();
 	private static int _screenHeight = Main.GAME.getHeight();
 	private int _amountOfBullets;
@@ -37,6 +42,10 @@ public class FopsScreen extends GameScreen
 		_fruitImages[ORANGE] = AssetManager.Instance().getImage("Simon/orange.png");
 		_fruitImages[APPLE] = AssetManager.Instance().getImage("Simon/apple.png");
 		_fruitImages[PEAR] = AssetManager.Instance().getImage("Simon/pear.png");
+		_fruitImages[BANANAPIECE] = AssetManager.Instance().getImage("Fops/banana_piece.png");
+		_fruitImages[ORANGEPIECE] = AssetManager.Instance().getImage("Fops/orange_piece.png");
+		_fruitImages[APPLEPIECE] = AssetManager.Instance().getImage("Fops/apple_piece.png");
+		_fruitImages[PEARPIECE] = AssetManager.Instance().getImage("Fops/pear_piece.png");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -54,13 +63,13 @@ public class FopsScreen extends GameScreen
 		FopsModel model = (FopsModel)_gameModel;
 		_amountOfBullets = model.getBullets();
 		ArrayList<Body> fruitBodies = model.getBodies();
-		ArrayList<Vector2f> shotPositions = model.getShotPositions();
-		int splashSize = 150;
+		ArrayList<Splash> splashes = model.getSplashes();
 		
 		//drawing splashes
-		for (Vector2f s : shotPositions)
+		for (Splash s : splashes)
 		{
-			g.drawImage(_splashImage, (int)s.getX(), (int)s.getY(), splashSize, splashSize, null);
+			System.out.println("drawing splash: " + s.getType() +  " rotated over: " + s.getRotation() + " at x: " + s.getX() + " and y: " + s.getY());
+			s.draw(g);
 		}
 		
 		//drawing fruits
@@ -84,12 +93,13 @@ public class FopsScreen extends GameScreen
 		g.drawImage(_crosshair, (int)model.getCursorPosition().x, (int)model.getCursorPosition().y, crosshairSize, crosshairSize, null);
 		
 		//bullet information
+		int bulletSize = 40;
 		g.drawString("Bullets: ", _screenWidth - 130, _screenHeight-30);
 		if (_amountOfBullets <= 6)
 		{
 			for (int i = _amountOfBullets; i > 0; i--)
 			{
-				g.drawImage(_bullet, _screenWidth-30-(10*i), _screenHeight-40, 10, 20, null);
+				g.drawImage(_bullet, _screenWidth-30-(10*i), _screenHeight-40, bulletSize/2, bulletSize, null);
 			}
 		}
 		else
@@ -119,6 +129,10 @@ public class FopsScreen extends GameScreen
 		case "orange": return _fruitImages[ORANGE];
 		case "pear": return _fruitImages[PEAR];
 		case "apple": return _fruitImages[APPLE];
+		case "bananapiece": return _fruitImages[BANANAPIECE];
+		case "orangepiece": return _fruitImages[ORANGEPIECE];
+		case "pearpiece": return _fruitImages[PEARPIECE];
+		case "applepiece": return _fruitImages[APPLEPIECE];
 		default: return null;
 		}
 	}
