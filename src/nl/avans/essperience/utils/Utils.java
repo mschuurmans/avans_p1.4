@@ -3,6 +3,10 @@ package nl.avans.essperience.utils;
 import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import nl.avans.essperience.utils.Enums.GameKeys;
 
@@ -101,5 +105,47 @@ public class Utils
 		 
 		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
  
+	}
+
+	public static void addHighScore(final String name, final int score)
+	{
+		new Thread(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
+					String url = "http://essperience.tostring.nl/highscore_add/" + name + "/" + score;
+					 
+					URL obj = new URL(url);
+					HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			 
+					con.setRequestMethod("GET");
+					con.setRequestProperty("User-Agent", "Mozilla/5.0");
+			 
+					int responseCode = con.getResponseCode();
+					System.out.println("\nSending 'GET' request to URL : " + url);
+					System.out.println("Response Code : " + responseCode);
+			 
+					BufferedReader in = new BufferedReader( new InputStreamReader(con.getInputStream()));
+					String inputLine;
+					StringBuffer response = new StringBuffer();
+			 
+					while ((inputLine = in.readLine()) != null) 
+					{
+						response.append(inputLine);
+					}
+					in.close();
+			 
+					//print result
+					System.out.println(response.toString());
+					
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}).start();
+				
 	}
 }
