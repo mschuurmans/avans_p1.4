@@ -4,12 +4,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.phys2d.raw.Body;
-import nl.avans.essperience.entities.simon.FruitPiece;
+import nl.avans.essperience.main.Main;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FopsModel;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class FopsScreen extends GameScreen 
 {
@@ -82,6 +84,18 @@ public class FopsScreen extends GameScreen
 			g.drawString("" + _amountOfBullets, _screenWidth-30, _screenHeight-30);
 		}
 		addTimeBar(g);
+		
+		//Display debug data when model says so!
+		if(model.isDebugTrue())
+		{
+			int startY = 40;
+			List<String> debugData = model.getDebugData();
+			for(String string : debugData)
+			{
+				g.drawString(string, Main.GAME.getWidth() - (Utils.getWidth(string, g.getFont()) + 20), startY + (20 * debugData.indexOf(string) ) );
+			}
+		}
+			
 	}
 
 	private Image getFruitImage(String name)

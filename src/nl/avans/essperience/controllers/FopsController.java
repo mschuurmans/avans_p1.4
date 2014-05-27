@@ -2,7 +2,7 @@ package nl.avans.essperience.controllers;
 
 import java.util.ArrayList;
 
-import nl.avans.essperience.entities.simon.FruitPiece;
+import nl.avans.essperience.entities.fops.FruitOpsPiece;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.main.Main;
@@ -77,7 +77,7 @@ public class FopsController extends GameController
 	}
 	
 	private void checkHits() {
-		ArrayList<FruitPiece> fruits = _model.getFruits();
+		ArrayList<FruitOpsPiece> fruits = _model.getFruits();
 		for (int i = 0; i < fruits.size(); i++)
 		{
 			float fruitX = fruits.get(i).getPosition().getX();
