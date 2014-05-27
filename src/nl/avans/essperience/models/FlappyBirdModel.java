@@ -114,8 +114,8 @@ public class FlappyBirdModel extends GameModel
 		//if position more than 10 it can move up. (0 is the top of the screen)
 		if(_player.getY() > 10)
 		{
-			AssetManager.Instance().playSound("Flappy/flap.wav");
 			_player.moveY(-6);
+			AssetManager.Instance().playSound("Flappy/flap.wav");
 		}
 	}
 }

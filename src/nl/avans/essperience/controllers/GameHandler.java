@@ -35,7 +35,7 @@ public class GameHandler extends JFrame
 
 	private boolean _failed = false;
 	private int _difficulty = 1;
-	private final int _NUMBEROFGAMES = 5;
+	private final int _NUMBEROFGAMES = 1;
 
 	private int _lives = GameHandler.MAX_LIVES;
 
@@ -213,7 +213,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) +1;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) +2;
 			switch (rand) 
 			{
 				case 1: 
