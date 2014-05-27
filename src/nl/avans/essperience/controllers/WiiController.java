@@ -87,7 +87,22 @@ public class WiiController implements WiimoteListener
 			wim.deactivateMotionSensing();
 		}
 	}
+
+	public void activateIRTracking()
+	{
+		for(Wiimote wim : _wiimotes)
+		{
+			wim.activateIRTRacking();
+		}
+	}
 	
+	public void deactivateIRTracking()
+	{
+		for(Wiimote wim : _wiimotes)
+		{
+			wim.deactivateIRTRacking();
+		}
+	}
 	public void addButtonPressedListener(ButtonPressedEventListener listener)
 	{
 		_listener = listener;
@@ -170,9 +185,10 @@ public class WiiController implements WiimoteListener
 	}
 
 	@Override
-	public void onIrEvent(IREvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void onIrEvent(IREvent e) 
+	{
+		if(_listener != null)
+			_listener.wiimoteIREvent(e);
 	}
 
 	@Override

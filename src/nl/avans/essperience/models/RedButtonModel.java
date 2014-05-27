@@ -7,12 +7,21 @@ public class RedButtonModel extends GameModel
 {
 	private int _colorChange;
 	private int _difficulty;
+	private boolean _dont;
 	
 	public RedButtonModel()
 	{
-		_maxTime = 3000;
+		_maxTime = 1000 + (4000/(int)Math.sqrt(Main.GAME.getDifficulty()));;
 		_difficulty = Main.GAME.getDifficulty();
 		_colorChange = 0;
+		if (Math.random() > 0.5f)
+		{
+			_dont = true;
+		}
+		else
+		{
+			_dont = false;
+		}
 	}
 	
 	@Override
@@ -33,5 +42,10 @@ public class RedButtonModel extends GameModel
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean getDont()
+	{
+		return _dont;
 	}
 }

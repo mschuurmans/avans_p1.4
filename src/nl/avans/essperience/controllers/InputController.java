@@ -6,6 +6,7 @@ import nl.avans.essperience.events.ButtonPressedEventListener;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.utils.Utils;
+import wiiusej.wiiusejevents.physicalevents.IREvent;
 
 public class InputController 
 {
@@ -57,6 +58,13 @@ public class InputController
 				if(_listener != null)
 					_listener.keyPressed(key);
 			}
+			
+			@Override
+			public void wiimoteIREvent(IREvent event)
+			{
+				if(_listener != null)
+					_listener.wiimoteIREvent(event);
+			}
 		});
 	}
 	
@@ -66,6 +74,14 @@ public class InputController
 			_wiiController.activateMotionSensor();
 		else
 			_wiiController.deactivateMotionSensor();
+	}
+	
+	public void setIRTracking(boolean state)
+	{
+		if(state)
+			_wiiController.activateIRTracking();
+		else
+			_wiiController.deactivateIRTracking();
 	}
 	
 	public void addInputTriggeredEventListener(InputTriggerdEventListener listener)

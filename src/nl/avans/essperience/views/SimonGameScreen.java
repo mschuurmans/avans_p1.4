@@ -51,7 +51,6 @@ public class SimonGameScreen extends GameScreen
 		g.drawImage(_backgroundTree, 0, 0, _screenWidth, _screenHeight, null);
 		//drawOverlay GUI. should be displayed in front of the game elemnts
 		model.drawOverlay(g);
-
 		
 		// if model says that the user has guessed right. set the alpha level at 0xff/2
 		if( ((SimonGameModel)_gameModel).getGuessedRight() )
@@ -66,6 +65,8 @@ public class SimonGameScreen extends GameScreen
 			_flashIntensity /= 2;
 			g.setColor(Color.black);
 		}
+		//timebar
+		addTimeBar(g);
 	}
 
 }

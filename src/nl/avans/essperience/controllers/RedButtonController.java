@@ -26,8 +26,16 @@ public class RedButtonController extends GameController
 				switch(key)
 				{
 					case KeySpacebar:
-						_view.stopTimer();
-						callFinishedListener(false);
+						if (_model.getDont())
+						{
+							_view.stopTimer();
+							callFinishedListener(false);
+						}
+						else
+						{
+							_view.stopTimer();
+							callFinishedListener(true);
+						}
 						if (_debug)
 							System.out.println("Red Button Pressed");
 						break;
@@ -41,8 +49,16 @@ public class RedButtonController extends GameController
 			@Override
 			public void timesUpEvent()
 			{
-				_view.stopTimer();
-				callFinishedListener(true);
+				if (_model.getDont())
+				{
+					_view.stopTimer();
+					callFinishedListener(true);
+				}
+				else
+				{
+					_view.stopTimer();
+					callFinishedListener(false);
+				}
 			}
 		});
 		

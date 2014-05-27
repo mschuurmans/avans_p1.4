@@ -20,13 +20,15 @@ public class AssetManager
 													"IndianaJantje/stonesspritesheet.png", "IndianaJantje/indianajantje_player_spritesheet.png",
 													"IndianaJantje/bloodsplash.png", "Simon/banana.png", "Simon/orange.png", "Simon/apple.png",
 													"Simon/pear.png", "Waf/fardoes.png", "Waf/lilly closed.png", "Waf/lilly open.png", "RedButton/arrow.png",
-													"Waf/fardoes background.png", "Simon/simon_background_tree.png", "Simon/simon_background.png"};
+													"Waf/fardoes background.png", "Simon/simon_background_tree.png", "Simon/simon_background.png",
+													"Fops/crosshair.png"};
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
 													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav",
 													"IndianaJantje/bloodsplash.wav", "IndianaJantje/stonebreak.wav", "IndianaJantje/stomp.wav",
 													"Waf/hello.wav", "Waf/ouch.wav", "Waf/whack.wav", 
-													"Flappy/flap.wav", "Flappy/smack.wav", "Flappy/bading.wav"};
+													"Flappy/flap.wav", "Flappy/smack.wav", "Flappy/bading.wav", 
+													"Fops/gun shot.wav", "Fops/gun empty.wav", "Fops/splash.wav", "Essperience/unrealsuperhero.wav"};
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private static Map<String, Clip> _sounds = new HashMap<String, Clip>();

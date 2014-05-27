@@ -13,6 +13,7 @@ import nl.avans.essperience.utils.Enums.DockLocations;
 public class FlappyBirdModel extends GameModel
 {
 	private Image _background;
+	private boolean _debug = false;
 	
 	// pipes
 	private FlappyPipe _pipeTop;
@@ -22,6 +23,10 @@ public class FlappyBirdModel extends GameModel
 	private FlappyPlayer _player;
 	private CollisionDetectedEventListener _collision = null;
 	private FlappyBirdFinishedListener _flappyFinished = null;
+	public  int _maxDiff = 12;
+	//Defines FlapSensitivity at start
+	public 	int _flapSensitivity = -10;
+	public int _minimumFlapSensitivity = 4;
 	public FlappyBirdModel()
 	{
 		
@@ -95,15 +100,44 @@ public class FlappyBirdModel extends GameModel
 		int pipeTopHeight = (int)(Math.random() * Main.GAME.getHeight() / 1.3f) + 1;
 		
 		_player = new FlappyPlayer();
+		int pipeX = (Main.GAME.getWidth()/10)*9;
+		int diff;
+		if (Main.GAME.getDifficulty() > _maxDiff)
+		{
+			diff = _maxDiff;
+		}
+		else
+		{
+			diff = Main.GAME.getDifficulty();
+		}
 		
-		_pipeTop = new FlappyPipe(DockLocations.Top, Main.GAME.getDifficulty() * 2);
-		_pipeTop.setX(900);
+		if (Main.GAME.getDifficulty() > _maxDiff)
+		{
+			int decreaseDiffBy = Main.GAME.getDifficulty() - _maxDiff;
+			if (_flapSensitivity - decreaseDiffBy < _minimumFlapSensitivity)
+			{
+				_flapSensitivity += decreaseDiffBy;
+			}
+			else
+			{
+				_flapSensitivity = _minimumFlapSensitivity;
+			}
+			_flapSensitivity += Main.GAME.getDifficulty() - _maxDiff;
+			
+			if (_debug == true)
+			{
+				System.out.println("flapsensitivity decreased." + _flapSensitivity);
+			}
+		}
+		
+		_pipeTop = new FlappyPipe(DockLocations.Top, diff * 2);
+		_pipeTop.setX(pipeX);
 		_pipeTop.setY(0);
 		_pipeTop.setWidth(100);
 		_pipeTop.setHeight(pipeTopHeight);
 		
-		_pipeBottom = new FlappyPipe(DockLocations.Bottom,Main.GAME.getDifficulty() * 2);
-		_pipeBottom.setX(900);
+		_pipeBottom = new FlappyPipe(DockLocations.Bottom, diff * 2);
+		_pipeBottom.setX(pipeX);
 		_pipeBottom.setY(pipeTopHeight + gap);
 		_pipeBottom.setWidth(100);
 		_pipeBottom.setHeight(Main.GAME.getHeight() - (pipeTopHeight + gap));
@@ -114,8 +148,8 @@ public class FlappyBirdModel extends GameModel
 		//if position more than 10 it can move up. (0 is the top of the screen)
 		if(_player.getY() > 10)
 		{
-			_player.moveY(-6);
 			AssetManager.Instance().playSound("Flappy/flap.wav");
+			_player.moveY(_flapSensitivity);
 		}
 	}
 }

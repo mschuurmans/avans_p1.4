@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import nl.avans.essperience.events.MicroGameFinishedEventListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
+import nl.avans.essperience.models.FopsModel;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.GameOverModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
@@ -20,6 +21,7 @@ import nl.avans.essperience.models.WafModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 import nl.avans.essperience.views.FlappyBirdScreen;
+import nl.avans.essperience.views.FopsScreen;
 import nl.avans.essperience.views.GameOverScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
@@ -33,9 +35,11 @@ public class GameHandler extends JFrame
 {
 	private static final long serialVersionUID = -4608768969398477748L;
 
+	private static int _game;
 	private boolean _failed = false;
 	private int _difficulty = 1;
-	private final int _NUMBEROFGAMES = 1;
+	private final int _NUMBEROFGAMES = 6;
+	private final int _STARTGAME = 6;
 
 	private int _lives = GameHandler.MAX_LIVES;
 
@@ -43,6 +47,7 @@ public class GameHandler extends JFrame
 	private GameScreen _gameScreen;
 	private GameController _gameController;
 	private GameModel _gameModel;
+	private ScoreModel _scoreModel;
 
 	public GameHandler()
 	{
@@ -51,6 +56,7 @@ public class GameHandler extends JFrame
 
 		init(true);
 
+		_scoreModel = new ScoreModel();
 		setContentPane(_gameScreen);
 
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -76,7 +82,7 @@ public class GameHandler extends JFrame
 	public void init(boolean firstRun)
 	{
 		AssetManager.Instance();
-		AssetManager.Instance().playBackgroundMusic("Essperience/background3.wav");
+		AssetManager.Instance().playBackgroundMusic("Essperience/unrealsuperhero.wav");
 		this._gameScreen = new MenuScreen();
 		this._gameModel = new MenuModel();
 		this._gameController = new MenuController((MenuScreen)this._gameScreen, (MenuModel)_gameModel);
@@ -94,7 +100,7 @@ public class GameHandler extends JFrame
 		
 		if(!firstRun)
 			changeScreen();
-		
+
 	}
 
 	public void changeScreen()
@@ -199,7 +205,9 @@ public class GameHandler extends JFrame
 		{
 			if (!_failed && _difficulty > 1)
 			{
+				_scoreModel.update();
 				AssetManager.Instance().playSound("Essperience/levelup.wav");
+				
 			}
 			_failed = !_failed;
 		}
@@ -207,13 +215,13 @@ public class GameHandler extends JFrame
 		// do logic for next game screen here.
 		if(!(_gameController instanceof ScoreScreenController))
 		{
-			this._gameModel = new ScoreModel();
-			this._gameScreen = new ScoreScreen((ScoreModel)_gameModel);
-			this._gameController = new ScoreScreenController((ScoreModel)_gameModel, (ScoreScreen)_gameScreen);
+			_game = (int) (Math.random() * _NUMBEROFGAMES) + _STARTGAME;
+			this._gameScreen = new ScoreScreen(_scoreModel);
+			this._gameController = new ScoreScreenController(_scoreModel, (ScoreScreen)_gameScreen);
 		}
 		else
 		{
-			int rand = (int) (Math.random() * _NUMBEROFGAMES) +2;
+			int rand = (int) (Math.random() * _NUMBEROFGAMES) +1;
 			switch (rand) 
 			{
 				case 1: 
@@ -241,6 +249,11 @@ public class GameHandler extends JFrame
 					this._gameScreen = new SimonGameScreen((SimonGameModel) _gameModel);
 					this._gameController = new SimonGameController((SimonGameModel) _gameModel, (SimonGameScreen)_gameScreen);
 					break;
+				case 6:
+					this._gameModel = new FopsModel();
+					this._gameScreen = new FopsScreen((FopsModel)_gameModel);
+					this._gameController = new FopsController((FopsModel)_gameModel, (FopsScreen)_gameScreen);
+					break;
 				default:
 					reset();
 					break;
@@ -267,7 +280,7 @@ public class GameHandler extends JFrame
 			try
 			{
 				Process proc = Runtime.getRuntime().exec("xset r off");
-				System.out.println("Rpeat is off");
+				System.out.println("Repeat is off");
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}
@@ -278,4 +291,24 @@ public class GameHandler extends JFrame
 		}
 	}
 
+	public static String getNextGame()
+	{
+		switch (_game) 
+		{
+			case 1: 
+				return "Indiana Jantje";
+			case 2:
+				return "Flappy Bird";
+			case 3:
+				return "Whack-a-Fardoes";
+			case 4:
+				return "Red Button";
+			case 5:
+				return "Simon Loves Fruit";
+			case 6:
+				return "Fruit Ops";
+			default:
+				return "error";
+		}
+	}
 }

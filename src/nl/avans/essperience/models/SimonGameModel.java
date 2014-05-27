@@ -63,11 +63,12 @@ public class SimonGameModel extends GameModel
 	private void init()
 	{
 		int _difficulty = Main.GAME.getDifficulty();
-		_difficulty *= 2;
+		_difficulty *= 1;
 		_patternLength = (_difficulty /4) +3; //max 426
 		int stepsPerPiece = 100/ ((_difficulty/4) +5);
 		_totalUpdatesNeeded = _patternLength * stepsPerPiece;
 		_stepsPerUpdate = (_difficulty /2) +4;
+		_maxTime = (int) (_totalUpdatesNeeded * 0.20) * 1000;
 		
 		_guessedRight = false; //used for the controller to check if the button that was pressed whas the right one. // gets set by the method setCurrentFruit()
 		
@@ -127,6 +128,11 @@ public class SimonGameModel extends GameModel
 				_bodyList.add(body);
 				_myWorld.add(body);
 			}
+		}
+		if (getTimeRemaining() == 0)
+		{
+			if(_modelToControllerListener != null)
+				_modelToControllerListener.timesUpEvent();
 		}
 		
 	}
@@ -307,6 +313,8 @@ public class SimonGameModel extends GameModel
 			if(pos == matchNametoNumber( (String)_bodyList.get(i).getUserData() ))
 			{
 				_guessedRight = true;
+				AssetManager.Instance().playSound("Flappy/bading.wav");
+				
 				_buttonsPressedCorrect++;
 				if(_modelToControllerListener != null && i == _bodyList.size()-1)
 				{
