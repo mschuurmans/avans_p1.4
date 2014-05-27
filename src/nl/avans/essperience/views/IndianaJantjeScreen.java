@@ -1,6 +1,9 @@
 package nl.avans.essperience.views;
 
+import java.awt.AlphaComposite;
+import java.awt.Composite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -31,6 +34,8 @@ public class IndianaJantjeScreen extends GameScreen
 	private int _screenWidth;
 	private int _screenHeight;
 	private boolean _dead;
+	
+	private double _splashAlpha = 1;
 	
 	private BufferedImage[] rock;
 	private BufferedImage[] player;
@@ -127,11 +132,22 @@ public class IndianaJantjeScreen extends GameScreen
 	}
 
 	@Override
-	public void paintComponent(Graphics g) 
+	public void paintComponent(Graphics g1) 
 	{
+		Graphics2D g = (Graphics2D)g1;
 		super.paintComponent(g);
 		//System.out.println("drawing");
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
+		
+		//draw SplashScreen
+		Composite composite = g.getComposite();
+		_splashAlpha -= 0.03;
+		if(_splashAlpha > 0)
+		{
+			g.setComposite(AlphaComposite.SrcOver.derive((float) _splashAlpha));
+			g.drawImage(AssetManager.Instance().getImage("IndianaJantje/indianajantje_splashscreen.png"), (Main.GAME.getWidth() / 2) -764/2, (int) (Main.GAME.getHeight() * 0.1), 764, 175, null);
+			g.setComposite(composite);
+		}
 		
 		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2) + _screenWidth/11, _screenHeight/2, _sizeX, _sizeY, null);
 		g.drawImage(player[_drawPlayerX], (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);

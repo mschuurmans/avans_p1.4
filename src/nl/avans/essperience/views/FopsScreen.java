@@ -32,6 +32,7 @@ public class FopsScreen extends GameScreen
 	private static int _screenWidth = Main.GAME.getWidth();
 	private static int _screenHeight = Main.GAME.getHeight();
 	private int _amountOfBullets;
+	private double _splashAlpha = 1;
 	
 	public FopsScreen(FopsModel model) 
 	{
@@ -69,10 +70,10 @@ public class FopsScreen extends GameScreen
 		
 		//draw SplashScreen
 		Composite composite = g.getComposite();
-		float alpha = (float) (model.getTimeRemaining() * 3) -2;
-		if(alpha > 0)
+		_splashAlpha -= 0.03;
+		if(_splashAlpha > 0)
 		{
-			g.setComposite(AlphaComposite.SrcOver.derive(alpha));
+			g.setComposite(AlphaComposite.SrcOver.derive((float) _splashAlpha));
 			g.drawImage(AssetManager.Instance().getImage("Fops/fruitops_splashscreen.png"), (Main.GAME.getWidth() / 2) -400/2, (int) (Main.GAME.getHeight() * 0.1), 800/2, 340/2, null);
 			g.setComposite(composite);
 		}
