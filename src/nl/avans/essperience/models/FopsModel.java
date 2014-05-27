@@ -120,7 +120,7 @@ public class FopsModel extends GameModel
 					_cursorY > fruitY - _XOFFSETALLOWED &&
 					_cursorY < fruitY + _YOFFSETALLOWED)
 			{
-				System.out.println("adding splash at x: " + _cursorX + " y: " + _cursorY);
+				//System.out.println("adding splash at x: " + _cursorX + " y: " + _cursorY);
 				_splashes.add(new Splash((int)_cursorX, (int)_cursorY, (String)_bodies.get(i).getUserData()));
 				fruitHit(i);
 				indexes.add(i);
@@ -243,7 +243,7 @@ public class FopsModel extends GameModel
 			int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
 			int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
 			newBody[i].setPosition(newX, newY);
-			newBody[i].setUserData(uData);
+			newBody[i].setUserData((String)uData + (i+1));
 			newBody[i].adjustVelocity(new Vector2f((float) (Math.cos(angleOffset*i)*_multiplier),(float) (Math.sin(angleOffset*i))*_multiplier));
 		}
 

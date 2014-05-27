@@ -3,13 +3,12 @@ package nl.avans.essperience.views;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import nl.avans.essperience.entities.fops.Splash;
-import nl.avans.essperience.main.Main;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FopsModel;
 import nl.avans.essperience.utils.AssetManager;
@@ -18,17 +17,14 @@ import nl.avans.essperience.utils.Utils;
 public class FopsScreen extends GameScreen 
 {
 	private static final long serialVersionUID = -6529289814578856921L;
-	private Image[] _fruitImages = new Image[8];
+	private Image[] _fruitImages = new Image[4];
+	private BufferedImage[] _fruitPieceImages = new BufferedImage[4];
 	private Image _crosshair = AssetManager.Instance().getImage("Fops/crosshair.png");
 	private Image _bullet = AssetManager.Instance().getImage("Fops/bullet.png");
 	private static final int BANANA = 0;
 	private static final int ORANGE = 1;
 	private static final int APPLE = 2;
 	private static final int PEAR = 3;
-	private static final int BANANAPIECE = 4;
-	private static final int ORANGEPIECE = 5;
-	private static final int APPLEPIECE = 6;
-	private static final int PEARPIECE = 7;
 	
 	private static int _screenWidth = Main.GAME.getWidth();
 	private static int _screenHeight = Main.GAME.getHeight();
@@ -42,10 +38,10 @@ public class FopsScreen extends GameScreen
 		_fruitImages[ORANGE] = AssetManager.Instance().getImage("Simon/orange.png");
 		_fruitImages[APPLE] = AssetManager.Instance().getImage("Simon/apple.png");
 		_fruitImages[PEAR] = AssetManager.Instance().getImage("Simon/pear.png");
-		_fruitImages[BANANAPIECE] = AssetManager.Instance().getImage("Fops/banana_piece.png");
-		_fruitImages[ORANGEPIECE] = AssetManager.Instance().getImage("Fops/orange_piece.png");
-		_fruitImages[APPLEPIECE] = AssetManager.Instance().getImage("Fops/apple_piece.png");
-		_fruitImages[PEARPIECE] = AssetManager.Instance().getImage("Fops/pear_piece.png");
+		_fruitPieceImages[BANANA] = (BufferedImage) AssetManager.Instance().getImage("Fops/banana_pieces.png");
+		_fruitPieceImages[ORANGE] = (BufferedImage) AssetManager.Instance().getImage("Fops/orange_pieces.png");
+		_fruitPieceImages[APPLE] = (BufferedImage) AssetManager.Instance().getImage("Fops/apple_pieces.png");
+		_fruitPieceImages[PEAR] = (BufferedImage) AssetManager.Instance().getImage("Fops/pear_pieces.png");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -68,7 +64,7 @@ public class FopsScreen extends GameScreen
 		//drawing splashes
 		for (Splash s : splashes)
 		{
-			System.out.println("drawing splash: " + s.getType() +  " rotated over: " + s.getRotation() + " at x: " + s.getX() + " and y: " + s.getY());
+			//System.out.println("drawing splash: " + s.getType() +  " rotated over: " + s.getRotation() + " at x: " + s.getX() + " and y: " + s.getY());
 			s.draw(g);
 		}
 		
@@ -129,10 +125,22 @@ public class FopsScreen extends GameScreen
 		case "orange": return _fruitImages[ORANGE];
 		case "pear": return _fruitImages[PEAR];
 		case "apple": return _fruitImages[APPLE];
-		case "bananapiece": return _fruitImages[BANANAPIECE];
-		case "orangepiece": return _fruitImages[ORANGEPIECE];
-		case "pearpiece": return _fruitImages[PEARPIECE];
-		case "applepiece": return _fruitImages[APPLEPIECE];
+		case "bananapiece1": return _fruitPieceImages[BANANA].getSubimage(0, 0,512, 512);
+		case "bananapiece2": return _fruitPieceImages[BANANA].getSubimage(512, 0,512, 512);
+		case "bananapiece3": return _fruitPieceImages[BANANA].getSubimage(1024, 0,512, 512);
+		case "bananapiece4": return _fruitPieceImages[BANANA].getSubimage(1536, 0,512, 512);
+		case "orangepiece1": return _fruitPieceImages[ORANGE].getSubimage(0, 0,512, 512);
+		case "orangepiece2": return _fruitPieceImages[ORANGE].getSubimage(512, 0,512, 512);
+		case "orangepiece3": return _fruitPieceImages[ORANGE].getSubimage(1024, 0,512, 512);
+		case "orangepiece4": return _fruitPieceImages[ORANGE].getSubimage(1536, 0,512, 512);
+		case "pearpiece1": return _fruitPieceImages[PEAR].getSubimage(0, 0,512, 512);
+		case "pearpiece2": return _fruitPieceImages[PEAR].getSubimage(512, 0,512, 512);
+		case "pearpiece3": return _fruitPieceImages[PEAR].getSubimage(1024, 0,512, 512);
+		case "pearpiece4": return _fruitPieceImages[PEAR].getSubimage(1536, 0,512, 512);
+		case "applepiece1": return _fruitPieceImages[APPLE].getSubimage(0, 0,512, 512);
+		case "applepiece2": return _fruitPieceImages[APPLE].getSubimage(512, 0,512, 512);
+		case "applepiece3": return _fruitPieceImages[APPLE].getSubimage(1024, 0,512, 512);
+		case "applepiece4": return _fruitPieceImages[APPLE].getSubimage(1536, 0,512, 512);
 		default: return null;
 		}
 	}
