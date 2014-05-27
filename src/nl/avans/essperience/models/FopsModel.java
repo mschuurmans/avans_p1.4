@@ -6,6 +6,7 @@ import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
+import nl.avans.essperience.entities.fops.FruitOpsPiece;
 import nl.avans.essperience.entities.simon.FruitPiece;
 import nl.avans.essperience.main.Main;
 
@@ -20,7 +21,7 @@ public class FopsModel extends GameModel
 	private int _amountOfBullets;
 	private double _cursorX;
 	private double _cursorY;
-	private ArrayList<FruitPiece> _fruits = new ArrayList<FruitPiece>();
+	private ArrayList<FruitOpsPiece> _fruits = new ArrayList<FruitOpsPiece>();
 	private ArrayList<Body> _bodies = new ArrayList<Body>();
 	
 	public FopsModel()
@@ -42,7 +43,7 @@ public class FopsModel extends GameModel
 		System.out.println("amount of bullets is: " + _amountOfBullets);
 		for (int i = 0; i < _amountOfFruit; i++)
 		{
-			FruitPiece fruit = new FruitPiece();
+			FruitOpsPiece fruit = new FruitOpsPiece();
 		//	fruit.getBodyFops();
 			_fruits.add(fruit);
 		}
@@ -50,10 +51,10 @@ public class FopsModel extends GameModel
 		_myWorld = new World(new Vector2f(0.0f, 10.0f), 3, new QuadSpaceStrategy(20,5));
 
 		_myWorld.clear();
-		for (FruitPiece f : _fruits)
+		for (FruitOpsPiece f : _fruits)
 		{
 			System.out.println("adding body to world");
-			Body body = f.getBodyFops();
+			Body body = f.getBody();
 			_myWorld.add(body);
 			_bodies.add(body);
 		}
@@ -79,7 +80,7 @@ public class FopsModel extends GameModel
 		}
 	}
 	
-	public ArrayList<FruitPiece> getFruits()
+	public ArrayList<FruitOpsPiece> getFruits()
 	{
 		return _fruits;
 	}
