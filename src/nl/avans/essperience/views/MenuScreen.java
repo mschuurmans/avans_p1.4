@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
+import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class MenuScreen extends GameScreen
 {
@@ -39,6 +41,47 @@ public class MenuScreen extends GameScreen
 		//drawing code.
 		if(_debug)
 			System.out.println("Drawing menu screen");
+		if(Main.GAME.getScore() == 0) // TODO to change to != 0
+		{
+			//Drawing the keyboard keys
+			for(int i = 0; i < 26; i++) // normal letter keys
+			{	
+				int width = 93;
+				int height = 88;
+				
+				int xIndex, yIndex, xOffset;
+				
+				if( i < 10 )
+				{
+					xIndex = i % 10;
+					yIndex = 1;
+					xOffset = 0;
+				}
+				else if( i < 19)
+				{
+					xIndex = i % 10;
+					yIndex = 2;
+					xOffset = 20;
+				}
+				else
+				{
+					xIndex = i % 9;
+					yIndex = 3;
+					xOffset = 0;
+				}
+			
+				int x = 100 + xOffset + xIndex * (width + 2);
+				int y = 100 + yIndex * (height + 3);
+				
+				g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey.png"), x, y, width, height, null);
+				Font font = new Font("Arial", Font.PLAIN, 30);
+				g.setFont(font);
+				g.drawString("" + i, x + width/5, y + height /2);
+			}
+			//shift space and enter
+			//TODO
+		}
+		
 		if(Main.GAME != null)
 		{
 			int xCenter = Main.GAME.getWidth() / 2;

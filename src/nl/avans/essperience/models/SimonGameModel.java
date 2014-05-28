@@ -396,7 +396,7 @@ public class SimonGameModel extends GameModel
 	private void endGame(boolean succes)
 	{
 		// make 100 steps to prevent the state of game saving with pieces in mid air
-		for(int i = 0; i < 1000; i++)
+		for(int i = 0; i < 300; i++)
 		{
 			_myWorld.step();
 		}

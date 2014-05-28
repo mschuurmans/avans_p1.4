@@ -75,6 +75,11 @@ public class FopsModel extends GameModel
 		}
 		_myWorld.setGravity(0, _gravity);
 		
+//		for (int i = 0; i < 20; i++)
+//		{
+//			AssetManager.Instance().addBulletHole(new BulletHole(new Vector2f((float)Math.random() * Main.GAME.getWidth(), (float)Math.random() * Main.GAME.getHeight())));
+//		}
+		
 	}	
 
 	public void update()
