@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import net.phys2d.math.Vector2f;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.utils.AssetManager;
@@ -43,12 +44,23 @@ public class MenuScreen extends GameScreen
 			System.out.println("Drawing menu screen");
 		if(Main.GAME.getScore() == 0) // TODO to change to != 0
 		{
+			
+			//keyboard
+			char[] charArray = "qwertyuiopasdfghjklzxcvbnm".toCharArray();
+			char shiftArrow = 0x21E7;
+			String shiftString = "Shift";
+			char returnArrow = 0x23CE;
+			String returnString = "Enter";
+			int selectedKey = 5;
+
+			int width = 93;
+			int keyHeight = 88;
+			
+			Vector2f[] extraKeyLocations = new Vector2f[4];
+			
 			//Drawing the keyboard keys
 			for(int i = 0; i < 26; i++) // normal letter keys
 			{	
-				int width = 93;
-				int height = 88;
-				
 				int xIndex, yIndex, xOffset;
 				
 				if( i < 10 )
@@ -61,25 +73,53 @@ public class MenuScreen extends GameScreen
 				{
 					xIndex = i % 10;
 					yIndex = 2;
-					xOffset = 20;
+					xOffset = 40;
 				}
 				else
 				{
 					xIndex = i % 9;
 					yIndex = 3;
-					xOffset = 0;
+					xOffset = 80;
 				}
 			
-				int x = 100 + xOffset + xIndex * (width + 2);
-				int y = 100 + yIndex * (height + 3);
+				int x = 100 + xOffset + (xIndex * (width + 2));
+				int y = 100 + yIndex * (keyHeight + 3);
+
+				extraKeyLocations[0] = new Vector2f((float) 100 - (4 + 9), 100 + yIndex * (keyHeight + 3));
+				extraKeyLocations[1] = new Vector2f((float) 100 + 3 + (9* (width)), 100 + yIndex * (keyHeight + 3));
+				extraKeyLocations[2] = new Vector2f((float) 100 + 60 + (9* (width)), 100 + 1 * (keyHeight + 3));
+				extraKeyLocations[3] = new Vector2f((float) 100 + 40 + (2* (width)), 100 + 4 * (keyHeight + 3));
 				
-				g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey.png"), x, y, width, height, null);
+				//draw the Keys
+				g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey.png"), x, y, width, keyHeight, null);
+				
+				//draw the letters on the Key
 				Font font = new Font("Arial", Font.PLAIN, 30);
 				g.setFont(font);
-				g.drawString("" + i, x + width/5, y + height /2);
+				g.drawString("" + charArray[i], x + width/5, y + keyHeight /2);
+				
+				//if selected. display hand
+				if(i == selectedKey)
+					g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x + 60, y + 50, 22, 32, null);
 			}
 			//shift space and enter
-			//TODO
+			//shift keys
+			for(int i = 0; i < 2; i++)
+			{
+				int x = (int)extraKeyLocations[i].getX();
+				int y = (int)extraKeyLocations[i].getY();
+				g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey_shift.png"), x, y, 186, 88, null);
+				g.drawString(shiftArrow + shiftString, x + width/5, y + keyHeight /2);
+			}
+			//enter key
+			int x = (int)extraKeyLocations[2].getX();
+			int y = (int)extraKeyLocations[2].getY();
+			g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey_return.png"), x, y, 179, 179, null);
+			g.drawString(returnString + returnArrow, x + width/5, y + keyHeight + keyHeight /2);
+			//space bar
+			x = (int)extraKeyLocations[3].getX();
+			y = (int)extraKeyLocations[3].getY();
+			g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey_spacebar.png"), x, y, 558, 88, null);
 		}
 		
 		if(Main.GAME != null)
