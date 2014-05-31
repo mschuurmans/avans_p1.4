@@ -125,6 +125,41 @@ public class WiiController implements WiimoteListener
 			if(_listener != null)
 				_listener.wiimoteButtonPressed(GameKeys.WiiB);
 		}
+		else if(e.isButtonUpJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiUp);
+		}
+		else if(e.isButtonRightJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiRight);
+		}
+		else if(e.isButtonDownJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiDown);
+		}
+		else if(e.isButtonLeftJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiLeft);
+		}
+		else if(e.isButtonMinusJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiMinus);
+		}
+		else if(e.isButtonPlusJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiPlus);
+		}
+		else if(e.isButtonHomeJustPressed())
+		{
+			if(_listener != null)
+				_listener.wiimoteButtonPressed(GameKeys.WiiHome);
+		}
 	}
 
 	@Override

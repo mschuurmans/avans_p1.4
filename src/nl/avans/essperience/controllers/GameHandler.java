@@ -77,6 +77,11 @@ public class GameHandler extends JFrame
 		return _playername;
 	}
 	
+	public void setPlayerName(String name)
+	{
+		this._playername = name;
+	}
+	
 	public int getLivesLeft()
 	{
 		return _lives;

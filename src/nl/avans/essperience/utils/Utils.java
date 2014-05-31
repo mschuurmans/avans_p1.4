@@ -106,16 +106,37 @@ public class Utils
 		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
  
 	}
+	
+	public static String parseName(String name)
+	{
+		String parsedName = "";
+		
+		for(int i = 0; i < name.length(); i++)
+		{
+			if(name.charAt(i) == ' ')
+			{
+				parsedName += "%20";
+			}
+			else
+			{
+				parsedName += name.charAt(i);
+			}
+		}
+		
+		return parsedName;
+	}
 
 	public static void addHighScore(final String name, final int score)
-	{
+	{	
+		final String parsedName = parseName(name);
+		
 		new Thread(new Runnable()
 		{
 			public void run()
 			{
 				try
 				{
-					String url = "http://essperience.tostring.nl/highscore_add/" + name + "/" + score;
+					String url = "http://essperience.tostring.nl/highscore_add/" + parsedName + "/" + score;
 					 
 					URL obj = new URL(url);
 					HttpURLConnection con = (HttpURLConnection) obj.openConnection();
