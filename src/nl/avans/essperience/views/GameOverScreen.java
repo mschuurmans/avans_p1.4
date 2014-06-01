@@ -15,9 +15,27 @@ public class GameOverScreen extends GameScreen {
 	private static final long serialVersionUID = 6570132551382597299L;
 	
 	private Vector2f _handPosition = new Vector2f();
+	
+	private int keybX, keybY;
+	private int keyboardWidth = 1090;
+	private int keyboardHeight = 450;
 
-	public GameOverScreen(GameOverModel model) {
+	public GameOverScreen(GameOverModel model)
+	{
 		super(model);
+		
+		//Keyboard positioning		
+		if (Main.GAME.getWidth() >= 1920)
+		{
+			keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2 - 100;
+			keybY = Main.GAME.getHeight() - keyboardHeight;
+		}
+		else
+		{
+			keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2;
+			keybY = Main.GAME.getHeight() - keyboardHeight + 200;
+		}
+		//end of keyboard positioning
 	}
 
 	@Override
@@ -31,46 +49,43 @@ public class GameOverScreen extends GameScreen {
 	{
 		super.paintComponent(g);
 		
+		if(Main.GAME.getWidth() < 1920)
+			g.translate(0, -90);
+		
+		//Strings above keyboard
 		int xCenter = Main.GAME.getWidth() / 2;
 		int yLocation = Main.GAME.getHeight() / 12;
 		
 		Font font = new Font("Arial", Font.PLAIN, 60) ;
-		String gameOver = "Game Over";
 		
 		g.setFont(font);
-		g.drawString(gameOver, xCenter - Utils.getWidth(gameOver, g.getFont()) /2, yLocation);
+		g.drawImage(AssetManager.Instance().getImage("Essperience/gameover.png"), xCenter - 840/2, (int) (yLocation + (0.05 * Main.GAME.getHeight())), 840, 87, null);
 		
 		String scoreString = "Your score: " + Main.GAME.getScore();
-		g.drawString(scoreString, xCenter - Utils.getWidth(scoreString, g.getFont()) /2, yLocation + 60);
+		g.drawString(scoreString, xCenter - Utils.getWidth(scoreString, g.getFont()) /2, yLocation + 240);
 		
 		String enterString = "Enter your name: ";
-		g.drawString(enterString, xCenter /2 - Utils.getWidth(enterString, g.getFont()) /2, yLocation + 170);
+		int enterStringWidth = Utils.getWidth(enterString, g.getFont());
+		int enterStringX =  keybX;
+		g.drawString(enterString, enterStringX, yLocation * 6);
 		
+		//code that displays the nameString that currently has been typed with the onscreen keyboard
 		String nameString = ((GameOverModel)_gameModel).getName() + ((GameOverModel)_gameModel).getNextChartoDisplay();
-		g.drawString(nameString, xCenter -50, yLocation + 170);
+		g.drawString(nameString, enterStringX + enterStringWidth , yLocation * 6);
 		
-		String orNot = "Or hit the spacebar on the keyboard to skip";
+		String orNot = "Or hit the red button to skip";
 		g.setFont(new Font("Arial", Font.PLAIN, 16));
-		g.drawString(orNot, 50, yLocation + 190);
+		g.drawString(orNot, enterStringX + 5, yLocation * 6 + 25);
 		g.setFont(font);
+		//end of strings above keyboard
 		
 		//Drawing the keyboard
 		if(true) // TODO to change to != 0
 		{
+			//note: keyboard location and height/Width are declared in the first section.
 
 			int width = 93;
 			int keyHeight = 88;
-			int keyboardWidth = 1090;
-			int keyboardHeight = 450;
-			
-			int keybX;
-			
-			if (Main.GAME.getWidth() == 1920)
-				keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2 - 100;
-			else
-				keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2;
-			
-			int keybY = Main.GAME.getHeight() - keyboardHeight;
 			
 			Vector2f[] extraKeyLocations = new Vector2f[4];
 			
@@ -85,7 +100,9 @@ public class GameOverScreen extends GameScreen {
 				int listSize = ((GameOverModel)_gameModel).getHighscoreQuickList().size();
 				String string = ((GameOverModel)_gameModel).getHighscoreQuickList().get( listSize - (i + 1)); //dem dirty tricks to reverse the list
 				
-				g.drawString(string, x, y);
+				string = Utils.cropString(string, 140/2); // 140 pixels /2 because the font is big :o
+				
+				g.drawString(string, x +5, y);
 				
 				g.draw3DRect(x, y -22, 140, 30, true);
 				
@@ -207,7 +224,7 @@ public class GameOverScreen extends GameScreen {
 			
 			
 			//drawing the Wiimote keyMap
-			if (Main.GAME.getWidth() == 1920)
+			if (Main.GAME.getWidth() >= 1920)
 			{
 				x = keybX + keyboardWidth + 180;
 				y = keybY -80;

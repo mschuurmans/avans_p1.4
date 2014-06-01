@@ -101,6 +101,32 @@ public class Utils
 		return getWidth(s, font);
 	}
 	
+	/**
+	 * Crops a string to fit the maxWidth that has been passed in
+	 * @param s string to be cropped
+	 * @param maxWidth: max width(in pixels) the returned string has to fit in.
+	 * @return a cropped string that fits the specified maxWidth
+	 * @author jack
+	 */
+	public static String cropString(String s, int maxWidth)
+	{
+//		System.out.println("StringWidth and maxWidth"); //DEBUGGING PURPOSES
+//		System.out.println(getWidth(s));
+//		System.out.println(maxWidth);
+
+		String string = s;
+
+		if(getWidth(string) < maxWidth)
+			return string;
+
+		while(getWidth(string + "...") > maxWidth)
+			string = string.substring(0, string.length() - 1);
+
+		string += "...";
+
+		return string;
+	}
+	
 	public static boolean isUnix(String OS) {
 		 
 		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );

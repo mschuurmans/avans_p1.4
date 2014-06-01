@@ -35,6 +35,7 @@ public class GameOverController extends GameController
 						int sizeList = _model.getHighscoreQuickList().size();
 						String name = _model.getHighscoreQuickList().get(sizeList - (selectedKey + 20 + 1));
 						_model.setLocalName(name);
+						_model.setShiftEnabled(false);
 						_model.setSelectedKey(GameOverModel.ENTERID);
 					}
 					else if(selectedKey >= 0) //if the keyID is 0 or above 0. enter the corresponding character to the name
