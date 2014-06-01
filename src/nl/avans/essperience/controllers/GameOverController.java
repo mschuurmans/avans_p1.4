@@ -3,6 +3,7 @@ package nl.avans.essperience.controllers;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.GameOverModel;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;
 import nl.avans.essperience.views.GameOverScreen;
 
@@ -29,13 +30,20 @@ public class GameOverController extends GameController
 				{
 					// add the selected character to the model.localName
 					int selectedKey = _model.getSelectedKey();
-					if(selectedKey >= 0) //if the keyID is 0 or above 0. enter the corresponding character to the name
+					if ( (selectedKey >= -20) && (selectedKey < -10) )
+					{
+						int sizeList = _model.getHighscoreQuickList().size();
+						String name = _model.getHighscoreQuickList().get(sizeList - (selectedKey + 20 + 1));
+						_model.setLocalName(name);
+						_model.setSelectedKey(GameOverModel.ENTERID);
+					}
+					else if(selectedKey >= 0) //if the keyID is 0 or above 0. enter the corresponding character to the name
 					{
 						int keyID = _model.getSelectedKey();
 						_model.addCharactertoLocalName(_model.getKeyboardCharacters()[keyID]);
 
 						if(_model.getName().length() == 1)
-							_model.toggleShift(); // after entering the first character. toggle the shift off.
+							_model.setShiftEnabled(false); // after entering the first character. toggle the shift off.
 					}
 					else if(selectedKey == GameOverModel.ENTERID) //if the keyID == enterID (-1) and the A is pressed. Submit Score. and continue game
 						submitScore(true);
@@ -94,9 +102,13 @@ public class GameOverController extends GameController
 	{
 		int sk = _model.getSelectedKey();
 		
-		if( (sk >= 0) && (sk <= 9) ) //when on the upper row. go to the spacebar
+		if ( (sk >= -20) && (sk < -10) ) //when the quickselectionbar is selected and button up is pressed. go to the spacebar
 		{
 			_model.setSelectedKey(GameOverModel.SPACEBARID);
+		}
+		else if( (sk >= 0) && (sk <= 9) ) //when on the upper row. go to the spacebar
+		{
+			_model.setSelectedKey((int)(sk/1.5) - 20);
 		}
 		else if (sk == GameOverModel.SPACEBARID) // when the spacebar is selected. go to the 'z' key
 		{
@@ -135,7 +147,16 @@ public class GameOverController extends GameController
 		int sk = _model.getSelectedKey();
 		
 		// this switch checks where the hand should move
-		if( (sk >= 0 ) && (sk != 9) && (sk != 18) && (sk != 25) ) //when the hand is >= 0 and not on 9, 18 or 25. the hand gets +1 so it moves to the char on the right
+
+		if (sk == (AssetManager.Instance().getHighscoreQuickList().size() -1) -20)
+		{
+			_model.setSelectedKey(-20);
+		}
+		else if ( (sk >= -20) && (sk < -10))
+		{
+			_model.setSelectedKey(sk + 1);
+		}
+		else if( (sk >= 0 ) && (sk != 9) && (sk != 18) && (sk != 25) ) //when the hand is >= 0 and not on 9, 18 or 25. the hand gets +1 so it moves to the char on the right
 		{
 			_model.setSelectedKey(sk +1);
 		}
@@ -165,7 +186,11 @@ public class GameOverController extends GameController
 	{
 		int sk = _model.getSelectedKey();
 		
-		if( (sk >= 0) && (sk <= 8) ) //when on the upper row add + 10
+		if ( (sk >= -20) && (sk < -10))
+		{
+			_model.setSelectedKey((int) (sk + 20 + (sk + 20)/1.5) );
+		}
+		else if( (sk >= 0) && (sk <= 8) ) //when on the upper row add + 10
 		{
 			_model.setSelectedKey(sk + 10);
 		}
@@ -173,9 +198,9 @@ public class GameOverController extends GameController
 		{
 			_model.setSelectedKey(GameOverModel.ENTERID);
 		}
-		else if (sk == GameOverModel.SPACEBARID) // when the spacebar is selected. go to the 'q' key
+		else if (sk == GameOverModel.SPACEBARID) // when the spacebar is selected. go to the quickSelectionBar
 		{
-			_model.setSelectedKey(0);
+			_model.setSelectedKey(-20);
 		}
 		else if (sk == 10) //if the 'a' key is selected add 9 instead of 8 for the selector to end up at 'z' instead of 'l'
 		{
@@ -211,7 +236,16 @@ public class GameOverController extends GameController
 	{
 		int sk = _model.getSelectedKey();
 
-		if( (sk > 0 ) && (sk != 10) && (sk != 20) ) //when the hand is > 0 and not on 10 or 20. the hand gets -1 so it moves to the char on the left
+		if ( (sk > -20) && (sk < -10))
+		{
+			_model.setSelectedKey(sk - 1);
+		}
+		else if (sk == -20)
+		{
+			int listSize = AssetManager.Instance().getHighscoreQuickList().size();
+			_model.setSelectedKey(sk + (listSize -1) );
+		}
+		else if( (sk > 0 ) && (sk != 10) && (sk != 19) ) //when the hand is > 0 and not on 10 or 20. the hand gets -1 so it moves to the char on the left
 		{
 			_model.setSelectedKey(sk -1);
 		}

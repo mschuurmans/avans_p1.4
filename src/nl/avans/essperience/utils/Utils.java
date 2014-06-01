@@ -111,6 +111,11 @@ public class Utils
 	{
 		String parsedName = "";
 		
+		if(name.length() == 0)
+		{
+			return "Unknown%20Soldier";
+		}
+		
 		for(int i = 0; i < name.length(); i++)
 		{
 			if(name.charAt(i) == ' ')

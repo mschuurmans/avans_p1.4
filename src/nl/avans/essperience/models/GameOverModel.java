@@ -1,6 +1,9 @@
 package nl.avans.essperience.models;
 
+import java.util.List;
+
 import nl.avans.essperience.main.Main;
+import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 
 public class GameOverModel extends GameModel
@@ -19,7 +22,7 @@ public class GameOverModel extends GameModel
 	private char[] _charArray = "qwertyuiopasdfghjklzxcvbnm".toCharArray();
 	private String _shiftString = (char)0x21E7 + "Shift";
 	private String _returnString = "Enter" + (char)0x23CE;
-	private int _selectedKeyID = 5;
+	private int _selectedKeyID;
 	private boolean _shiftEnabled = true;
 	
 	public GameOverModel()
@@ -27,6 +30,11 @@ public class GameOverModel extends GameModel
 		startCursorThread();
 		
 		this._name = "";
+		
+		if( !AssetManager.Instance().getHighscoreQuickList().isEmpty() )
+			_selectedKeyID = -20;
+		else
+			_selectedKeyID = 0;
 //		Utils.addHighScore(name, score);
 	}
 	
@@ -42,16 +50,31 @@ public class GameOverModel extends GameModel
 	}
 	
 	/**
-	 * purges the String name that has been created in the gameOverScreen to the Main.GAME
+	 * purges the String name that has been created in the gameOverScreen to the Main.GAME and stores it in the quicklist when not there.
 	 */
 	public void setPlayerName()
 	{
 		Main.GAME.setPlayerName(_name);
+		
+		if(_name.length() > 0)
+		{
+			AssetManager.Instance().addQuickListEntry(_name);
+		}
+	}
+	
+	public List<String> getHighscoreQuickList()
+	{
+		return AssetManager.Instance().getHighscoreQuickList();
 	}
 	
 	public void addCharactertoLocalName(char c)
 	{
 		this._name += c;
+	}
+
+	public void setLocalName(String s)
+	{
+		this._name = s;
 	}
 	
 	public String getName()
@@ -97,6 +120,11 @@ public class GameOverModel extends GameModel
 	public void toggleShift()
 	{
 		this._shiftEnabled = !_shiftEnabled;
+	}
+	
+	public void setShiftEnabled(boolean bool)
+	{
+		this._shiftEnabled = bool;
 	}
 	
 	public boolean getShiftEnabled()

@@ -1,9 +1,17 @@
 package nl.avans.essperience.utils;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +56,9 @@ public class AssetManager
 	
 	private List<BulletHole> _bulletHoles = new ArrayList<BulletHole>();
 	private List<FruitPiece> _fruitPieces = new ArrayList<FruitPiece>();
+	
+	//quicklist of names to enter on gameOverScreen
+	private List<String> _highscoreQuickList = new ArrayList<String>();
 
 	private static AssetManager _instance = null;
 
@@ -110,6 +121,82 @@ public class AssetManager
 			}
 			catch(Exception e){e.printStackTrace();}
 		}
+		
+		readQuicklist();
+
+	}
+	
+	private void readQuicklist()
+	{
+		try
+		{
+			String url = this.getClass().getClassLoader().getResource("Essperience/namesQuicklist.dat").getFile();
+			
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(url));
+
+			@SuppressWarnings("unchecked")
+			List<String> list = (ArrayList<String>)in.readObject();
+			
+			this._highscoreQuickList = list;
+			
+			in.close();
+			
+		} catch (ClassNotFoundException e){
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("file: namesQuickList.dat does not currently exist");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void writeQuickList()
+	{
+		ObjectOutputStream out;
+		try {
+			String url = this.getClass().getClassLoader().getResource("Essperience/namesQuicklist.dat").getFile();
+			out = new ObjectOutputStream(new FileOutputStream(url));
+			
+			out.writeObject(_highscoreQuickList);
+			
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	public void addQuickListEntry(String s)
+	{
+//		if(_highscoreQuickList.contains(s))
+//		{
+//			Iterator<String> it = _highscoreQuickList.iterator();
+//			if(it.hasNext())
+//			{
+//				String tempString = it.next();
+//				if (tempString.equals(s))
+//				{
+//					it.remove();
+//				}
+//			}
+//		}
+		
+		_highscoreQuickList.add(s);
+		
+		if(_highscoreQuickList.size() > 7)
+		{
+			_highscoreQuickList = _highscoreQuickList.subList(1, 8);
+		}
+		
+		writeQuickList();
+	}
+	
+	public List<String> getHighscoreQuickList()
+	{
+		return this._highscoreQuickList;
 	}
 
 	public void playSound(final String key)

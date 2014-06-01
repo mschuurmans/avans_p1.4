@@ -13,6 +13,8 @@ import nl.avans.essperience.utils.Utils;
 public class GameOverScreen extends GameScreen {
 
 	private static final long serialVersionUID = 6570132551382597299L;
+	
+	private Vector2f _handPosition = new Vector2f();
 
 	public GameOverScreen(GameOverModel model) {
 		super(model);
@@ -30,7 +32,7 @@ public class GameOverScreen extends GameScreen {
 		super.paintComponent(g);
 		
 		int xCenter = Main.GAME.getWidth() / 2;
-		int yLocation = Main.GAME.getHeight() / 6;
+		int yLocation = Main.GAME.getHeight() / 12;
 		
 		Font font = new Font("Arial", Font.PLAIN, 60) ;
 		String gameOver = "Game Over";
@@ -41,16 +43,38 @@ public class GameOverScreen extends GameScreen {
 		String scoreString = "Your score: " + Main.GAME.getScore();
 		g.drawString(scoreString, xCenter - Utils.getWidth(scoreString, g.getFont()) /2, yLocation + 60);
 		
-		String enterString = "Enter your name to submit your highscore";
-		g.drawString(enterString, xCenter - Utils.getWidth(enterString, g.getFont()) /2, yLocation + 120);
+		String enterString = "Enter your name: ";
+		g.drawString(enterString, xCenter /2 - Utils.getWidth(enterString, g.getFont()) /2, yLocation + 170);
+		
+		String nameString = ((GameOverModel)_gameModel).getName() + ((GameOverModel)_gameModel).getNextChartoDisplay();
+		g.drawString(nameString, xCenter -50, yLocation + 170);
 		
 		String orNot = "Or hit the spacebar on the keyboard to skip";
 		g.setFont(new Font("Arial", Font.PLAIN, 16));
-		g.drawString(orNot, 50, yLocation + 150);
+		g.drawString(orNot, 50, yLocation + 190);
 		g.setFont(font);
 		
-		String nameString = ((GameOverModel)_gameModel).getName() + ((GameOverModel)_gameModel).getNextChartoDisplay();
-		g.drawString(nameString, 200, yLocation + 180);
+		//draw the names from the quickSelection list
+		g.setFont(new Font("Arial", Font.PLAIN, 24));
+		for(String s : ((GameOverModel)_gameModel).getHighscoreQuickList())
+		{
+			int i = ((GameOverModel)_gameModel).getHighscoreQuickList().indexOf(s);
+			int x = (Main.GAME.getWidth() /2 - 1090/2) + ( i * 145 );
+			int y = 320;
+			
+			int listSize = ((GameOverModel)_gameModel).getHighscoreQuickList().size();
+			String string = ((GameOverModel)_gameModel).getHighscoreQuickList().get( listSize - (i + 1)); //dem dirty tricks to reverse the list
+			
+			g.drawString(string, x, y);
+			
+			g.draw3DRect(x, y -22, 140, 30, true);
+			
+			if( ((GameOverModel) _gameModel).getSelectedKey() == i -20)
+			{
+				_handPosition.set(x + 70, y - 5);
+			}
+		}
+		g.setFont(font);
 		
 		//Drawing the keyboard
 		if(true) // TODO to change to != 0
@@ -109,7 +133,7 @@ public class GameOverScreen extends GameScreen {
 				
 				//if selected. display hand
 				if(i == ((GameOverModel)_gameModel).getSelectedKey())
-					g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x + 60, y + 50, 22, 32, null);
+					_handPosition.set(x +60, y +50);
 			}
 			//shift space and enter
 			//shift keys
@@ -146,26 +170,31 @@ public class GameOverScreen extends GameScreen {
 			{
 				x = (int)extraKeyLocations[2].getX() + 130;
 				y = (int)extraKeyLocations[2].getY() + 130;
-				g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x, y, 22, 32, null);
+				_handPosition.set(x, y);
 			}
 			else if (((GameOverModel)_gameModel).getSelectedKey() == GameOverModel.LEFTSHIFTID)
 			{
 				x = (int)extraKeyLocations[0].getX() + 60;
 				y = (int)extraKeyLocations[0].getY() + 50;
-				g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x, y, 22, 32, null);
+				_handPosition.set(x, y);
 			}
 			else if (((GameOverModel)_gameModel).getSelectedKey() == GameOverModel.RIGHTSHIFTID)
 			{
 				x = (int)extraKeyLocations[1].getX() + 60;
 				y = (int)extraKeyLocations[1].getY() + 50;
-				g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x, y, 22, 32, null);
+				_handPosition.set(x, y);
 			}
 			else if (((GameOverModel)_gameModel).getSelectedKey() == GameOverModel.SPACEBARID)
 			{
 				x = (int)extraKeyLocations[3].getX() + 500;
 				y = (int)extraKeyLocations[3].getY() + 60;
-				g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x, y, 22, 32, null);
+				_handPosition.set(x, y);
 			}
+			
+			//drawing the hand on the position that has been set at the beginning
+			x = (int) _handPosition.getX();
+			y = (int) _handPosition.getY();
+			g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x, y, 22, 32, null);
 		}
 		
 	}
