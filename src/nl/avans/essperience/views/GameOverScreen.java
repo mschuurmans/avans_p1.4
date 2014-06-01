@@ -54,28 +54,6 @@ public class GameOverScreen extends GameScreen {
 		g.drawString(orNot, 50, yLocation + 190);
 		g.setFont(font);
 		
-		//draw the names from the quickSelection list
-		g.setFont(new Font("Arial", Font.PLAIN, 24));
-		for(String s : ((GameOverModel)_gameModel).getHighscoreQuickList())
-		{
-			int i = ((GameOverModel)_gameModel).getHighscoreQuickList().indexOf(s);
-			int x = (Main.GAME.getWidth() /2 - 1090/2) + ( i * 145 );
-			int y = 320;
-			
-			int listSize = ((GameOverModel)_gameModel).getHighscoreQuickList().size();
-			String string = ((GameOverModel)_gameModel).getHighscoreQuickList().get( listSize - (i + 1)); //dem dirty tricks to reverse the list
-			
-			g.drawString(string, x, y);
-			
-			g.draw3DRect(x, y -22, 140, 30, true);
-			
-			if( ((GameOverModel) _gameModel).getSelectedKey() == i -20)
-			{
-				_handPosition.set(x + 70, y - 5);
-			}
-		}
-		g.setFont(font);
-		
 		//Drawing the keyboard
 		if(true) // TODO to change to != 0
 		{
@@ -83,11 +61,40 @@ public class GameOverScreen extends GameScreen {
 			int width = 93;
 			int keyHeight = 88;
 			int keyboardWidth = 1090;
+			int keyboardHeight = 450;
 			
-			int keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2;
-			int keybY = 250;
+			int keybX;
+			
+			if (Main.GAME.getWidth() == 1920)
+				keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2 - 100;
+			else
+				keybX = Main.GAME.getWidth() / 2 - keyboardWidth / 2;
+			
+			int keybY = Main.GAME.getHeight() - keyboardHeight;
 			
 			Vector2f[] extraKeyLocations = new Vector2f[4];
+			
+			//draw the names from the quickSelection list
+			g.setFont(new Font("Arial", Font.PLAIN, 24));
+			for(String s : ((GameOverModel)_gameModel).getHighscoreQuickList())
+			{
+				int i = ((GameOverModel)_gameModel).getHighscoreQuickList().indexOf(s);
+				int x = keybX + ( i * 145 );
+				int y = keybY  - 30;
+				
+				int listSize = ((GameOverModel)_gameModel).getHighscoreQuickList().size();
+				String string = ((GameOverModel)_gameModel).getHighscoreQuickList().get( listSize - (i + 1)); //dem dirty tricks to reverse the list
+				
+				g.drawString(string, x, y);
+				
+				g.draw3DRect(x, y -22, 140, 30, true);
+				
+				if( ((GameOverModel) _gameModel).getSelectedKey() == i -20)
+				{
+					_handPosition.set(x + 70, y - 5);
+				}
+			}
+			g.setFont(font);
 			
 			//Drawing the keyboard keys
 			for(int i = 0; i < 26; i++) // normal letter keys
@@ -97,19 +104,19 @@ public class GameOverScreen extends GameScreen {
 				if( i < 10 )
 				{
 					xIndex = i % 10;
-					yIndex = 1;
+					yIndex = 0;
 					xOffset = 0;
 				}
 				else if( i < 19)
 				{
 					xIndex = i % 10;
-					yIndex = 2;
+					yIndex = 1;
 					xOffset = 40;
 				}
 				else
 				{
 					xIndex = i % 9;
-					yIndex = 3;
+					yIndex = 2;
 					xOffset = 80;
 				}
 			
@@ -118,8 +125,8 @@ public class GameOverScreen extends GameScreen {
 
 				extraKeyLocations[0] = new Vector2f((float) keybX - (4 + 9), keybY + yIndex * (keyHeight + 3)); //left shift
 				extraKeyLocations[1] = new Vector2f((float) keybX + 3 + (9* (width)), keybY+ yIndex * (keyHeight + 3)); //right shift
-				extraKeyLocations[2] = new Vector2f((float) keybX + 60 + (9* (width)), keybY + 1 * (keyHeight + 3)); //Enter key
-				extraKeyLocations[3] = new Vector2f((float) keybX + 40 + (2* (width)), keybY + 4 * (keyHeight + 3)); //spacebar
+				extraKeyLocations[2] = new Vector2f((float) keybX + 60 + (9* (width)), keybY + 0 * (keyHeight + 3)); //Enter key
+				extraKeyLocations[3] = new Vector2f((float) keybX + 40 + (2* (width)), keybY + 3 * (keyHeight + 3)); //spacebar
 				
 				//draw the Keys
 				g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey.png"), x, y, width, keyHeight, null);
@@ -195,6 +202,37 @@ public class GameOverScreen extends GameScreen {
 			x = (int) _handPosition.getX();
 			y = (int) _handPosition.getY();
 			g.drawImage(AssetManager.Instance().getImage("Essperience/cursorhand.png"), x, y, 22, 32, null);
+			
+			//end of keyboard
+			
+			
+			//drawing the Wiimote keyMap
+			if (Main.GAME.getWidth() == 1920)
+			{
+				x = keybX + keyboardWidth + 180;
+				y = keybY -80;
+				font = new Font("Arial", Font.PLAIN, 20);
+				g.setFont(font);
+				String string = "Key selection";
+				g.drawString(string, x - Utils.getWidth(string, font), y + 83);
+
+				string = "Toggle Shift";
+				g.drawString(string, x - Utils.getWidth(string, font), y + 119);
+
+				string = "Enter character";
+				g.drawString(string, x - Utils.getWidth(string, font), y + 151);
+
+				string = "Select Enter Key";
+				g.drawString(string, x - Utils.getWidth(string, font), y + 189);
+
+				string = "Backspace";
+				g.drawString(string, x - Utils.getWidth(string, font), y + 228);
+
+				string = "Spacebar";
+				g.drawString(string, x - Utils.getWidth(string, font), y + 267);
+
+				g.drawImage(AssetManager.Instance().getImage("Essperience/wiimote.png"), x, y, 300, 463, null);
+			}
 		}
 		
 	}

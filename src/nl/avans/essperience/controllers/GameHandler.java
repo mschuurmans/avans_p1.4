@@ -63,6 +63,7 @@ public class GameHandler extends JFrame
 		
 		setUndecorated(true);  
 		setSize(1280, 700);
+//		setSize(1920, 1080);
 		setVisible(true);
 		setLocationRelativeTo(null);
 	}

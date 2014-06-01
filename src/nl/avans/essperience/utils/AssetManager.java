@@ -38,7 +38,8 @@ public class AssetManager
 													"Fops/apple_pieces.png", "Fops/pear_pieces.png", "Fops/banana_pieces.png", "Fops/orange_pieces.png", "Fops/fruitops_background.png",
 													"Fops/bullethole.png", "Fops/fruitops_splashscreen.png", "IndianaJantje/indianajantje_splashscreen.png",
 													"Essperience/keyboardkey.png", "Essperience/keyboardkey_shift.png", "Essperience/keyboardkey_shift_down.png",
-													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png"};
+													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png",
+													"Essperience/wiimote.png"};
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
 													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav", "Essperience/unrealsuperhero.wav",
@@ -60,6 +61,8 @@ public class AssetManager
 	//quicklist of names to enter on gameOverScreen
 	private List<String> _highscoreQuickList = new ArrayList<String>();
 
+	private boolean _soundEnabled = false;
+	
 	private static AssetManager _instance = null;
 
 	public static AssetManager Instance()
@@ -171,18 +174,8 @@ public class AssetManager
 	
 	public void addQuickListEntry(String s)
 	{
-//		if(_highscoreQuickList.contains(s))
-//		{
-//			Iterator<String> it = _highscoreQuickList.iterator();
-//			if(it.hasNext())
-//			{
-//				String tempString = it.next();
-//				if (tempString.equals(s))
-//				{
-//					it.remove();
-//				}
-//			}
-//		}
+		if(_highscoreQuickList.contains(s))
+			_highscoreQuickList.remove(s);
 		
 		_highscoreQuickList.add(s);
 		
@@ -191,6 +184,7 @@ public class AssetManager
 			_highscoreQuickList = _highscoreQuickList.subList(1, 8);
 		}
 		
+		System.out.println(_highscoreQuickList);
 		writeQuickList();
 	}
 	
@@ -201,37 +195,27 @@ public class AssetManager
 
 	public void playSound(final String key)
 	{
-		
-		
-		//Thread thread = new Thread(new Runnable()
-		//{
-		//	public void run()
-		//	{
-		//		try 
-		//		{
-					if (!key.equals("Fops/gun shot.wav"))
-						_sounds.get(key).stop();
-					_sounds.get(key).setFramePosition(0);
-					_sounds.get(key).start();
-		//		}
-		//	    catch (Exception e) 
-		//	    {
-		//	    	System.err.println(e.getMessage());
-		//	    }
-		//	}
-		//});
-		//thread.start();
-		
+		if(_soundEnabled)
+		{
+			if (!key.equals("Fops/gun shot.wav"))
+				_sounds.get(key).stop();
+			_sounds.get(key).setFramePosition(0);
+			_sounds.get(key).start();
+		}
 	}
 	
-	public void playBackgroundMusic(final String key) {
-		if (!_currentBGMKey.equals(key)) {
-			if (!_currentBGMKey.equals("")) {
-			_sounds.get(_currentBGMKey).stop();
-		}
-			_sounds.get(key).setFramePosition(0);
-			_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY);
-			_currentBGMKey = key;
+	public void playBackgroundMusic(final String key) 
+	{
+		if(_soundEnabled)
+		{
+			if (!_currentBGMKey.equals(key)) {
+				if (!_currentBGMKey.equals("")) {
+					_sounds.get(_currentBGMKey).stop();
+				}
+				_sounds.get(key).setFramePosition(0);
+				_sounds.get(key).loop(Clip.LOOP_CONTINUOUSLY);
+				_currentBGMKey = key;
+			}
 		}
 	}
 	
