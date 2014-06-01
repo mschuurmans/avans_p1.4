@@ -198,20 +198,20 @@ public class GameOverScreen extends GameScreen {
 			}
 			else if (((GameOverModel)_gameModel).getSelectedKey() == GameOverModel.LEFTSHIFTID)
 			{
-				x = (int)extraKeyLocations[0].getX() + 60;
+				x = (int)extraKeyLocations[0].getX() + 150;
 				y = (int)extraKeyLocations[0].getY() + 50;
 				_handPosition.set(x, y);
 			}
 			else if (((GameOverModel)_gameModel).getSelectedKey() == GameOverModel.RIGHTSHIFTID)
 			{
-				x = (int)extraKeyLocations[1].getX() + 60;
+				x = (int)extraKeyLocations[1].getX() + 150;
 				y = (int)extraKeyLocations[1].getY() + 50;
 				_handPosition.set(x, y);
 			}
 			else if (((GameOverModel)_gameModel).getSelectedKey() == GameOverModel.SPACEBARID)
 			{
 				x = (int)extraKeyLocations[3].getX() + 500;
-				y = (int)extraKeyLocations[3].getY() + 60;
+				y = (int)extraKeyLocations[3].getY() + 50;
 				_handPosition.set(x, y);
 			}
 			

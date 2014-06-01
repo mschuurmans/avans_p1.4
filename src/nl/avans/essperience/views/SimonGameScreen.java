@@ -43,12 +43,16 @@ public class SimonGameScreen extends GameScreen
 		super.paintComponent(g);
 		SimonGameModel model = (SimonGameModel) _gameModel;
 		
-		//background
-		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 		//model content
-		model.draw(g);	
+		model.draw(g);
+		
 		//foreground tree
 		g.drawImage(_backgroundTree, 0, 0, _screenWidth, _screenHeight, null);
+		
+		//Grass forground
+		for (int i = 0; i < (Main.GAME.getWidth() / 380) +1; i++)
+			g.drawImage(_background, i * 380, Main.GAME.getHeight() - 130, 380, 130, null);
+		
 		//drawOverlay GUI. should be displayed in front of the game elemnts
 		model.drawOverlay(g);
 		

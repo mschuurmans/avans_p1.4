@@ -10,7 +10,6 @@ import java.util.List;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
-import net.phys2d.raw.BodyList;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
@@ -29,7 +28,7 @@ public class SimonGameModel extends GameModel
 	public static final int PEAR = 3;
 
 	private boolean _debug = false;
-	private boolean _easyMode = true;
+	private boolean _easyMode = false;
 	private char[] _charArray = {'u' , 'i', 'o', 'p'};
 	
 	private int _patternLength;
@@ -81,7 +80,7 @@ public class SimonGameModel extends GameModel
 		_myWorld.setGravity(0, 30);
 		
 		_floor = new StaticBody("Floor", new Box(Main.GAME.getWidth(), 1f));
-		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 100);
+		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 50);
 		_floor.setRestitution(0.4f);
 		_myWorld.add(_floor);
 		
@@ -287,7 +286,7 @@ public class SimonGameModel extends GameModel
 		{
 			int i = _fruitPieces.indexOf(fp);
 			int x = 10 + ( i * boxSize) + ( i * 10);
-			int y = 10;
+			int y = 30;
 			
 			g.drawRect(x, y, boxSize, boxSize);
 		}
@@ -297,7 +296,7 @@ public class SimonGameModel extends GameModel
 		{
 			int i = _bodyList.indexOf(body);
 			int x = 10 + ( i * boxSize) + ( i * 10) + 5;
-			int y = 10 + 5;
+			int y = 30 + 5;
 			
 			// if hit right or _easyMode == true. than display the fruitpieces.
 			if(_buttonsPressedCorrect > i || _easyMode)
