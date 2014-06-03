@@ -48,6 +48,10 @@ public class FopsController extends GameController
 						}
 					}
 				}
+				if (key == GameKeys.KeySpacebar)
+				{
+					callFinishedListener(false);
+				}
 			}
 			
 			@Override
