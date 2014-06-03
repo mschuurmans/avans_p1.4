@@ -89,7 +89,7 @@ public class GameOverController extends GameController
 				
 			}
 		});
-		
+				
 		InputController.Instance().setMotionDetecting(false);
 		_view.addKeyListener(InputController.Instance().getKeyboardListener());
 	}
