@@ -1,8 +1,5 @@
 package nl.avans.essperience.controllers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -43,7 +40,7 @@ public class GameHandler extends JFrame
 
 	private int _lives = GameHandler.MAX_LIVES;
 
-	public static final int MAX_LIVES = 1;
+	public static final int MAX_LIVES = 3;
 	private GameScreen _gameScreen;
 	private GameController _gameController;
 	private GameModel _gameModel;

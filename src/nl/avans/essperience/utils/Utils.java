@@ -3,7 +3,6 @@ package nl.avans.essperience.utils;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
@@ -160,12 +159,17 @@ public class Utils
 		return parsedName;
 	}
 	
-	public static void drawStringWithOutline(Graphics g, String string, Font font, int x, int y)
+	public static void drawString(Graphics g, String string, int x, int y)
 	{
-		drawStringWithOutline(g, string, font, Color.white, Color.black, 2, x, y);
+		drawString(g, string, 2, x, y);
 	}
 	
-	public static void drawStringWithOutline(Graphics g, String string, Font font, Color stringColor, Color outlineColor, int outlineThickness, int x, int y)
+	public static void drawString(Graphics g, String string, int outlineThickness, int x, int y)
+	{
+		drawString(g, string, Color.white, Color.black, outlineThickness, x, y);
+	}
+	
+	public static void drawString(Graphics g, String string, Color stringColor, Color outlineColor, int outlineThickness, int x, int y)
 	{
 		g.setColor(outlineColor);
 		g.drawString(string, x - outlineThickness, y);

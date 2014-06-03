@@ -1,6 +1,5 @@
 package nl.avans.essperience.views;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -67,20 +66,21 @@ public class GameOverScreen extends GameScreen {
 		g.drawImage(AssetManager.Instance().getImage("Essperience/gameover.png"), xCenter - 840/2, (int) (yLocation + (0.05 * Main.GAME.getHeight())), 840, 87, null);
 		
 		String scoreString = "Your score: " + Main.GAME.getScore();
-		g.drawString(scoreString, xCenter - Utils.getWidth(scoreString, g.getFont()) /2, yLocation + 240);
+		Utils.drawString(g, scoreString, xCenter - Utils.getWidth(scoreString, g.getFont()) /2, yLocation + 240);
 		
 		String enterString = "Enter your name: ";
 		int enterStringWidth = Utils.getWidth(enterString, g.getFont());
 		int enterStringX =  keybX;
-		g.drawString(enterString, enterStringX, yLocation * 6);
+		Utils.drawString(g, enterString, enterStringX, yLocation * 6);
+		
 		
 		//code that displays the nameString that currently has been typed with the onscreen keyboard
 		String nameString = ((GameOverModel)_gameModel).getName() + ((GameOverModel)_gameModel).getNextChartoDisplay();
-		g.drawString(nameString, enterStringX + enterStringWidth , yLocation * 6);
+		Utils.drawString(g, nameString, enterStringX + enterStringWidth , yLocation * 6);
 		
 		String orNot = "Or hit the red button to skip";
 		g.setFont(new Font("Arial", Font.PLAIN, 16));
-		g.drawString(orNot, enterStringX + 5, yLocation * 6 + 25);
+		Utils.drawString(g, orNot, 1, enterStringX + 5, yLocation * 6 +25);
 		g.setFont(font);
 		//end of strings above keyboard
 		
@@ -107,9 +107,10 @@ public class GameOverScreen extends GameScreen {
 				
 				string = Utils.cropString(string, 140/2); // 140 pixels /2 because the font is big :o
 				
-				g.drawString(string, x +5, y);
-				
+				Utils.drawString(g, string, 1, x + 5, y);
+
 				g.draw3DRect(x, y -22, 140, 30, true);
+				g.draw3DRect(x +1, y -22 +1, 140, 30, true);
 				
 				if( ((GameOverModel) _gameModel).getSelectedKey() == i -20)
 				{
@@ -158,7 +159,7 @@ public class GameOverScreen extends GameScreen {
 				g.setFont(font);
 				
 				char keyChar = ((GameOverModel)_gameModel).getKeyboardCharacters()[i];					
-				g.drawString("" + keyChar, x + width/5, y + keyHeight /2);
+				Utils.drawString(g, "" + keyChar, 1, x + width/5, y + keyHeight /2);
 				
 				//if selected. display hand
 				if(i == ((GameOverModel)_gameModel).getSelectedKey())
@@ -182,13 +183,13 @@ public class GameOverScreen extends GameScreen {
 					image = AssetManager.Instance().getImage("Essperience/keyboardkey_shift.png");
 				
 				g.drawImage(image, x, y, 186, 88, null);
-				g.drawString(((GameOverModel)_gameModel).getShiftString(), x + width/5, y + keydownOffset + keyHeight /2);
+				Utils.drawString(g, ((GameOverModel)_gameModel).getShiftString(), 1, x + width/5, y + keydownOffset + keyHeight /2);
 			}
 			//enter key
 			int x = (int)extraKeyLocations[2].getX();
 			int y = (int)extraKeyLocations[2].getY();
 			g.drawImage(AssetManager.Instance().getImage("Essperience/keyboardkey_return.png"), x, y, 179, 179, null);
-			g.drawString(((GameOverModel)_gameModel).getReturnString(), x + width/5, y + keyHeight + keyHeight /2);
+			Utils.drawString(g, ((GameOverModel)_gameModel).getReturnString(), 1, x + width/5, y + keyHeight + keyHeight /2);
 			//space bar
 			x = (int)extraKeyLocations[3].getX();
 			y = (int)extraKeyLocations[3].getY();
@@ -245,32 +246,32 @@ public class GameOverScreen extends GameScreen {
 				String string = "Key selection";
 				int stringX =  x - Utils.getWidth(string, font);
 				int stringY = y + 83;
-				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				Utils.drawString(g, string, stringX, stringY);
 				
 				string = "Toggle Shift";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 119;
-				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				Utils.drawString(g, string, stringX, stringY);
 
 				string = "Enter character";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 151;
-				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				Utils.drawString(g, string, stringX, stringY);
 
 				string = "Select Enter Key";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 189;
-				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				Utils.drawString(g, string, stringX, stringY);
 
 				string = "Backspace";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 228;
-				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				Utils.drawString(g, string, stringX, stringY);
 
 				string = "Spacebar";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 267;
-				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				Utils.drawString(g, string, stringX, stringY);
 
 				g.drawImage(AssetManager.Instance().getImage("Essperience/wiimote.png"), x, y, 300, 463, null);
 			}

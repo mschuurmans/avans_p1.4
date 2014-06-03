@@ -72,8 +72,8 @@ public class MenuScreen extends GameScreen
 			int nLineWidth = fm.stringWidth(nLine);
 			
 			g.setFont(font);
-			Utils.drawStringWithOutline(g, startGame, font, xCenter - (stringWidth / 2), yCenter - 115);
-			Utils.drawStringWithOutline(g, nLine, font,  xCenter - (nLineWidth / 2),  yCenter - 50);
+			Utils.drawString(g, startGame, xCenter - (stringWidth / 2), yCenter - 115);
+			Utils.drawString(g, nLine, xCenter - (nLineWidth / 2),  yCenter - 50);
 			
 			
 			int leftLocX = xCenter - (20 + 150);
