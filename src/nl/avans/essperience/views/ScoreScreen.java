@@ -44,7 +44,7 @@ public class ScoreScreen extends GameScreen
 		int size = 200;
 		int space = 50;
 		int center = Main.GAME.getWidth() / 2;
-		int y = (Main.GAME.getHeight() / 2) - size / 2;
+		int y = (Main.GAME.getHeight() / 2) - size / 2 + 65;
 		
 		Image img = AssetManager.Instance().getImage("heart.png");
 		if(_livesLeft > 0)
@@ -57,6 +57,7 @@ public class ScoreScreen extends GameScreen
 			g.drawImage(img, center + (space + size/2), y ,size, size, null);
 		
 		Graphics2D g2 = (Graphics2D)g;
+		
 		
 		g2.setFont(new Font("Arial", Font.PLAIN, 80));
 		g2.drawString(""+_level, center - Utils.getWidth(""+_level, getFont()), 150);
