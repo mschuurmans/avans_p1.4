@@ -24,6 +24,7 @@ public class SimonGameScreen extends GameScreen
 	{
 		super(model);
 		
+		super.setBackground(new Color(0xf_f6ffcc));
 		_backgroundTree = AssetManager.Instance().getImage("Simon/simon_background_tree.png");
 		_background = AssetManager.Instance().getImage("Simon/simon_background.png");
 		_screenWidth = Main.GAME.getWidth();

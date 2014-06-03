@@ -49,6 +49,8 @@ public class GameOverScreen extends GameScreen {
 	{
 		super.paintComponent(g);
 		
+		g.drawImage(AssetManager.Instance().getImage("Essperience/bliss_background.jpg"), 0, 0, 1920, 1200, null);
+		
 		if(Main.GAME.getWidth() < 1920)
 			g.translate(0, -90);
 		
