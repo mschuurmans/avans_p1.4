@@ -63,9 +63,10 @@ public class MenuScreen extends GameScreen
 			Font font = new Font("Arial", Font.PLAIN, 60) ;
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 			FontMetrics fm = img.getGraphics().getFontMetrics(font);
-			String startGame = "Stand on the pressure plate";
+			String startGame = "Stand on the pressure plates";
 			String nLine = "to start the game.";
 			
+			g.drawImage(AssetManager.Instance().getImage("Essperience/essteling_logo.png"), 0, 0, 400,142,null);
 			
 			int stringWidth = fm.stringWidth(startGame);
 			int nLineWidth = fm.stringWidth(nLine);

@@ -39,7 +39,8 @@ public class AssetManager
 													"Fops/bullethole.png", "Fops/fruitops_splashscreen.png", "IndianaJantje/indianajantje_splashscreen.png",
 													"Essperience/keyboardkey.png", "Essperience/keyboardkey_shift.png", "Essperience/keyboardkey_shift_down.png",
 													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png",
-													"Essperience/wiimote.png", "Essperience/gameover.png", "Essperience/footsteps.png", "Essperience/footsteps_green.png"};
+													"Essperience/wiimote.png", "Essperience/gameover.png", "Essperience/footsteps.png", "Essperience/footsteps_green.png",
+													"Essperience/essteling_logo.png"};
 
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
