@@ -1,7 +1,9 @@
 package nl.avans.essperience.views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 
 import net.phys2d.math.Vector2f;
@@ -45,8 +47,9 @@ public class GameOverScreen extends GameScreen {
 	}
 	
 	@Override
-	public void paintComponent(Graphics g)
+	public void paintComponent(Graphics g1)
 	{
+		Graphics2D g = (Graphics2D)g1;
 		super.paintComponent(g);
 		
 		g.drawImage(AssetManager.Instance().getImage("Essperience/bliss_background.jpg"), 0, 0, 1920, 1200, null);
@@ -228,27 +231,46 @@ public class GameOverScreen extends GameScreen {
 			//drawing the Wiimote keyMap
 			if (Main.GAME.getWidth() >= 1920)
 			{
+//				Color stringColor = Color.white;				// these settings have been set by default in the simplified method of drawString in Utils
+//				Color outlineColor = Color.black;
+//				int outlineThickness = 2;
+				
 				x = keybX + keyboardWidth + 180;
 				y = keybY -80;
+				
 				font = new Font("Arial", Font.PLAIN, 20);
 				g.setFont(font);
+				
+				//content section
 				String string = "Key selection";
-				g.drawString(string, x - Utils.getWidth(string, font), y + 83);
-
+				int stringX =  x - Utils.getWidth(string, font);
+				int stringY = y + 83;
+				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
+				
 				string = "Toggle Shift";
-				g.drawString(string, x - Utils.getWidth(string, font), y + 119);
+				stringX =  x - Utils.getWidth(string, font);
+				stringY = y + 119;
+				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
 
 				string = "Enter character";
-				g.drawString(string, x - Utils.getWidth(string, font), y + 151);
+				stringX =  x - Utils.getWidth(string, font);
+				stringY = y + 151;
+				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
 
 				string = "Select Enter Key";
-				g.drawString(string, x - Utils.getWidth(string, font), y + 189);
+				stringX =  x - Utils.getWidth(string, font);
+				stringY = y + 189;
+				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
 
 				string = "Backspace";
-				g.drawString(string, x - Utils.getWidth(string, font), y + 228);
+				stringX =  x - Utils.getWidth(string, font);
+				stringY = y + 228;
+				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
 
 				string = "Spacebar";
-				g.drawString(string, x - Utils.getWidth(string, font), y + 267);
+				stringX =  x - Utils.getWidth(string, font);
+				stringY = y + 267;
+				Utils.drawStringWithOutline(g, string, font, stringX, stringY);
 
 				g.drawImage(AssetManager.Instance().getImage("Essperience/wiimote.png"), x, y, 300, 463, null);
 			}
