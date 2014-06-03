@@ -27,6 +27,10 @@ public class IndianaJantjeController extends GameController
 				{
 					System.out.println("IndianaJantjeController : key has been pressed " + key);
 				}
+				if (key == GameKeys.KeySpacebar)
+				{
+					callFinishedListener(false);
+				}
 				if (key == GameKeys.KeyA) 
 				{
 					keyA = true;
