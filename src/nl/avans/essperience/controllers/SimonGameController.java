@@ -59,6 +59,13 @@ public class SimonGameController extends GameController
 						_model.setCurrentFruit(3);
 					}
 				}
+				
+				public void keyPressed(GameKeys key) {
+					if (key == GameKeys.KeySpacebar)
+					{
+						callFinishedListener(false);
+					}
+				}
 		});
 		_view.addViewToControllerEventListener(new ViewToControllerEventListener()
 		{

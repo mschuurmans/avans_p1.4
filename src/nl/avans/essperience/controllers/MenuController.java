@@ -9,11 +9,9 @@ import nl.avans.essperience.views.MenuScreen;
 public class MenuController extends GameController
 {
 	private MenuScreen _view;
-	@SuppressWarnings("unused")
 	private MenuModel _model;
 	
 	private boolean _debug = true;
-	private int _currentlySelected = 0;
 	
 	public MenuController(MenuScreen menuScreen, MenuModel model) 
 	{
@@ -22,8 +20,6 @@ public class MenuController extends GameController
 		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener() 
 		{
-			private boolean aPressed = false;
-			private boolean dPressed = false;
 				@Override
 				public void keyPressed(GameKeys key) 
 				{
@@ -33,14 +29,16 @@ public class MenuController extends GameController
 					switch(key)
 					{
 						case KeyA:
-							aPressed = true;
+							_model.setLeftFoot(true);
 							break;
 						case KeyD:
-							dPressed = true;
+							_model.setRightFoot(true);
+							break;
+						default:
 							break;
 					}
 					
-					if(aPressed && dPressed)
+					if(_model.getLeftFoot() && _model.getRightFoot())
 						startGame();
 				}
 				
@@ -50,24 +48,21 @@ public class MenuController extends GameController
 					switch(key)
 					{
 						case KeyA:
-							aPressed = false;
+							_model.setLeftFoot(false);
 							break;
 						case KeyD:
-							dPressed = false;
+							_model.setRightFoot(false);
+							break;
+						default:
 							break;
 					}
 				}
 		});
-		
 		this._view.addKeyListener(InputController.Instance().getKeyboardListener());
 	}
 	
 	public void startGame()
-	{
-		if(_debug)
-			System.out.println("MenuController : current option");
-		
-		
+	{				
 		AssetManager.Instance().flushPersistentData();
 		_view.stopTimer();
 		this.callFinishedListener(true);

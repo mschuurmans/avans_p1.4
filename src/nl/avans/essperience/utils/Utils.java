@@ -200,4 +200,41 @@ public class Utils
 		}).start();
 				
 	}
+	
+	public static void disableAutoPress()
+	{
+		if(Utils.isUnix(System.getProperty("os.name").toLowerCase()))
+		{
+			try
+			{
+				Process proc = Runtime.getRuntime().exec("xset r off");
+				System.out.println("Repeat is off");
+				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+				proc.waitFor();
+			}
+			catch(Exception e) 
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	
+	public static void enableAutoPress()
+	{
+		if(Utils.isUnix(System.getProperty("os.name").toLowerCase()))
+		{
+			try
+			{
+				Process proc = Runtime.getRuntime().exec("xset r on");
+
+				System.out.println("Rpeat is on");
+				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+				proc.waitFor();
+			}
+			catch(Exception e) 
+			{
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 }
