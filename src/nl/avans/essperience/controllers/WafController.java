@@ -62,6 +62,9 @@ public class WafController extends GameController
 					case Key9:
 						whack(9);
 						break;
+					case KeySpacebar:
+						callFinishedListener(false);
+						break;
 					default:
 						break;
 				}
