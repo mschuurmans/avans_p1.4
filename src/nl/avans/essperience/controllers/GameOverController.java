@@ -1,7 +1,6 @@
 package nl.avans.essperience.controllers;
 
 import nl.avans.essperience.events.InputTriggerdEventListener;
-import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.GameOverModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Enums.GameKeys;

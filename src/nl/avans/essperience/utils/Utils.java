@@ -232,6 +232,7 @@ public class Utils
 			{
 				Process proc = Runtime.getRuntime().exec("xset r off");
 				System.out.println("Repeat is off");
+				@SuppressWarnings("unused")
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}
@@ -251,6 +252,7 @@ public class Utils
 				Process proc = Runtime.getRuntime().exec("xset r on");
 
 				System.out.println("Rpeat is on");
+				@SuppressWarnings("unused")
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}

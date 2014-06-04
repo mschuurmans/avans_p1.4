@@ -17,6 +17,7 @@ import nl.avans.essperience.main.Main;
  * @author jack
  *
  */
+@SuppressWarnings("serial")
 public class FruitPiece implements Serializable
 {
 	String _name;

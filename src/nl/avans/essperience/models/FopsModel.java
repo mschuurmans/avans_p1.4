@@ -21,7 +21,6 @@ public class FopsModel extends GameModel
 	private int _amountOfFruit;
 	private int _difficulty;
 	private int _gravity;
-	private int _timeRemaining;
 	private int _amountOfBullets;
 	private double _cursorX;
 	private double _cursorY;
@@ -48,7 +47,6 @@ public class FopsModel extends GameModel
 	{
 		_difficulty = Main.GAME.getDifficulty();
 		_maxTime = 3000 + (6000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
-		_timeRemaining = _maxTime;
 		_amountOfFruit = (_difficulty / 4) + 2;
 		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 2;
 		_gravity = 170 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
