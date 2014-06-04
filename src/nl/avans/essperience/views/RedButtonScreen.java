@@ -11,6 +11,7 @@ import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 
+@SuppressWarnings("serial")
 public class RedButtonScreen extends GameScreen {
 	
 	private Image _arrow;

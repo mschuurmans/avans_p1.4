@@ -80,7 +80,7 @@ public class SimonGameModel extends GameModel
 		_myWorld.setGravity(0, 30);
 		
 		_floor = new StaticBody("Floor", new Box(Main.GAME.getWidth(), 1f));
-		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 50);
+		_floor.setPosition(Main.GAME.getWidth()/2, Main.GAME.getHeight() - 40);
 		_floor.setRestitution(0.4f);
 		_myWorld.add(_floor);
 		
@@ -394,8 +394,18 @@ public class SimonGameModel extends GameModel
 	
 	private void endGame(boolean succes)
 	{
-		// make 100 steps to prevent the state of game saving with pieces in mid air
-		for(int i = 0; i < 300; i++)
+		for(Body body : _bodyList)
+		{
+			if( body.getPosition().getY() < Main.GAME.getHeight() - 60) //if the body positioin is more than n above the bottom of the screen.
+			{
+				float x = body.getPosition().getX();
+				float y = Main.GAME.getHeight() - 50;
+				
+				body.setPosition(x, y);
+			}
+		}
+		// make n steps to prevent the state of game saving with pieces in mid air
+		for(int i = 0; i < 200; i++)
 		{
 			_myWorld.step();
 		}

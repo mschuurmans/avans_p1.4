@@ -8,7 +8,6 @@ import wiiusej.wiiusejevents.physicalevents.ExpansionEvent;
 import wiiusej.wiiusejevents.physicalevents.IREvent;
 import wiiusej.wiiusejevents.physicalevents.JoystickEvent;
 import wiiusej.wiiusejevents.physicalevents.MotionSensingEvent;
-import wiiusej.wiiusejevents.physicalevents.NunchukButtonsEvent;
 import wiiusej.wiiusejevents.physicalevents.NunchukEvent;
 import wiiusej.wiiusejevents.physicalevents.WiimoteButtonsEvent;
 import wiiusej.wiiusejevents.utils.WiimoteListener;
@@ -189,9 +188,9 @@ public class WiiController implements WiimoteListener
 		{
 			NunchukEvent nunchuck = (NunchukEvent)e;
 			
-			NunchukButtonsEvent buttons = nunchuck.getButtonsEvent();
+			//NunchukButtonsEvent buttons = nunchuck.getButtonsEvent();
 			JoystickEvent joy = nunchuck.getNunchukJoystickEvent();
-			MotionSensingEvent mot = nunchuck.getNunchukMotionSensingEvent();
+			//MotionSensingEvent mot = nunchuck.getNunchukMotionSensingEvent();
 			
 			if(joy.getAngle() < 85 || joy.getAngle() > 95)
 				System.out.println(joy.getAngle());

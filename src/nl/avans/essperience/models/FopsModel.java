@@ -21,7 +21,6 @@ public class FopsModel extends GameModel
 	private int _amountOfFruit;
 	private int _difficulty;
 	private int _gravity;
-	private int _timeRemaining;
 	private int _amountOfBullets;
 	private double _cursorX;
 	private double _cursorY;
@@ -48,9 +47,8 @@ public class FopsModel extends GameModel
 	{
 		_difficulty = Main.GAME.getDifficulty();
 		_maxTime = 3000 + (6000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
-		_timeRemaining = _maxTime;
 		_amountOfFruit = (_difficulty / 4) + 2;
-		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 10;
+		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 2;
 		_gravity = 170 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
 
 		//debug data
@@ -74,12 +72,12 @@ public class FopsModel extends GameModel
 			_bodies.add(body);
 		}
 		_myWorld.setGravity(0, _gravity);
-		
-//		for (int i = 0; i < 20; i++)
-//		{
-//			AssetManager.Instance().addBulletHole(new BulletHole(new Vector2f((float)Math.random() * Main.GAME.getWidth(), (float)Math.random() * Main.GAME.getHeight())));
-//		}
-		
+
+		//		for (int i = 0; i < 20; i++)
+		//		{
+		//			AssetManager.Instance().addBulletHole(new BulletHole(new Vector2f((float)Math.random() * Main.GAME.getWidth(), (float)Math.random() * Main.GAME.getHeight())));
+		//		}
+
 	}	
 
 	public void update()
@@ -222,70 +220,69 @@ public class FopsModel extends GameModel
 	 * @return an array that contains 5 bodies. These bodies resemble the fractions of the fruitpiece that has been passed in as a parameter
 	 * @author jack
 	 */
-	public Body[] splitBody(Body body)
+	public Body[] splitBody(final Body body)
 	{
-		Body[] newBody = new Body[5];
-		String uData = (String)body.getUserData();
-		switch(uData)
-		{
-		case "banana": uData = "bananapiece";
-		break;
-		case "orange": uData = "orangepiece";
-		break;
-		case "pear": uData = "pearpiece";
-		break;
-		case "apple": uData = "applepiece";
-		break;
-		default: uData = "bananapiece";
-		break;
-		}
-
-		int x = (int) body.getPosition().getX();
-		int y = (int) body.getPosition().getY();
-
-		double angleOffset = Math.toRadians(72);
-
-		int bodyWidth = (int) (body.getShape().getBounds().getWidth());
-		int fractionWidth = (int) (bodyWidth * 0.35);
-		int fractionMass = (int) (body.getMass() * 0.35);
-		int multiplier = (int)(Math.random() * 200) + 200;
-		int imageOffset = 1;
-		float rotation = body.getRotation();
-		if (rotation < 0.4*Math.PI)
-		{
-			imageOffset = 1;
-		}
-		else if(rotation < 0.8*Math.PI)
-		{
-			imageOffset = 2;
-		}
-		else if(rotation < 1.2*Math.PI)
-		{
-			imageOffset = 3;
-		}
-		else if(rotation < 1.6*Math.PI)
-		{
-			imageOffset = 4;
-		}
-		else
-		{
-			imageOffset = 5;
-		}
-		for (int i = 0; i < 5; i++)
-		{
-			newBody[i] = new Body(new Circle( fractionWidth ), fractionMass);
-
-			int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
-			int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
-			newBody[i].setPosition(newX, newY);
-			if (i+imageOffset > 5)
+			Body[] newBody = new Body[5];
+			String uData = (String)body.getUserData();
+			switch(uData)
 			{
-				imageOffset -= 5;
+			case "banana": uData = "bananapiece";
+			break;
+			case "orange": uData = "orangepiece";
+			break;
+			case "pear": uData = "pearpiece";
+			break;
+			case "apple": uData = "applepiece";
+			break;
+			default: uData = "bananapiece";
+			break;
 			}
-			newBody[i].setUserData((String)uData + (i+imageOffset));
-			newBody[i].adjustVelocity(new Vector2f((float) (Math.cos(angleOffset*i)*multiplier),(float) (Math.sin(angleOffset*i))*multiplier));
-		}
 
+			int x = (int) body.getPosition().getX();
+			int y = (int) body.getPosition().getY();
+
+			double angleOffset = Math.toRadians(72);
+
+			int bodyWidth = (int) (body.getShape().getBounds().getWidth());
+			int fractionWidth = (int) (bodyWidth * 0.35);
+			int fractionMass = (int) (body.getMass() * 0.35);
+			int multiplier = (int)(Math.random() * 200) + 200;
+			int imageOffset = 1;
+			float rotation = body.getRotation();
+			if (rotation < 0.5*Math.PI)
+			{
+				imageOffset = 1;
+			}
+			else if(rotation < Math.PI)
+			{
+				imageOffset = 2;
+			}
+			else if(rotation < 1.5*Math.PI)
+			{
+				imageOffset = 3;
+			}
+			else// if(rotation < 2*Math.PI)
+			{
+				imageOffset = 4;
+			}
+
+			//new Thread() {
+				for (int i = 0; i < 5; i++)
+			{
+				newBody[i] = new Body(new Circle( fractionWidth ), fractionMass);
+
+				int newX = (int)( ((Math.cos(angleOffset * i) / 2) * bodyWidth) + x);
+				int newY = (int)( ((Math.sin(angleOffset * i) / 2) * bodyWidth) + y);
+				newBody[i].setPosition(newX, newY);
+				if (i+imageOffset > 4)
+				{
+					imageOffset -= 4;
+				}
+				newBody[i].setUserData((String)uData + (i+imageOffset));
+				newBody[i].adjustVelocity(new Vector2f((float) (Math.cos(angleOffset*i)*multiplier),(float) (Math.sin(angleOffset*i))*multiplier));
+			}
+		//};
 		return newBody;
+
 	}
 }

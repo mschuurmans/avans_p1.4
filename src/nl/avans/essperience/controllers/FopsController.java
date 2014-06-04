@@ -1,8 +1,5 @@
 package nl.avans.essperience.controllers;
 
-import java.util.ArrayList;
-
-import nl.avans.essperience.entities.fops.FruitOpsPiece;
 import nl.avans.essperience.events.InputTriggerdEventListener;
 import nl.avans.essperience.events.ModelToControllerEventListener;
 import nl.avans.essperience.main.Main;

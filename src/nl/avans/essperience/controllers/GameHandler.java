@@ -1,8 +1,5 @@
 package nl.avans.essperience.controllers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 

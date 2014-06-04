@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class MenuScreen extends GameScreen
 {
@@ -64,7 +65,7 @@ public class MenuScreen extends GameScreen
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 			FontMetrics fm = img.getGraphics().getFontMetrics(font);
 			String startGame = "Stand on the pressure plates";
-			String nLine = "to start the game.";
+			String nLine = "to start the game!";
 			
 			g.drawImage(AssetManager.Instance().getImage("Essperience/essteling_logo.png"), 0, 0, 400,142,null);
 			
@@ -72,9 +73,8 @@ public class MenuScreen extends GameScreen
 			int nLineWidth = fm.stringWidth(nLine);
 			
 			g.setFont(font);
-			g.drawString(startGame, xCenter - (stringWidth / 2), yCenter - 115);
-			g.drawString(nLine, xCenter - (nLineWidth / 2), yCenter - 60);
-			
+			Utils.drawString(g, startGame, xCenter - (stringWidth / 2), yCenter - 115);
+			Utils.drawString(g, nLine, xCenter - (nLineWidth / 2),  yCenter - 50);
 			
 			
 			int leftLocX = xCenter - (20 + 150);

@@ -1,17 +1,14 @@
 package nl.avans.essperience.utils;
 import java.awt.Image;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +37,8 @@ public class AssetManager
 													"Essperience/keyboardkey.png", "Essperience/keyboardkey_shift.png", "Essperience/keyboardkey_shift_down.png",
 													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png",
 													"Essperience/wiimote.png", "Essperience/gameover.png", "Essperience/footsteps.png", "Essperience/footsteps_green.png",
-													"Essperience/essteling_logo.png"};
+													"Essperience/essteling_logo.png",
+													"Essperience/bliss_background.jpg"};
 
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",

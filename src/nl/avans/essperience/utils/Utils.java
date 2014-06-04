@@ -1,6 +1,8 @@
 package nl.avans.essperience.utils;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
@@ -161,6 +163,27 @@ public class Utils
 		
 		return parsedName;
 	}
+	
+	public static void drawString(Graphics g, String string, int x, int y)
+	{
+		drawString(g, string, 2, x, y);
+	}
+	
+	public static void drawString(Graphics g, String string, int outlineThickness, int x, int y)
+	{
+		drawString(g, string, Color.white, Color.black, outlineThickness, x, y);
+	}
+	
+	public static void drawString(Graphics g, String string, Color stringColor, Color outlineColor, int outlineThickness, int x, int y)
+	{
+		g.setColor(outlineColor);
+		g.drawString(string, x - outlineThickness, y);
+		g.drawString(string, x + outlineThickness, y);
+		g.drawString(string, x, y - outlineThickness);
+		g.drawString(string, x, y + outlineThickness);
+		g.setColor(stringColor);
+		g.drawString(string, x, y);
+	}
 
 	public static void addHighScore(final String name, final int score)
 	{	
@@ -214,6 +237,7 @@ public class Utils
 			{
 				Process proc = Runtime.getRuntime().exec("xset r off");
 				System.out.println("Repeat is off");
+				@SuppressWarnings("unused")
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}
@@ -233,6 +257,7 @@ public class Utils
 				Process proc = Runtime.getRuntime().exec("xset r on");
 
 				System.out.println("Rpeat is on");
+				@SuppressWarnings("unused")
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}

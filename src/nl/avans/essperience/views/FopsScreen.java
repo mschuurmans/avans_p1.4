@@ -1,9 +1,9 @@
 package nl.avans.essperience.views;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Composite;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import nl.avans.essperience.entities.fops.BulletHole;
 import nl.avans.essperience.entities.fops.Splash;
