@@ -67,6 +67,7 @@ public class MenuScreen extends GameScreen
 			String startGame = "Stand on the pressure plates";
 			String nLine = "to start the game!";
 			
+			g.drawImage(AssetManager.Instance().getImage("Essperience/essteling_logo.png"), 0, 0, 400,142,null);
 			
 			int stringWidth = fm.stringWidth(startGame);
 			int nLineWidth = fm.stringWidth(nLine);

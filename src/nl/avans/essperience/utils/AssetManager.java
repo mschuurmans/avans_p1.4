@@ -37,6 +37,7 @@ public class AssetManager
 													"Essperience/keyboardkey.png", "Essperience/keyboardkey_shift.png", "Essperience/keyboardkey_shift_down.png",
 													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png",
 													"Essperience/wiimote.png", "Essperience/gameover.png", "Essperience/footsteps.png", "Essperience/footsteps_green.png",
+													"Essperience/essteling_logo.png",
 													"Essperience/bliss_background.jpg"};
 
 
