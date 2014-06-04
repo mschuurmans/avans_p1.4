@@ -1,8 +1,5 @@
 package nl.avans.essperience.controllers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -99,8 +96,9 @@ public class GameHandler extends JFrame
 	{
 		AssetManager.Instance();
 		AssetManager.Instance().playBackgroundMusic("Essperience/unrealsuperhero.wav");
-		this._gameScreen = new MenuScreen();
+		Utils.disableAutoPress();
 		this._gameModel = new MenuModel();
+		this._gameScreen = new MenuScreen((MenuModel)_gameModel);
 		this._gameController = new MenuController((MenuScreen)this._gameScreen, (MenuModel)_gameModel);
 		this._gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener()
 		{
@@ -170,26 +168,12 @@ public class GameHandler extends JFrame
 		((GameOverController)_gameController).start();
 		AssetManager.Instance().stopCurrentBackgroundMusic();
 		AssetManager.Instance().playSound("Essperience/gameover.wav");
+		AssetManager.Instance().playBackgroundMusic("Essperience/unrealsuperhero.wav");
 	}
 
 	public void nextGame(boolean succeed)
 	{
-		String OS = System.getProperty("os.name").toLowerCase();
-		if(Utils.isUnix(OS))
-		{
-			try
-			{
-				Process proc = Runtime.getRuntime().exec("xset r on");
-
-				System.out.println("Rpeat is on");
-				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-				proc.waitFor();
-			}
-			catch(Exception e) 
-			{
-				System.out.println(e.getMessage());
-			}
-		}
+		Utils.enableAutoPress();
 		
 		if (_difficulty < 11) {
 			AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
@@ -291,19 +275,9 @@ public class GameHandler extends JFrame
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
 		
-		if(_gameController instanceof IndianaJantjeController && Utils.isUnix(OS))
+		if(_gameController instanceof IndianaJantjeController && _gameController instanceof MenuController)
 		{
-			try
-			{
-				Process proc = Runtime.getRuntime().exec("xset r off");
-				System.out.println("Repeat is off");
-				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-				proc.waitFor();
-			}
-			catch(Exception e) 
-			{
-				System.out.println(e.getMessage());
-			}
+			Utils.disableAutoPress();
 		}
 	}
 
