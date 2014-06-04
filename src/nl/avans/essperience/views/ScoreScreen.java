@@ -40,11 +40,14 @@ public class ScoreScreen extends GameScreen
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		
+
 		int size = 200;
 		int space = 50;
 		int center = Main.GAME.getWidth() / 2;
-		int y = (Main.GAME.getHeight() / 2) - size / 2 + 65;
+		//int y = (Main.GAME.getHeight() / 2) - size / 2 + (Main.GAME.getHeight() / 10);
+		int y = 325;
+		
+		g.drawImage(AssetManager.Instance().getImage("Essperience/bliss_background.jpg"), 0, 0, 1920, 1200, null);
 		
 		Image img = AssetManager.Instance().getImage("heart.png");
 		if(_livesLeft > 0)
