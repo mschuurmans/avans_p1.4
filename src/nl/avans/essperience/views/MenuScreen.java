@@ -80,7 +80,7 @@ public class MenuScreen extends GameScreen
 			String nLine = "to start the game!";
 			
 			g.drawImage(AssetManager.Instance().getImage("Essperience/essteling_logo.png"), 0, 0, 400,142,null);
-			
+			g.drawImage(AssetManager.Instance().getImage("Essperience/essperience_logo.png"), Main.DIMENSION.width - 400,0, 400, 142, null);
 			int stringWidth = fm.stringWidth(startGame);
 			int nLineWidth = fm.stringWidth(nLine);
 			

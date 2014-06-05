@@ -226,11 +226,13 @@ public class GameHandler extends JFrame
 	public void nextGame(boolean succeed)
 	{
 		Utils.enableAutoPress();
-		
-		if (_difficulty < 11) {
-			AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
-		} else {
-			AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
+		if(!(_gameController instanceof LoadingController))
+		{
+			if (_difficulty < 11) {
+				AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
+			} else {
+				AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
+			}
 		}
 		if(_gameController instanceof GameOverController)
 		{

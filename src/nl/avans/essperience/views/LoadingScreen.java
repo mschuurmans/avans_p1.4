@@ -38,11 +38,9 @@ public class LoadingScreen extends GameScreen
 		super.paintComponent(g);
 		
 		Font font = new Font("Arial", Font.PLAIN, 60) ;
-		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-		FontMetrics fm = img.getGraphics().getFontMetrics(font);
 		String status = _status;
 		
-		int stringWidth = fm.stringWidth(status);
+		int stringWidth = Utils.getWidth(status, font);
 		
 		int xCenter = (int)(Main.DIMENSION.getWidth() / 2);
 		int yCenter = (int)(Main.DIMENSION.getHeight() / 2);
