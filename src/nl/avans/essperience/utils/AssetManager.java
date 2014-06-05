@@ -37,8 +37,9 @@ public class AssetManager
 													"Essperience/keyboardkey.png", "Essperience/keyboardkey_shift.png", "Essperience/keyboardkey_shift_down.png",
 													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png",
 													"Essperience/wiimote.png", "Essperience/gameover.png", "Essperience/footsteps.png", "Essperience/footsteps_green.png",
-													"Essperience/essteling_logo.png","Essperience/bliss_background.jpg", "Essperience/essperience_logo.png"};
-
+													"Essperience/essteling_logo.png","Essperience/bliss_background.jpg", "Essperience/essperience_logo.png",  
+													"Essperience/menuscreen.png"};
+													
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
 													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav", "Essperience/unrealsuperhero.wav",
