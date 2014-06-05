@@ -169,7 +169,7 @@ public class Utils
 	
 	public static void drawString(Graphics g, String string, int x, int y)
 	{
-		drawString(g, string, 2, x, y);
+		drawString(g, string, 1, x, y);
 	}
 	
 	public static void drawString(Graphics g, String string, int outlineThickness, int x, int y)
@@ -186,6 +186,7 @@ public class Utils
 		g.drawString(string, x, y + outlineThickness);
 		g.setColor(stringColor);
 		g.drawString(string, x, y);
+		g.setColor(outlineColor);
 	}
 
 	public static void addHighScore(final String name, final int score)
