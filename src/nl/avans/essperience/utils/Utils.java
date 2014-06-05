@@ -7,15 +7,18 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import nl.avans.essperience.entities.Score;
+import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.Enums.GameKeys;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Utils 
 {
@@ -268,12 +271,12 @@ public class Utils
 		}
 	}
 	
-	public static List<Score> getTopScores()
+	public static List<Score> getTopScores(int amount)
 	{
 		List<Score> result = new ArrayList<Score>();
 		try
 		{
-			String url = "http://essperience.tostring.nl/top_highscore/";
+			String url = "http://essperience.tostring.nl/top_highscore/" + amount;
 			 
 			URL obj = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -294,7 +297,12 @@ public class Utils
 				response.append(inputLine);
 			}
 			in.close();
-			result = (new Gson().fromJson(response.toString(), new ArrayList<Score>().getClass()));
+			//JsonObject job = new Gson().fromJson(response.toString(), JsonObject.class);
+			
+			Type listType = new TypeToken<List<Score>>() {}.getType();
+			result = new Gson().fromJson(response.toString(), listType);
+			
+			//result = (new Gson().fromJson(response.toString(), new ArrayList<Score>().getClass()));
 			//print result
 			System.out.println(response.toString());
 			
@@ -304,5 +312,26 @@ public class Utils
 		}
 		
 		return result;
+	}
+	
+	public void startBackgroundWorder()
+	{
+		Thread t = new Thread(new Runnable()
+		{
+
+			@Override
+			public void run() 
+			{
+				while(true)
+				{
+					Main.GAME.setScores(Utils.getTopScores(5));
+					try
+					{
+						Thread.sleep(10000);
+					}catch(Exception e){}
+				}	
+			}
+			
+		});
 	}
 }

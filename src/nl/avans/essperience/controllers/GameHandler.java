@@ -1,15 +1,22 @@
 package nl.avans.essperience.controllers;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import nl.avans.essperience.entities.Score;
 import nl.avans.essperience.events.MicroGameFinishedEventListener;
+import nl.avans.essperience.events.WindowListenerFrame;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.FlappyBirdModel;
 import nl.avans.essperience.models.FopsModel;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.GameOverModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
+import nl.avans.essperience.models.LoadingModel;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.models.RedButtonModel;
 import nl.avans.essperience.models.ScoreModel;
@@ -22,6 +29,7 @@ import nl.avans.essperience.views.FopsScreen;
 import nl.avans.essperience.views.GameOverScreen;
 import nl.avans.essperience.views.GameScreen;
 import nl.avans.essperience.views.IndianaJantjeScreen;
+import nl.avans.essperience.views.LoadingScreen;
 import nl.avans.essperience.views.MenuScreen;
 import nl.avans.essperience.views.RedButtonScreen;
 import nl.avans.essperience.views.ScoreScreen;
@@ -46,12 +54,14 @@ public class GameHandler extends JFrame
 	private GameModel _gameModel;
 	private ScoreModel _scoreModel;
 	private String _playername = ">>replace<<";
-	public GameHandler()
+	
+	private List<Score> _scores = new ArrayList<Score>();
+	
+	public GameHandler(Dimension dim)
 	{
 		super("Essperience");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		init(true);
+		load();
 
 		_scoreModel = new ScoreModel();
 		setContentPane(_gameScreen);
@@ -59,10 +69,36 @@ public class GameHandler extends JFrame
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		
 		setUndecorated(true);  
-		setSize(1280, 700);
+		
+		setSize(dim); //UPDATE FRAME SIZE IN MAIN CLASS!!!
 //		setSize(1920, 1080);
 		setVisible(true);
 		setLocationRelativeTo(null);
+		
+		this.addWindowListener(new WindowListenerFrame());
+		
+	}
+	
+	public LoadingModel getLoadingModel()
+	{
+		if(_gameModel instanceof LoadingModel)
+		{
+			return (LoadingModel)_gameModel;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public List<Score> getScores()
+	{
+		return _scores;
+	}
+	
+	public void setScores(List<Score> value)
+	{
+		_scores = value;
 	}
 	
 	public int getScore()
@@ -92,9 +128,29 @@ public class GameHandler extends JFrame
 	{
 		return _difficulty;
 	}
+	
+	public void load()
+	{
+		//AssetManager.Instance().playBackgroundMusic("Essperience/unrealsuperhero.wav");
+		Utils.disableAutoPress();
+		this._gameModel = new LoadingModel();
+		this._gameScreen = new LoadingScreen((LoadingModel)_gameModel);
+		this._gameController = new LoadingController((LoadingModel)this._gameModel, (LoadingScreen)_gameScreen);
+		this._gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener()
+		{
+			/**
+			 * this is the finished listener for the menu screen. All screens except the menuscreen will do other stuff in this event. (will be added in start method).
+			 */
+			@Override
+			public void microGameFinishedEvent(boolean succeed) 
+			{
+				start(); // calls the start method to start the series of minigames. 
+			}
+		});
+	}
+	
 	public void init(boolean firstRun)
 	{
-		AssetManager.Instance();
 		AssetManager.Instance().playBackgroundMusic("Essperience/unrealsuperhero.wav");
 		Utils.disableAutoPress();
 		this._gameModel = new MenuModel();
@@ -102,9 +158,6 @@ public class GameHandler extends JFrame
 		this._gameController = new MenuController((MenuScreen)this._gameScreen, (MenuModel)_gameModel);
 		this._gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener()
 		{
-			/**
-			 * this is the finished listener for the menu screen. All screens except the menuscreen will do other stuff in this event. (will be added in start method).
-			 */
 			@Override
 			public void microGameFinishedEvent(boolean succeed) 
 			{
@@ -213,7 +266,11 @@ public class GameHandler extends JFrame
 		}
 		setContentPane(new JPanel(null));
 		// do logic for next game screen here.
-		if(!(_gameController instanceof ScoreScreenController))
+		if(_gameController instanceof LoadingController)
+		{
+			init(false);
+		}
+		else if(!(_gameController instanceof ScoreScreenController))
 		{
 			_game = (int) (Math.random() * _NUMBEROFGAMES) + _STARTGAME;
 			this._gameScreen = new ScoreScreen(_scoreModel);

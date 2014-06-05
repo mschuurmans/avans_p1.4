@@ -5,7 +5,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
+import nl.avans.essperience.entities.Score;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.MenuModel;
 import nl.avans.essperience.utils.AssetManager;
@@ -60,6 +62,16 @@ public class MenuScreen extends GameScreen
 		{
 			int xCenter = Main.GAME.getWidth() / 2;
 			int yCenter = Main.GAME.getHeight() / 2;
+			List<Score> scores = Main.GAME.getScores();
+			int count = 0;
+			for(int i = 0; i < scores.size(); i++)
+			{
+				int xLoc = xCenter - 150;
+				int yLoc = 50 +(count * 25);
+				
+				g.drawString((i+1) + ": " + scores.get(i).getScore() + " : " + scores.get(i).getName() , xLoc, yLoc);
+				count++;
+			}
 			
 			Font font = new Font("Arial", Font.PLAIN, 60) ;
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -73,9 +85,8 @@ public class MenuScreen extends GameScreen
 			int nLineWidth = fm.stringWidth(nLine);
 			
 			g.setFont(font);
-			Utils.drawString(g, startGame, xCenter - (stringWidth / 2), yCenter - 115);
-			Utils.drawString(g, nLine, xCenter - (nLineWidth / 2),  yCenter - 50);
-			
+			Utils.drawString(g, startGame, xCenter - (stringWidth / 2), yCenter + 200 + 30);
+			Utils.drawString(g, nLine, xCenter - (nLineWidth / 2),  yCenter + 200 + 85);
 			
 			int leftLocX = xCenter - (20 + 150);
 			int rightLocX = xCenter + 20;

@@ -66,6 +66,8 @@ public class InputController
 					_listener.wiimoteIREvent(event);
 			}
 		});
+		
+		System.out.println("INPUT CONTROLLER FINISHED");
 	}
 	
 	public void setMotionDetecting(boolean state)

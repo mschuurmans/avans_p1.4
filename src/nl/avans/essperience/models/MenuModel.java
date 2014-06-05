@@ -1,5 +1,10 @@
 package nl.avans.essperience.models;
 
+import java.util.List;
+
+import nl.avans.essperience.entities.Score;
+import nl.avans.essperience.utils.Utils;
+
 public class MenuModel extends GameModel
 {
 	private boolean _leftFoot = false;
@@ -28,5 +33,10 @@ public class MenuModel extends GameModel
 	public boolean getRightFoot()
 	{
 		return _rightFoot;
+	}
+	
+	public List<Score> getTopScores(int amount)
+	{
+		return Utils.getTopScores(amount);
 	}
 }
