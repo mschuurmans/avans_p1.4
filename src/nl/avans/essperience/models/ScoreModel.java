@@ -17,8 +17,7 @@ public class ScoreModel extends GameModel
 	
 	public void update()
 	{
-		_score+= 100;
-		_randomScore = (int) ((Math.random() * 60) - 30);
+		_randomScore = (int) ((Math.random() * 60) - 30)+100;
 	}
 	
 	public void resetScore()
@@ -30,13 +29,29 @@ public class ScoreModel extends GameModel
 	{
 		if (_randomScore > 0)
 		{
-			_score++;
-			_randomScore--;
+			if (_randomScore < 10)
+			{
+				_score += _randomScore;
+				_randomScore = 0;
+			}
+			else
+			{
+				_score += 10;
+				_randomScore -= 10;
+			}
 		}
 		else if (_randomScore < 0)
 		{
-			_score--;
-			_randomScore++;
+			if (_randomScore > -10)
+			{
+				_score -= _randomScore;
+				_randomScore = 0;
+			}
+			else
+			{
+				_score -= 10;
+				_randomScore += 10;
+			}
 		}
 	}
 }
