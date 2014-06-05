@@ -174,7 +174,7 @@ public class Utils
 	
 	public static void drawString(Graphics g, String string, int outlineThickness, int x, int y)
 	{
-		drawString(g, string, Color.white, Color.black, outlineThickness, x, y);
+		drawString(g, string, Color.black, Color.white, outlineThickness, x, y);
 	}
 	
 	public static void drawString(Graphics g, String string, Color stringColor, Color outlineColor, int outlineThickness, int x, int y)
@@ -314,11 +314,10 @@ public class Utils
 		return result;
 	}
 	
-	public void startBackgroundWorder()
+	public static void startBackgroundWorder()
 	{
 		Thread t = new Thread(new Runnable()
 		{
-
 			@Override
 			public void run() 
 			{
@@ -327,11 +326,12 @@ public class Utils
 					Main.GAME.setScores(Utils.getTopScores(5));
 					try
 					{
-						Thread.sleep(10000);
+						Thread.sleep(5000);
 					}catch(Exception e){}
 				}	
 			}
 			
 		});
+		t.start();
 	}
 }

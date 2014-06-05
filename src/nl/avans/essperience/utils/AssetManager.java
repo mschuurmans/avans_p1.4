@@ -37,8 +37,7 @@ public class AssetManager
 													"Essperience/keyboardkey.png", "Essperience/keyboardkey_shift.png", "Essperience/keyboardkey_shift_down.png",
 													"Essperience/keyboardkey_return.png", "Essperience/keyboardkey_spacebar.png", "Essperience/cursorhand.png",
 													"Essperience/wiimote.png", "Essperience/gameover.png", "Essperience/footsteps.png", "Essperience/footsteps_green.png",
-													"Essperience/essteling_logo.png",
-													"Essperience/bliss_background.jpg"};
+													"Essperience/essteling_logo.png","Essperience/bliss_background.jpg", "Essperience/essperience_logo.png"};
 
 
 	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
@@ -90,7 +89,6 @@ public class AssetManager
 			if(url == null)
 			{
 				System.out.println("Asset is null: " + asset);
-				return;
 			}
 			else
 			{
@@ -105,7 +103,7 @@ public class AssetManager
 				}
 			}
 		}
-		
+		System.out.println("");
 		for(String sound : soundsList)
 		{
 	        System.out.println("Sound loading: " + sound);
@@ -209,8 +207,10 @@ public class AssetManager
 	{
 		if(_soundEnabled)
 		{
-			if (!_currentBGMKey.equals(key)) {
-				if (!_currentBGMKey.equals("")) {
+			if (!_currentBGMKey.equals(key)) 
+			{
+				if (!_currentBGMKey.equals(""))
+				{
 					_sounds.get(_currentBGMKey).stop();
 				}
 				_sounds.get(key).setFramePosition(0);

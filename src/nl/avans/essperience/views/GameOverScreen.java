@@ -60,7 +60,8 @@ public class GameOverScreen extends GameScreen {
 		int xCenter = Main.GAME.getWidth() / 2;
 		int yLocation = Main.GAME.getHeight() / 12;
 		
-		Font font = new Font("Arial", Font.PLAIN, 60) ;
+		//Font font = new Font("Arial", Font.PLAIN, 60) ;
+		Font font = Main.GAME.getFont(60);
 		
 		g.setFont(font);
 		g.drawImage(AssetManager.Instance().getImage("Essperience/gameover.png"), xCenter - 840/2, (int) (yLocation + (0.05 * Main.GAME.getHeight())), 840, 87, null);

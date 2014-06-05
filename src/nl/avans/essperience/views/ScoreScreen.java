@@ -34,7 +34,7 @@ public class ScoreScreen extends GameScreen
 	@Override
 	public void update() 
 	{
-				
+		((ScoreModel) _gameModel).scoreCount();		
 	}
 	
 	public void paintComponent(Graphics g)
@@ -61,11 +61,11 @@ public class ScoreScreen extends GameScreen
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		
-		g2.setFont(new Font("Arial", Font.PLAIN, 80));
-		Utils.drawString(g, ""+_level, center - Utils.getWidth(""+_level, getFont()), 150);
-		Utils.drawString(g, "Your score: " + ((ScoreModel) _gameModel).getScore(), center - (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore(), g2.getFont())/2), 250);
-		Utils.drawString(g, "Next Game: " + ((GameHandler.getNextGame())), center - (Utils.getWidth("Next Game: " + (GameHandler.getNextGame()), g2.getFont())/2), 650);
+		Font font = Main.GAME.getFont(60);
+		g2.setFont(font);
+		Utils.drawString(g, "Level: "+_level, center - (Utils.getWidth("Level: " +_level, g2.getFont())/2), 150);
+		Utils.drawString(g, "Your score: " + ((ScoreModel) _gameModel).getScore() + " + " + ((ScoreModel) _gameModel).getRandomScore(), center - (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore() + " + " + ((ScoreModel) _gameModel).getRandomScore(), g2.getFont())/2), 250);
+		//Utils.drawString(g, "Next Game: " + ((GameHandler.getNextGame())), center - (Utils.getWidth("Next Game: " + (GameHandler.getNextGame()), g2.getFont())/2), 650);
 	}
 
 }
