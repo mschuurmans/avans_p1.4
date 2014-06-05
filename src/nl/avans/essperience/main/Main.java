@@ -12,9 +12,8 @@ public class Main
 	{
 		GAME = new GameHandler(DIMENSION);
 		if(GAME.getLoadingModel() != null)
-		{
 			GAME.getLoadingModel().startLoading();
-		}
+		
 		GAME.reset();
 	}
 }
