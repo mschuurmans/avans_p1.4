@@ -50,7 +50,7 @@ public class FopsModel extends GameModel
 		_amountOfFruit = (_difficulty / 4) + 2;
 		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 2;
 		_gravity = 170 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
-
+		
 		//debug data
 		_debugData.add("Diff is: " + _difficulty);
 		_debugData.add("amount of fruit is: " + _amountOfFruit);
@@ -112,6 +112,18 @@ public class FopsModel extends GameModel
 			else
 				_updates++;
 		}
+		if (checkFruitsOut()) {
+			_modelToControllerListener.gameFinished(false);
+		}
+	}
+	
+	private boolean checkFruitsOut() {
+		for (Body b : _bodies) {
+			if (b.getPosition().getY()-150 < Main.GAME.getHeight()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void checkHits()

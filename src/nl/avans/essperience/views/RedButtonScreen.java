@@ -50,7 +50,7 @@ public class RedButtonScreen extends GameScreen {
 		g.setFont(font);
 		if (((RedButtonModel)_gameModel).getDont())
 		{
-			dont = "DO NOT";
+			dont = "DON'T";
 		}
 		else
 		{
