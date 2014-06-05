@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import nl.avans.essperience.events.StatusUpdateListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.LoadingModel;
+import nl.avans.essperience.utils.Utils;
 
 public class LoadingScreen extends GameScreen
 {
@@ -47,6 +48,6 @@ public class LoadingScreen extends GameScreen
 		int yCenter = (int)(Main.DIMENSION.getHeight() / 2);
 		
 		g.setFont(font);
-		g.drawString(status, xCenter - (stringWidth / 2), yCenter);
+		Utils.drawString(g, status, xCenter - (stringWidth / 2), yCenter);
 	}
 }

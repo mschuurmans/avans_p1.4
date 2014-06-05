@@ -167,7 +167,6 @@ public class GameHandler extends JFrame
 		
 		if(!firstRun)
 			changeScreen();
-
 	}
 
 	public void changeScreen()
@@ -256,7 +255,7 @@ public class GameHandler extends JFrame
 		} 
 		else
 		{
-			if (!_failed && _difficulty > 1)
+			if (!_failed && _difficulty > 1 && _gameModel instanceof LoadingModel)
 			{
 				_scoreModel.update();
 				AssetManager.Instance().playSound("Essperience/levelup.wav");
