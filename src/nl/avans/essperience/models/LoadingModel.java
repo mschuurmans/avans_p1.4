@@ -32,12 +32,20 @@ public class LoadingModel extends GameModel
 		
 		sendStatus();
 		System.out.println(_status);
-		List<Score> scores = Utils.getTopScores(1);
-		//Main.GAME.setScores(scores);
+		List<Score> scores = Utils.getTopScores(5);
+		Main.GAME.setScores(scores);
 		_status = "Searching for Wiimotes...";
 		sendStatus();
 		System.out.println(_status);
 		InputController.Instance();
+		
+		_status = "Starting background workers...";
+		sendStatus();
+		Utils.startBackgroundWorder();
+		try
+		{
+			Thread.sleep(1000);
+		}catch(Exception e){}
 		LOADING = false;
 			
 	}
