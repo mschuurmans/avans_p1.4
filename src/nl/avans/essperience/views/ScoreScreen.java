@@ -34,7 +34,7 @@ public class ScoreScreen extends GameScreen
 	@Override
 	public void update() 
 	{
-				
+		((ScoreModel) _gameModel).scoreCount();		
 	}
 	
 	public void paintComponent(Graphics g)
