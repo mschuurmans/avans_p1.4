@@ -137,10 +137,10 @@ public class Utils
 		return string;
 	}
 	
-	public static boolean isUnix(String OS) {
-		 
+	public static boolean isUnix() 
+	{	 
+		String OS = System.getProperty("os.name").toLowerCase();
 		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
- 
 	}
 	
 	public static String parseName(String name)
@@ -234,7 +234,7 @@ public class Utils
 	
 	public static void disableAutoPress()
 	{
-		if(Utils.isUnix(System.getProperty("os.name").toLowerCase()))
+		if(Utils.isUnix())
 		{
 			try
 			{
@@ -253,7 +253,7 @@ public class Utils
 	
 	public static void enableAutoPress()
 	{
-		if(Utils.isUnix(System.getProperty("os.name").toLowerCase()))
+		if(Utils.isUnix())
 		{
 			try
 			{
