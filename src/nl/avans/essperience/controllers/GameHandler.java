@@ -190,9 +190,10 @@ public class GameHandler extends JFrame
 			}
 		});
 		
+		_scoreModel.resetScore();
+		
 		if(!firstRun)
 			changeScreen();
-
 	}
 
 	public void changeScreen()
@@ -252,11 +253,13 @@ public class GameHandler extends JFrame
 	public void nextGame(boolean succeed)
 	{
 		Utils.enableAutoPress();
-		
-		if (_difficulty < 11) {
-			AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
-		} else {
-			AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
+		if(!(_gameController instanceof LoadingController))
+		{
+			if (_difficulty < 11) {
+				AssetManager.Instance().playBackgroundMusic("Essperience/background1.wav");
+			} else {
+				AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
+			}
 		}
 		if(_gameController instanceof GameOverController)
 		{
@@ -351,16 +354,17 @@ public class GameHandler extends JFrame
 				nextGame(succeed);
 			}
 		});
-
-		changeScreen();
 		
-		if(_gameController instanceof ScoreScreenController)
-			((ScoreScreenController)_gameController).start();
+		changeScreen();
 		
 		if(_gameController instanceof IndianaJantjeController || _gameController instanceof MenuController)
 		{
 			Utils.disableAutoPress();
 		}
+		if(_gameController instanceof ScoreScreenController)
+			((ScoreScreenController)_gameController).start();
+		
+		
 	}
 
 	public static String getNextGame()

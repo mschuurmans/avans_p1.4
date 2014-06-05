@@ -314,11 +314,10 @@ public class Utils
 		return result;
 	}
 	
-	public void startBackgroundWorder()
+	public static void startBackgroundWorder()
 	{
 		Thread t = new Thread(new Runnable()
 		{
-
 			@Override
 			public void run() 
 			{
@@ -327,11 +326,12 @@ public class Utils
 					Main.GAME.setScores(Utils.getTopScores(5));
 					try
 					{
-						Thread.sleep(10000);
+						Thread.sleep(5000);
 					}catch(Exception e){}
 				}	
 			}
 			
 		});
+		t.start();
 	}
 }
