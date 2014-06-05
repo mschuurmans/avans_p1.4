@@ -137,10 +137,10 @@ public class Utils
 		return string;
 	}
 	
-	public static boolean isUnix(String OS) {
-		 
+	public static boolean isUnix() 
+	{	 
+		String OS = System.getProperty("os.name").toLowerCase();
 		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
- 
 	}
 	
 	public static String parseName(String name)
@@ -169,7 +169,7 @@ public class Utils
 	
 	public static void drawString(Graphics g, String string, int x, int y)
 	{
-		drawString(g, string, 2, x, y);
+		drawString(g, string, 1, x, y);
 	}
 	
 	public static void drawString(Graphics g, String string, int outlineThickness, int x, int y)
@@ -186,6 +186,7 @@ public class Utils
 		g.drawString(string, x, y + outlineThickness);
 		g.setColor(stringColor);
 		g.drawString(string, x, y);
+		g.setColor(outlineColor);
 	}
 
 	public static void addHighScore(final String name, final int score)
@@ -234,7 +235,7 @@ public class Utils
 	
 	public static void disableAutoPress()
 	{
-		if(Utils.isUnix(System.getProperty("os.name").toLowerCase()))
+		if(Utils.isUnix())
 		{
 			try
 			{
@@ -253,7 +254,7 @@ public class Utils
 	
 	public static void enableAutoPress()
 	{
-		if(Utils.isUnix(System.getProperty("os.name").toLowerCase()))
+		if(Utils.isUnix())
 		{
 			try
 			{
@@ -285,8 +286,8 @@ public class Utils
 			con.setRequestProperty("User-Agent", "Mozilla/5.0");
 	 
 			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
-			System.out.println("Response Code : " + responseCode);
+			//System.out.println("\nSending 'GET' request to URL : " + url);
+			//System.out.println("Response Code : " + responseCode);
 	 
 			BufferedReader in = new BufferedReader( new InputStreamReader(con.getInputStream()));
 			String inputLine;
@@ -304,7 +305,7 @@ public class Utils
 			
 			//result = (new Gson().fromJson(response.toString(), new ArrayList<Score>().getClass()));
 			//print result
-			System.out.println(response.toString());
+			//System.out.println(response.toString());
 			
 		}catch(Exception e)
 		{

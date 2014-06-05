@@ -1,14 +1,10 @@
 package nl.avans.essperience.views;
 
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import nl.avans.essperience.entities.Score;
@@ -22,18 +18,11 @@ public class MenuScreen extends GameScreen
 	private static final long serialVersionUID = 4178628810705405806L;
 	
 	private boolean _debug = false;
-	private int _selected = 0;
 	
 	private Image _checkedLeft;
 	private Image _checkedRight;
 	private Image _unCheckedLeft; 
 	private Image _unCheckedRight;
-	
-	public void setSelected(int value)
-	{
-		_selected = value;
-		System.out.println("Selected value has been set to: " + _selected);
-	}
 	
 	public MenuScreen(MenuModel model) 
 	{
@@ -68,17 +57,25 @@ public class MenuScreen extends GameScreen
 			int yCenter = Main.GAME.getHeight() / 2;
 			List<Score> scores = Main.GAME.getScores();
 			int count = 0;
+			Font font = Main.GAME.getFont(60);
+			Font fontH = Main.GAME.getFont(30);
 			for(int i = 0; i < scores.size(); i++)
 			{
 				int xLoc = xCenter - 150;
-				int yLoc = 50 +(count * 25);
+				int yLoc = 50 +(count * 35);
+				g.setFont(fontH);
+				String place = (i+1+"");
 				
-				g.drawString((i+1) + ": " + scores.get(i).getScore() + " : " + scores.get(i).getName() , xLoc, yLoc);
+				if(i ==0)
+					place = " " + place;
+				
+				Utils.drawString(g, place + ": " +scores.get(i).getName() + " - " + scores.get(i).getScore(), xLoc, yLoc);
+				//g.drawString((i+1) + ": " + scores.get(i).getScore() + " : " + scores.get(i).getName() , xLoc, yLoc);
 				count++;
 			}
 			
 			//Font font = new Font("Arial", Font.PLAIN, 60) ;
-			Font font = Main.GAME.getFont(60);
+			
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 			FontMetrics fm = img.getGraphics().getFontMetrics(font);
 			String startGame = "Stand on the pressure plates";
