@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import nl.avans.essperience.controllers.GameHandler;
 import nl.avans.essperience.events.StatusUpdateListener;
 import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.LoadingModel;
@@ -36,7 +37,8 @@ public class LoadingScreen extends GameScreen
 	{
 		super.paintComponent(g);
 		
-		Font font = new Font("Arial", Font.PLAIN, 60) ;
+		//Font font = new Font("Arial", Font.PLAIN, 60) ;
+		Font font = Main.GAME.getFont(60);
 		BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 		FontMetrics fm = img.getGraphics().getFontMetrics(font);
 		String status = _status;

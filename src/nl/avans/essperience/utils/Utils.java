@@ -174,7 +174,7 @@ public class Utils
 	
 	public static void drawString(Graphics g, String string, int outlineThickness, int x, int y)
 	{
-		drawString(g, string, Color.white, Color.black, outlineThickness, x, y);
+		drawString(g, string, Color.black, Color.white, outlineThickness, x, y);
 	}
 	
 	public static void drawString(Graphics g, String string, Color stringColor, Color outlineColor, int outlineThickness, int x, int y)

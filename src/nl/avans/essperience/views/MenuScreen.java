@@ -1,10 +1,14 @@
 package nl.avans.essperience.views;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import nl.avans.essperience.entities.Score;
@@ -73,7 +77,8 @@ public class MenuScreen extends GameScreen
 				count++;
 			}
 			
-			Font font = new Font("Arial", Font.PLAIN, 60) ;
+			//Font font = new Font("Arial", Font.PLAIN, 60) ;
+			Font font = Main.GAME.getFont(60);
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 			FontMetrics fm = img.getGraphics().getFontMetrics(font);
 			String startGame = "Stand on the pressure plates";

@@ -5,7 +5,6 @@ import java.util.List;
 import nl.avans.essperience.controllers.InputController;
 import nl.avans.essperience.entities.Score;
 import nl.avans.essperience.events.StatusUpdateListener;
-import nl.avans.essperience.main.Main;
 import nl.avans.essperience.utils.AssetManager;
 import nl.avans.essperience.utils.Utils;
 
