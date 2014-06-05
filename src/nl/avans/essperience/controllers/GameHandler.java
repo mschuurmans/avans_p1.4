@@ -1,6 +1,12 @@
 package nl.avans.essperience.controllers;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +48,8 @@ public class GameHandler extends JFrame
 
 	private static int _game;
 	private boolean _failed = false;
-	private int _difficulty = 1;
-	private final int _NUMBEROFGAMES = 6;
+	private int _difficulty = 0;
+	private final int _NUMBEROFGAMES = 1;
 	private final int _STARTGAME = 1;
 
 	private int _lives = GameHandler.MAX_LIVES;
@@ -54,7 +60,6 @@ public class GameHandler extends JFrame
 	private GameModel _gameModel;
 	private ScoreModel _scoreModel;
 	private String _playername = ">>replace<<";
-	
 	private List<Score> _scores = new ArrayList<Score>();
 	
 	public GameHandler(Dimension dim)
@@ -77,6 +82,25 @@ public class GameHandler extends JFrame
 		
 		this.addWindowListener(new WindowListenerFrame());
 		
+	}
+	
+	public Font getFont(int size) {
+		URL fontUrl = null;
+		fontUrl = this.getClass().getClassLoader().getResource("Fonts/dotspecial.ttf");
+		Font font = null;
+		try {
+			font = Font.createFont(Font.PLAIN, fontUrl.openStream());
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		font = font.deriveFont(font.PLAIN, size);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	        ge.registerFont(font);
+	    return font;
 	}
 	
 	public LoadingModel getLoadingModel()
@@ -227,7 +251,7 @@ public class GameHandler extends JFrame
 
 	public void nextGame(boolean succeed)
 	{
-		Utils.enableAutoPress();
+		Utils.disableAutoPress();
 		if(!(_gameController instanceof LoadingController))
 		{
 			if (_difficulty < 11) {
@@ -236,6 +260,7 @@ public class GameHandler extends JFrame
 				AssetManager.Instance().playBackgroundMusic("Essperience/background2.wav");
 			}
 		}
+		
 		if(_gameController instanceof GameOverController)
 		{
 			reset();
@@ -259,11 +284,11 @@ public class GameHandler extends JFrame
 		} 
 		else
 		{
+			
 			if (!_failed && _difficulty > 1)
 			{
 				_scoreModel.update();
 				AssetManager.Instance().playSound("Essperience/levelup.wav");
-				
 			}
 			_failed = !_failed;
 		}
@@ -338,8 +363,6 @@ public class GameHandler extends JFrame
 		}
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
-		
-		
 	}
 
 	public static String getNextGame()

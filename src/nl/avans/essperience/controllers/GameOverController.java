@@ -25,6 +25,23 @@ public class GameOverController extends GameController
 					submitScore(false);
 				}
 				
+				if(key == GameKeys.KeyU || key == GameKeys.KeyI || key == GameKeys.KeyO || key == GameKeys.KeyP)
+				{
+					String s = "Unknown Soldier";
+					
+					switch(key)
+					{
+					case KeyU: s = "Im a filthy Banana"; break;
+					case KeyI: s = "Angry Orange"; break;
+					case KeyO: s = "AppleF*g"; break;
+					case KeyP: s = "Grow a Pear"; break;
+					}
+					
+					_model.setLocalName(s);
+					_model.setShiftEnabled(false);
+					_model.setSelectedKey(GameOverModel.ENTERID);
+				}
+				
 				if(key == GameKeys.WiiA)
 				{
 					// add the selected character to the model.localName

@@ -46,10 +46,11 @@ public class RedButtonScreen extends GameScreen {
 		int numberOfArrows = 7;
 		String dont;
 		
-		g.setFont(new Font("Arial", Font.PLAIN, 14));
+		Font font = Main.GAME.getFont(10);
+		g.setFont(font);
 		if (((RedButtonModel)_gameModel).getDont())
 		{
-			dont = "DON'T";
+			dont = "DO NOT";
 		}
 		else
 		{
@@ -57,7 +58,8 @@ public class RedButtonScreen extends GameScreen {
 		}
 		int stringWidth = Utils.getWidth(dont, g.getFont());
 		g.drawString(dont, xCenter - (stringWidth / 2), yCenter - (yCenter / 2) - 100);
-		g.setFont(new Font("Arial", Font.PLAIN, 90));
+		font = Main.GAME.getFont(90);
+		g.setFont(font);
 		String _press = "PRESS THE RED BUTTON";
 		stringWidth = Utils.getWidth(_press, g.getFont());
 		g.drawString(_press, xCenter - (stringWidth / 2), yCenter - (yCenter / 2));
