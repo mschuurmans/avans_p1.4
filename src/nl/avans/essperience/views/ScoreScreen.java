@@ -64,7 +64,7 @@ public class ScoreScreen extends GameScreen
 		
 		g2.setFont(new Font("Arial", Font.PLAIN, 80));
 		Utils.drawString(g, ""+_level, center - Utils.getWidth(""+_level, getFont()), 150);
-		Utils.drawString(g, "" + ((ScoreModel) _gameModel).getRandomScore(), center + (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore(), g2.getFont())/2), 125);
+		Utils.drawString(g, "" + ((ScoreModel) _gameModel).getRandomScore(), center + (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore(), g2.getFont())/2), 175);
 		Utils.drawString(g, "Your score: " + ((ScoreModel) _gameModel).getScore(), center - (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore(), g2.getFont())/2), 250);
 		Utils.drawString(g, "Next Game: " + ((GameHandler.getNextGame())), center - (Utils.getWidth("Next Game: " + (GameHandler.getNextGame()), g2.getFont())/2), 650);
 	}
