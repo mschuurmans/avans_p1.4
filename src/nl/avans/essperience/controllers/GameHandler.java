@@ -165,6 +165,8 @@ public class GameHandler extends JFrame
 			}
 		});
 		
+		_scoreModel.resetScore();
+		
 		if(!firstRun)
 			changeScreen();
 	}
@@ -257,7 +259,7 @@ public class GameHandler extends JFrame
 		} 
 		else
 		{
-			if (!_failed && _difficulty > 1 && _gameModel instanceof LoadingModel)
+			if (!_failed && _difficulty > 1)
 			{
 				_scoreModel.update();
 				AssetManager.Instance().playSound("Essperience/levelup.wav");
@@ -327,16 +329,17 @@ public class GameHandler extends JFrame
 				nextGame(succeed);
 			}
 		});
-
-		changeScreen();
 		
-		if(_gameController instanceof ScoreScreenController)
-			((ScoreScreenController)_gameController).start();
+		changeScreen();
 		
 		if(_gameController instanceof IndianaJantjeController || _gameController instanceof MenuController)
 		{
 			Utils.disableAutoPress();
 		}
+		if(_gameController instanceof ScoreScreenController)
+			((ScoreScreenController)_gameController).start();
+		
+		
 	}
 
 	public static String getNextGame()

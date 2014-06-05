@@ -21,6 +21,11 @@ public class ScoreModel extends GameModel
 		_randomScore = (int) ((Math.random() * 60) - 30);
 	}
 	
+	public void resetScore()
+	{
+		_score = 0;
+	}
+	
 	public void scoreCount()
 	{
 		if (_randomScore > 0)
