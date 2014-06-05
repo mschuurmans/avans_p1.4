@@ -15,7 +15,7 @@ public class Main
 		{
 			GAME.getLoadingModel().startLoading();
 		}
-		GAME.nextGame(true);
+		GAME.reset();
 	}
 }
 
