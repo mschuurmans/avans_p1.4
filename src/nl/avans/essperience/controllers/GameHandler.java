@@ -1,6 +1,12 @@
 package nl.avans.essperience.controllers;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +83,25 @@ public class GameHandler extends JFrame
 		
 		this.addWindowListener(new WindowListenerFrame());
 		
+	}
+	
+	public Font getFont(int size) {
+		URL fontUrl = null;
+		fontUrl = this.getClass().getClassLoader().getResource("Fonts/dotspecial.ttf");
+		Font font = null;
+		try {
+			font = Font.createFont(Font.PLAIN, fontUrl.openStream());
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		font = font.deriveFont(font.PLAIN, size);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	        ge.registerFont(font);
+	    return font;
 	}
 	
 	public LoadingModel getLoadingModel()
