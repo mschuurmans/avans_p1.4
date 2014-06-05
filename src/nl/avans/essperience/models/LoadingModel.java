@@ -32,7 +32,7 @@ public class LoadingModel extends GameModel
 		
 		sendStatus();
 		System.out.println(_status);
-		List<Score> scores = Utils.getTopScores(1);
+		List<Score> scores = Utils.getTopScores(5);
 		Main.GAME.setScores(scores);
 		_status = "Searching for Wiimotes...";
 		sendStatus();
