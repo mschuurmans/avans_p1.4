@@ -45,6 +45,8 @@ public class ScoreScreen extends GameScreen
 		int space = 50;
 		int center = Main.GAME.getWidth() / 2;
 		int y = 325;
+		String scoreLine = "Your score: " + ((ScoreModel) _gameModel).getScore();
+		String randomScoreLine =  "" + ((ScoreModel) _gameModel).getRandomScore();
 		
 		g.drawImage(AssetManager.Instance().getImage("Essperience/bliss_background.jpg"), 0, 0, 1920, 1200, null);
 		
@@ -63,12 +65,10 @@ public class ScoreScreen extends GameScreen
 		Font font = Main.GAME.getFont(60);
 		g2.setFont(font);
 		Utils.drawString(g, "Level: "+_level, center - (Utils.getWidth("Level: "+_level, g2.getFont())/2), 150);
-		if (Main.GAME.getDifficulty() > 5)
-			Utils.drawString(g, "Your score: " + ((ScoreModel) _gameModel).getScore() + " + " + ((ScoreModel) _gameModel).getRandomScore(), center - (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore() + " + " + ((ScoreModel) _gameModel).getRandomScore(), g2.getFont())/2), 250);
+		if (((ScoreModel) _gameModel).getRandomScore() > 0)
+			Utils.drawString(g, scoreLine + " + " + randomScoreLine, center - (Utils.getWidth(scoreLine + " + " + randomScoreLine, g2.getFont())/2), 250);
 		else
-			Utils.drawString(g, "Your score: " + ((ScoreModel) _gameModel).getScore() + " + " + ((ScoreModel) _gameModel).getRandomScore(), center - (Utils.getWidth("Your score: " + ((ScoreModel) _gameModel).getScore(), g2.getFont())/2), 250);
-			
-			
+			Utils.drawString(g,scoreLine, center - (Utils.getWidth(scoreLine, g2.getFont())/2), 250);
 	}
 
 }
