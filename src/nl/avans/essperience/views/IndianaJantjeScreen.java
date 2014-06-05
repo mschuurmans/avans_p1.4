@@ -11,6 +11,7 @@ import nl.avans.essperience.main.Main;
 import nl.avans.essperience.models.GameModel;
 import nl.avans.essperience.models.IndianaJantjeModel;
 import nl.avans.essperience.utils.AssetManager;
+import nl.avans.essperience.utils.Utils;
 
 public class IndianaJantjeScreen extends GameScreen
 {
@@ -140,15 +141,17 @@ public class IndianaJantjeScreen extends GameScreen
 		g.drawImage(_background, 0, 0, _screenWidth, _screenHeight, null);
 		
 		//draw SplashScreen
-		Composite composite = g.getComposite();
-		_splashAlpha -= 0.03;
-		if(_splashAlpha > 0)
+		if(!Utils.isUnix()) //DISABLED ON UNIX FOR BETTER PERFORMANCE
 		{
-			g.setComposite(AlphaComposite.SrcOver.derive((float) _splashAlpha));
-			g.drawImage(AssetManager.Instance().getImage("IndianaJantje/indianajantje_splashscreen.png"), (Main.GAME.getWidth() / 2) -764/2, (int) (Main.GAME.getHeight() * 0.1), 764, 175, null);
-			g.setComposite(composite);
+			Composite composite = g.getComposite();
+			_splashAlpha -= 0.03;
+			if(_splashAlpha > 0)
+			{
+				g.setComposite(AlphaComposite.SrcOver.derive((float) _splashAlpha));
+				g.drawImage(AssetManager.Instance().getImage("IndianaJantje/indianajantje_splashscreen.png"), (Main.GAME.getWidth() / 2) -764/2, (int) (Main.GAME.getHeight() * 0.1), 764, 175, null);
+				g.setComposite(composite);
+			}
 		}
-		
 		g.drawImage(rock[_drawStoneX+(_drawStoneY*4)], (_screenWidth/2*_side) + (_screenHeight/4)-(_sizeX/2) + _screenWidth/11, _screenHeight/2, _sizeX, _sizeY, null);
 		g.drawImage(player[_drawPlayerX], (_screenWidth/3) * _position, _screenHeight-(_drawPlayerY), _drawPlayerY, _drawPlayerY*2, null);
 	
