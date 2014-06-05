@@ -53,6 +53,7 @@ public class MenuScreen extends GameScreen
 		
 		if(Main.GAME != null)
 		{
+			g.drawImage(AssetManager.Instance().getImage("Essperience/menuscreen.png"), 0, 0, Main.GAME.getWidth(), Main.GAME.getHeight(), null);
 			int xCenter = Main.GAME.getWidth() / 2;
 			int yCenter = Main.GAME.getHeight() / 2;
 			List<Score> scores = Main.GAME.getScores();
@@ -81,7 +82,6 @@ public class MenuScreen extends GameScreen
 			String startGame = "Stand on the pressure plates";
 			String nLine = "to start the game!";
 			
-			g.drawImage(AssetManager.Instance().getImage("Essperience/menuscreen.png"), 0, 0, Main.GAME.getWidth(), Main.GAME.getHeight(), null);
 			g.drawImage(AssetManager.Instance().getImage("Essperience/essteling_logo.png"), 0, 0, 400,142,null);
 			g.drawImage(AssetManager.Instance().getImage("Essperience/essperience_logo.png"), Main.DIMENSION.width - 400,0, 400, 142, null);
 			int stringWidth = fm.stringWidth(startGame);
