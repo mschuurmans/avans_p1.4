@@ -165,9 +165,13 @@ public class FruitOpsPiece
 		{
 			yForce = (int)(Math.random()*100) + 350;
 		}
-		else
+		else if (Main.GAME.getHeight() > 800)
 		{
 			yForce = (int)(Math.random()*100) + 300;
+		}
+		else
+		{
+			yForce = (int)(Math.random()*100) + 200;	
 		}
 		int extraForce = (int)(Math.random()*100);
 		

@@ -31,8 +31,9 @@ public class FopsModel extends GameModel
 	private int _updates = 0;
 	private int _currentBody = 0;
 
-	private final int _XOFFSETALLOWED = 75;
-	private final int _YOFFSETALLOWED = 75;
+	private final int _MAXDIFF = 15;
+	private int _XOFFSETALLOWED;
+	private int _YOFFSETALLOWED;
 
 	//debug data
 	private boolean _debug = false;
@@ -50,7 +51,16 @@ public class FopsModel extends GameModel
 		_amountOfFruit = (_difficulty / 4) + 2;
 		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 2;
 		_gravity = 150 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 15);
-		
+		if (_difficulty < _MAXDIFF)
+		{
+			_YOFFSETALLOWED = 75 + (40 - _difficulty*2);
+			_XOFFSETALLOWED = 75 + (40 - _difficulty*2);	
+		}
+		else
+		{
+			_YOFFSETALLOWED = 75;
+			_XOFFSETALLOWED = 75;
+		}
 		//debug data
 		_debugData.add("Diff is: " + _difficulty);
 		_debugData.add("amount of fruit is: " + _amountOfFruit);
@@ -82,6 +92,7 @@ public class FopsModel extends GameModel
 
 	public void update()
 	{
+		System.out.println("amount of fruits: " + _amountOfFruit + " - bodies: " + _bodies.size() + " - currentbody: " + _currentBody);
 		for (int i = 0; i < 5; i ++)
 		{
 			_updates++;
@@ -179,6 +190,7 @@ public class FopsModel extends GameModel
 				System.out.println("bodies.size(): " + _bodies.size());
 				System.out.println("removing body with index: " + indexes.get(i) + " which is i: " + i);
 			}
+			_currentBody--;
 			_bodies.remove(_bodies.get(indexes.get(i)));
 			AssetManager.Instance().playSound("Fops/splash.wav");
 			//_bodies.remove(indexes.get(i));

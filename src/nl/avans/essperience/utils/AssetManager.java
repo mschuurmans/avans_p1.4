@@ -41,7 +41,7 @@ public class AssetManager
 													"Essperience/menuscreen.png"};
 													
 
-	private String[] soundsList = new String[] { 	"Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
+	private String[] soundsList = new String[] { 	"Essperience/background0.wav", "Essperience/background1.wav", "Essperience/background2.wav", "Essperience/background3.wav",
 													"Essperience/levelup.wav", "Essperience/lifeloss.wav", "Essperience/gameover.wav", "Essperience/unrealsuperhero.wav",
 													"IndianaJantje/bloodsplash.wav", "IndianaJantje/stonebreak.wav", "IndianaJantje/stomp.wav",
 													"Waf/hello.wav", "Waf/ouch.wav", "Waf/whack.wav", 
