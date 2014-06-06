@@ -31,6 +31,10 @@ public class FopsScreen extends GameScreen
 	private static final int APPLE = 2;
 	private static final int PEAR = 3;
 	
+	private ArrayList<Image> _fruits = new ArrayList<Image>();
+	
+	private int _oldFruitAmount;
+	
 	private static int _screenWidth = Main.GAME.getWidth();
 	private static int _screenHeight = Main.GAME.getHeight();
 	private int _amountOfBullets;
@@ -48,6 +52,7 @@ public class FopsScreen extends GameScreen
 		_fruitPieceImages[ORANGE] = (BufferedImage) AssetManager.Instance().getImage("Fops/orange_pieces.png");
 		_fruitPieceImages[APPLE] = (BufferedImage) AssetManager.Instance().getImage("Fops/apple_pieces.png");
 		_fruitPieceImages[PEAR] = (BufferedImage) AssetManager.Instance().getImage("Fops/pear_pieces.png");
+		_oldFruitAmount = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -55,6 +60,15 @@ public class FopsScreen extends GameScreen
 	public void update() 
 	{
 		_gameModel.update();
+		FopsModel model = (FopsModel)_gameModel;
+		if (_oldFruitAmount < model.getBodies().size())
+		{
+			_oldFruitAmount = model.getBodies().size();
+			for (Body body : model.getBodies())
+			{
+				_fruits.add(getFruitImage((String)body.getUserData()));
+			}
+		}
 	}
 	
 	public void paintComponent(Graphics g1)
@@ -92,7 +106,7 @@ public class FopsScreen extends GameScreen
 			//System.out.println("drawing splash: " + s.getType() +  " rotated over: " + s.getRotation() + " at x: " + s.getX() + " and y: " + s.getY());
 			s.draw(g);
 		}
-		
+		int index = 0;
 		//drawing fruits
 		for (Body body : fruitBodies)
 		{
@@ -103,10 +117,11 @@ public class FopsScreen extends GameScreen
 			g.translate(x, y);
 			g.rotate(rotation);	
 			int size = 150;
-			g.drawImage(getFruitImage((String)body.getUserData()), 0 -size/2, 0 -size/2, size, size, null);	
+			g.drawImage(_fruits.get(index), 0 -size/2, 0 -size/2, size, size, null);	
 
 			g.rotate(-rotation);
 			g.translate(-x, -y);
+			index++;
 		}
 		
 		//drawing crosshair

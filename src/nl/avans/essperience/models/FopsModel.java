@@ -287,7 +287,7 @@ public class FopsModel extends GameModel
 			}
 
 			//new Thread() {
-				for (int i = 0; i < 5; i++)
+				for (int i = 0; i < 4; i++)
 			{
 				newBody[i] = new Body(new Circle( fractionWidth ), fractionMass);
 
