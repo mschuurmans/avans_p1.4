@@ -9,7 +9,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.phys2d.raw.Body;
 import nl.avans.essperience.entities.fops.BulletHole;
@@ -31,7 +33,8 @@ public class FopsScreen extends GameScreen
 	private static final int APPLE = 2;
 	private static final int PEAR = 3;
 	
-	private ArrayList<Image> _fruits = new ArrayList<Image>();
+	//private ArrayList<Image> _fruits = new ArrayList<Image>();
+	private Map<String, Image> _fruits = new HashMap<String, Image>();
 	
 	private int _oldFruitAmount;
 	
@@ -61,14 +64,7 @@ public class FopsScreen extends GameScreen
 	{
 		_gameModel.update();
 		FopsModel model = (FopsModel)_gameModel;
-		if (_oldFruitAmount < model.getBodies().size())
-		{
-			_oldFruitAmount = model.getBodies().size();
-			for (Body body : model.getBodies())
-			{
-				_fruits.add(getFruitImage((String)body.getUserData()));
-			}
-		}
+		ArrayList<Body> bodies = model.getBodies();
 	}
 	
 	public void paintComponent(Graphics g1)
@@ -106,8 +102,17 @@ public class FopsScreen extends GameScreen
 			//System.out.println("drawing splash: " + s.getType() +  " rotated over: " + s.getRotation() + " at x: " + s.getX() + " and y: " + s.getY());
 			s.draw(g);
 		}
-		int index = 0;
+		
 		//drawing fruits
+		int index = 0;
+		if (_fruits.size() < fruitBodies.size())
+		{
+			for (Body body : fruitBodies)
+			{
+				_fruits.put((String)body.getUserData(), getFruitImage((String)body.getUserData()));
+				System.out.println((String)body.getUserData());
+			}
+		}
 		for (Body body : fruitBodies)
 		{
 			float rotation = body.getRotation();
@@ -117,7 +122,7 @@ public class FopsScreen extends GameScreen
 			g.translate(x, y);
 			g.rotate(rotation);	
 			int size = 150;
-			g.drawImage(_fruits.get(index), 0 -size/2, 0 -size/2, size, size, null);	
+			g.drawImage(_fruits.get((String)body.getUserData()), 0 -size/2, 0 -size/2, size, size, null);	
 
 			g.rotate(-rotation);
 			g.translate(-x, -y);

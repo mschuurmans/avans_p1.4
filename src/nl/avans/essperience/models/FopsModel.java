@@ -242,7 +242,7 @@ public class FopsModel extends GameModel
 	 */
 	public Body[] splitBody(final Body body)
 	{
-			Body[] newBody = new Body[5];
+			Body[] newBody = new Body[4];
 			String uData = (String)body.getUserData();
 			switch(uData)
 			{
@@ -261,7 +261,7 @@ public class FopsModel extends GameModel
 			int x = (int) body.getPosition().getX();
 			int y = (int) body.getPosition().getY();
 
-			double angleOffset = Math.toRadians(72);
+			double angleOffset = Math.toRadians(90);
 
 			int bodyWidth = (int) (body.getShape().getBounds().getWidth());
 			int fractionWidth = (int) (bodyWidth * 0.35);
