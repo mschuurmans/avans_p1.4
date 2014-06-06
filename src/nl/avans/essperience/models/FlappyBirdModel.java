@@ -130,13 +130,13 @@ public class FlappyBirdModel extends GameModel
 			}
 		}
 		
-		_pipeTop = new FlappyPipe(DockLocations.Top, diff * 2);
+		_pipeTop = new FlappyPipe(DockLocations.Top, diff * 2 + 2);
 		_pipeTop.setX(pipeX);
 		_pipeTop.setY(0);
 		_pipeTop.setWidth(100);
 		_pipeTop.setHeight(pipeTopHeight);
 		
-		_pipeBottom = new FlappyPipe(DockLocations.Bottom, diff * 2);
+		_pipeBottom = new FlappyPipe(DockLocations.Bottom, diff * 2 + 2);
 		_pipeBottom.setX(pipeX);
 		_pipeBottom.setY(pipeTopHeight + gap);
 		_pipeBottom.setWidth(100);
