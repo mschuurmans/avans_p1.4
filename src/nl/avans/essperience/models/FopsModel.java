@@ -107,12 +107,12 @@ public class FopsModel extends GameModel
 			{
 				_updates = 0;
 			}
-			if(_modelToControllerListener != null && _updates > 30)
+			if(_updates > 30)
 				_modelToControllerListener.gameFinished(true);
 			else
 				_updates++;
 		}
-		if (checkFruitsOut()) {
+		if (checkFruitsOut() && _bodies.size() > 0) {
 			_modelToControllerListener.gameFinished(false);
 		}
 	}
