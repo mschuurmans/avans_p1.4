@@ -3,6 +3,7 @@ package nl.avans.essperience.models;
 import java.util.List;
 
 import nl.avans.essperience.controllers.InputController;
+import nl.avans.essperience.controllers.LightController;
 import nl.avans.essperience.entities.Score;
 import nl.avans.essperience.events.StatusUpdateListener;
 import nl.avans.essperience.main.Main;
@@ -52,6 +53,7 @@ public class LoadingModel extends GameModel
 		_status = "Starting background workers...";
 		sendStatus();
 		Utils.startBackgroundWorder();
+		new LightController().start();
 		try
 		{
 			Thread.sleep(1000);

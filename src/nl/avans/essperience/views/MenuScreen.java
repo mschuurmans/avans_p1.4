@@ -59,11 +59,11 @@ public class MenuScreen extends GameScreen
 			List<Score> scores = Main.GAME.getScores();
 			int count = 0;
 			Font font = Main.GAME.getFont(60);
-			Font fontH = Main.GAME.getFont(30);
+			Font fontH = Main.GAME.getFont(50);
 			for(int i = 0; i < scores.size(); i++)
 			{
 				int xLoc = xCenter - 150;
-				int yLoc = 50 +(count * 35);
+				int yLoc = 50 +(count * 55);
 				g.setFont(fontH);
 				String place = (i+1+"");
 				
