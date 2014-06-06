@@ -32,11 +32,10 @@ public class FopsScreen extends GameScreen
 	private static final int ORANGE = 1;
 	private static final int APPLE = 2;
 	private static final int PEAR = 3;
+	private boolean _debug = false;
 	
 	//private ArrayList<Image> _fruits = new ArrayList<Image>();
 	private Map<String, Image> _fruits = new HashMap<String, Image>();
-	
-	private int _oldFruitAmount;
 	
 	private static int _screenWidth = Main.GAME.getWidth();
 	private static int _screenHeight = Main.GAME.getHeight();
@@ -55,7 +54,6 @@ public class FopsScreen extends GameScreen
 		_fruitPieceImages[ORANGE] = (BufferedImage) AssetManager.Instance().getImage("Fops/orange_pieces.png");
 		_fruitPieceImages[APPLE] = (BufferedImage) AssetManager.Instance().getImage("Fops/apple_pieces.png");
 		_fruitPieceImages[PEAR] = (BufferedImage) AssetManager.Instance().getImage("Fops/pear_pieces.png");
-		_oldFruitAmount = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -63,8 +61,6 @@ public class FopsScreen extends GameScreen
 	public void update() 
 	{
 		_gameModel.update();
-		FopsModel model = (FopsModel)_gameModel;
-		ArrayList<Body> bodies = model.getBodies();
 	}
 	
 	public void paintComponent(Graphics g1)
@@ -104,13 +100,13 @@ public class FopsScreen extends GameScreen
 		}
 		
 		//drawing fruits
-		int index = 0;
 		if (_fruits.size() < fruitBodies.size())
 		{
 			for (Body body : fruitBodies)
 			{
 				_fruits.put((String)body.getUserData(), getFruitImage((String)body.getUserData()));
-				System.out.println((String)body.getUserData());
+				if (_debug)
+					System.out.println((String)body.getUserData());
 			}
 		}
 		for (Body body : fruitBodies)
@@ -126,7 +122,6 @@ public class FopsScreen extends GameScreen
 
 			g.rotate(-rotation);
 			g.translate(-x, -y);
-			index++;
 		}
 		
 		//drawing crosshair
@@ -150,7 +145,7 @@ public class FopsScreen extends GameScreen
 			g.drawString("Bullets: " + _amountOfBullets, _screenWidth-180, _screenHeight-30);
 		}
 		
-		addTimeBar(g);
+		//addTimeBar(g);
 		
 		//Display debug data when model says so!
 		if(model.isDebugTrue())

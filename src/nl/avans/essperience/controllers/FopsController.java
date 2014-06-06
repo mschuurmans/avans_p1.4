@@ -24,6 +24,7 @@ public class FopsController extends GameController
 		_model = model;
 		_view = view;
 		
+		
 		InputController.Instance().addInputTriggeredEventListener(new InputTriggerdEventListener()
 		{
 			@Override

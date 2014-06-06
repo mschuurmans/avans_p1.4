@@ -46,10 +46,10 @@ public class FopsModel extends GameModel
 	public void init()
 	{
 		_difficulty = Main.GAME.getDifficulty();
-		_maxTime = 3000 + (6000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
+		//_maxTime = 3000 + (6000/(int)Math.sqrt(Main.GAME.getDifficulty())); // TODO check fruit falltime
 		_amountOfFruit = (_difficulty / 4) + 2;
 		_amountOfBullets = (int) (_amountOfFruit) + (_maxTime/2000) + 2;
-		_gravity = 170 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 10);
+		_gravity = 150 + ((int)Math.sqrt(Main.GAME.getDifficulty()) * 15);
 		
 		//debug data
 		_debugData.add("Diff is: " + _difficulty);
@@ -96,11 +96,11 @@ public class FopsModel extends GameModel
 			_currentBody++;
 		}
 
-		if (getTimeRemaining() == 0)
+	/*	if (getTimeRemaining() == 0)
 		{
 			if(_modelToControllerListener != null)
 				_modelToControllerListener.timesUpEvent();
-		}
+		}*/
 		if (_bodies.size() <= 0)
 		{
 			if (_updates > 40)
