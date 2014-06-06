@@ -33,7 +33,7 @@ public class GameOverController extends GameController
 					{
 					case KeyU: s = "Im a filthy Banana"; break;
 					case KeyI: s = "Angry Orange"; break;
-					case KeyO: s = "AppleF*g"; break;
+					case KeyO: s = "AppleFag"; break;
 					case KeyP: s = "Grow a Pear"; break;
 					}
 					
