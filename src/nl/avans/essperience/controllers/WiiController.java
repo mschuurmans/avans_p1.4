@@ -29,7 +29,7 @@ public class WiiController implements WiimoteListener
 {
 	private Wiimote[] _wiimotes;
 	private ButtonPressedEventListener _listener = null;
-	public static final int MAX_TRIES = 1;
+	public static final int MAX_TRIES = 3;
 	private static int _currentWiiMoteID = 0;
 
 	private boolean _debug = true;

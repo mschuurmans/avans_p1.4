@@ -35,7 +35,7 @@ public class FopsModel extends GameModel
 	private final int _YOFFSETALLOWED = 75;
 
 	//debug data
-	private boolean _debug = true;
+	private boolean _debug = false;
 	private List<String> _debugData = new ArrayList<String>();
 
 	public FopsModel()
@@ -169,8 +169,11 @@ public class FopsModel extends GameModel
 	{
 		for (int i = indexes.size()-1; i >= 0; i--)
 		{
-			System.out.println("bodies.size(): " + _bodies.size());
-			System.out.println("removing body with index: " + indexes.get(i) + " which is i: " + i);
+			if(_debug)
+			{
+				System.out.println("bodies.size(): " + _bodies.size());
+				System.out.println("removing body with index: " + indexes.get(i) + " which is i: " + i);
+			}
 			_bodies.remove(_bodies.get(indexes.get(i)));
 			AssetManager.Instance().playSound("Fops/splash.wav");
 			//_bodies.remove(indexes.get(i));
