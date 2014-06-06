@@ -47,6 +47,7 @@ public class GameHandler extends JFrame
 	private static final long serialVersionUID = -4608768969398477748L;
 
 	private static int _game;
+	private boolean _debug = false;
 	private boolean _failed = false;
 	private int _difficulty = 0;
 	private final int _NUMBEROFGAMES = 1;
@@ -197,17 +198,23 @@ public class GameHandler extends JFrame
 
 	public void changeScreen()
 	{
-		System.out.println(_gameScreen.getClass());
-		System.out.println(_gameController.getClass());
-		System.out.println(_gameModel.getClass());
+		if (_debug)
+		{
+			System.out.println(_gameScreen.getClass());
+			System.out.println(_gameController.getClass());
+			System.out.println(_gameModel.getClass());
+		}
 		_gameScreen.addKeyListener(InputController.Instance().getKeyboardListener());
 		Main.GAME.setContentPane(_gameScreen); // updating the game screen.
 		Main.GAME.validate();
 		Main.GAME.repaint();
 		_gameScreen.requestFocus();
-		System.out.println("CHANGING SCREEN");
-	}
+		if (_debug)
+		{
+			System.out.println("CHANGING SCREEN");
 	
+		}
+	}
 	public void start()
 	{
 		nextGame(true); // for now.
@@ -267,7 +274,10 @@ public class GameHandler extends JFrame
 			return;
 		}
 		//System.out.println("GOING TO CHANGE THE SCREEN");
+		if (_debug)
+		{
 		System.out.println(succeed);
+		}
 		if(!succeed)
 		{
 			if(_lives == 1)

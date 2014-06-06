@@ -102,7 +102,10 @@ public class SimonGameModel extends GameModel
 			FruitPiece fp = new FruitPiece();					//create new pieces of fruit
 			while( fp.intersects(_fruitPieces))					//while the new fruitpiece intersects with one of the old ones
 			{
-				System.out.println("Intersecting fruitpiece discarded!");
+				if (_debug)
+				{
+					System.out.println("Intersecting fruitpiece discarded!");
+				}
 				fp = new FruitPiece();							// if true. replace it with a new one until it gets false
 			}
 			_fruitPieces.add(fp.getBody());						//get the Bodies and store them

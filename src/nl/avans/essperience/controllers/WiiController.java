@@ -68,7 +68,10 @@ public class WiiController implements WiimoteListener
 			wim.activateMotionSensing();
 			count++;
 		}
-		System.out.println(wiimotes.length);
+		if (_debug)
+		{
+			System.out.println(wiimotes.length);
+		}
 		_wiimotes = wiimotes;			
 	}
 	

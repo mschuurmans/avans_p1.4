@@ -124,7 +124,7 @@ public class FlappyBirdModel extends GameModel
 			}
 			_flapSensitivity += Main.GAME.getDifficulty() - _maxDiff;
 			
-			if (_debug == true)
+			if (_debug)
 			{
 				System.out.println("flapsensitivity decreased." + _flapSensitivity);
 			}

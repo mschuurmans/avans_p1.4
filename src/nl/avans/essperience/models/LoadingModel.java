@@ -13,6 +13,7 @@ public class LoadingModel extends GameModel
 {
 	private static String _status;
 	private StatusUpdateListener _listener = null;
+	private boolean _debug = false;
 	public boolean LOADING = true;
 	public void addStatusUpdateListener(StatusUpdateListener list)
 	{
@@ -24,19 +25,28 @@ public class LoadingModel extends GameModel
 		LOADING = true;
 		// TODO Auto-generated method stub
 		_status = "Loading assets...";
-		System.out.println(_status);
+		if (_debug)
+		{
+			System.out.println(_status);
+		}
 		
 		sendStatus();
 		AssetManager.Instance();
 		_status = "Retrieving highscores...";
 		
 		sendStatus();
-		System.out.println(_status);
+		if (_debug)
+		{
+			System.out.println(_status);
+		}
 		List<Score> scores = Utils.getTopScores(5);
 		Main.GAME.setScores(scores);
 		_status = "Searching for Wiimotes...";
 		sendStatus();
-		System.out.println(_status);
+		if (_debug)
+		{
+			System.out.println(_status);
+		}
 		InputController.Instance();
 		
 		_status = "Starting background workers...";
@@ -55,6 +65,4 @@ public class LoadingModel extends GameModel
 		if(_listener != null)
 			_listener.statusUpdated(_status);
 	}
-	
-	
 }

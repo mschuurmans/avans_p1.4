@@ -35,6 +35,7 @@ public class IndianaJantjeScreen extends GameScreen
 	private int _screenWidth;
 	private int _screenHeight;
 	private boolean _dead;
+	private boolean _debug;
 	
 	private double _splashAlpha = 1;
 	
@@ -166,7 +167,10 @@ public class IndianaJantjeScreen extends GameScreen
 	private int chooseSide() 
 	{
 		int rand = (int)(Math.random() * 2);
+		if (_debug)
+		{
 		System.out.println("rand is: " + rand);
+		}
 		return rand;
 	}
 

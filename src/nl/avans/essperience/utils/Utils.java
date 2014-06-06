@@ -208,9 +208,11 @@ public class Utils
 					con.setRequestProperty("User-Agent", "Mozilla/5.0");
 			 
 					int responseCode = con.getResponseCode();
+					if (_debug)
+					{
 					System.out.println("\nSending 'GET' request to URL : " + url);
 					System.out.println("Response Code : " + responseCode);
-			 
+					}
 					BufferedReader in = new BufferedReader( new InputStreamReader(con.getInputStream()));
 					String inputLine;
 					StringBuffer response = new StringBuffer();
@@ -221,9 +223,11 @@ public class Utils
 					}
 					in.close();
 			 
-					//print result
-					System.out.println(response.toString());
-					
+					if (_debug)
+					{
+						//print result
+						System.out.println(response.toString());
+					}
 				}catch(Exception e)
 				{
 					e.printStackTrace();
@@ -240,14 +244,20 @@ public class Utils
 			try
 			{
 				Process proc = Runtime.getRuntime().exec("xset r off");
-				System.out.println("Repeat is off");
+				if (_debug)
+				{
+					System.out.println("Repeat is off");
+				}
 				@SuppressWarnings("unused")
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}
 			catch(Exception e) 
 			{
+				if (_debug)
+				{
 				System.out.println(e.getMessage());
+				}
 			}
 		}
 	}
@@ -260,14 +270,20 @@ public class Utils
 			{
 				Process proc = Runtime.getRuntime().exec("xset r on");
 
-				System.out.println("Rpeat is on");
+				if (_debug)
+				{
+					System.out.println("Rpeat is on");
+				}
 				@SuppressWarnings("unused")
 				BufferedReader read = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 				proc.waitFor();
 			}
 			catch(Exception e) 
 			{
-				System.out.println(e.getMessage());
+				if (_debug)
+				{
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 	}

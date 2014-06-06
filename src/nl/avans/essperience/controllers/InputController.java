@@ -10,6 +10,8 @@ import wiiusej.wiiusejevents.physicalevents.IREvent;
 
 public class InputController 
 {
+	private boolean _debug = true;
+	
 	private InputTriggerdEventListener _listener = null;
 	private KeyboardController _keyboardListener = null;
 	private WiiController _wiiController = null;
@@ -66,8 +68,10 @@ public class InputController
 					_listener.wiimoteIREvent(event);
 			}
 		});
-		
-		System.out.println("INPUT CONTROLLER FINISHED");
+		if (_debug)
+		{
+			System.out.println("INPUT CONTROLLER FINISHED");
+		}
 	}
 	
 	public void setMotionDetecting(boolean state)

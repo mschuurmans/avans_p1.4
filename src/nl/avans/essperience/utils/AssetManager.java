@@ -52,6 +52,7 @@ public class AssetManager
 	
 	private Map<String, Image> _assets = new HashMap<String, Image>();
 	private static Map<String, Clip> _sounds = new HashMap<String, Clip>();
+	private boolean _debug = false;
 	
 	private String _currentBGMKey = "";
 	
@@ -85,11 +86,17 @@ public class AssetManager
 
 		for (String asset : customAssets)
 		{
-			System.out.println("Asset: " + asset);
+			if (_debug)
+			{
+				System.out.println("Asset: " + asset);
+			}
 			URL url = this.getClass().getClassLoader().getResource(asset);
 			if(url == null)
 			{
-				System.out.println("Asset is null: " + asset);
+				if (_debug)
+				{
+					System.out.println("Asset is null: " + asset);
+				}
 			}
 			else
 			{
@@ -104,22 +111,29 @@ public class AssetManager
 				}
 			}
 		}
-		System.out.println("");
 		for(String sound : soundsList)
 		{
-	        System.out.println("Sound loading: " + sound);
+			if (_debug)
+			{
+				System.out.println("Sound loading: " + sound);
+			}
 			try
 			{
 				URL url = this.getClass().getClassLoader().getResource(sound);
+				if (_debug)
+				{
 				System.out.println("Path of sound: " + url.getPath());
-				
+				}
 		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
 		        AudioFormat format = inputStream.getFormat();
 		        DataLine.Info info = new DataLine.Info(Clip.class, format);
 		        Clip clip = (Clip)AudioSystem.getLine(info);
 		        clip.open(inputStream);
 		        _sounds.put(sound, clip);
+		        if (_debug)
+		        {
 		        System.out.println("Sound loaded: " + sound);
+		        }
 			}
 			catch(Exception e){e.printStackTrace();}
 		}
@@ -146,7 +160,10 @@ public class AssetManager
 		} catch (ClassNotFoundException e){
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			System.out.println("file: namesQuickList.dat does not currently exist");
+			if (_debug)
+			{
+				System.out.println("file: namesQuickList.dat does not currently exist");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -183,8 +200,11 @@ public class AssetManager
 			_highscoreQuickList = _highscoreQuickList.subList(1, 8);
 		}
 		
-		System.out.println("HighScoreQuickList: " + _highscoreQuickList);
-		
+		if (_debug)
+		{
+			System.out.println("HighScoreQuickList: " + _highscoreQuickList);
+		}
+	
 		writeQuickList();
 	}
 	
@@ -226,7 +246,10 @@ public class AssetManager
 	}
 	
 	public void stopCurrentBackgroundMusic() {
-		System.out.println("stopping music");
+		if (_debug)
+		{
+			System.out.println("stopping music");
+		}
 		_sounds.get(_currentBGMKey).stop();
 	}
 	
