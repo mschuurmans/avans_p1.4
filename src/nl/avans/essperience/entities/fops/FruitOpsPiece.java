@@ -159,9 +159,16 @@ public class FruitOpsPiece
 		
 		int bodyWidth = (int) body.getShape().getBounds().getWidth();
 		int bodyHeight = (int) body.getShape().getBounds().getHeight();
-
-		int xForce = (int)(Math.random()*100) + 200;
-		int yForce = (int)(Math.random()*100) + 300;
+		int yForce = 0;
+		int xForce = (int)(Math.random()*100) + 300;
+		if(Main.GAME.getHeight() > 1100)
+		{
+			yForce = (int)(Math.random()*100) + 350;
+		}
+		else
+		{
+			yForce = (int)(Math.random()*100) + 300;
+		}
 		int extraForce = (int)(Math.random()*100);
 		
 		if(sideIsLeft)
