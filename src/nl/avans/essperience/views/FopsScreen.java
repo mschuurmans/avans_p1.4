@@ -111,7 +111,7 @@ public class FopsScreen extends GameScreen
 		
 		//drawing crosshair
 		int crosshairSize = 60;
-		g.drawImage(_crosshair, (int)model.getCursorPosition().x, (int)model.getCursorPosition().y, crosshairSize, crosshairSize, null);
+		g.drawImage(_crosshair, (int)model.getCursorPosition().x - (crosshairSize/2), (int)model.getCursorPosition().y - (crosshairSize/2), crosshairSize, crosshairSize, null);
 		
 		//bullet information
 		int bulletSize = 60;

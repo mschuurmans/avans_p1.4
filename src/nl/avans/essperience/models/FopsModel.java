@@ -123,6 +123,11 @@ public class FopsModel extends GameModel
 				return false;
 			}
 		}
+		for (Body b : _splitBodies) {
+			if (b.getPosition().getY()-150 < Main.GAME.getHeight()) {
+				return false;
+			}
+		}
 		return true;
 	}
 
