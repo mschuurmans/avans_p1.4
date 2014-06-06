@@ -381,6 +381,11 @@ public class GameHandler extends JFrame
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
 	}
+	
+	public GameModel getGameModel()
+	{
+		return _gameModel;
+	}
 
 	public static String getNextGame()
 	{

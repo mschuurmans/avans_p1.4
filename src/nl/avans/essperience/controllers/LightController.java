@@ -1,5 +1,7 @@
 package nl.avans.essperience.controllers;
 
+import nl.avans.essperience.main.Main;
+
 public class LightController 
 {
 	public static int LED_STATUS;
@@ -14,7 +16,8 @@ public class LightController
 			{
 				while(true)
 				{
-					// send comm..
+					double timeRemaining = Main.GAME.getGameModel().getTimeRemaining();
+					//sent value
 					try
 					{
 						Thread.sleep(100);// runs 10x a second.
