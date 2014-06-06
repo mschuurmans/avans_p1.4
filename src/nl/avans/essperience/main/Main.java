@@ -7,7 +7,7 @@ import nl.avans.essperience.controllers.GameHandler;
 public class Main 
 {
 	public static GameHandler GAME;
-	public static Dimension DIMENSION = new Dimension(1280, 700);
+	public static Dimension DIMENSION = new Dimension(1920, 1200);
 	public static void main(String[] args)
 	{
 		GAME = new GameHandler(DIMENSION);
