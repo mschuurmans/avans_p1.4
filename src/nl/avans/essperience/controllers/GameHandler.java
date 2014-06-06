@@ -50,8 +50,8 @@ public class GameHandler extends JFrame
 	private boolean _debug = false;
 	private boolean _failed = false;
 	private int _difficulty = 0;
-	private final int _NUMBEROFGAMES = 1;
-	private final int _STARTGAME = 6;
+	private final int _NUMBEROFGAMES = 6;
+	private final int _STARTGAME = 1;
 
 	private int _lives = GameHandler.MAX_LIVES;
 

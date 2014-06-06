@@ -26,7 +26,7 @@ public class FlappyBirdModel extends GameModel
 	public  int _maxDiff = 12;
 	//Defines FlapSensitivity at start
 	public 	int _flapSensitivity = -10;
-	public int _minimumFlapSensitivity = 4;
+	public int _minimumFlapSensitivity = -4;
 	public FlappyBirdModel()
 	{
 		
@@ -114,7 +114,7 @@ public class FlappyBirdModel extends GameModel
 		if (Main.GAME.getDifficulty() > _maxDiff)
 		{
 			int decreaseDiffBy = Main.GAME.getDifficulty() - _maxDiff;
-			if (_flapSensitivity - decreaseDiffBy < _minimumFlapSensitivity)
+			if (_flapSensitivity + decreaseDiffBy < _minimumFlapSensitivity)
 			{
 				_flapSensitivity += decreaseDiffBy;
 			}
@@ -122,7 +122,6 @@ public class FlappyBirdModel extends GameModel
 			{
 				_flapSensitivity = _minimumFlapSensitivity;
 			}
-			_flapSensitivity += Main.GAME.getDifficulty() - _maxDiff;
 			
 			if (_debug)
 			{
