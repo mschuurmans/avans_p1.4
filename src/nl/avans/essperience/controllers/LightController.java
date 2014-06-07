@@ -48,9 +48,8 @@ public class LightController
                         System.out.println((char)c);
                         System.out.println(c);
 
-                        writeData("" + (char)c);
-                        String inputLine=input.readLine();
-                        System.out.println(inputLine);
+                        //writeData("" + (char)c);
+                        writeData("" + (char)101);
 
                         obj.close();
 
@@ -62,7 +61,7 @@ public class LightController
 					Thread.sleep(100);// runs 10x a second.
 				}
 				catch(Exception e){}
-			
+			}
 		});
 		t.start();
 	}
