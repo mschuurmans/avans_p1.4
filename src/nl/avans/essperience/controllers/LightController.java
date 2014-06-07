@@ -30,50 +30,38 @@ public class LightController
 			public void run() 
 			{
 				System.out.println("Lightcontroller");
-				while(true)
+				try
+                {
+                        SerialController obj = new SerialController();
+    					double timeRemaining = Main.GAME.getGameModel().getTimeRemaining();
+    					int c = 0;
+    					c = (int) timeRemaining;
+    					System.out.println("Status" + c);
+                        obj.initialize();
+                        input = SerialController.input;
+                        output = SerialController.output;
+                        InputStreamReader Ir = new InputStreamReader(System.in);
+                        BufferedReader Br = new BufferedReader(Ir);
+                        System.out.print("Enter your choice: ");
+                        c = Integer.parseInt(Br.readLine());
+
+                        System.out.println((char)c);
+                        System.out.println(c);
+
+                        writeData("" + (char)c);
+                        String inputLine=input.readLine();
+                        System.out.println(inputLine);
+
+                        obj.close();
+
+                }
+                catch(Exception e){}
+				
+				try
 				{
-
-					
-					try
-	                {
-	                        SerialController obj = new SerialController();
-	    					double timeRemaining = Main.GAME.getGameModel().getTimeRemaining();
-	    					int c = 0;
-	    					c = (int) timeRemaining;
-	    					System.out.println("Status" + c);
-	                        obj.initialize();
-	                        input = SerialController.input;
-	                        output = SerialController.output;
-	                        InputStreamReader Ir = new InputStreamReader(System.in);
-	                        BufferedReader Br = new BufferedReader(Ir);
-	                        while (c!=200)
-	                        {
-	                                System.out.print("Enter your choice: ");
-	                                c = Integer.parseInt(Br.readLine());
-
-	                                System.out.println((char)c);
-	                                System.out.println(c);
-
-	                                writeData("" + (char)c);
-
-	                        }
-
-
-	                        String inputLine=input.readLine();
-	                        System.out.println(inputLine);
-
-	                        obj.close();
-
-	                }
-	                catch(Exception e){}
-					
-					try
-					{
-						Thread.sleep(100);// runs 10x a second.
-					}
-					catch(Exception e){}
+					Thread.sleep(100);// runs 10x a second.
 				}
-			}
+				catch(Exception e){}
 			
 		});
 		t.start();
