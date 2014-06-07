@@ -111,7 +111,7 @@ public class SerialController implements SerialPortEventListener {
 				//the following line will keep this app alive for 1000 seconds,
 				//waiting for events to occur and responding to them (printing incoming messages to console).
 				try {Thread.sleep(1500);
-				writeData("2");} catch (InterruptedException ie) {}
+				writeData("102");} catch (InterruptedException ie) {}
 			}
 		};
 		t.start();
