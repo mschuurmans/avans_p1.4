@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
+import java.lang.management.GarbageCollectorMXBean;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,8 +51,8 @@ public class GameHandler extends JFrame
 	private boolean _debug = false;
 	private boolean _failed = false;
 	private int _difficulty = 0;
-	private final int _NUMBEROFGAMES = 1;
-	private final int _STARTGAME = 3;
+	private final int _NUMBEROFGAMES = 6;
+	private final int _STARTGAME = 1;
 
 	private int _lives = GameHandler.MAX_LIVES;
 
@@ -176,6 +177,7 @@ public class GameHandler extends JFrame
 	
 	public void init(boolean firstRun)
 	{
+		
 		AssetManager.Instance().playBackgroundMusic("Essperience/unrealsuperhero.wav");
 		Utils.disableAutoPress();
 		this._gameModel = new MenuModel();
@@ -380,6 +382,8 @@ public class GameHandler extends JFrame
 		}
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
+		
+		System.gc();
 	}
 	
 	public GameModel getGameModel()
