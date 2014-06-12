@@ -1,13 +1,22 @@
 package nl.avans.essperience.controllers;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import sun.nio.ch.ThreadPool;
 import nl.avans.essperience.main.Main;
 
 public class LightController 
 {
 	public static int LED_STATUS;
 	private boolean _running = false;
-	
+	private boolean _isRunning = false;
 	private static LightController _instance = null;
+	private Thread _t;
+	private ExecutorService _serv;
 	
 	public static LightController Instance()
 	{
@@ -21,43 +30,56 @@ public class LightController
 	public  synchronized void writeData(char data) {
        obj.write(data);
     }
+	public LightController()
+	{
+		_serv = Executors.newFixedThreadPool(10);
+	}
 	
     public void stop()
     {
     	_running = false;
+    	_serv.shutdownNow();
     }
     
 	public void start()
 	{
 		_running = true;
-		Thread t = new Thread(new Runnable()
+		if(!_isRunning)
 		{
-
-			@Override
-			public void run() 
+			_serv.shutdownNow();
+			_serv = Executors.newFixedThreadPool(1); 
+			_serv.execute(new Runnable()
 			{
-				System.out.println("Lightcontroller");
-				try
-                {
-                        while(_running)
-                        {
-	    					double timeRemaining = Main.GAME.getGameModel().getTimeRemaining();
-	    					int c = 0;
-	    					c = (int) timeRemaining;
-	    					System.out.println("Status" + c);
-	                        char ch = (char)c;
-	                        writeData(ch);
-                        }
-                }
-                catch(Exception e){}
-				
-				try
+	
+				@Override
+				public void run() 
 				{
-					Thread.sleep(100);// runs 10x a second.
+					System.out.println("Lightcontroller");
+					try
+	                {
+	                        while(_running)
+	                        {
+	                        	_isRunning = true;
+		    					int c = (int)(Main.GAME.getGameModel().getTimeRemainingAsInt() *0.6f);
+		    					
+		    					if (c>0)
+		    					{
+		    						System.out.println("Status " + c);
+		    					}
+		                        char ch = (char)c;
+		                        writeData(ch);
+		                        try
+		        				{
+		        					Thread.sleep(500);// runs 10x a second.
+		        				}
+		        				catch(Exception e){}
+	                        }
+	                }
+	                catch(Exception e){}
+					_isRunning = false;
+					
 				}
-				catch(Exception e){}
-			}
-		});
-		t.start();
+			});
+		}
 	}
 }

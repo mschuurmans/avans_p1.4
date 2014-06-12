@@ -28,5 +28,11 @@ public class GameModel
 		return _timeBar;
 	}
 	
+	public int getTimeRemainingAsInt()
+	{
+		double rem = getTimeRemaining() * 100;
+		return (int)rem;
+	}
+	
 	public void update(){}
 }
