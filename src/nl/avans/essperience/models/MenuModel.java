@@ -31,9 +31,9 @@ public class MenuModel extends GameModel
 	private void switchLight()
 	{
 		if(_leftFoot || _rightFoot)
-			LightController.Instance().writeData(""+101);
+			LightController.Instance().writeData((char)101);
 		else
-			LightController.Instance().writeData(""+103);
+			LightController.Instance().writeData((char)103);
 	}
 	
 	public boolean getLeftFoot()

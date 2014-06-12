@@ -3,7 +3,8 @@ package nl.avans.essperience.main;
 import java.awt.Dimension;
 
 import nl.avans.essperience.controllers.GameHandler;
-import nl.avans.essperience.controllers.SerialController;
+import nl.avans.essperience.controllers.LightController;
+import nl.avans.essperience.controllers.SerialControllerOLD;
 
 public class Main 
 {
@@ -12,17 +13,6 @@ public class Main
 	public static String COM = "ttyACM0";
 	public static void main(String[] args)
 	{
-		final SerialController sCon = new SerialController();
-		sCon.initialize();
-		Thread t=new Thread() {
-			public void run() {
-				//the following line will keep this app alive for 1000 seconds,
-				//waiting for events to occur and responding to them (printing incoming messages to console).
-				try {Thread.sleep(1500);
-				sCon.writeData("102");} catch (InterruptedException ie) {}
-			}
-		};
-		t.start();
 		System.out.println("Started");
 		
 		GAME = new GameHandler(DIMENSION);

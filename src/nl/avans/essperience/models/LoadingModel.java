@@ -53,7 +53,15 @@ public class LoadingModel extends GameModel
 		_status = "Starting background workers...";
 		sendStatus();
 		Utils.startBackgroundWorder();
-		new LightController().start();
+		try
+		{
+			Thread.sleep(1000);
+		}catch(Exception e){}
+		
+		_status = "Connecting to arduino...";
+		sendStatus();
+		LightController.Instance();
+		
 		try
 		{
 			Thread.sleep(1000);

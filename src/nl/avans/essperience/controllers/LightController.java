@@ -18,14 +18,10 @@ public class LightController
 	}
 	private SerialController obj = new SerialController();
     
-	public  synchronized void writeData(String data) {
-       obj.writeData(data);
+	public  synchronized void writeData(char data) {
+       obj.write(data);
     }
 	
-    public LightController()
-    {
-    	obj.initialize();
-    }
     public void stop()
     {
     	_running = false;
@@ -49,8 +45,8 @@ public class LightController
 	    					int c = 0;
 	    					c = (int) timeRemaining;
 	    					System.out.println("Status" + c);
-	                        
-	                        writeData("" + (char)c);
+	                        char ch = (char)c;
+	                        writeData(ch);
                         }
                 }
                 catch(Exception e){}
