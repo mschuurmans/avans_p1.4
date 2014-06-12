@@ -11,7 +11,7 @@ public class Main
 	public static GameHandler GAME;
 	public static Dimension DIMENSION = new Dimension(1920, 1080);
 
-	public static String COM = "COM7";
+	public static String COM = "COM5";
 	public static void main(String[] args)
 	{
 		System.out.println("Started");

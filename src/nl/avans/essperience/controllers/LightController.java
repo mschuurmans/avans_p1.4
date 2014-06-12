@@ -1,12 +1,8 @@
 package nl.avans.essperience.controllers;
 
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
-import sun.nio.ch.ThreadPool;
 import nl.avans.essperience.main.Main;
 
 public class LightController 
