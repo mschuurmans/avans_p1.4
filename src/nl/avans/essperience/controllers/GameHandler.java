@@ -390,7 +390,8 @@ public class GameHandler extends JFrame
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
 		
-		LightController.Instance().start(); // starting the thread to get time.
+		if(!(_gameController instanceof MenuController))
+			LightController.Instance().start(); // starting the thread to get time.
 		System.gc();
 	}
 	
