@@ -93,28 +93,17 @@ public class SerialController implements SerialPortEventListener {
 		}
 
 	}
-
-	public static synchronized void writeData(String data) {
+	public synchronized void sendCode(int code)
+	{
+		writeData(""+code);
+	}
+	
+	public synchronized void writeData(String data) {
 		System.out.println("Sent: " + data);
 		try {
 			output.write(data.getBytes());
 		} catch (Exception e) {
 			System.out.println("could not write to port");
 		}
-	}
-
-	public static void maind(String[] args) throws Exception {
-		SerialController main = new SerialController();
-		main.initialize();
-		Thread t=new Thread() {
-			public void run() {
-				//the following line will keep this app alive for 1000 seconds,
-				//waiting for events to occur and responding to them (printing incoming messages to console).
-				try {Thread.sleep(1500);
-				writeData("102");} catch (InterruptedException ie) {}
-			}
-		};
-		t.start();
-		System.out.println("Started");
 	}
 }

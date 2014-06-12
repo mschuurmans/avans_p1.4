@@ -2,6 +2,7 @@ package nl.avans.essperience.models;
 
 import java.util.List;
 
+import nl.avans.essperience.controllers.LightController;
 import nl.avans.essperience.entities.Score;
 import nl.avans.essperience.utils.Utils;
 
@@ -17,12 +18,22 @@ public class MenuModel extends GameModel
 	
 	public void setLeftFoot(boolean value)
 	{
+		switchLight();
 		_leftFoot = value;
 	}
 	
 	public void setRightFoot(boolean value)
 	{
+		switchLight();
 		_rightFoot = value;
+	}
+	
+	private void switchLight()
+	{
+		if(_leftFoot || _rightFoot)
+			LightController.Instance().writeData(""+101);
+		else
+			LightController.Instance().writeData(""+103);
 	}
 	
 	public boolean getLeftFoot()

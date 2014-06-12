@@ -9,7 +9,7 @@ public class Main
 {
 	public static GameHandler GAME;
 	public static Dimension DIMENSION = new Dimension(1920, 1080);
-	public static String COM = "COM6";
+	public static String COM = "ttyACM0";
 	public static void main(String[] args)
 	{
 		final SerialController sCon = new SerialController();
