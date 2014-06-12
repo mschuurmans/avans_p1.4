@@ -103,7 +103,7 @@ public class SerialController implements SerialPortEventListener {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void maind(String[] args) throws Exception {
 		SerialController main = new SerialController();
 		main.initialize();
 		Thread t=new Thread() {

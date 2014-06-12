@@ -317,7 +317,11 @@ public class GameHandler extends JFrame
 		}
 		else if(!(_gameController instanceof ScoreScreenController))
 		{
-			_game = (int) (Math.random() * _NUMBEROFGAMES) + _STARTGAME;
+			if(_difficulty < 7)
+				_game = _difficulty;
+			else
+				_game = (int) (Math.random() * _NUMBEROFGAMES) + _STARTGAME;
+			
 			this._gameScreen = new ScoreScreen(_scoreModel);
 			this._gameController = new ScoreScreenController(_scoreModel, (ScoreScreen)_gameScreen);
 		}
