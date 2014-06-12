@@ -319,6 +319,7 @@ public class GameHandler extends JFrame
 		}
 		else if(!(_gameController instanceof ScoreScreenController))
 		{
+			LightController.Instance().stop();
 			if(_difficulty < 7)
 				_game = _difficulty;
 			else
@@ -329,6 +330,7 @@ public class GameHandler extends JFrame
 		}
 		else
 		{
+			
 			//int rand = (int) (Math.random() * _NUMBEROFGAMES) + _STARTGAME;
 			switch (_game) 
 			{
@@ -367,6 +369,7 @@ public class GameHandler extends JFrame
 					break;
 			}
 			_difficulty++;
+			
 		}
 		
 		_gameController.addMicroGameFinishedEventListener(new MicroGameFinishedEventListener() {
@@ -387,6 +390,8 @@ public class GameHandler extends JFrame
 		if(_gameController instanceof ScoreScreenController)
 			((ScoreScreenController)_gameController).start();
 		
+		if(!(_gameController instanceof MenuController))
+			LightController.Instance().start(); // starting the thread to get time.
 		System.gc();
 	}
 	

@@ -1,28 +1,35 @@
 package nl.avans.essperience.controllers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-
 import nl.avans.essperience.main.Main;
 
 public class LightController 
 {
 	public static int LED_STATUS;
-	public static BufferedReader input;
-    public static OutputStream output;
+	private boolean _running = false;
+	
+	private static LightController _instance = null;
+	
+	public static LightController Instance()
+	{
+		if(_instance == null)
+			_instance = new LightController();
+		
+		return _instance;
+	}
+	private SerialController obj = new SerialController();
     
-    public static synchronized void writeData(String data) {
-        System.out.println("Sent: " + data);
-        try {
-                output.write(data.getBytes());
-        } catch (Exception e) {
-                System.out.println("could not write to port");
-        }
+	public  synchronized void writeData(char data) {
+       obj.write(data);
     }
 	
+    public void stop()
+    {
+    	_running = false;
+    }
+    
 	public void start()
 	{
+		_running = true;
 		Thread t = new Thread(new Runnable()
 		{
 
@@ -32,27 +39,15 @@ public class LightController
 				System.out.println("Lightcontroller");
 				try
                 {
-                        SerialController obj = new SerialController();
-    					double timeRemaining = Main.GAME.getGameModel().getTimeRemaining();
-    					int c = 0;
-    					c = (int) timeRemaining;
-    					System.out.println("Status" + c);
-                        obj.initialize();
-                        input = SerialController.input;
-                        output = SerialController.output;
-                        InputStreamReader Ir = new InputStreamReader(System.in);
-                        BufferedReader Br = new BufferedReader(Ir);
-                        System.out.print("Enter your choice: ");
-                        c = Integer.parseInt(Br.readLine());
-
-                        System.out.println((char)c);
-                        System.out.println(c);
-
-                        //writeData("" + (char)c);
-                        writeData("" + (char)101);
-
-                        obj.close();
-
+                        while(_running)
+                        {
+	    					double timeRemaining = Main.GAME.getGameModel().getTimeRemaining();
+	    					int c = 0;
+	    					c = (int) timeRemaining;
+	    					System.out.println("Status" + c);
+	                        char ch = (char)c;
+	                        writeData(ch);
+                        }
                 }
                 catch(Exception e){}
 				
