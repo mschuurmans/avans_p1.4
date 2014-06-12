@@ -1,9 +1,3 @@
-package nl.avans.essperience.controllers;
-
-/**
- *
- * @author Atulmaharaj
- */
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -14,13 +8,19 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
-import nl.avans.essperience.main.Main;
-public class SerialController implements SerialPortEventListener {
+
+/**
+ *
+ * @author Atulmaharaj
+ */
+public class SerialClass implements SerialPortEventListener {
 
 	public SerialPort serialPort;
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = {
-		Main.COM, // com poort
+		"/dev/tty.usbserial-A9007UX1", // Mac OS X
+		"/dev/ttyUSB0", // Linux
+		"COM6", // <-- change for com poort Windows
 	};
 
 	public static BufferedReader input;
@@ -103,15 +103,15 @@ public class SerialController implements SerialPortEventListener {
 		}
 	}
 
-	public static void maind(String[] args) throws Exception {
-		SerialController main = new SerialController();
+	public static void main(String[] args) throws Exception {
+		SerialClass main = new SerialClass();
 		main.initialize();
 		Thread t=new Thread() {
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,
 				//waiting for events to occur and responding to them (printing incoming messages to console).
 				try {Thread.sleep(1500);
-				writeData("102");} catch (InterruptedException ie) {}
+				writeData("2");} catch (InterruptedException ie) {}
 			}
 		};
 		t.start();
