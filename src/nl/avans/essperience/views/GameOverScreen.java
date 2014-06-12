@@ -1,5 +1,6 @@
 package nl.avans.essperience.views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -247,32 +248,32 @@ public class GameOverScreen extends GameScreen {
 				String string = "Key selection";
 				int stringX =  x - Utils.getWidth(string, font);
 				int stringY = y + 83;
-				Utils.drawString(g, string, stringX, stringY);
+				Utils.drawString(g, string, Color.white, Color.black, 2, stringX, stringY);
 				
 				string = "Toggle Shift";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 119;
-				Utils.drawString(g, string, stringX, stringY);
-
+				Utils.drawString(g, string, Color.white, Color.black, 2, stringX, stringY);
+				
 				string = "Enter character";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 151;
-				Utils.drawString(g, string, stringX, stringY);
+				Utils.drawString(g, string, Color.white, Color.black, 2, stringX, stringY);
 
 				string = "Select Enter Key";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 189;
-				Utils.drawString(g, string, stringX, stringY);
+				Utils.drawString(g, string, Color.white, Color.black, 2, stringX, stringY);
 
 				string = "Backspace";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 228;
-				Utils.drawString(g, string, stringX, stringY);
+				Utils.drawString(g, string, Color.white, Color.black, 2, stringX, stringY);
 
 				string = "Spacebar";
 				stringX =  x - Utils.getWidth(string, font);
 				stringY = y + 267;
-				Utils.drawString(g, string, stringX, stringY);
+				Utils.drawString(g, string, Color.white, Color.black, 2, stringX, stringY);
 
 				g.drawImage(AssetManager.Instance().getImage("Essperience/wiimote.png"), x, y, 300, 463, null);
 			}

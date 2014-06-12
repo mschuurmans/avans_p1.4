@@ -23,6 +23,8 @@ public class MenuScreen extends GameScreen
 	private Image _checkedRight;
 	private Image _unCheckedLeft; 
 	private Image _unCheckedRight;
+	private Font _font = Main.GAME.getFont(60);
+	private Font _fontH = Main.GAME.getFont(50);
 	
 	public MenuScreen(MenuModel model) 
 	{
@@ -58,13 +60,12 @@ public class MenuScreen extends GameScreen
 			int yCenter = Main.GAME.getHeight() / 2;
 			List<Score> scores = Main.GAME.getScores();
 			int count = 0;
-			Font font = Main.GAME.getFont(60);
-			Font fontH = Main.GAME.getFont(50);
+		
 			for(int i = 0; i < scores.size(); i++)
 			{
 				int xLoc = xCenter - 150;
 				int yLoc = 50 +(count * 55);
-				g.setFont(fontH);
+				g.setFont(_fontH);
 				String place = (i+1+"");
 				
 				if(i ==0)
@@ -78,7 +79,7 @@ public class MenuScreen extends GameScreen
 			//Font font = new Font("Arial", Font.PLAIN, 60) ;
 			
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-			FontMetrics fm = img.getGraphics().getFontMetrics(font);
+			FontMetrics fm = img.getGraphics().getFontMetrics(_font);
 			String startGame = "Stand on the pressure plates";
 			String nLine = "to start the game!";
 			
@@ -87,7 +88,7 @@ public class MenuScreen extends GameScreen
 			int stringWidth = fm.stringWidth(startGame);
 			int nLineWidth = fm.stringWidth(nLine);
 			
-			g.setFont(font);
+			g.setFont(_font);
 			Utils.drawString(g, startGame, xCenter - (stringWidth / 2), yCenter + 200 + 30);
 			Utils.drawString(g, nLine, xCenter - (nLineWidth / 2),  yCenter + 200 + 85);
 			
