@@ -66,6 +66,7 @@ public class WiiController implements WiimoteListener
 			wim.addWiiMoteEventListeners(this);
 			wim.activateSmoothing();
 			wim.activateMotionSensing();
+			wim.setIrSensitivity(4);
 			count++;
 		}
 		if (_debug)
