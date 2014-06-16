@@ -33,7 +33,7 @@ public class MenuModel extends GameModel
 		if(_leftFoot || _rightFoot)
 			LightController.Instance().writeData((char)101);
 		else
-			LightController.Instance().writeData((char)103);
+			LightController.Instance().writeData((char)102);
 	}
 	
 	public boolean getLeftFoot()

@@ -24,7 +24,7 @@ public class LightController
 	private SerialController obj = new SerialController();
     
 	public  synchronized void writeData(char data) {
-       obj.write(data);
+       obj.write((char) data);
     }
 	public LightController()
 	{
@@ -53,7 +53,7 @@ public class LightController
 					System.out.println("Lightcontroller");
 					try
 	                {
-	                        while(_running)
+	                        while(true)
 	                        {
 	                        	_isRunning = true;
 		    					int c = (int)(Main.GAME.getGameModel().getTimeRemainingAsInt() *0.6f);
@@ -63,7 +63,8 @@ public class LightController
 		    						System.out.println("Status " + c);
 		    					}
 		                        char ch = (char)c;
-		                        writeData(ch);
+		                        if(_running)
+		                        	writeData(ch);
 		                        try
 		        				{
 		        					Thread.sleep(500);// runs 10x a second.

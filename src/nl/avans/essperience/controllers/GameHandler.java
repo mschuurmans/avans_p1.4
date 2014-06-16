@@ -261,6 +261,7 @@ public class GameHandler extends JFrame
 	public void nextGame(boolean succeed)
 	{
 		Utils.disableAutoPress();
+		LightController.Instance().stop();
 		if(!(_gameController instanceof LoadingController))
 		{
 			if (_difficulty < 11)

@@ -32,7 +32,7 @@ void setLed()
     analogWrite(REDPIN, 255 - statusLed*2);
     analogWrite(GREENPIN, statusLed*2);
     analogWrite(BLUEPIN, 0);
-    strobeTime = statusLed*10+10;
+    strobeTime = statusLed*5+10;
     strobeDelay();
   }
   else if (statusLed == 101)
