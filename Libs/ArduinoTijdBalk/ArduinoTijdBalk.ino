@@ -4,6 +4,7 @@
  int Recv = 0;
  int strobeTime = 1000;
 
+
 #define REDPIN 6
 #define GREENPIN 5
 #define BLUEPIN 3
@@ -14,6 +15,7 @@ void setup()
   pinMode(REDPIN, OUTPUT);
   pinMode(GREENPIN, OUTPUT);
   pinMode(BLUEPIN, OUTPUT);
+  Serial.setTimeout(200);
 }
 
 void loop()
@@ -23,7 +25,7 @@ void loop()
     statusLed = Serial.read();
   }
   setLed();
-  //Serial.print(statusLed);
+//  Serial.print(statusLed);
 }
 void setLed()
 {
@@ -32,7 +34,7 @@ void setLed()
     analogWrite(REDPIN, 255 - statusLed*2);
     analogWrite(GREENPIN, statusLed*2);
     analogWrite(BLUEPIN, 0);
-    strobeTime = statusLed*5+10;
+    strobeTime = statusLed*10+10;
     strobeDelay();
   }
   else if (statusLed == 101)
@@ -46,6 +48,13 @@ void setLed()
     analogWrite(REDPIN, 0);
     analogWrite(GREENPIN, 0);
     analogWrite(BLUEPIN, 255);
+  }
+  
+  else
+  {
+    analogWrite(REDPIN, 0);
+    analogWrite(GREENPIN, 0);
+    analogWrite(BLUEPIN, 0);
   }
 }
 
