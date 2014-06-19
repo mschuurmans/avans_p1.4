@@ -53,14 +53,14 @@ public class FopsModel extends GameModel
 		if (_difficulty < _MAXDIFF)
 		{
 			_amountOfBullets = (int) (_amountOfFruit) + 35  - (_difficulty * 2);
-			_YOFFSETALLOWED = 75 + (40 - _difficulty*2);
-			_XOFFSETALLOWED = 75 + (40 - _difficulty*2);	
+			_YOFFSETALLOWED = 90 + (40 - _difficulty*2);
+			_XOFFSETALLOWED = 90 + (40 - _difficulty*2);	
 		}
 		else
 		{
 			_amountOfBullets = (int) (_amountOfFruit) + 5;
-			_YOFFSETALLOWED = 75;
-			_XOFFSETALLOWED = 75;
+			_YOFFSETALLOWED = 80;
+			_XOFFSETALLOWED = 80;
 		}
 		//debug data
 		_debugData.add("Diff is: " + _difficulty);

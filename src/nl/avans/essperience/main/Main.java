@@ -9,9 +9,9 @@ import nl.avans.essperience.controllers.LightController;
 public class Main 
 {
 	public static GameHandler GAME;
-	public static Dimension DIMENSION = new Dimension(1600, 900);
+	public static Dimension DIMENSION = new Dimension(1920, 1080);
 
-	public static String COM = "COM11";
+	public static String COM = "COM6";
 	public static void main(String[] args)
 	{
 		System.out.println("Started");

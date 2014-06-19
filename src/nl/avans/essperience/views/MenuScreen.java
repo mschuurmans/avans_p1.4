@@ -25,7 +25,7 @@ public class MenuScreen extends GameScreen
 	private Image _unCheckedRight;
 	private Font _font = Main.GAME.getFont(60);
 	private Font _fontH = Main.GAME.getFont(50);
-	
+	private Font _fontURL = Main.GAME.getFont(100);
 	public MenuScreen(MenuModel model) 
 	{
 		super(model);
@@ -91,6 +91,11 @@ public class MenuScreen extends GameScreen
 			g.setFont(_font);
 			Utils.drawString(g, startGame, xCenter - (stringWidth / 2), yCenter + 200 + 30);
 			Utils.drawString(g, nLine, xCenter - (nLineWidth / 2),  yCenter + 200 + 85);
+			
+			String url = "Essperience.tostring.nl";
+			int urlWidth = Utils.getWidth(url, _fontURL);
+			g.setFont(_fontURL);
+			Utils.drawString(g, url, xCenter - (urlWidth / 2),  yCenter + 200 + 250);
 			
 			int leftLocX = xCenter - (20 + 150);
 			int rightLocX = xCenter + 20;
